@@ -1,14 +1,14 @@
 import { en } from '../../translations/en';
-import { ru } from './ru';
+import { pt } from './pt';
 
 // tslint:disable:no-submodule-imports
-import localeRu from 'react-intl/locale-data/ru';
+import localePt from 'react-intl/locale-data/pt';
 // tslint:enable
 
-export const customLocaleData = ([...localeRu]);
+export const customLocaleData = ([...localePt]);
 
 export type LangType = typeof en;
 
 export const customLanguageMap = {
-    ru,
+    pt,
 };

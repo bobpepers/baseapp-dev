@@ -6,6 +6,7 @@ import { AlertState, rootHandleAlertSaga } from './public/alert';
 import { ColorThemeState } from './public/colorTheme';
 import { ConfigsState, rootConfigsSaga } from './public/configs';
 import { CurrenciesState, rootCurrenciesSaga } from './public/currencies';
+import { FeesState, rootFeesSaga } from './public/fees';
 import { GridLayoutState } from './public/gridLayout';
 import { LanguageState } from './public/i18n';
 import { KlineState, rootKlineFetchSaga } from './public/kline';
@@ -45,6 +46,7 @@ export * from './public/orderBook';
 export * from './public/colorTheme';
 export * from './public/configs';
 export * from './public/currencies';
+export * from './public/fees';
 export * from './public/i18n';
 export * from './public/kline';
 export * from './public/alert';
@@ -71,6 +73,7 @@ export interface RootState {
         colorTheme: ColorThemeState;
         configs: ConfigsState;
         currencies: CurrenciesState;
+        fees: FeesState;
         recentTrades: RecentTradesState;
         markets: MarketsState;
         orderBook: OrderBookState;
@@ -118,6 +121,7 @@ export function* rootSaga() {
         call(rootBeneficiariesSaga),
         call(rootConfigsSaga),
         call(rootCurrenciesSaga),
+        call(rootFeesSaga),
         call(rootEmailVerificationSaga),
         call(rootGeetestCaptchaSaga),
         call(rootHandleAlertSaga),

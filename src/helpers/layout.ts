@@ -37,7 +37,7 @@ const getLayouts = () => {
     return {
         lg: [
             /* Top Bar */
-            { i: '1', x: 0, y: 0, w: 24, h: 3, minH: 3, maxH: 6, minW: 13, isDraggable: isDraggable, isResizable: isResizable },
+            { i: '1', x: 0, y: 0, w: 24, h: 3, minH: 3, maxH: 6, minW: 13, isDraggable: false, isResizable: false },
             /* Left Side */
             { i: '2', x: 0, y: 3, w: 14, h: 36, minH: 36, maxH: 36, minW: 4, isDraggable: isDraggable, isResizable: isResizable }, /* Chart */
             { i: '3', x: 0, y: 39, w: 14, h: 10, minH: 10, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Market Depth */
@@ -51,7 +51,7 @@ const getLayouts = () => {
         ],
         md: [
             /* Top Bar */
-            { i: '1', x: 0, y: 0, w: 24, h: 3, minH: 3, maxH: 6, minW: 13, isDraggable: isDraggable, isResizable: isResizable },
+            { i: '1', x: 0, y: 0, w: 24, h: 6, minH: 6, maxH: 6, minW: 13, isDraggable: false, isResizable: false },
             /* Left Side */
             { i: '2', x: 0, y: 3, w: 14, h: 36, minH: 36, maxH: 36, minW: 4, isDraggable: isDraggable, isResizable: isResizable },
             { i: '3', x: 0, y: 39, w: 14, h: 10, minH: 10, minW: 5, isDraggable: isDraggable, isResizable: isResizable },
@@ -64,7 +64,7 @@ const getLayouts = () => {
             { i: '8', x: 14, y: 70, w: 10, h: 20, minH: 20, minW: 4, isDraggable: isDraggable, isResizable: isResizable },
         ],
         sm: [
-            { i: '1', x: 0, y: 0, w: 24, h: 3, minH: 3, maxH: 6, minW: 13, isDraggable: false },
+            { i: '1', x: 0, y: 0, w: 24, h: 6, minH: 6, maxH: 6, minW: 13, isDraggable: false, isResizable: false },
             { i: '2', x: 0, y: 3, w: 12, h: 36, minH: 22, maxH: 22, minW: 5, isDraggable: false },
             { i: '3', x: 0, y: 39, w: 12, h: 10, minH: 30, minW: 5, isDraggable: false },
             { i: '4', x: 0, y: 49, w: 12, h: 21, minH: 12, minW: 3, isDraggable: false },

@@ -37,7 +37,9 @@ class ProfileVerificationComponent extends React.Component<Props> {
                 </div>
                 {this.renderFirstLevel(userLevel)}
                 {this.renderSecondLevel(userLevel)}
-                {this.renderThirdLevel(userLevel)}
+                {/*
+                    {this.renderThirdLevel(userLevel)}
+                */}
             </div>
         );
     }
@@ -57,8 +59,10 @@ class ProfileVerificationComponent extends React.Component<Props> {
         );
     }
 
-    private renderSecondLevel(userLevel: number) {
-        const targetLevel = 2;
+    private renderThirdLevel(userLevel: number) {
+        const targetLevel = 3;
+        const documentLabel = this.props.label.find((label: Label) => label.key === 'document');
+        const isPending = documentLabel && documentLabel.value === 'pending' ? this.renderPendingIcon() : '';
         const {
             titleClassName,
         } = this.getLevelsClassNames(userLevel, targetLevel);
@@ -68,12 +72,13 @@ class ProfileVerificationComponent extends React.Component<Props> {
                     {this.renderVerificationLevel('page.body.profile.header.account.profile.phone', userLevel, targetLevel)}
                     <p><FormattedMessage id="page.body.profile.header.account.profile.phone.message" /></p>
                 </div>
+                {isPending}
             </div>
         );
     }
 
-    private renderThirdLevel(userLevel: number) {
-        const targetLevel = 3;
+    private renderSecondLevel(userLevel: number) {
+        const targetLevel = 2;
         const documentLabel = this.props.label.find((label: Label) => label.key === 'document');
         const isPending = documentLabel && documentLabel.value === 'pending' ? this.renderPendingIcon() : '';
 

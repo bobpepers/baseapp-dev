@@ -5,17 +5,71 @@
   left: 0; 
   bottom: 0; 
   right: 0;
-  width: 95%;
-  display: flex;
+  width: 95%;  
   align-items: center;
+  justify-content: center !important;
+  flex-wrap: wrap;
+  display: flex;
 
-  &__navbar{
-    padding-top: 3px;
-    margin-left: 30px;
+  &__coinLink {
+    height: 75%;
+  }
+
+  &__coinImage {
+    height: 100%;
+    padding-right: 10px;
+  }
+
+  &__marketInfo {
+    height: 52px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &__priceInfo {
+    height: 52px;
     float: right;
-    right: 0;
-    position: absolute;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
-    
+.pg-priceInfoBar-break {
+    height: 0;
+  }
+
+.pg-header__toolbar-item:nth-of-type(1)
+{
+    margin-left: 0px;
+} 
+
+
+@media (min-width: 1200px) {
+  .pg-priceInfoBar {
+    display: unset;
+  }
+}
+
+@media (max-width: 1200px) {
+  .pg-priceInfoBar-break {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 776px) {
+  .pg-header__toolbar-item-value {
+    font-size: 10px !important;
+  }
+  .pg-header__toolbar-item-text {
+    font-size: 10px !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .pg-header__toolbar-item-value {
+    font-size: 9px !important;
+  }
+  .pg-header__toolbar-item-text {
+    font-size: 9px !important;
+  }
+}

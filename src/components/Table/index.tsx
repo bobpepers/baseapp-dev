@@ -148,7 +148,7 @@ class Table extends React.Component<TableProps, TableState> {
     private renderRowCells(row: CellData[]) {
 
         return row && row.length ?
-            row.map((c, index: number) =>
+            row.slice(1).map((c, index: number) =>
                 <td key={index} colSpan={row.length === 1 ? this.props.colSpan : undefined}>{c}</td>) : [];
     }
 

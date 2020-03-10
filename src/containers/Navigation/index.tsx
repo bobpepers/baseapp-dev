@@ -70,7 +70,7 @@ class NavigationContainer extends React.Component<Props, State> {
                         <Dropdown>
                             <Dropdown.Toggle variant="primary" id={languageClassName}>
                                 <img
-                                    src={this.tryRequire(lang) && require(`../../assets/images/sidebar/${lang}.svg`)}
+                                    src={this.tryRequire(lang) && require(`../../assets/images/languages/${lang}.svg`)}
                                     alt={`${lang}-flag-icon`}
                                 />
                                 <span className="dropdown-menu-language-selected">{languageName}</span>
@@ -161,7 +161,7 @@ class NavigationContainer extends React.Component<Props, State> {
             <Dropdown.Item onClick={e => this.handleChangeLanguage(l)}>
                 <div className="dropdown-row">
                     <img
-                        src={this.tryRequire(l) && require(`../../assets/images/sidebar/${l}.svg`)}
+                        src={this.tryRequire(l) && require(`../../assets/images/languages/${l}.svg`)}
                         alt={`${l}-flag-icon`}
                     />
                     <span>{l.toUpperCase()}</span>
@@ -172,7 +172,7 @@ class NavigationContainer extends React.Component<Props, State> {
 
     private tryRequire = (name: string) => {
         try {
-            require(`../../assets/images/sidebar/${name}.svg`);
+            require(`../../assets/images/languages/${name}.svg`);
             return true;
         } catch (err) {
             return false;

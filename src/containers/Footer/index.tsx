@@ -44,10 +44,16 @@ class FooterComponent extends React.Component<Props> {
                             </div>
                         </div>
                         <div className="pg-footer__footer__wrap__social">
-                            <div className="pg-footer__footer__wrap__social__row">
-                                <img src={DiscordIcon} alt="Discord" />
-                                <img src={TelegramIcon} alt="Telegram" />
-                                <img src={TwitterIcon} alt="Twitter" />
+                            <div className="pg-footer__footer__wrap__social__row">                            
+                                <a rel="noopener noreferrer" target="_blank" href="https://discord.gg/uTUXr43">
+                                    <img src={DiscordIcon} alt="Discord" />
+                                </a>                                
+                                <a rel="noopener noreferrer" target="_blank" href="https://t.me/joinchat/KBGO3QwuMu-QTJKgPQjHmg">
+                                    <img src={TelegramIcon} alt="Telegram" />
+                                </a>
+                                <a rel="noopener noreferrer" target="_blank" href="https://twitter.com/Runebase_Tweet">
+                                    <img src={TwitterIcon} alt="Twitter" />
+                                </a>
                             </div>
                             {/* 
                             <div className="pg-footer__footer__wrap__social__row">

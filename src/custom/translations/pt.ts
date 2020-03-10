@@ -1,7 +1,7 @@
-import { en as customTranslations } from '../custom/translations/en';
-import { nationalitiesNames } from './nationalities';
+import { LangType } from '../../translations';
+import { nationalitiesNames } from '../../translations/nationalities';
 
-export const en = {
+export const pt: LangType = {
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',
     'page.header.navbar.wallets': 'Wallets',
@@ -809,5 +809,4 @@ export const en = {
     'server.internal_error': 'Internal Server Error',
 
     ...nationalitiesNames,
-    ...customTranslations,
 };

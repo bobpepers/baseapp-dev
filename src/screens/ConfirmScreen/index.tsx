@@ -84,9 +84,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const isIdentity = labels.find(w => w.key === 'profile' && w.value === 'verified');
         const currentProfileLevel = userData.level;
         const cx = classnames('pg-confirm__progress-items', {
-            'pg-confirm__progress-first': currentProfileLevel === 1,
-            'pg-confirm__progress-second': currentProfileLevel === 2 && !isIdentity,
-            'pg-confirm__progress-third': currentProfileLevel === 3 || isIdentity,
+            'pg-confirm__progress-first': currentProfileLevel === 1 && !isIdentity,
+            'pg-confirm__progress-second': currentProfileLevel === 2 || isIdentity,
         });
         return (
             <div className="pg-wrapper">
@@ -106,20 +105,14 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                         <div className="pg-confirm__progress">
                             <div className={cx}>
                                 <div className="pg-confirm__progress-circle-1">
-                                    <span className="pg-confirm__title-text pg-confirm__active-1">
-                                    <FormattedMessage id="page.body.kyc.head.phone"/>
+                                    <span className="pg-confirm__title-text pg-confirm__active-2">
+                                        <FormattedMessage id="page.body.kyc.head.identity"/>
                                     </span>
                                 </div>
                                 <div className="pg-confirm__progress-line-1" />
                                 <div className="pg-confirm__progress-circle-2">
-                                    <span className="pg-confirm__title-text pg-confirm__active-2">
-                                    <FormattedMessage id="page.body.kyc.head.identity"/>
-                                    </span>
-                                </div>
-                                <div className="pg-confirm__progress-line-2" />
-                                <div className="pg-confirm__progress-circle-3">
                                     <span className="pg-confirm__title-text pg-confirm__active-3">
-                                    <FormattedMessage id="page.body.kyc.head.document"/>
+                                        <FormattedMessage id="page.body.kyc.head.document"/>
                                     </span>
                                 </div>
                             </div>
@@ -139,10 +132,9 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const { level } = this.state;
         const isIdentity = labels.find(w => w.key === 'profile' && w.value === 'verified');
 
-        switch (level) {
-            case 1: return <Phone />;
-            case 2: return isIdentity ? <Documents /> : <Identity />;
-            case 3: return <Documents />;
+        switch (level) {            
+            case 1: return isIdentity ? <Documents /> : <Identity />;
+            case 2: return <Documents />;
             default: return 'Something went wrong';
         }
     };

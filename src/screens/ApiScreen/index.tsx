@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { Link, RouteProps, withRouter } from 'react-router-dom';
-import { MarketsTable } from '../../containers';
+import { RouteProps, withRouter } from 'react-router-dom';
+import SwaggerUI from 'swagger-ui';
+import "swagger-ui/dist/swagger-ui.css";
+
 import {
     RootState,
     selectUserLoggedIn,
@@ -15,25 +17,17 @@ interface ReduxProps {
 type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
 class Api extends React.Component<Props> {
-    public renderMarketInfoBlock() {
-        return (
-            <div className="pg-landing-screen__market-info">
-                <div className="pg-landing-screen__market-info__wrap">
-                    <div className="pg-landing-screen__market-info__wrap__title">
-                        <Link to="/trading" className="landing-button">
-                            {this.translate('page.body.landing.marketInfo.title.button')}
-                        </Link>
-                    </div>
-                    <MarketsTable />
-                </div>
-            </div>
-        );
+    public componentDidMount() {
+        SwaggerUI({
+        dom_id: '#swagger-container',
+        url: "https://downloads.runebase.io/swagger.json",
+        })
     }
 
     public render() {
         return (
-            <div className="pg-landing-screen">
-                {this.renderMarketInfoBlock()}
+            <div className="pg-landing-screen">  
+                <div id='swagger-container' />             
             </div>
         );
     }

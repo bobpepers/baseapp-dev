@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   fill="none"
+   version="1.1"
+   id="svg4045"
+   sodipodi:docname="pt.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata4051">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4049">
+    <circle
+       r="3.1"
+       cy="12"
+       cx="12.1"
+       id="XMLID_39_" />
+    <clipPath
+       id="XMLID_8_">
+      <use
+         id="use4198"
+         overflow="visible"
+         xlink:href="#XMLID_39_"
+         style="overflow:visible"
+         x="0"
+         y="0"
+         width="100%"
+         height="100%" />
+    </clipPath>
+    <circle
+       r="3.0999999"
+       cy="12"
+       cx="12.1"
+       id="circle4268" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="992"
+     inkscape:window-height="623"
+     id="namedview4047"
+     showgrid="false"
+     inkscape:zoom="9.8333333"
+     inkscape:cx="-5.3795047"
+     inkscape:cy="12"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1" />
+  <g
+     id="g4327"
+     transform="translate(-24.405085,0.559768)">
+    <g
+       id="Layer_2">
+</g>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer1"
+     inkscape:label="Layer 1"
+     style="display:inline">
+    <g
+       id="Layer_1"
+       transform="translate(-0.1209,0.2547)">
+      <rect
+         height="12.6"
+         width="22"
+         y="5.6999998"
+         x="1.1"
+         id="_x34_8_1_"
+         style="fill:#0a9c49" />
+      <g
+         id="XMLID_22_">
+        <path
+           d="M 4.7,12 12,16.7 19.3,12 12,7.3 Z"
+           id="_x34_7_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#fddf00" />
+        <circle
+           r="3.0999999"
+           cy="12"
+           cx="12.1"
+           id="_x34_6_1_"
+           style="fill:#253370" />
+        <g
+           id="_x34_5_1_">
+          <defs
+             id="defs4196">
+            <circle
+               r="3.0999999"
+               cy="12"
+               cx="12.1"
+               id="circle4609" />
+          </defs>
+          <clipPath
+             id="clipPath4346">
+            <use
+               id="use4344"
+               overflow="visible"
+               xlink:href="#XMLID_39_"
+               style="overflow:visible"
+               x="0"
+               y="0"
+               width="100%"
+               height="100%" />
+          </clipPath>
+          <path
+             d="m 2.8,18.2 c 0,-4.2 3.4,-7.5 7.5,-7.5 4.1,0 7.5,3.4 7.5,7.5 h -0.4 c 0,-3.9 -3.2,-7.1 -7.1,-7.1 -3.9,0 -7.1,3.2 -7.1,7.1 z"
+             clip-path="url(#XMLID_8_)"
+             id="XMLID_40_"
+             inkscape:connector-curvature="0"
+             style="fill:#ffffff" />
+        </g>
+        <path
+           d="m 10.4,11 h 0.3 v -0.1 l -0.3,0.1 0.1,-0.1 h 0.2 v -0.1 h -0.2 v -0.1 h 0.2 v -0.1 h -0.3 z"
+           id="_x34_4_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 10.8,11.1 v 0 l 0.1,-0.2 v 0.2 0 L 11,10.9 v 0.2 h 0.1 V 10.8 H 11 L 10.9,11 v -0.2 h -0.1 z"
+           id="_x34_3_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 11.4,11.1 h 0.2 v 0 H 11.4 L 11.5,11 h 0.1 v 0 h -0.1 v 0 h 0.2 v 0 h -0.2 z"
+           id="_x34_2_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <rect
+           height="0"
+           width="0.1"
+           transform="matrix(-0.9171,-0.3987,0.3987,-0.9171,20.8177,27.4273)"
+           y="11.5"
+           x="13.2"
+           id="_x34_1_1_"
+           style="fill:#0a9c49" />
+        <rect
+           height="0.1"
+           width="0"
+           transform="matrix(-0.9171,-0.3987,0.3987,-0.9171,20.8128,27.5514)"
+           y="11.5"
+           x="13.3"
+           id="_x34_0_1_"
+           style="fill:#0a9c49" />
+        <path
+           d="m 14.1,12 c 0,0.1 0,0.1 0,0 0.1,0.1 0.1,0.1 0.1,0.1 0,-0.1 -0.2,-0.1 -0.1,-0.2 0,-0.1 0.1,0 0.2,0 0,0 0.1,0.1 0,0.1 h -0.1 c 0,0 0,-0.1 0,-0.1 0,0 0,0 -0.1,0.1 0,-0.1 0.2,0 0.2,0.1 0,0.1 -0.1,0 -0.2,0 0,0 -0.1,0 0,-0.1 z"
+           id="_x33_9_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 13.7,11.9 0.2,0.1 v 0 l -0.2,-0.1 0.1,-0.1 0.1,0.1 v 0 l -0.1,-0.1 v -0.1 l 0.2,0.1 v 0 l -0.2,-0.1 z"
+           id="_x33_8_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 14.4,12.3 c 0,0 0,0 0,0 0.1,0.1 0.1,0.1 0.1,0.1 0,0 -0.1,-0.1 -0.1,-0.2 0.1,-0.1 0.1,0 0.2,0 0,0 0.1,0.1 0,0.1 h -0.1 c 0,0 0,-0.1 0,-0.1 0.1,-0.1 0,-0.1 -0.1,0.1 0,-0.1 0.2,0 0.2,0.1 0,0.1 -0.1,0 -0.2,0 0,-0.1 -0.1,-0.1 0,-0.1 z"
+           id="_x33_7_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 9.5,10.9 c 0,-0.1 -0.1,-0.1 -0.1,-0.1 -0.1,0 -0.1,0.1 -0.1,0.2 0,0.1 0.1,0.1 0.1,0.1 0.1,0 0.1,-0.1 0.1,-0.2 z m -0.1,0 c 0.1,0 0.1,0.2 0,0.2 -0.1,-0.1 -0.1,-0.2 0,-0.2 z"
+           id="_x33_6_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 15,12.5 c 0,-0.1 0,-0.2 -0.1,-0.2 -0.1,0 -0.1,0 -0.2,0.1 0,0.1 0,0.2 0.1,0.2 0,0.1 0.1,0 0.2,-0.1 z m -0.1,-0.1 c 0.1,0.1 0,0.2 -0.1,0.1 -0.1,0 0,-0.1 0.1,-0.1 z"
+           id="_x33_5_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 10.3,10.8 c -0.1,-0.1 -0.1,-0.1 0,0 L 10,10.7 V 11 c 0,0 0.1,0 0.1,0 0,0 0.1,0 0.1,-0.1 0,-0.1 0.1,0 0.1,-0.1 0,0.1 0,0 0,0 z M 10.1,11 c 0,0 0,0 0,0 C 10,11 10,10.9 10,10.8 c 0.1,0 0.1,0 0.1,0 0,0 0.1,0 0.1,0.1 0,0 0,0 -0.1,0.1 0.1,-0.1 0.1,0 0,0 0.1,0 0.1,0 0,0 z"
+           id="_x33_4_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 9.9,10.9 c 0,0 0,0 0,0 0,-0.1 0,-0.1 0,-0.1 0,0 0,0 -0.1,0 0,0 -0.2,0 -0.2,0 v 0.3 H 9.7 V 11 l 0.2,-0.1 v 0 c -0.1,0 -0.1,0.1 0,0 0,0.1 0,0.1 0,0.1 H 10 c -0.1,0.1 -0.1,0 -0.1,-0.1 0,0 0,0 0,0 z m -0.1,0 c 0,0 0,0 0,0 H 9.7 c 0,0 0,-0.1 0,-0.1 0,0 0.1,0 0.1,0.1 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,0 0,0 0,0 0,0 z"
+           id="_x33_3_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 13,11.4 c 0,-0.1 0,-0.2 -0.1,-0.2 -0.1,0 -0.1,0 -0.2,0.1 0,0.1 0,0.2 0.1,0.2 0.1,0 0.2,0 0.2,-0.1 z m -0.1,-0.1 c 0.1,0 0.1,0.2 0,0.2 -0.2,-0.1 -0.1,-0.3 0,-0.2 z"
+           id="_x33_2_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 12.6,11.3 c 0,0 0,-0.1 0,0 0.1,-0.1 0.1,-0.1 0.1,-0.1 0,0 0,0 0,0 0,0 -0.2,0 -0.2,0 l -0.1,0.3 h 0.1 v -0.1 l 0.1,-0.1 v 0 c -0.1,0 -0.1,0 0,0 0,0.1 -0.1,0.1 -0.1,0.1 h 0.1 c 0,0 0,-0.1 0,-0.1 0,0 0,0 0,0 z m -0.1,-0.1 c 0,0 0,0 0,0 h -0.1 c 0,0 0,0 0,-0.1 0,0 0.1,0 0.1,0.1 0,-0.1 0,-0.1 0,0 0,-0.1 0.1,-0.1 0,0 0.1,0 0.1,0 0,0 0.1,0 0,0 0,0 z"
+           id="_x33_1_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 13.6,11.7 c 0,0 0.1,0 0,0 0.1,-0.1 0.1,-0.1 0.1,-0.1 0,0 0,0 0,-0.1 0,0 -0.2,-0.1 -0.2,-0.1 l -0.1,0.3 h 0.1 v -0.1 l 0.1,0.1 v 0 c 0,0 0,0.1 0,0 -0.1,0.1 -0.1,0.1 -0.1,0.1 v 0 c 0.1,0 0.1,0 0.1,-0.1 0,0 0,0 0,0 z m 0,-0.1 c 0,0 0,0 0,0 h -0.1 c 0,0 0,0 0,-0.1 0,0 0.1,0.1 0.1,0.1 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0.1,0 0,0 0,0 0,0 0,0 z"
+           id="_x33_0_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 12.2,11.2 c 0,0 0,-0.1 0,0 0.1,-0.1 0.1,-0.1 0.1,-0.1 0,0 0,0 0,0 0,0 -0.2,0 -0.2,0 L 12,11.2 h 0.1 v -0.1 l 0.1,0.1 v 0 m 0,-0.1 c 0,0 -0.1,0 0,0 h -0.1 c 0,0 0,-0.1 0,-0.1 0,0 0,0 0.1,0.1 0,-0.1 0,-0.1 0,0 0,-0.1 0,-0.1 0,0 0,0 0,0 0,0 0,0 0,0 0,0 z"
+           id="_x32_9_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <path
+           d="m 13.3,11.5 c 0,0 0,0 0,0 0,0 -0.1,0.1 -0.1,0 -0.1,-0.1 0,-0.2 0.1,-0.1 0,0 0,0.1 0,0.1 0,0 0,0 0,0 0,0 0,0 0,0 0,-0.1 0,-0.1 0,-0.2 -0.1,0 -0.1,0 -0.2,0.1 0,0.1 0,0.2 0.1,0.2 0,0.1 0.1,0 0.1,-0.1 0,0.1 0,0.1 0,0 0,0 0,0 0,0 z"
+           id="_x32_8_1_"
+           inkscape:connector-curvature="0"
+           style="fill:#0a9c49" />
+        <polygon
+           points="13.1,11 13.1,11.1 13,11.1 13,11 12.9,11 13,11 13,10.9 "
+           id="_x32_7_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="9.7,11.4 9.6,11.4 9.5,11.3 9.5,11.4 9.4,11.4 9.5,11.5 9.4,11.6 9.5,11.5 9.6,11.6 9.6,11.5 "
+           id="_x32_6_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="12.8,11.8 12.9,11.9 13,11.9 12.9,11.9 13,11.8 12.9,11.8 "
+           id="_x32_5_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="10.2,12.5 10.1,12.5 10,12.5 10.1,12.6 "
+           id="_x32_4_1_"
+           style="fill:#ffffff" />
+        <polyline
+           points="9.8,12.6 9.8,12.7 9.7,12.7 9.8,12.8 9.7,12.9 9.8,12.8 9.9,12.9 9.8,12.8     9.9,12.7 9.8,12.7 9.8,12.6   "
+           id="_x32_3_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="9.4,12.9 9.4,13 9.3,13 9.4,13 9.4,13.1 9.5,13.1 9.5,13 9.4,13 "
+           id="_x32_2_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="10.9,12 10.9,12.1 10.8,12.1 10.8,12.2 10.9,12.2 10.9,12.1 11,12.1 10.9,12.1 "
+           id="_x32_1_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="10.5,13.1 10.5,13 10.5,12.9 10.4,13 10.4,13.1 "
+           id="_x32_0_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="10.4,13.3 10.3,13.3 10.3,13.4 10.4,13.4 "
+           id="_x31_9_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="10.8,13.6 10.8,13.5 10.8,13.6 10.7,13.6 10.8,13.6 10.7,13.7 10.8,13.7 10.9,13.7 10.9,13.6 "
+           id="_x31_8_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="12,12.5 12,12.6 12.1,12.6 12.1,12.5 12.2,12.5 12.1,12.5 12.1,12.4 "
+           id="_x31_7_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="11.7,12.9 11.7,12.8 11.8,12.9 11.8,12.8 11.7,12.7 11.7,12.8 "
+           id="_x31_6_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="11.8,13 11.9,13 12,13 11.9,13 11.9,12.9 11.9,13 "
+           id="_x31_5_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="12.5,12.7 12.4,12.7 12.3,12.7 12.4,12.8 12.3,12.9 12.4,12.8 12.5,12.9 12.5,12.8 "
+           id="_x31_4_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="12.1,13.4 12.1,13.3 12,13.4 11.9,13.4 12,13.4 12,13.5 12.1,13.5 12.1,13.4 12.2,13.4 "
+           id="_x31_3_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="12.1,14.4 12.1,14.5 12.1,14.4 12,14.4 12,14.5 "
+           id="_x31_2_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="12.8,13.8 12.8,13.7 12.7,13.6 12.7,13.7 12.7,13.8 "
+           id="_x31_1_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="13,14.1 13,14 13,14.1 12.9,14.1 12.9,14.2 13,14.1 13,14.2 13,14.1 13.1,14.1 "
+           id="_x31_0_1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="13.3,13.8 13.3,13.7 13.2,13.8 13.2,13.9 13.3,13.8 13.3,13.9 "
+           id="_x39__1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="13.7,13.7 13.6,13.7 13.6,13.6 13.6,13.7 13.5,13.7 13.6,13.7 13.5,13.8 13.6,13.7 13.6,13.8 13.6,13.7 "
+           id="_x38__1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="13.7,14 13.6,14 13.6,13.9 13.6,14 13.5,14 13.6,14 13.5,14.1 13.6,14 13.7,14.1 13.6,14 "
+           id="_x37__1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="13.6,14.3 13.6,14.2 13.6,14.3 13.5,14.3 13.6,14.3 13.6,14.4 13.7,14.4 13.6,14.3 13.7,14.3 "
+           id="_x36__1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="13.9,13.8 14,13.8 14,13.7 13.9,13.7 13.8,13.7 "
+           id="_x35__1_"
+           style="fill:#ffffff" />
+        <polyline
+           points="14.1,13.6 14.1,13.6 14.1,13.7 14.2,13.7 14.2,13.7 14.2,13.6 14.3,13.6     14.2,13.6 14.2,13.5 14.1,13.6 14.1,13.6   "
+           id="_x34__1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="14.5,13.3 14.4,13.3 14.3,13.3 14.2,13.3 14.3,13.4 14.3,13.5 14.4,13.4 14.4,13.5 14.4,13.4 "
+           id="_x33__1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="14.4,13 14.3,13 14.2,13 14.1,13 14.2,13.1 14.1,13.2 14.2,13.1 14.3,13.2 14.3,13.1 "
+           id="_x32__1_"
+           style="fill:#ffffff" />
+        <polygon
+           points="14.7,13.2 14.7,13.1 14.7,13 14.6,13.1 14.6,13.2 "
+           id="_x31__1_"
+           style="fill:#ffffff" />
+      </g>
+      <g
+         id="XMLID_1_" />
+      <g
+         id="XMLID_2_" />
+      <g
+         id="XMLID_3_" />
+      <g
+         id="XMLID_4_" />
+      <g
+         id="XMLID_5_" />
+      <g
+         id="XMLID_6_" />
+    </g>
+  </g>
+</svg>
