@@ -50,10 +50,12 @@ class AppLayout extends React.Component<Props, {}, {}> {
             <IntlProvider locale={lang} messages={messages} key={lang}>
                 <Router history={history}>
                     <ErrorWrapper>
-                        <Header/>
-                        <Sidebar/>
-                        <Alerts/>
-                        <Layout/>
+                        <div className='wrapper'>
+                            <Header/>
+                            <Sidebar/>
+                            <Alerts/>
+                            <Layout/>
+                        </div>
                         <Footer/>
                     </ErrorWrapper>
                 </Router>

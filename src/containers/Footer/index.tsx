@@ -2,6 +2,7 @@ import * as React from 'react';
 import { RouterProps } from 'react-router';
 import { withRouter, Link } from 'react-router-dom';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import CookieConsent from "react-cookie-consent";
 
 const TelegramIcon = require('../../assets/images/social/Telegram.svg');
 const TwitterIcon = require('../../assets/images/social/Twitter.svg');
@@ -68,6 +69,9 @@ class FooterComponent extends React.Component<Props> {
                         <span className="pg-footer__footer__rights"><a href="https://www.openware.com">openware.com</a></span> 
                     */}
                 </div>
+                <CookieConsent>
+                    {this.translate('page.body.footer.cookies')}                    
+                </CookieConsent>
             </React.Fragment>
         );
     }

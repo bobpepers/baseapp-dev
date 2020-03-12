@@ -99,7 +99,6 @@ export const makeRequest = async (request: Request, configData: RequestOptions) 
         const axiosRequest: AxiosPromise = axios(requestConfig);
         axiosRequest
             .then((response: AxiosResponse) => {
-                console.log(response);
                 if (configData.withHeaders) {
                     resolve(response);
                 } else {

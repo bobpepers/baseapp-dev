@@ -1,19 +1,19 @@
 .pg-sign-in-screen {
   display: flex;
   justify-content: center;
-  height: calc(100vh - 95px);
+
   .pg-sign-in-screen__container {
     background: transparent;
     margin-top: calc(var(--gap) * 3.33);
     width: calc(var(--gap) * 70.66);
   }
+
   .cr-sign-in-form {
     background: var(--base-bright);
     margin: 0 auto;
     border-radius: calc(var(--gap) * 0.66);
     display: flex;
     flex-direction: column;
-    height: calc(var(--big-gap) * 5.5);
 
     &__options-group {
       width: 100%;
@@ -64,6 +64,7 @@
       color: var(--base-new);
       padding-top: calc(var(--gap) * 1.33);
     }
+
     &__input {
       input {
         color: var(--color-white);
@@ -72,10 +73,12 @@
         border-radius: calc(var(--gap) * 0.66);
       }
     }
+
     &__error,
     &__error-message {
       color: var(--order-error-color);
     }
+
     &__footer {
       position: absolute;
       bottom: calc(var(--gap) * (-1.66));
@@ -85,12 +88,14 @@
         font-size: calc(var(--gap) * 2.33);
         font-weight: bolder;
       }
+
       &-signup {
         color: var(--active-color);
         font-size: calc(var(--gap) * 2.33);
         font-weight: bold;
       }
     }
+
     &__group--focused {
       .cr-sign-in-form__label {
         color: var(--sign-in-accent);
@@ -102,10 +107,10 @@
     }
   }
 }
+
 @media screen and (max-width: 768px) {
   .pg-sign-in-screen {
     .pg-sign-in-screen__container {
-      margin: calc(var(--gap) * 3.33) calc(var(--gap) * 1.66) 0;
       width: 100%;
     }
     .cr-sign-in-form {

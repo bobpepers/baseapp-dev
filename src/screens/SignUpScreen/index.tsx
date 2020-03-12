@@ -3,6 +3,7 @@ import { History } from 'history';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { captchaType, recaptchaSitekey } from '../../api/config';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -14,7 +15,6 @@ import {
 } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Modal, SignUpForm } from '../../components';
-import { GeetestCaptcha } from '../../containers';
 import {
     EMAIL_REGEX,
     ERROR_INVALID_EMAIL,
@@ -71,18 +71,14 @@ class SignUp extends React.Component<Props> {
         passwordFocused: false,
         confirmPasswordFocused: false,
         refIdFocused: false,
-        geetestCaptchaSuccess: false,
-        shouldGeetestReset: false,
     };
 
     public constructor(props) {
         super(props);
         this.reCaptchaRef = React.createRef();
-        this.geetestCaptchaRef = React.createRef();
     }
 
     private reCaptchaRef;
-    private geetestCaptchaRef;
 
     public componentDidMount() {
         setDocumentTitle('Sign Up');
@@ -108,10 +104,6 @@ class SignUp extends React.Component<Props> {
             if (this.reCaptchaRef.current) {
                 this.reCaptchaRef.current.reset();
             }
-
-            if (this.geetestCaptchaRef.current) {
-                this.setState({ shouldGeetestReset: true });
-            }
         }
     }
 
@@ -132,7 +124,6 @@ class SignUp extends React.Component<Props> {
             passwordFocused,
             confirmPasswordFocused,
             refIdFocused,
-            geetestCaptchaSuccess,
         } = this.state;
 
         const className = cx('pg-sign-up-screen__container', { loading });
@@ -172,10 +163,9 @@ class SignUp extends React.Component<Props> {
                         handleFocusPassword={this.handleFocusPassword}
                         handleFocusConfirmPassword={this.handleFocusConfirmPassword}
                         handleFocusRefId={this.handleFocusRefId}
-                        captchaType={configs.captcha_type}
+                        captchaType={captchaType()}
                         renderCaptcha={this.renderCaptcha()}
                         reCaptchaSuccess={reCaptchaSuccess}
-                        geetestCaptchaSuccess={geetestCaptchaSuccess}
                         captcha_response={captcha_response}
                     />
                     <Modal
@@ -190,27 +180,16 @@ class SignUp extends React.Component<Props> {
     }
 
     private renderCaptcha = () => {
-        const { configs } = this.props;
-        const { shouldGeetestReset } = this.state;
-
-        switch (configs.captcha_type) {
+        switch (captchaType()) {
             case 'recaptcha':
                 return (
                     <div className="cr-sign-up-form__recaptcha">
                         <ReCAPTCHA
                             ref={this.reCaptchaRef}
-                            sitekey={configs.captcha_id}
+                            sitekey={recaptchaSitekey()}
                             onChange={this.handleReCaptchaSuccess}
                         />
                     </div>
-                );
-            case 'geetest':
-                return (
-                    <GeetestCaptcha
-                        ref={this.geetestCaptchaRef}
-                        shouldCaptchaReset={shouldGeetestReset}
-                        onSuccess={this.handleGeetestCaptchaSuccess}
-                    />
                 );
             default:
                 return null;
@@ -284,13 +263,6 @@ class SignUp extends React.Component<Props> {
         });
     };
 
-    private handleGeetestCaptchaSuccess = value => {
-        this.setState({
-            geetestCaptchaSuccess: true,
-            captcha_response: value,
-            shouldGeetestReset: false,
-        });
-    }
 
     private handleSignUp = () => {
         const { configs, i18n } = this.props;
@@ -312,7 +284,6 @@ class SignUp extends React.Component<Props> {
                     });
                     break;
                 case 'recaptcha':
-                case 'geetest':
                     this.props.signUp({
                         email,
                         password,
@@ -340,7 +311,6 @@ class SignUp extends React.Component<Props> {
                     });
                     break;
                 case 'recaptcha':
-                case 'geetest':
                 default:
                     this.props.signUp({
                         email,
@@ -354,7 +324,6 @@ class SignUp extends React.Component<Props> {
 
         this.setState({
             reCaptchaSuccess: false,
-            geetestCaptchaSuccess: false,
             captcha_response: '',
         });
     };

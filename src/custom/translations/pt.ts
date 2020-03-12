@@ -806,6 +806,8 @@ export const pt: LangType = {
     'page.body.terms.contact.header': 'Contact Us',
     'page.body.terms.contact.body.1': 'If you have any questions about these Terms, please contact us via our Ticket Desk or by our Discord Channel.',
 
+    'page.body.footer.cookies': 'This site uses cookies. By continuing to browse you are agreeing to our use of cookies.',
+
     'server.internal_error': 'Internal Server Error',
 
     ...nationalitiesNames,

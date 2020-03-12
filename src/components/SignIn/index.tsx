@@ -32,6 +32,11 @@ export interface SignInProps {
     handleChangeFocusField: (value: string) => void;
     changePassword: (value: string) => void;
     changeEmail: (value: string) => void;
+    captchaType: 'recaptcha' | 'none';
+    renderCaptcha: JSX.Element | null;
+    reCaptchaSuccess: boolean;
+    geetestCaptchaSuccess: boolean;
+    captcha_response: string;
 }
 
 export class SignInComponent extends React.Component<SignInProps> {
@@ -112,12 +117,13 @@ export class SignInComponent extends React.Component<SignInProps> {
                                 autoFocus={false}
                             />
                             {passwordError && <div className={'cr-sign-in-form__error'}>{passwordError}</div>}
-                        </div>
+                        </div>                        
+                        {this.props.renderCaptcha}
                         <div className="cr-sign-in-form__button-wrapper">
                             <Button
                                 block={true}
                                 type="button"
-                                disabled={isLoading || !email.match(EMAIL_REGEX) || !password}
+                                disabled={this.disableButton()}
                                 onClick={e => this.handleClick(e)}
                                 size="lg"
                                 variant="primary"
@@ -139,6 +145,24 @@ export class SignInComponent extends React.Component<SignInProps> {
         );
         // tslint:enable:jsx-no-lambda
     }
+
+    private disableButton = (): boolean => {
+        const {
+            email,
+            isLoading,
+            password,
+            reCaptchaSuccess,
+            captchaType,
+        } = this.props;
+
+        if (isLoading || !email.match(EMAIL_REGEX) || !password) {
+            return true;
+        }
+        if (captchaType === 'recaptcha' && !reCaptchaSuccess) {
+            return true;
+        }
+        return false;
+    };    
 
     private handleChangeEmail = (value: string) => {
         this.props.changeEmail(value);

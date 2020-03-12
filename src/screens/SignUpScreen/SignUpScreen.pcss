@@ -1,9 +1,7 @@
 .pg-sign-up-screen {
   display: flex;
   justify-content: center;
-  height: calc(100vh - 95px);
-  background: url(assets/images/background.svg);
-  background-size: cover;
+
   .pg-sign-up-screen__container {
     background: transparent;
     margin-top: calc(var(--gap) * 3.33);
@@ -13,7 +11,6 @@
     background: var(--base-bright);
     margin: 0 auto;
     border-radius: calc(var(--gap) * 0.66);
-    min-height: calc(var(--big-gap) * 10);
 
     &__options-group {
       width: 100%;
@@ -163,13 +160,11 @@
 @media screen and (max-width: 768px) {
   .pg-sign-up-screen {
     .pg-sign-up-screen__container {
-      margin: calc(var(--gap) * 3.33) calc(var(--gap) * 1.66) 0;
       width: 100%;
     }
 
     .cr-sign-up-form {
       margin: 0 auto;
-      min-height: calc(var(--big-gap) * 10.8);
 
       &__button {
         margin-top: calc(var(--gap) * 4);

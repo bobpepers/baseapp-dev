@@ -38,7 +38,6 @@ class Fees extends React.Component<Props> {
 
     public renderTradeFeeBlock() {
         const { fees } = this.props;
-        console.log(fees);
         return (
             <div className="pg-landing-screen__market-info">
                 <div className="pg-landing-screen__market-info__wrap">
@@ -67,7 +66,6 @@ class Fees extends React.Component<Props> {
 
     public renderCoinFeeBlock() {
         const { currencies } = this.props;
-        console.log(currencies);
         return (
             <div className="pg-landing-screen__market-info">
                 <div className="pg-landing-screen__market-info__wrap">

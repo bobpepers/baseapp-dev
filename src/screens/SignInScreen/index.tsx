@@ -4,6 +4,8 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
+import { captchaType, recaptchaSitekey } from '../../api/config';
 import { SignInComponent, TwoFactorAuth } from '../../components';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
 import {
@@ -58,6 +60,8 @@ class SignIn extends React.Component<Props, SignInState> {
         otpCode: '',
         error2fa: '',
         codeFocused: false,
+        captcha_response: '',
+        reCaptchaSuccess: false,
     };
 
     public componentDidMount() {
@@ -88,36 +92,80 @@ class SignIn extends React.Component<Props, SignInState> {
 
     private renderSignInForm = () => {
         const { loading } = this.props;
-        const { email, emailError, emailFocused, password, passwordError, passwordFocused } = this.state;
+        const { 
+            email, 
+            emailError, 
+            emailFocused, 
+            password, 
+            passwordError, 
+            passwordFocused, 
+            reCaptchaSuccess,
+            captcha_response, 
+        } = this.state;
 
         return (
-            <SignInComponent
-                email={email}
-                emailError={emailError}
-                emailFocused={emailFocused}
-                emailPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
-                password={password}
-                passwordError={passwordError}
-                passwordFocused={passwordFocused}
-                passwordPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
-                labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp' })}
-                emailLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
-                passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
-                receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
-                forgotPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.forgotPassword' })}
-                isLoading={loading}
-                onForgotPassword={this.forgotPassword}
-                onSignUp={this.handleSignUp}
-                onSignIn={this.handleSignIn}
-                handleChangeFocusField={this.handleFieldFocus}
-                isFormValid={this.validateForm}
-                refreshError={this.refreshError}
-                changeEmail={this.handleChangeEmailValue}
-                changePassword={this.handleChangePasswordValue}
-            />
+            <React.Fragment>
+                <SignInComponent
+                    email={email}
+                    emailError={emailError}
+                    emailFocused={emailFocused}
+                    emailPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
+                    password={password}
+                    passwordError={passwordError}
+                    passwordFocused={passwordFocused}
+                    passwordPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
+                    labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
+                    labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp' })}
+                    emailLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
+                    passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
+                    receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
+                    forgotPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.forgotPassword' })}
+                    isLoading={loading}
+                    onForgotPassword={this.forgotPassword}
+                    onSignUp={this.handleSignUp}
+                    onSignIn={this.handleSignIn}
+                    handleChangeFocusField={this.handleFieldFocus}
+                    isFormValid={this.validateForm}
+                    refreshError={this.refreshError}
+                    changeEmail={this.handleChangeEmailValue}
+                    changePassword={this.handleChangePasswordValue}
+                    renderCaptcha={this.renderCaptcha()}
+                    captchaType={captchaType()}
+                    reCaptchaSuccess={reCaptchaSuccess}
+                    captcha_response={captcha_response}
+                />                
+            </React.Fragment>
         );
     };
+
+    private handleReCaptchaSuccess = (value: string) => {
+        this.setState({
+            reCaptchaSuccess: true,
+            captcha_response: value,
+        });
+    };
+
+
+    private renderCaptcha = () => {
+        switch (captchaType()) {
+            case 'recaptcha':
+                return (
+                    <div className='cr-sign-in-form__recaptcha-wrapper'>
+                        <div className="cr-sign-in-form__recaptcha">
+                            <ReCAPTCHA
+                                ref={this.reCaptchaRef}
+                                sitekey={recaptchaSitekey()}
+                                onChange={this.handleReCaptchaSuccess}
+                            />
+                        </div>
+                    </div>
+                );
+            default:
+                return null;
+
+        }
+    }
+    
 
     private render2FA = () => {
         const { loading } = this.props;
@@ -155,10 +203,11 @@ class SignIn extends React.Component<Props, SignInState> {
     };
 
     private handleSignIn = () => {
-        const { email, password } = this.state;
+        const { email, password, captcha_response } = this.state;
         this.props.signIn({
             email,
             password,
+            captcha_response,
         });
     };
 

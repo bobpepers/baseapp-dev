@@ -40,10 +40,9 @@ export interface SignUpFormProps {
     refIdFocused: boolean;
     emailFocused: boolean;
     passwordFocused: boolean;
-    captchaType: 'recaptcha' | 'geetest' | 'none';
+    captchaType: 'recaptcha' | 'none';
     renderCaptcha: JSX.Element | null;
     reCaptchaSuccess: boolean;
-    geetestCaptchaSuccess: boolean;
     captcha_response: string;
 }
 
@@ -208,16 +207,12 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
             reCaptchaSuccess,
             isLoading,
             captchaType,
-            geetestCaptchaSuccess,
         } = this.props;
 
         if (!hasConfirmed || isLoading || !email.match(EMAIL_REGEX) || !password || !confirmPassword) {
             return true;
         }
         if (captchaType === 'recaptcha' && !reCaptchaSuccess) {
-            return true;
-        }
-        if (captchaType === 'geetest' && !geetestCaptchaSuccess) {
             return true;
         }
         return false;
