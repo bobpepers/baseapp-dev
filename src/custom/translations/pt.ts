@@ -352,6 +352,7 @@ export const pt: LangType = {
 
     'page.body.profile.header.accountActivity': 'Account Activity',
     'page.body.profile.header.accountActivity.content.date': 'Date',
+    'page.body.profile.header.accountActivity.content.path': 'Path',
     'page.body.profile.header.accountActivity.content.addressip': 'Address IP',
     'page.body.profile.header.accountActivity.content.action': 'Action',
     'page.body.profile.header.accountActivity.content.result': 'Result',
@@ -710,7 +711,7 @@ export const pt: LangType = {
     'page.body.privacy.body.1': 'RunesX and its subsidiaries and affiliates (collectively, “RunesX” or “we” or “us”) provide services that permit you to trade cryptographic tokens and other digital rights or assets. This Privacy Policy describes how RunesX collects, uses, stores, and protects information about users of the Services and applies to information we collect when you use our website https://www.runesx.com (the “Site”) and to any other related services provided by RunesX (collectively, the “Services”).',
     'page.body.privacy.body.2': 'We may periodically post changes to this Privacy Policy by revising the date at the top of this page.',
     'page.body.privacy.body.3': 'We encourage you to review the Privacy Policy whenever you access the Services or otherwise interact with us to stay informed about our information practices and the choices available to you.',
-    
+
     'page.body.privacy.scope.header': '1. Scope',
     'page.body.privacy.scope.list.1': '1.1 This Privacy Policy informs users of how RunesX will use and protect any Personal Information submitted when accessing its services.This policy is legally binding when using any RunesX Services, as defined below.',
     'page.body.privacy.scope.list.2': '1.2 This Privacy Policy is applicable to any RunesX Services which are accessed in any manner.',

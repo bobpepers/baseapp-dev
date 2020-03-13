@@ -41,7 +41,7 @@ const getLayouts = () => {
             /* Left Side */
             { i: '2', x: 0, y: 3, w: 14, h: 36, minH: 36, maxH: 36, minW: 4, isDraggable: isDraggable, isResizable: isResizable }, /* Chart */
             { i: '3', x: 0, y: 39, w: 14, h: 10, minH: 10, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Market Depth */
-            { i: '4', x: 0, y: 49, w: 14, h: 21, minH: 21, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Order Component */ 
+            { i: '4', x: 0, y: 49, w: 14, h: 21, minH: 21, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Order Component */
             { i: '5', x: 0, y: 70, w: 14, h: 20, minH: 20, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Open Orders */
 
             /* Right Side */

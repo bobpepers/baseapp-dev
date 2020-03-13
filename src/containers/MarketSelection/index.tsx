@@ -42,7 +42,7 @@ class MarketSelectorComponent extends React.Component<Props, State> {
                     <div className={'pg-market-depth__title'}>
                         <div className={'cr-title-component'}>{this.props.intl.formatMessage({id: 'page.body.trade.header.markets'})}</div>
                     </div>
-                </div>                
+                </div>
                 <div className="pg-trading-header-market-selector-list-container">
                     <MarketsTabs onSelect={this.marketsTabsSelectHandler}/>
                     <MarketsList search={searchFieldValue} currencyQuote={marketsTabsSelectedValue}/>

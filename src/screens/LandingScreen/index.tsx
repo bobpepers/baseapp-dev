@@ -22,7 +22,7 @@ class Landing extends React.Component<Props> {
             <div className="pg-landing-screen__market-info">
                 <div className="pg-landing-screen__market-info__wrap">
                     <div className="pg-landing-screen__market-info__wrap__title">
-                        <img src={LogoImage} alt='RuneX Logo' />
+                        <img src={LogoImage} alt="RuneX Logo" />
                         <Link to="/trading" className="landing-button">
                             {this.translate('page.body.landing.marketInfo.title.button')}
                         </Link>

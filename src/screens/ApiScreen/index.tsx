@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { RouteProps, withRouter } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui';
-import "swagger-ui/dist/swagger-ui.css";
+import 'swagger-ui/dist/swagger-ui.css';
 
 import {
     RootState,
@@ -20,19 +20,19 @@ class Api extends React.Component<Props> {
     public componentDidMount() {
         SwaggerUI({
         dom_id: '#swagger-container',
-        url: "https://downloads.runebase.io/swagger.json",
-        })
+        url: 'https://downloads.runebase.io/swagger.json',
+        });
     }
 
     public render() {
         return (
-            <div className="pg-landing-screen">  
-                <div id='swagger-container' />             
+            <div className="pg-landing-screen">
+                <div id="swagger-container" />
             </div>
         );
     }
 
-    private translate = (key: string) => this.props.intl.formatMessage({id: key});
+    /* private translate = (key: string) => this.props.intl.formatMessage({id: key}); */
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

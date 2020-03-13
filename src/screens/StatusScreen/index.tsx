@@ -37,7 +37,7 @@ class Status extends React.Component<Props> {
             </div>
         );
     }
-    
+
     private translate = (key: string) => this.props.intl.formatMessage({id: key});
 }
 

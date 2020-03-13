@@ -4,7 +4,7 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Phone } from '../../containers';
+/* import { Phone } from '../../containers'; */
 import { Documents } from '../../containers/Confirm/Documents';
 import { Identity } from '../../containers/Confirm/Identity';
 import { setDocumentTitle } from '../../helpers';
@@ -132,7 +132,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const { level } = this.state;
         const isIdentity = labels.find(w => w.key === 'profile' && w.value === 'verified');
 
-        switch (level) {            
+        switch (level) {
             case 1: return isIdentity ? <Documents /> : <Identity />;
             case 2: return <Documents />;
             default: return 'Something went wrong';

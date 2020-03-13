@@ -31,7 +31,6 @@ const defaults: SignUpFormProps = {
     passwordFocused: false,
     renderCaptcha: null,
     reCaptchaSuccess: false,
-    geetestCaptchaSuccess: false,
     captcha_response: '',
 };
 

@@ -40,7 +40,7 @@ export interface SignUpFormProps {
     refIdFocused: boolean;
     emailFocused: boolean;
     passwordFocused: boolean;
-    captchaType: 'recaptcha' | 'none';
+    captchaType: string;
     renderCaptcha: JSX.Element | null;
     reCaptchaSuccess: boolean;
     captcha_response: string;

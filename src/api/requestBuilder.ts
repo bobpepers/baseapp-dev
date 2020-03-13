@@ -106,7 +106,6 @@ export const makeRequest = async (request: Request, configData: RequestOptions) 
                 }
             })
             .catch((error: AxiosError) => {
-                console.log(error);
                 reject(formatError(error));
             });
     });

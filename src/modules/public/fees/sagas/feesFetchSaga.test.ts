@@ -9,7 +9,7 @@ import {
     feesError,
     feesFetch,
 } from '../actions';
-import { Currency } from '../types';
+import { Fee } from '../types';
 
 // tslint:disable no-any no-magic-numbers
 describe('Saga: feesFetchSaga', () => {
@@ -28,13 +28,13 @@ describe('Saga: feesFetchSaga', () => {
         mockAxios.reset();
     });
 
-    const fakeFees: Currency[] = [
+    const fakeFees: Fee[] = [
         {
             id: '1',
             group: 'any',
             market_id: 'any',
             maker: '0.15',
-            taker: '0.15,
+            taker: '0.15',
             created_at: '2020-02-29T21:00:52+01:00',
             updated_at: '2020-02-29T21:00:52+01:00',
         },
@@ -44,7 +44,7 @@ describe('Saga: feesFetchSaga', () => {
             group: 'runebase-member',
             market_id: 'any',
             maker: '0.1',
-            taker: '0.1,
+            taker: '0.1',
             created_at: '2020-02-29T21:00:52+01:00',
             updated_at: '2020-02-29T21:00:52+01:00',
         },

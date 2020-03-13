@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import * as React from 'react';
 
-export type CellData = string | number | React.ReactNode | undefined;
+export type MarketSelectionCellData = string | number | React.ReactNode | undefined;
 
-export interface Filter {
+export interface MarketSelectionFilter {
     name: string;
-    filter: (cell: CellData[]) => boolean;
+    filter: (cell: MarketSelectionCellData[]) => boolean;
 }
 
-export interface TableState {
+export interface MarketSelectionTableState {
     /**
      * Selected filter
      */
@@ -16,7 +16,7 @@ export interface TableState {
     /**
      * Filtered data
      */
-    resultData?: CellData[][];
+    resultData?: MarketSelectionCellData[][];
     /**
      * Key of selected row
      */
@@ -31,7 +31,7 @@ interface TableProps {
      *
      * All the elements of an array should have the same length.
      */
-    data: CellData[][];
+    data: MarketSelectionCellData[][];
     /**
      * Renders table head.
      */
@@ -39,7 +39,7 @@ interface TableProps {
     /**
      *  Pair name & filter is used to filter table data depending on a filter
      */
-    filters?: Filter[];
+    filters?: MarketSelectionFilter[];
     /**
      * Row's unique key, could be a number - element's index in data
      */
@@ -78,7 +78,7 @@ interface TableProps {
 /**
  * Cryptobase Table overrides default table
  */
-class Table extends React.Component<TableProps, TableState> {
+class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTableState> {
     constructor(props: TableProps) {
         super(props);
 
@@ -145,13 +145,13 @@ class Table extends React.Component<TableProps, TableState> {
         return <div className={'cr-title-component'}>{titleComponent}</div>;
     }
 
-    private renderRowCells(row: CellData[]) {
+    private renderRowCells(row: MarketSelectionCellData[]) {
         return row && row.length ?
-            row.map((c, index: number) =>
+            row.slice(1).map((c, index: number) =>
                 <td key={index} colSpan={row.length === 1 ? this.props.colSpan : undefined}>{c}</td>) : [];
     }
 
-    private handleFilter(item: Filter) {
+    private handleFilter(item: MarketSelectionFilter) {
         const { data } = this.props;
 
         if (!item.filter) {
@@ -160,7 +160,7 @@ class Table extends React.Component<TableProps, TableState> {
             });
             return;
         }
-        const resultData: CellData[][] = [...data].filter(item.filter);
+        const resultData: MarketSelectionCellData[][] = [...data].filter(item.filter);
         this.setState({
             activeFilter: item.name,
             resultData: resultData,
@@ -188,7 +188,7 @@ class Table extends React.Component<TableProps, TableState> {
         const cn = (filterName: string) => classNames('cr-table__filter', {
             'cr-table__filter--active': activeFilter === filterName,
         });
-        return filters.map((item: Filter) => {
+        return filters.map((item: MarketSelectionFilter) => {
             const handleFilterClick = () => {
                 this.handleFilter(item);
             };
@@ -205,7 +205,7 @@ class Table extends React.Component<TableProps, TableState> {
         });
     }
 
-    private renderHead(row: CellData[]) {
+    private renderHead(row: MarketSelectionCellData[]) {
         const cells = row.map((c, index) => <th key={index}>{c}</th>);
 
         return (
@@ -228,11 +228,11 @@ class Table extends React.Component<TableProps, TableState> {
             : null);
     }
 
-    private renderBackground(rows: CellData[][]) {
+    private renderBackground(rows: MarketSelectionCellData[][]) {
         const { resultData } = this.state;
         const { rowBackground, side } = this.props;
         const dataToBeMapped = resultData || rows;
-        const renderBackgroundRow = (r: CellData[], i: number) => this.renderRowBackground(i);
+        const renderBackgroundRow = (r: MarketSelectionCellData[], i: number) => this.renderRowBackground(i);
 
         const className = classNames('cr-table-background', {
             'cr-table-background--left': side === 'left',
@@ -246,7 +246,7 @@ class Table extends React.Component<TableProps, TableState> {
         );
     }
 
-    private renderBody(rows: CellData[][], rowKeyIndex: number | undefined) {
+    private renderBody(rows: MarketSelectionCellData[][], rowKeyIndex: number | undefined) {
         const { resultData, selectedRowKey } = this.state;
 
         const rowClassName = (key: string) => classNames({
@@ -274,7 +274,7 @@ class Table extends React.Component<TableProps, TableState> {
         );
     }
 
-    private ensureDataIsValid(data: CellData[][]) {
+    private ensureDataIsValid(data: MarketSelectionCellData[][]) {
         const length = data[0].length;
         const len = data.length;
         for (let i = 0; i < len; i += 1) {
@@ -286,5 +286,5 @@ class Table extends React.Component<TableProps, TableState> {
 }
 
 export {
-    Table,
+    MarketSelectionTable,
 };

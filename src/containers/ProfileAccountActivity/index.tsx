@@ -87,6 +87,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
     private getHeaders = () => {
         return [
             this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.date'}),
+            this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.path'}),
             this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.action'}),
             this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.result'}),
             this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.addressip'}),
@@ -98,6 +99,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
         return userData.map(item => {
             return [
                 localeDate(item.created_at, 'fullDate'),
+                JSON.parse(item.data || '{}').path,
                 this.getResultOfUserAction(item.action),
                 this.renderResult(this.props.intl.formatMessage({ id: `page.body.profile.content.result.${item.result}`})),
                 item.user_ip,

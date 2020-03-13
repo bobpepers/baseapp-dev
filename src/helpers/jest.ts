@@ -15,6 +15,10 @@ const mockConfig: Config = {
         rangerUrl: '/api/v2/ranger',
         arkeUrl: '/api/v2/arke',
     },
+    captcha: {
+        type: 'recaptcha',
+        siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
+    },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
     withCredentials: true,
@@ -23,7 +27,7 @@ const mockConfig: Config = {
     incrementalOrderBook: false,
     isResizable: false,
     isDraggable: false,
-    languages: ['en', 'ru'],
+    languages: ['en', 'pt'],
 };
 
 // tslint:disable no-any no-console

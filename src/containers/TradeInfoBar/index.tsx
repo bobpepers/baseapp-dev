@@ -33,14 +33,14 @@ class Head extends React.Component<Props> {
         return (
             <React.Fragment>
                 <div className={`pg-priceInfoBar ${tradingCls}`}>
-                    <div className='pg-priceInfoBar__marketInfo'>            
+                    <div className="pg-priceInfoBar__marketInfo">
                         {currentMarket && this.renderCoinImage()}
                         <p className="pg-header__market-selector-toggle-value">
                             {currentMarket && currentMarket.name}
                         </p>
                         {currentMarket && this.renderCoinWebsite()}
                         {currentMarket && this.renderCoinGithub()}
-                        {currentMarket && this.renderCoinExplorer()}                    
+                        {currentMarket && this.renderCoinExplorer()}
                         {currentMarket && this.renderCoinCoinPaprika()}
                         {currentMarket && this.renderCoinCoinGecko()}
                         {currentMarket && this.renderCoinCoinMarketCap()}
@@ -57,114 +57,115 @@ class Head extends React.Component<Props> {
 
     private renderCoinType = () => {
         const { coin_type } = this.props.currentMarket;
-        if (coin_type === 'pos') {
-            return (
-                <span className='pg-priceInfoBar__coinLink'>
-                    <img src={PosIcon} alt='PoS Icon' className='pg-priceInfoBar__coinImage' />
-                </span>
-            );
-        } else if (coin_type === 'pow') {
-            return (
-                <span className='pg-priceInfoBar__coinLink'>
-                    <img src={PowIcon} alt='PoW Icon' className='pg-priceInfoBar__coinImage' />
-                </span>
-            );
-        } else {
-            return <span />
+
+        switch (coin_type) {
+            case 'pos':
+                return (
+                    <span className="pg-priceInfoBar__coinLink">
+                        <img src={PosIcon} alt="PoS Icon" className="pg-priceInfoBar__coinImage" />
+                    </span>
+                );
+            case 'pow':
+                return (
+                    <span className="pg-priceInfoBar__coinLink">
+                        <img src={PowIcon} alt="PoW Icon" className="pg-priceInfoBar__coinImage" />
+                    </span>
+                );
+            default:
+                return <span />;
         }
-        
     };
 
     private renderCoinCoinGecko = () => {
         const { base_unit, coingecko } = this.props.currentMarket;
         if (!!coingecko) {
             return (
-                <a rel="noopener noreferrer" target="_blank" href={`https://www.coingecko.com/en/coins/${coingecko}`} className='pg-priceInfoBar__coinLink'>
-                    <img src={CoinGeckoIcon} alt={`${base_unit} coingecko icon`}  className='pg-priceInfoBar__coinImage' />
+                <a rel="noopener noreferrer" target="_blank" href={`https://www.coingecko.com/en/coins/${coingecko}`} className="pg-priceInfoBar__coinLink">
+                    <img src={CoinGeckoIcon} alt={`${base_unit} coingecko icon`}  className="pg-priceInfoBar__coinImage" />
                 </a>
             );
         } else {
             return <span />;
         }
-        
+
     };
 
     private renderCoinCoinPaprika = () => {
         const { base_unit, coinpaprika } = this.props.currentMarket;
         if (!!coinpaprika) {
             return (
-                <a rel="noopener noreferrer" target="_blank" href={`https://coinpaprika.com/coin/${coinpaprika}`} className='pg-priceInfoBar__coinLink'>
-                    <img src={CoinPaprikaIcon} alt={`${base_unit} coinpaprika icon`}  className='pg-priceInfoBar__coinImage' />
+                <a rel="noopener noreferrer" target="_blank" href={`https://coinpaprika.com/coin/${coinpaprika}`} className="pg-priceInfoBar__coinLink">
+                    <img src={CoinPaprikaIcon} alt={`${base_unit} coinpaprika icon`}  className="pg-priceInfoBar__coinImage" />
                 </a>
             );
         } else {
             return <span />;
-        }        
+        }
     };
 
     private renderCoinCoinMarketCap = () => {
         const { base_unit, coinmarketcap } = this.props.currentMarket;
         if (!!coinmarketcap) {
             return (
-                <a rel="noopener noreferrer" target="_blank" href={`https://coinmarketcap.com/currencies/${coinmarketcap}`} className='pg-priceInfoBar__coinLink'>
-                    <img src={CoinMarketCapIcon} alt={`${base_unit} coinmarketcap icon`}  className='pg-priceInfoBar__coinImage' />
+                <a rel="noopener noreferrer" target="_blank" href={`https://coinmarketcap.com/currencies/${coinmarketcap}`} className="pg-priceInfoBar__coinLink">
+                    <img src={CoinMarketCapIcon} alt={`${base_unit} coinmarketcap icon`}  className="pg-priceInfoBar__coinImage" />
                 </a>
             );
         } else {
             return <span />;
-        }        
+        }
     };
 
     private renderCoinExplorer = () => {
         const { base_unit, explorer_url } = this.props.currentMarket;
         if (!!explorer_url) {
             return (
-                <a rel="noopener noreferrer" target="_blank" href={explorer_url} className='pg-priceInfoBar__coinLink'>
-                    <img src={ExplorerIcon} alt={`${base_unit} explorer icon`}  className='pg-priceInfoBar__coinImage' />
+                <a rel="noopener noreferrer" target="_blank" href={explorer_url} className="pg-priceInfoBar__coinLink">
+                    <img src={ExplorerIcon} alt={`${base_unit} explorer icon`}  className="pg-priceInfoBar__coinImage" />
                 </a>
             );
         } else {
             return <span />;
-        }        
+        }
     };
 
     private renderCoinGithub = () => {
         const { base_unit, github } = this.props.currentMarket;
         if (!!github) {
             return (
-                <a rel="noopener noreferrer" target="_blank" href={`https://github.com/${github}`} className='pg-priceInfoBar__coinLink'>
-                    <img src={GithubIcon} alt={`${base_unit} github icon`}  className='pg-priceInfoBar__coinImage' />
+                <a rel="noopener noreferrer" target="_blank" href={`https://github.com/${github}`} className="pg-priceInfoBar__coinLink">
+                    <img src={GithubIcon} alt={`${base_unit} github icon`}  className="pg-priceInfoBar__coinImage" />
                 </a>
             );
         } else {
             return <span />;
-        }        
+        }
     };
 
     private renderCoinWebsite = () => {
         const { base_unit, website } = this.props.currentMarket;
         if (!!website) {
            return (
-                <a rel="noopener noreferrer" target="_blank" href={website} className='pg-priceInfoBar__coinLink'>
-                    <img src={WebsiteIcon} alt={`${base_unit} website icon`}  className='pg-priceInfoBar__coinImage' />
+                <a rel="noopener noreferrer" target="_blank" href={website} className="pg-priceInfoBar__coinLink">
+                    <img src={WebsiteIcon} alt={`${base_unit} website icon`}  className="pg-priceInfoBar__coinImage" />
                 </a>
-            ); 
+            );
        } else {
             return <span />;
-       }        
+       }
     };
 
     private renderCoinImage = () => {
         const { base_unit } = this.props.currentMarket;
         if (!!base_unit) {
             return (
-                <div className='pg-priceInfoBar__coinLink'>
-                    <img src={`https://downloads.runebase.io/${base_unit}.svg`} alt={`${base_unit} coin`}  className='pg-priceInfoBar__coinImage' />
+                <div className="pg-priceInfoBar__coinLink">
+                    <img src={`https://downloads.runebase.io/${base_unit}.svg`} alt={`${base_unit} coin`}  className="pg-priceInfoBar__coinImage" />
                 </div>
             );
         } else {
             return <span />;
-        }        
+        }
     };
 
     private renderMarketToolbar = () => {
@@ -174,10 +175,11 @@ class Head extends React.Component<Props> {
 
         return <HeaderToolbar/>;
     };
-
-    public translate = (id: string) => {
+    /*
+    private translate = (id: string) => {
         return id ? this.props.intl.formatMessage({ id }) : '';
-    };    
+    };
+    */
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

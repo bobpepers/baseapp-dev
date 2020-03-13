@@ -40,7 +40,7 @@ import {
     PrivacyScreen,
     TermsScreen,
     VotingScreen,
-    StatusScreen,    
+    StatusScreen,
     ApiScreen,
     FeeScreen,
 } from '../../screens';

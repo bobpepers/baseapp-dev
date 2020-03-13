@@ -16,15 +16,15 @@ import { Navigation } from '../Navigation';
 import logo from '../../assets/images/logo.svg';
 import logoLight from '../../assets/images/logoLight.svg';
 
-import useWindowDimensions from '../../hooks/getScreenWidth';
+import { useWindowDimensions } from '../../hooks/getScreenWidth';
 
 type ScreenWidthChildren = (screenWidth: number) => any;
 
-interface IScreenWidthProps {
+interface ScreenWidthProps {
   children: ScreenWidthChildren;
 }
 
-export const ScreenWidth: React.FunctionComponent<IScreenWidthProps> = ({
+export const ScreenWidth: React.FunctionComponent<ScreenWidthProps> = ({
   children,
 }) => {
   const screenWidth: number = useWindowDimensions();
@@ -50,13 +50,13 @@ interface HistoryProps {
 type Props = ReduxProps & HistoryProps & DispatchProps & InjectedIntlProps;
 
 // tslint:disable jsx-no-multiline-js
-class Head extends React.Component<Props> {    
+class Head extends React.Component<Props> {
 
     public render() {
         const { colorTheme, mobileWallet } = this.props;
         const tradingCls = window.location.pathname.includes('/trading') ? 'pg-container-trading' : '';
         const shouldRenderHeader = !['/confirm'].some(r => window.location.pathname.includes(r));
-        
+
         return (
             <React.Fragment>
             {shouldRenderHeader &&
@@ -64,7 +64,7 @@ class Head extends React.Component<Props> {
                     <div className={`pg-container pg-header__content ${tradingCls}`}>
                         <ScreenWidth>
                             {
-                                (width) => {
+                                width => {
                                     if (width < 996) {
                                         return (
                                             <div
@@ -75,14 +75,14 @@ class Head extends React.Component<Props> {
                                                 <span className="pg-sidebar__toggler-item"/>
                                                 <span className="pg-sidebar__toggler-item"/>
                                             </div>
-                                        )
+                                        );
                                     } else {
-                                        return <span />
-                                    }                                    
-                                } 
+                                        return <span />;
+                                    }
+                                }
                             }
-                        </ScreenWidth> 
-                        
+                        </ScreenWidth>
+
                         <div onClick={e => this.redirectToLanding()} className="pg-header__logo">
                             <div className="pg-logo">
                                 {colorTheme === 'light' ? (
@@ -92,24 +92,24 @@ class Head extends React.Component<Props> {
                                )}
                             </div>
                         </div>
-                        
+
                         <div className="pg-header__location">
                             {mobileWallet ? <span>{mobileWallet}</span> : <span>{window.location.pathname.split('/')[1]}</span>}
                         </div>
                         {this.renderMobileWalletNav()}
-                         
+
                         <ScreenWidth>
                             {
-                                (width) => {
+                                width => {
                                     if (width >= 996) {
-                                        return <Navigation />
+                                        return <Navigation />;
                                     } else {
-                                        return <span />
-                                    }                                    
-                                } 
+                                        return <span />;
+                                    }
+                                }
                             }
-                        </ScreenWidth>       
-                        
+                        </ScreenWidth>
+
                         <div className="pg-header__navbar">
                             <NavBar onLinkChange={this.closeMenu}/>
                         </div>

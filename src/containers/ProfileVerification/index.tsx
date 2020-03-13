@@ -59,6 +59,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
         );
     }
 
+    /*
     private renderThirdLevel(userLevel: number) {
         const targetLevel = 3;
         const documentLabel = this.props.label.find((label: Label) => label.key === 'document');
@@ -76,6 +77,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
             </div>
         );
     }
+    */
 
     private renderSecondLevel(userLevel: number) {
         const targetLevel = 2;

@@ -39,8 +39,8 @@ window.env = window.env || defaultConfig;
 Cryptobase.config = { ...window.env };
 Cryptobase.config.storage = Cryptobase.config.storage || {};
 
-export const captchaType = () => Cryptobase.config.captcha.type;
-export const recaptchaSitekey = () => Cryptobase.config.captcha.siteKey;
+export const captchaType = (): string => Cryptobase.config.captcha.type || 'none';
+export const recaptchaSitekey = (): string => Cryptobase.config.captcha.siteKey || '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI';
 
 export const tradeUrl = () => Cryptobase.config.api.tradeUrl;
 export const arkeUrl = () => Cryptobase.config.api.arkeUrl || tradeUrl();

@@ -8,7 +8,7 @@ import {
 import { connect } from 'react-redux';
 import { incrementalOrderBook } from '../../../api';
 import { SortAsc, SortDefault, SortDesc } from '../../../assets/images/SortIcons';
-import { Decimal, Table } from '../../../components';
+import { Decimal, MarketSelectionTable } from '../../../components';
 import {
     depthFetch,
     Market,
@@ -79,7 +79,7 @@ class MarketsListComponent extends React.Component<Props, State> {
         const data = this.mapMarkets();
         return (
             <div className="pg-dropdown-markets-list-container">
-                <Table
+                <MarketSelectionTable
                     data={data.length > 0 ? data : [[]]}
                     header={this.getHeaders()}
                     onSelect={this.currencyPairSelectHandler}
@@ -182,7 +182,7 @@ class MarketsListComponent extends React.Component<Props, State> {
             });
             return [
                 market.name,
-                (<span><img src={`https://downloads.runebase.io/${market.base_unit}.svg` }alt={`${market.name} market icon`} className='MarketListCoinIcon' />{market.name}</span>),
+                (<span><img src={`https://downloads.runebase.io/${market.base_unit}.svg` }alt={`${market.name} market icon`} className="MarketListCoinIcon" />{market.name}</span>),
                 (<span className={classname}>{Decimal.format(Number(market.last), market.price_precision)}</span>),
                 (<span className={classname}>{Decimal.format(Number(market.vol), market.amount_precision)}</span>),
                 (<span className={classname}>{market.price_change_percent}</span>),

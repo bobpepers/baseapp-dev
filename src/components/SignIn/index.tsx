@@ -32,10 +32,9 @@ export interface SignInProps {
     handleChangeFocusField: (value: string) => void;
     changePassword: (value: string) => void;
     changeEmail: (value: string) => void;
-    captchaType: 'recaptcha' | 'none';
+    captchaType: string;
     renderCaptcha: JSX.Element | null;
     reCaptchaSuccess: boolean;
-    geetestCaptchaSuccess: boolean;
     captcha_response: string;
 }
 
@@ -117,7 +116,7 @@ export class SignInComponent extends React.Component<SignInProps> {
                                 autoFocus={false}
                             />
                             {passwordError && <div className={'cr-sign-in-form__error'}>{passwordError}</div>}
-                        </div>                        
+                        </div>
                         {this.props.renderCaptcha}
                         <div className="cr-sign-in-form__button-wrapper">
                             <Button
@@ -162,7 +161,7 @@ export class SignInComponent extends React.Component<SignInProps> {
             return true;
         }
         return false;
-    };    
+    };
 
     private handleChangeEmail = (value: string) => {
         this.props.changeEmail(value);

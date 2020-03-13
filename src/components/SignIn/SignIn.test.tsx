@@ -21,6 +21,10 @@ const defaults: SignInProps = {
     handleChangeFocusField: jest.fn(),
     changePassword: jest.fn(),
     changeEmail: jest.fn(),
+    captchaType: '',
+    renderCaptcha: null,
+    reCaptchaSuccess: false,
+    captcha_response: '',
 };
 
 const setup = (props: Partial<SignInProps> = {}) =>

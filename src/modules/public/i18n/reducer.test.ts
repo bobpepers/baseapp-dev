@@ -14,10 +14,10 @@ describe('ChangeLanguage reducer', () => {
         expect(changeLanguageReducer(initialChangeLanguageState, actions.changeLanguage('en'))).toEqual(expectedState);
         expect(localStorage.getItem('lang_code')).toEqual('en');
         expectedState = {
-            lang: 'ru',
-            messages: languageMap.ru,
+            lang: 'pt',
+            messages: languageMap.pt,
         };
-        expect(changeLanguageReducer(initialChangeLanguageState, actions.changeLanguage('ru'))).toEqual(expectedState);
-        expect(localStorage.getItem('lang_code')).toEqual('ru');
+        expect(changeLanguageReducer(initialChangeLanguageState, actions.changeLanguage('pt'))).toEqual(expectedState);
+        expect(localStorage.getItem('lang_code')).toEqual('pt');
     });
 });

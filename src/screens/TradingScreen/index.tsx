@@ -88,18 +88,18 @@ class Trading extends React.Component<Props, StateProps> {
         orderBookComponentResized: 5,
     };
 
-    private gridItems = [    
+    private gridItems = [
         {
             i: 1,
-            render: () => <TradeInfoBar />,            
+            render: () => <TradeInfoBar />,
         },
         {
             i: 2,
-            render: () => <TradingChart />,            
+            render: () => <TradingChart />,
         },
         {
             i: 3,
-            render: () => <MarketDepthsComponent />,             
+            render: () => <MarketDepthsComponent />,
         },
         {
             i: 4,
@@ -107,11 +107,11 @@ class Trading extends React.Component<Props, StateProps> {
         },
         {
             i: 5,
-            render: () => <OpenOrdersComponent/>,            
+            render: () => <OpenOrdersComponent/>,
         },
         {
             i: 6,
-            render: () => <MarketSelection/>,            
+            render: () => <MarketSelection/>,
         },
         {
             i: 7,
@@ -119,7 +119,7 @@ class Trading extends React.Component<Props, StateProps> {
         },
         {
             i: 8,
-            render: () => <RecentTrades/>,            
+            render: () => <RecentTrades/>,
         },
     ];
 
@@ -189,7 +189,7 @@ class Trading extends React.Component<Props, StateProps> {
         return (
             <div className={'pg-trading-screen'}>
                 <div className={'pg-trading-wrap'}>
-                    <ToolBar />                    
+                    <ToolBar />
                     <Grid
                         breakpoints={breakpoints}
                         className="layout"

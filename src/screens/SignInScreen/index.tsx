@@ -45,6 +45,8 @@ interface SignInState {
     otpCode: string;
     error2fa: string;
     codeFocused: boolean;
+    reCaptchaSuccess: boolean;
+    captcha_response: string;
 }
 
 type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps;
@@ -92,15 +94,15 @@ class SignIn extends React.Component<Props, SignInState> {
 
     private renderSignInForm = () => {
         const { loading } = this.props;
-        const { 
-            email, 
-            emailError, 
-            emailFocused, 
-            password, 
-            passwordError, 
-            passwordFocused, 
+        const {
+            email,
+            emailError,
+            emailFocused,
+            password,
+            passwordError,
+            passwordFocused,
             reCaptchaSuccess,
-            captcha_response, 
+            captcha_response,
         } = this.state;
 
         return (
@@ -133,7 +135,7 @@ class SignIn extends React.Component<Props, SignInState> {
                     captchaType={captchaType()}
                     reCaptchaSuccess={reCaptchaSuccess}
                     captcha_response={captcha_response}
-                />                
+                />
             </React.Fragment>
         );
     };
@@ -150,10 +152,9 @@ class SignIn extends React.Component<Props, SignInState> {
         switch (captchaType()) {
             case 'recaptcha':
                 return (
-                    <div className='cr-sign-in-form__recaptcha-wrapper'>
+                    <div className="cr-sign-in-form__recaptcha-wrapper">
                         <div className="cr-sign-in-form__recaptcha">
                             <ReCAPTCHA
-                                ref={this.reCaptchaRef}
                                 sitekey={recaptchaSitekey()}
                                 onChange={this.handleReCaptchaSuccess}
                             />
@@ -165,7 +166,7 @@ class SignIn extends React.Component<Props, SignInState> {
 
         }
     }
-    
+
 
     private render2FA = () => {
         const { loading } = this.props;

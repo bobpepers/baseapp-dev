@@ -58,7 +58,6 @@ class SidebarContainer extends React.Component<Props, State> {
         const isLight = colorTheme === 'light';
         const lightBox = isLight ? 'light-box' : '';
         const languageName = lang.toUpperCase();
-        console.log(lang);
 
         const languageClassName = classnames('dropdown-menu-language-field', {
             'dropdown-menu-language-field-active': isOpenLanguage,

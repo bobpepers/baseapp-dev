@@ -63,7 +63,7 @@ class NavigationContainer extends React.Component<Props, State> {
         });
 
         return (
-            <div className='pg-navigation-wrapper'>                
+            <div className="pg-navigation-wrapper">
                 {pgRoutes(isLoggedIn, isLight).map(this.renderNavItems(address))}
                 <div className="pg-navigations-wrapper-lng">
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">

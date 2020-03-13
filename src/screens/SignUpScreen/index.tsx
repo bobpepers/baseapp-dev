@@ -108,7 +108,7 @@ class SignUp extends React.Component<Props> {
     }
 
     public render() {
-        const { configs, loading } = this.props;
+        const { loading } = this.props;
         const {
             email,
             password,
