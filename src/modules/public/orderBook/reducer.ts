@@ -95,6 +95,8 @@ export const depthReducer = (state = initialDepth, action: DepthActions): DepthS
 };
 
 export const incrementDepthReducer = (state = initialIncrementDepth, action: DepthActions): DepthIncrementState => {
+  console.log('depthReducer');
+  console.log(action.type);
   switch (action.type) {
     case DEPTH_INCREMENT_SUBSCRIBE:
       return {
