@@ -54,7 +54,8 @@ class OrderBookContainer extends React.Component<Props, State> {
     private orderRef;
 
     public componentDidMount() {
-        this.props.orderBookFetch();
+        console.log(this.props.currentMarket);
+        this.props.orderBookFetch(this.props.currentMarket);
     }
 
     public componentDidUpdate() {

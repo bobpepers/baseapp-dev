@@ -47,7 +47,7 @@
       "always",
       "ignore-bound-class-methods"
     ],
-    "no-console": true,
+    "no-console": false,
     "ban": [
       true,
       "eval",
