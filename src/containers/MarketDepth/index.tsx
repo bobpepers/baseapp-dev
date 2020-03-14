@@ -44,10 +44,6 @@ class MarketDepthContainer extends React.Component<Props> {
 
     public render() {
         const { asksItems, bidsItems } = this.props;
-        console.log('asksItems');
-        console.log(asksItems);
-        console.log('bidsItems');
-        console.log(bidsItems);
 
         const colors = {
             fillAreaAsk: '#fa5252',

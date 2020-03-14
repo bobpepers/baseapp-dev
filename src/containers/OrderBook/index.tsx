@@ -15,7 +15,6 @@ import {
     selectDepthLoading,
     selectMarketTickers,
     setCurrentPrice,
-    orderBookFetch,
 } from '../../modules';
 
 interface ReduxProps {
@@ -28,7 +27,6 @@ interface ReduxProps {
 
 interface DispatchProps {
     setCurrentPrice: typeof setCurrentPrice;
-    orderBookFetch: typeof orderBookFetch;
 }
 
 interface State {
@@ -53,11 +51,6 @@ class OrderBookContainer extends React.Component<Props, State> {
 
     private orderRef;
 
-    public componentDidMount() {
-        console.log(this.props.currentMarket);
-        this.props.orderBookFetch(this.props.currentMarket);
-    }
-
     public componentDidUpdate() {
         if (this.orderRef.current && this.state.width !== this.orderRef.current.clientWidth) {
             this.setState({
@@ -72,9 +65,6 @@ class OrderBookContainer extends React.Component<Props, State> {
             bids,
             orderBookLoading,
         } = this.props;
-
-        console.log(asks);
-        console.log(bids);
 
         const isLarge = this.state.width > breakpoint;
         const cn = classNames('pg-combined-order-book ', {
@@ -116,11 +106,6 @@ class OrderBookContainer extends React.Component<Props, State> {
 
     private lastPrice = () => {
         const { marketTickers, currentMarket } = this.props;
-        console.log('currentMarket');
-        console.log(currentMarket);
-        console.log('marketTickers');
-        console.log(marketTickers);
-
         const defaultTicker = {
             last: 0,
             price_change_percent: '+0.00%',
@@ -215,7 +200,6 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
         setCurrentPrice: payload => dispatch(setCurrentPrice(payload)),
-        orderBookFetch: payload => dispatch(orderBookFetch(payload)),
     });
 
 export const OrderBook = injectIntl(connect(mapStateToProps, mapDispatchToProps)(OrderBookContainer));

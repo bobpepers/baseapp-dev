@@ -158,7 +158,7 @@ class NavigationContainer extends React.Component<Props, State> {
 
     public getLanguageDropdownItems = () => {
         return languages.map((l: string) =>
-            <Dropdown.Item onClick={e => this.handleChangeLanguage(l)}>
+            <Dropdown.Item key={l} onClick={e => this.handleChangeLanguage(l)}>
                 <div className="dropdown-row">
                     <img
                         src={this.tryRequire(l) && require(`../../assets/images/languages/${l}.svg`)}

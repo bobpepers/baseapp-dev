@@ -80,15 +80,6 @@ const initRanger = (
                     const orderBookMatchSnap = routingKey.match(/([^.]*)\.ob-snap/);
                     const orderBookMatchInc = routingKey.match(/([^.]*)\.ob-inc/);
 
-                    console.log('orderBookMatch');
-                    console.log(orderBookMatch);
-                    console.log('currentMarket');
-                    console.log(currentMarket);
-                    // console.log(orderBookMatch[1]);
-                    console.log('routingKey');
-                    console.log(routingKey);
-                    console.log('payload');
-                    console.log(payload);
                     // public
                     if (orderBookMatch) {
                         if (currentMarket && orderBookMatch[1] === currentMarket.id) {
