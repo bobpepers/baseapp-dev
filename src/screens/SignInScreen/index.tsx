@@ -170,7 +170,12 @@ class SignIn extends React.Component<Props, SignInState> {
 
     private render2FA = () => {
         const { loading } = this.props;
-        const { otpCode, error2fa, codeFocused } = this.state;
+        const {
+            otpCode,
+            error2fa,
+            codeFocused,
+        } = this.state;
+
         return (
             <TwoFactorAuth
                 isLoading={loading}
@@ -213,7 +218,7 @@ class SignIn extends React.Component<Props, SignInState> {
     };
 
     private handle2FASignIn = () => {
-        const { email, password, otpCode } = this.state;
+        const { email, password, otpCode, captcha_response } = this.state;
         if (!otpCode) {
             this.setState({
                 error2fa: 'Please enter 2fa code',
@@ -223,6 +228,7 @@ class SignIn extends React.Component<Props, SignInState> {
                 email,
                 password,
                 otp_code: otpCode,
+                captcha_response,
             });
         }
     };
