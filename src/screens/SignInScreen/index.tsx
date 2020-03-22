@@ -209,7 +209,11 @@ class SignIn extends React.Component<Props, SignInState> {
     };
 
     private handleSignIn = () => {
-        const { email, password, captcha_response } = this.state;
+        const {
+            email,
+            password,
+            captcha_response,
+        } = this.state;
         this.props.signIn({
             email,
             password,
