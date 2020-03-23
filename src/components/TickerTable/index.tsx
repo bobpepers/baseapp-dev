@@ -72,7 +72,6 @@ export class TickerTable extends React.Component<Props> {
     private renderItem = (market, index: number) => {
         const { redirectToTrading } = this.props;
         const marketChangeColor = +(market.change || 0) < 0 ? 'negative' : 'positive';
-
         return (
             <tr key={index} onClick={() => redirectToTrading(market.id)}>
                 <td>
@@ -107,7 +106,7 @@ export class TickerTable extends React.Component<Props> {
                 <td>
                     <span>
                         <Decimal fixed={market.amount_precision} thousSep=",">
-                            {market.volume}
+                            {market.vol}
                         </Decimal>
                     </span>
                 </td>
