@@ -81,8 +81,6 @@ class Fees extends React.Component<Props> {
                                         <th scope="col">{this.translate('page.body.feesTable.coin.header.feedeposit')}</th>
                                         <th scope="col">{this.translate('page.body.feesTable.coin.header.minwithdraw')}</th>
                                         <th scope="col">{this.translate('page.body.feesTable.coin.header.feewithdraw')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.limitwithdraw24')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.limitwithdraw72')}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -120,12 +118,12 @@ class Fees extends React.Component<Props> {
                 </td>
                 <td>
                     <span>
-                        {trade && trade.maker}%
+                        {trade && (trade.maker * 100)}%
                     </span>
                 </td>
                 <td>
                     <span>
-                        {trade && trade.taker}%
+                        {trade && (trade.taker * 100)}%
                     </span>
                 </td>
             </tr>
@@ -163,16 +161,6 @@ class Fees extends React.Component<Props> {
                 <td>
                     <span>
                         {currency && currency.withdraw_fee}
-                    </span>
-                </td>
-                <td>
-                    <span>
-                        {currency && currency.withdraw_limit_24h}
-                    </span>
-                </td>
-                <td>
-                    <span>
-                        {currency && currency.withdraw_limit_72h}
                     </span>
                 </td>
             </tr>
