@@ -5,8 +5,6 @@ import { SignInComponent, SignInProps } from './';
 import { shallow } from 'enzyme';
 
 const defaults: SignInProps = {
-    onForgotPassword: jest.fn(),
-    onSignUp: jest.fn(),
     onSignIn: jest.fn(),
     email: '',
     emailError: '',
@@ -55,12 +53,6 @@ describe('SignIn component', () => {
         expect(secondState).toHaveLength(5);
     });
 
-    it('should have correct labels', () => {
-        const wrapper = setup({ labelSignIn: 'label sign in', labelSignUp: 'label sign up'});
-        expect(wrapper.find('.__selected').text()).toBe('label sign in');
-        expect(wrapper.find('.cr-sign-in-form__tab-signup').text()).toBe('label sign up');
-    });
-
     it('should render error blocks', () => {
         const wrapper = setup({emailError: 'error email', passwordError: 'error password'});
         expect(wrapper.find('.cr-sign-in-form__error').first().text()).toBe('error email');
@@ -107,9 +99,7 @@ describe('SignIn component', () => {
     });
 
     it('should have correct labels for input fields', () => {
-        let wrapper = setup();
+        const wrapper = setup();
         expect(wrapper.find('.cr-sign-in-form__bottom-section-password').text()).toBe('Forgot your password?');
-        wrapper = setup({forgotPasswordLabel: 'label forgot password'});
-        expect(wrapper.find('.cr-sign-in-form__bottom-section-password').text()).toBe('label forgot password');
     });
 });

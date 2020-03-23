@@ -32,6 +32,9 @@ export function* handleAlertSaga(action: AlertPush) {
                 }
                 break;
             case 403:
+                if (action.payload.message.indexOf('identity.session.missing_otp') > -1) {
+                    yield call(callAlertData, action);
+                }
                 if (action.payload.message.indexOf('identity.session.invalid_otp') > -1) {
                     yield call(callAlertData, action);
                 }

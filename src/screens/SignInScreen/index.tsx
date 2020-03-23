@@ -4,6 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { captchaType, recaptchaSitekey } from '../../api/config';
 import { SignInComponent, TwoFactorAuth } from '../../components';
@@ -82,12 +83,13 @@ class SignIn extends React.Component<Props, SignInState> {
     }
 
     public render() {
-        const { loading, require2FA } = this.props;
-
+        const { loading } = this.props;
         const className = cx('pg-sign-in-screen__container', { loading });
         return (
             <div className="pg-sign-in-screen">
-                <div className={className}>{require2FA ? this.render2FA() : this.renderSignInForm()}</div>
+                <div className={className}>
+                    {this.renderSignInForm()}
+                </div>
             </div>
         );
     }
@@ -103,41 +105,125 @@ class SignIn extends React.Component<Props, SignInState> {
             passwordFocused,
             reCaptchaSuccess,
             captcha_response,
+            otpCode,
+            codeFocused,
         } = this.state;
 
         return (
             <React.Fragment>
-                <SignInComponent
-                    email={email}
-                    emailError={emailError}
-                    emailFocused={emailFocused}
-                    emailPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
-                    password={password}
-                    passwordError={passwordError}
-                    passwordFocused={passwordFocused}
-                    passwordPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
-                    labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                    labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp' })}
-                    emailLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
-                    passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
-                    receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
-                    forgotPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.forgotPassword' })}
-                    isLoading={loading}
-                    onForgotPassword={this.forgotPassword}
-                    onSignUp={this.handleSignUp}
-                    onSignIn={this.handleSignIn}
-                    handleChangeFocusField={this.handleFieldFocus}
-                    isFormValid={this.validateForm}
-                    refreshError={this.refreshError}
-                    changeEmail={this.handleChangeEmailValue}
-                    changePassword={this.handleChangePasswordValue}
-                    renderCaptcha={this.renderCaptcha()}
-                    captchaType={captchaType()}
-                    reCaptchaSuccess={reCaptchaSuccess}
-                    captcha_response={captcha_response}
-                />
+                <div className="cr-sign-in-form">
+                    <div className="cr-sign-in-form__options-group">
+                        <div className="cr-sign-in-form__option">
+                            <div className="cr-sign-in-form__option-inner __selected">
+                                {this.props.intl.formatMessage({ id: 'page.header.signIn' })}
+                            </div>
+                        </div>
+                        <div className="cr-sign-in-form__option">
+                            <div className="cr-sign-in-form__option-inner cr-sign-in-form__tab-signup" onClick={this.handleSignUp}>
+                                {this.props.intl.formatMessage({ id: 'page.header.signUp' })}
+                            </div>
+                        </div>
+                    </div>
+                    <SignInComponent
+                        email={email}
+                        emailError={emailError}
+                        emailFocused={emailFocused}
+                        emailPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
+                        password={password}
+                        passwordError={passwordError}
+                        passwordFocused={passwordFocused}
+                        passwordPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
+                        emailLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
+                        passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
+                        receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
+                        isLoading={loading}
+                        onSignIn={this.handleSignIn}
+                        handleChangeFocusField={this.handleFieldFocus}
+                        isFormValid={this.validateForm}
+                        refreshError={this.refreshError}
+                        changeEmail={this.handleChangeEmailValue}
+                        changePassword={this.handleChangePasswordValue}
+                        renderCaptcha={this.renderCaptcha()}
+                        captchaType={captchaType()}
+                        reCaptchaSuccess={reCaptchaSuccess}
+                        captcha_response={captcha_response}
+                    />
+                    <TwoFactorAuth
+                        onSubmit={this.handle2FASignIn}
+                        label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
+                        message={this.props.intl.formatMessage({ id: 'page.password2fa.message' })}
+                        codeFocused={codeFocused}
+                        otpCode={otpCode}
+                        handleOtpCodeChange={this.handleChangeOtpCode}
+                        handleChangeFocusField={this.handle2faFocus}
+                    />
+                    <div className="cr-sign-in-form__button-wrapper">
+                        <Button
+                            block={true}
+                            type="button"
+                            disabled={this.disableButton()}
+                            onClick={e => this.handleClick(e)}
+                            size="lg"
+                            variant="primary"
+                        >
+                            {loading ? 'Loading...' : this.props.intl.formatMessage({ id: 'page.header.signIn' })}
+                        </Button>
+                    </div>
+                    <div className="cr-sign-in-form__bottom-section">
+                        <div
+                            className="cr-sign-in-form__bottom-section-password"
+                            onClick={() => this.forgotPassword()}
+                        >
+                            {this.props.intl.formatMessage({ id: 'page.header.signIn.forgotPassword' })}
+                        </div>
+                    </div>
+                </div>
             </React.Fragment>
         );
+    };
+
+    private handleValidateForm = () => {
+        this.props.isFormValid();
+    };
+
+    private handleSubmitForm = () => {
+        this.refreshError();
+        this.handleSignIn();
+    };
+
+    private isValidForm = () => {
+        const { email, password } = this.state;
+        const isEmailValid = email.match(EMAIL_REGEX);
+
+        return email && isEmailValid && password;
+    };
+
+    private handleClick = (label?: string, e?: React.FormEvent<HTMLInputElement>) => {
+        if (e) {
+            e.preventDefault();
+        }
+        if (!this.isValidForm()) {
+            this.handleValidateForm();
+        } else {
+            this.handleSubmitForm();
+        }
+    };
+
+    private disableButton = (): boolean => {
+        const { loading } = this.props;
+        const {
+            email,
+            password,
+            reCaptchaSuccess,
+        } = this.state;
+
+        if (loading || !email.match(EMAIL_REGEX) || !password) {
+            return true;
+        }
+        if (captchaType() === 'recaptcha' && !reCaptchaSuccess) {
+            return true;
+        }
+        return false;
     };
 
     private handleReCaptchaSuccess = (value: string) => {
@@ -168,32 +254,6 @@ class SignIn extends React.Component<Props, SignInState> {
     }
 
 
-    private render2FA = () => {
-        const { loading } = this.props;
-        const {
-            otpCode,
-            error2fa,
-            codeFocused,
-        } = this.state;
-
-        return (
-            <TwoFactorAuth
-                isLoading={loading}
-                onSubmit={this.handle2FASignIn}
-                title={this.props.intl.formatMessage({ id: 'page.password2fa' })}
-                label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
-                buttonLabel={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                message={this.props.intl.formatMessage({ id: 'page.password2fa.message' })}
-                codeFocused={codeFocused}
-                otpCode={otpCode}
-                error={error2fa}
-                handleOtpCodeChange={this.handleChangeOtpCode}
-                handleChangeFocusField={this.handle2faFocus}
-                handleClose2fa={this.handleClose}
-            />
-        );
-    };
-
     private refreshError = () => {
         this.setState({
             emailError: '',
@@ -213,12 +273,22 @@ class SignIn extends React.Component<Props, SignInState> {
             email,
             password,
             captcha_response,
+            otpCode,
         } = this.state;
-        this.props.signIn({
-            email,
-            password,
-            captcha_response,
-        });
+        if (!otpCode) {
+            this.props.signIn({
+                email,
+                password,
+                captcha_response,
+            });
+        } else {
+            this.props.signIn({
+                email,
+                password,
+                otp_code: otpCode,
+                captcha_response,
+            });
+        }
     };
 
     private handle2FASignIn = () => {
@@ -300,9 +370,6 @@ class SignIn extends React.Component<Props, SignInState> {
         });
     };
 
-    private handleClose = () => {
-        this.props.signInRequire2FA({ require2fa: false });
-    };
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({

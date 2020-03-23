@@ -26,6 +26,9 @@ export function* signInSaga(action: SignInFetch) {
                 yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
                 break;
             case 403:
+                if (error.message.indexOf('identity.session.missing_otp') > -1) {
+                    yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+                }
                 if (error.message.indexOf('identity.session.invalid_otp') > -1) {
                     yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
                 }
