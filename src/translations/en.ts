@@ -125,6 +125,12 @@ export const en = {
     'page.body.wallets.balance': 'Balance',
     'page.body.wallets.tabs.deposit': 'Deposit',
     'page.body.wallets.tabs.deposit.ccy.message.submit': 'Submit a deposit using the following address or QR code. Your deposit will be reflected in your account after {confirmations} confirmations',
+
+    'page.body.wallets.tabs.deposit.message.mindeposit1': 'Warning',
+    'page.body.wallets.tabs.deposit.message.mindeposit2': 'The minimum deposit amount for',
+    'page.body.wallets.tabs.deposit.message.mindeposit3': 'is',
+    'page.body.wallets.tabs.deposit.message.mindeposit4': 'Deposit amounts below this threshold are lost',
+
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Deposit Address',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'COPY',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Address copied',

@@ -23,6 +23,17 @@ export interface DepositCryptoProps {
      */
     text?: string;
     /**
+     *  Renders text of a component
+     */
+    textMinDeposit1?: string;
+    textMinDeposit2?: string;
+    textMinDeposit3?: string;
+    textMinDeposit4?: string;
+
+    currencyName?: string;
+    currencyMinDeposit?: string;
+    currencyTicker?: string;
+    /**
      * @default 'Deposit by Wallet Address'
      * Renders text of the label of CopyableTextField component
      */
@@ -49,7 +60,23 @@ export interface DepositCryptoProps {
  */
 const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: DepositCryptoProps) => {
     const QR_SIZE = 118;
-    const { data, dimensions, error, text, copiableTextFieldText, copyButtonText, handleOnCopy, disabled } = props;
+    const {
+        data,
+        dimensions,
+        error,
+        text,
+        textMinDeposit1,
+        textMinDeposit2,
+        textMinDeposit3,
+        textMinDeposit4,
+        currencyName,
+        currencyMinDeposit,
+        currencyTicker,
+        copiableTextFieldText,
+        copyButtonText,
+        handleOnCopy,
+        disabled,
+    } = props;
     const size = dimensions || QR_SIZE;
     const onCopy = !disabled ? handleOnCopy : undefined;
     const className = classnames({'cr-copyable-text-field__disabled': data === ''});
@@ -60,6 +87,11 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
                 <div>
                     <p className={'cr-deposit-info'}>{text}</p>
                     {data ? <div className="d-none d-md-block qr-code-wrapper"><QRCode dimensions={size} data={data}/></div> : null}
+                </div>
+                <div>
+                    <p>
+                        <span className="fat warning">{textMinDeposit1}:</span> {textMinDeposit2} <span className="fat">{currencyName}</span> {textMinDeposit3} <span className="fat">{currencyMinDeposit} {currencyTicker}</span>. {textMinDeposit4}.
+                    </p>
                 </div>
                 <div>
                     <form className={'cr-deposit-crypto__copyable'}>

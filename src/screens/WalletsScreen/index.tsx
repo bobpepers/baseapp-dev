@@ -310,8 +310,16 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const { selectedWalletIndex } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
         const currencyItem = (currencies && currencies.find(item => item.id === currency)) || { min_confirmations: 6 };
-        const text = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' },
-                                                   { confirmations: currencyItem.min_confirmations });
+        const text = this.props.intl.formatMessage(
+            { id: 'page.body.wallets.tabs.deposit.ccy.message.submit' },
+            { confirmations: currencyItem.min_confirmations });
+
+        const textMinDeposit1 = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.message.mindeposit1' });
+        const textMinDeposit2 = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.message.mindeposit2' });
+        const textMinDeposit3 = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.message.mindeposit3' });
+        const textMinDeposit4 = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.message.mindeposit4' });
+
+
         const error = addressDepositError ?
             this.props.intl.formatMessage({id: addressDepositError.message}) :
             this.props.intl.formatMessage({id: 'page.body.wallets.tabs.deposit.ccy.message.error'});
@@ -327,6 +335,13 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         handleOnCopy={this.handleOnCopy}
                         error={error}
                         text={text}
+                        textMinDeposit1={textMinDeposit1}
+                        textMinDeposit2={textMinDeposit2}
+                        currencyName={currencyItem.name}
+                        textMinDeposit3={textMinDeposit3}
+                        currencyMinDeposit={currencyItem.min_deposit_amount}
+                        currencyTicker={(currencyItem.id).toUpperCase()}
+                        textMinDeposit4={textMinDeposit4}
                         disabled={walletAddress === ''}
                         copiableTextFieldText={this.translate('page.body.wallets.tabs.deposit.ccy.message.address')}
                         copyButtonText={this.translate('page.body.wallets.tabs.deposit.ccy.message.button')}
