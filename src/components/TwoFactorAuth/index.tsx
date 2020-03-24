@@ -55,14 +55,10 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
         );
     }
 
-    private handleSubmit = () => {
-        this.props.onSubmit();
-    };
-
     private handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            this.handleSubmit();
+            this.props.onSubmit();
         }
     }
 }

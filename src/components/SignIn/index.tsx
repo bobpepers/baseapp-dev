@@ -9,7 +9,7 @@ export interface SignInProps {
     isLoading?: boolean;
     title?: string;
     onConfirmationResend?: (email?: string) => void;
-    onSignIn: () => void;
+    onSubmit: () => void;
     className?: string;
     image?: string;
     email: string;
@@ -74,6 +74,7 @@ export class SignInComponent extends React.Component<SignInProps> {
                             inputValue={email}
                             handleFocusInput={() => this.handleFieldFocus('email')}
                             classNameLabel="cr-sign-in-form__label"
+                            onKeyPress={this.handleEnterPress}
                             autoFocus={true}
                         />
                         {emailError && <div className={'cr-sign-in-form__error'}>{emailError}</div>}
@@ -88,6 +89,7 @@ export class SignInComponent extends React.Component<SignInProps> {
                             inputValue={password}
                             handleFocusInput={() => this.handleFieldFocus('password')}
                             classNameLabel="cr-sign-in-form__label"
+                            onKeyPress={this.handleEnterPress}
                             autoFocus={false}
                         />
                         {passwordError && <div className={'cr-sign-in-form__error'}>{passwordError}</div>}
@@ -97,6 +99,13 @@ export class SignInComponent extends React.Component<SignInProps> {
             </form>
         );
         // tslint:enable:jsx-no-lambda
+    }
+
+    private handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            this.props.onSubmit();
+        }
     }
 
     private handleChangeEmail = (value: string) => {

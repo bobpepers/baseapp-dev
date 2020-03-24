@@ -137,7 +137,7 @@ class SignIn extends React.Component<Props, SignInState> {
                         passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
                         receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
                         isLoading={loading}
-                        onSignIn={this.handleSignIn}
+                        onSubmit={this.handleEnter}
                         handleChangeFocusField={this.handleFieldFocus}
                         isFormValid={this.validateForm}
                         refreshError={this.refreshError}
@@ -149,7 +149,7 @@ class SignIn extends React.Component<Props, SignInState> {
                         captcha_response={captcha_response}
                     />
                     <TwoFactorAuth
-                        onSubmit={this.handle2FASignIn}
+                        onSubmit={this.handleEnter}
                         label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
                         message={this.props.intl.formatMessage({ id: 'page.password2fa.message' })}
                         codeFocused={codeFocused}
@@ -198,6 +198,14 @@ class SignIn extends React.Component<Props, SignInState> {
         return email && isEmailValid && password;
     };
 
+    private handleEnter = () => {
+        if (!this.isValidForm()) {
+            this.handleValidateForm();
+        } else {
+            this.handleSubmitForm();
+        }
+    };
+
     private handleClick = (label?: string, e?: React.FormEvent<HTMLInputElement>) => {
         if (e) {
             e.preventDefault();
@@ -233,7 +241,6 @@ class SignIn extends React.Component<Props, SignInState> {
         });
     };
 
-
     private renderCaptcha = () => {
         switch (captchaType()) {
             case 'recaptcha':
@@ -252,7 +259,6 @@ class SignIn extends React.Component<Props, SignInState> {
 
         }
     }
-
 
     private refreshError = () => {
         this.setState({
@@ -280,22 +286,6 @@ class SignIn extends React.Component<Props, SignInState> {
                 email,
                 password,
                 captcha_response,
-            });
-        } else {
-            this.props.signIn({
-                email,
-                password,
-                otp_code: otpCode,
-                captcha_response,
-            });
-        }
-    };
-
-    private handle2FASignIn = () => {
-        const { email, password, otpCode, captcha_response } = this.state;
-        if (!otpCode) {
-            this.setState({
-                error2fa: 'Please enter 2fa code',
             });
         } else {
             this.props.signIn({
@@ -369,7 +359,6 @@ class SignIn extends React.Component<Props, SignInState> {
             password: value,
         });
     };
-
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
