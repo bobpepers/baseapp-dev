@@ -6,6 +6,7 @@ import {
     RootState,
     selectUserLoggedIn,
 } from '../../modules';
+import { setDocumentTitle } from '../../helpers';
 
 interface ReduxProps {
     isLoggedIn: boolean;
@@ -14,6 +15,9 @@ interface ReduxProps {
 type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
 class Terms extends React.Component<Props> {
+    public componentDidMount() {
+      setDocumentTitle('Terms');
+    }
     public renderTermsBlock() {
         return (
             <div className="pg-landing-screen__privacy-info">

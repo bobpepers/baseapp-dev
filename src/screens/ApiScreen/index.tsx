@@ -4,6 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { RouteProps, withRouter } from 'react-router-dom';
 import SwaggerUI from 'swagger-ui';
 import 'swagger-ui/dist/swagger-ui.css';
+import { setDocumentTitle } from '../../helpers';
 
 import {
     RootState,
@@ -18,6 +19,7 @@ type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
 class Api extends React.Component<Props> {
     public componentDidMount() {
+        setDocumentTitle('API');
         SwaggerUI({
         dom_id: '#swagger-container',
         url: 'https://downloads.runebase.io/swagger.json',

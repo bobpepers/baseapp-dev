@@ -815,6 +815,13 @@ export const pt: LangType = {
 
     'page.body.footer.cookies': 'This site uses cookies. By continuing to browse you are agreeing to our use of cookies.',
 
+    'page.body.voting.description': 'Votes are deposited to burner addresses and are non-refundable',
+    'page.body.voting.exception': 'Exception',
+    'page.body.voting.exception.description': 'Upon failure to integrate, RunesX team will return RUNES to sender addresses from their own wallet',
+
+    'page.body.voting.warning': 'Warning',
+    'page.body.voting.warning.description': 'Successful integration is not garanteed',
+
     'server.internal_error': 'Internal Server Error',
 
     ...nationalitiesNames,

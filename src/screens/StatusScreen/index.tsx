@@ -7,6 +7,7 @@ import {
     RootState,
     selectUserLoggedIn,
 } from '../../modules';
+import { setDocumentTitle } from '../../helpers';
 
 interface ReduxProps {
     isLoggedIn: boolean;
@@ -15,6 +16,9 @@ interface ReduxProps {
 type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
 class Status extends React.Component<Props> {
+    public componentDidMount() {
+      setDocumentTitle('Status');
+    }
     public renderMarketInfoBlock() {
         return (
             <div className="pg-landing-screen__market-info">

@@ -12,6 +12,7 @@ import {
     Fee,
     selectFees,
 } from '../../modules';
+import { setDocumentTitle } from '../../helpers';
 
 interface ReduxProps {
     isLoggedIn: boolean;
@@ -28,6 +29,7 @@ type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
 class Fees extends React.Component<Props> {
     public componentDidMount() {
+        setDocumentTitle('Fees');
         if (!this.props.currencies.length) {
             this.props.currenciesFetch();
         }
