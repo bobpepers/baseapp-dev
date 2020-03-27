@@ -3,6 +3,7 @@ import { PercentageButton } from '../PercentageButton';
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
+import BigNumber from 'bignumber.js';
 import { Decimal } from '../Decimal';
 import { cleanPositiveFloatInput, getAmount, getTotalPrice } from '../../helpers';
 import { DropdownComponent } from '../Dropdown';
@@ -197,6 +198,11 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
         const availablePrecision = type === 'buy' ? currentMarketBidPrecision : currentMarketAskPrecision;
         const availableCurrency = type === 'buy' ? from : to;
 
+        const fmt = {
+          decimalSeparator: '.',
+          groupSeparator: '',
+        };
+
         return (
             <div className={cx}>
                 <div className="cr-order-item">
@@ -273,11 +279,13 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                         <div className="cr-order-item__total__content">
                             {orderType === 'Limit' ? (
                                 <span className="cr-order-item__total__content__amount">
-                                    {Decimal.format(total, currentMarketBidPrecision + currentMarketAskPrecision)}
+                                    {new BigNumber(total).toFormat(currentMarketBidPrecision + currentMarketAskPrecision, fmt)}
+                                    {/* Decimal.format(total, currentMarketBidPrecision + currentMarketAskPrecision) */}
                                 </span>
                             ) : (
                                 <span className="cr-order-item__total__content__amount">
-                                    &asymp;{Decimal.format(total, currentMarketBidPrecision + currentMarketAskPrecision)}
+                                    {new BigNumber(total).toFormat(currentMarketBidPrecision + currentMarketAskPrecision, fmt)}
+                                    &asymp;{/* Decimal.format(total, currentMarketBidPrecision + currentMarketAskPrecision) */}
                                 </span>
                             )}
                             <span className="cr-order-item__total__content__currency">
