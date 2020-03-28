@@ -36,7 +36,7 @@ interface State {
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 
 // render big/small breakpoint
-const breakpoint = 448;
+const breakpoint = 5000;
 
 class OrderBookContainer extends React.Component<Props, State> {
     constructor(props: Props) {

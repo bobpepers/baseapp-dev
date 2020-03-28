@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { RouteProps, withRouter } from 'react-router-dom';
+import { Grid } from '@material-ui/core';
 import {
     RootState,
     selectUserLoggedIn,
@@ -27,7 +28,7 @@ interface DispatchProps {
 
 type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
-class Fees extends React.Component<Props> {
+class Fees extends Component<Props> {
     public componentDidMount() {
         setDocumentTitle('Fees');
         if (!this.props.currencies.length) {
@@ -41,67 +42,67 @@ class Fees extends React.Component<Props> {
     public renderTradeFeeBlock() {
         const { fees } = this.props;
         return (
-            <div className="pg-landing-screen__market-info">
-                <div className="pg-landing-screen__market-info__wrap">
+            <Grid container className="mb-32">
+                <Grid item xs={12} className="gridItemCenter">
                     <h2>{this.translate('page.body.feesTable.trade.header')}</h2>
-                    <div className="pg-ticker-table">
-                        <div className="pg-ticker-table__table-wrap">
-                            <table className="pg-ticker-table__table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">{this.translate('page.body.feesTable.trade.header.group')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.trade.header.market')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.trade.header.makerfee')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.trade.header.takerfee')}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {fees[0] && fees.map(this.renderTradeFeeItem)}
-                                </tbody>
-                            </table>
-                        </div>
+                </Grid>
+                <div className="pg-ticker-table">
+                    <div className="pg-ticker-table__table-wrap">
+                        <table className="pg-ticker-table__table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.group')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.market')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.makerfee')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.takerfee')}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {fees[0] && fees.map(this.renderTradeFeeItem)}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
+            </Grid>
         );
     }
 
     public renderCoinFeeBlock() {
         const { currencies } = this.props;
         return (
-            <div className="pg-landing-screen__market-info">
-                <div className="pg-landing-screen__market-info__wrap">
+            <Grid container>
+                <Grid item xs={12} className="gridItemCenter">
                     <h2>{this.translate('page.body.feesTable.coin.header')}</h2>
-                    <div className="pg-ticker-table">
-                        <div className="pg-ticker-table__table-wrap">
-                            <table className="pg-ticker-table__table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.name')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.ticker')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.mindeposit')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.feedeposit')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.minwithdraw')}</th>
-                                        <th scope="col">{this.translate('page.body.feesTable.coin.header.feewithdraw')}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currencies[0] && currencies.map(this.renderCoinFeeItem)}
-                                </tbody>
-                            </table>
-                        </div>
+                </Grid>
+                <div className="pg-ticker-table">
+                    <div className="pg-ticker-table__table-wrap">
+                        <table className="pg-ticker-table__table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.name')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.ticker')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.mindeposit')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.feedeposit')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.minwithdraw')}</th>
+                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.feewithdraw')}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {currencies[0] && currencies.map(this.renderCoinFeeItem)}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
+            </Grid>
         );
     }
 
     public render() {
         return (
-            <div className="pg-landing-screen">
+            <Fragment>
                 {this.renderTradeFeeBlock()}
                 {this.renderCoinFeeBlock()}
-            </div>
+            </Fragment>
         );
     }
 
@@ -142,7 +143,7 @@ class Fees extends React.Component<Props> {
                 </td>
                 <td>
                     <span>
-                       {currency && currency.id}
+                       {currency && (currency.id).toUpperCase()}
                     </span>
                 </td>
                 <td>

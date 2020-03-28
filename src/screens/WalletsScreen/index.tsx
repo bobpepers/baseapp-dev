@@ -201,7 +201,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         return (
             <React.Fragment>
                 <EstimatedValue wallets={wallets}/>
-                <div className="pg-container pg-wallet">
+                <div className="pg-wallet">
                     <div className="text-center">
                         {walletsLoading && <Spinner animation="border" variant="primary" />}
                     </div>

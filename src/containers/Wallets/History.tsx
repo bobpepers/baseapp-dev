@@ -159,6 +159,7 @@ export class WalletTable extends React.Component<Props> {
     };
 
     private formatTxState = (tx: string, confirmations?: number, minConfirmations?: number) => {
+        console.log(tx);
         const statusMapping = {
             succeed: <SucceedIcon />,
             failed: <FailIcon />,

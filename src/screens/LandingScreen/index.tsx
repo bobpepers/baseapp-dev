@@ -1,7 +1,8 @@
-import * as React from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
+import { Button, Grid } from '@material-ui/core';
 import { MarketsTable } from '../../containers';
 import {
     RootState,
@@ -16,28 +17,32 @@ interface ReduxProps {
 
 type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
-class Landing extends React.Component<Props> {
+class Landing extends Component<Props> {
     public renderMarketInfoBlock() {
         return (
-            <div className="pg-landing-screen__market-info">
-                <div className="pg-landing-screen__market-info__wrap">
-                    <div className="pg-landing-screen__market-info__wrap__title">
-                        <img src={LogoImage} alt="RuneX Logo" />
-                        <Link to="/trading" className="landing-button">
+            <Grid container alignItems="center" justify="center" className="frontPage">
+                <Grid item xs={2} className="logoWrapper">
+                    <img src={LogoImage} alt="RuneX Logo" />
+                </Grid>
+                <Grid item xs={12} className="gridItemCenter">
+                    <Link to="/trading">
+                        <Button variant="contained" color="primary" className="tradeButton mb-32">
                             {this.translate('page.body.landing.marketInfo.title.button')}
-                        </Link>
-                    </div>
+                        </Button>
+                    </Link>
+                </Grid>
+                <Grid item xs={12}>
                     <MarketsTable />
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         );
     }
 
     public render() {
         return (
-            <div className="pg-landing-screen">
+            <Fragment>
                 {this.renderMarketInfoBlock()}
-            </div>
+            </Fragment>
         );
     }
 

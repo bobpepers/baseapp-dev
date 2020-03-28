@@ -11,6 +11,8 @@
     "noUnusedLocals": true,
     "allowSyntheticDefaultImports": false,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "types": [
       "node",
       "jest"
