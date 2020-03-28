@@ -4,7 +4,7 @@ export const PendingIcon = () => {
     return (
         <Fragment>
             Pending
-            <div className="ml-5">
+            <div className="ml-2 inlineBlock">
                 <svg width="15" height="15" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-300 392 10 10" xmlSpace="preserve">
                     <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
                         <path fill="#191604" d="M-2956.9,8873.3c-8.2-0.2-15-0.6-20.5-1.4c-3.3-0.5-5.3-0.9-7.8-1.6c-4.4-1.2-6.9-2.7-8.1-4.7
