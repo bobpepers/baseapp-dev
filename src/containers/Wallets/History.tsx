@@ -27,6 +27,7 @@ import {
 } from '../../modules';
 import { FailIcon } from './FailIcon';
 import { SucceedIcon } from './SucceedIcon';
+import { PendingIcon } from './PendingIcon';
 
 export interface HistoryProps {
     label: string;
@@ -163,7 +164,7 @@ export class WalletTable extends React.Component<Props> {
         const statusMapping = {
             succeed: <SucceedIcon />,
             failed: <FailIcon />,
-            accepted: <SucceedIcon />,
+            accepted: <PendingIcon />,
             collected: <SucceedIcon />,
             canceled: <FailIcon />,
             rejected: <FailIcon />,
