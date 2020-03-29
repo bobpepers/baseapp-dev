@@ -10,12 +10,14 @@ describe('Constants', () => {
         ['page.header.navbar.wallets', '/wallets', 'wallets'],
         ['page.header.navbar.openOrders', '/orders', 'orders'],
         ['page.header.navbar.history', '/history', 'history'],
+        ['page.header.navbar.profile', '/profile', 'profile'],
+        ['page.header.navbar.logout', '/logout', 'logout'],
     ];
 
     const expectedRoutesForNotLoggedInUser = [
+        ['page.header.navbar.trade', '/trading/', 'trade'],
         ['page.header.navbar.signIn', '/signin', 'signin'],
         ['page.header.signUp', '/signup', 'signup'],
-        ['page.header.navbar.trade', '/trading/', 'trade'],
     ];
 
     it('Rendering correct title prefix', () => {
