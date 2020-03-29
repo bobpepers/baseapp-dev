@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
     "@openware/cryptofont": "2.3.0",
     "@types/compression-webpack-plugin": "^2.0.1",
     "@types/ws": "^6.0.4",

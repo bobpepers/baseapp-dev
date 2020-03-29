@@ -1,10 +1,11 @@
 import classnames from 'classnames';
 import { History } from 'history';
-import * as React from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
-import {  pgRoutes } from '../../constants';
+import { Timeline, Dvr, AccountCircle, Restore, AccountBalanceWallet, PersonAdd, Person, ExitToApp, Help } from '@material-ui/icons';
+import { pgRoutes } from '../../constants';
 import {
     changeLanguage,
     logoutFetch,
@@ -43,12 +44,33 @@ interface OwnProps {
     history: History;
 }
 
+
 type Props = OwnProps & ReduxProps & RouteProps & DispatchProps;
 
-class SidebarContainer extends React.Component<Props, State> {
+class SidebarContainer extends Component<Props, State> {
+    public wrapperRef: HTMLDivElement | null = null;
+
     public state = {
         isOpenLanguage: false,
     };
+
+    public componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    public componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
+    }
+
+    public setWrapperRef = node => {
+        this.wrapperRef = node;
+    }
+
+    public handleClickOutside = event => {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+            this.props.toggleSidebar(false);
+        }
+    }
 
     public render() {
         const { isLoggedIn, colorTheme, isActive, lang } = this.props;
@@ -64,10 +86,9 @@ class SidebarContainer extends React.Component<Props, State> {
         });
 
         return (
-            <div className={`pg-sidebar-wrapper ${lightBox} pg-sidebar-wrapper--${isActive ? 'active' : 'hidden'}`}>
-                {this.renderProfileLink()}
+            <div ref={this.setWrapperRef} className={`pg-sidebar-wrapper ${lightBox} pg-sidebar-wrapper--${isActive ? 'active' : 'hidden'}`}>
                 <div className="pg-sidebar-wrapper-nav">
-                    {pgRoutes(isLoggedIn, isLight).map(this.renderNavItems(address))}
+                    {pgRoutes(isLoggedIn).map(this.renderNavItems(address))}
                 </div>
                 <div className="pg-sidebar-wrapper-lng">
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">
@@ -85,81 +106,56 @@ class SidebarContainer extends React.Component<Props, State> {
                         </Dropdown>
                     </div>
                 </div>
-                {this.renderLogout()}
             </div>
         );
+    }
+
+    public renderNavImage = (imgName: string, isActive: boolean) => {
+        switch (imgName) {
+            case 'trade':
+                return <Timeline className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'signin':
+                return <Person className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'signup':
+                return <PersonAdd className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'wallets':
+                return <AccountBalanceWallet className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'orders':
+                return <Dvr className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'history':
+                return <Restore className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'profile':
+                return <AccountCircle className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'logout':
+                return <ExitToApp className={`menu-icon ${isActive && 'route-selected'}`} />;
+            default:
+                return <Help className={`menu-icon ${isActive && 'route-selected'}`} />;
+        }
     }
 
     public renderNavItems = (address: string) => (values: string[], index: number) => {
         const { currentMarket } = this.props;
 
-        const [name, url, img] = values;
+        const [name, url, imgName] = values;
         const handleLinkChange = () => this.props.toggleSidebar(false);
         const path = url.includes('/trading') && currentMarket ? `/trading/${currentMarket.id}` : url;
         const isActive = (url === '/trading/' && address.includes('/trading')) || address === url;
         return (
-            <Link to={path} key={index} onClick={handleLinkChange} className={`${isActive && 'route-selected'}`}>
+            <Link
+                to={path}
+                key={index}
+                onClick={ () => { imgName === 'logout' ? this.props.logoutFetch() : handleLinkChange(); } }
+                className={`${isActive && 'route-selected'}`}
+            >
                 <div className="pg-sidebar-wrapper-nav-item">
-                    <div className="pg-sidebar-wrapper-nav-item-img-wrapper">
-                        <img
-                            className="pg-sidebar-wrapper-nav-item-img"
-                            src={require(`../../assets/images/sidebar/${img}.svg`)}
-                            alt="icon"
-                        />
+                    <div className="menu-icon-wrapper">
+                        {this.renderNavImage(imgName, isActive)}
                     </div>
                     <p className="pg-sidebar-wrapper-nav-item-text">
                         <FormattedMessage id={name} />
                     </p>
                 </div>
             </Link>
-        );
-    };
-
-    public renderProfileLink = () => {
-        const { isLoggedIn, colorTheme, location } = this.props;
-        const isLight = colorTheme === 'light';
-        const handleLinkChange = () => this.props.toggleSidebar(false);
-        const address = location ? location.pathname : '';
-        const isActive = address === '/profile';
-
-        return isLoggedIn && (
-            <div className="pg-sidebar-wrapper-profile">
-                <Link to="/profile" onClick={handleLinkChange} className={`${isActive && 'route-selected'}`}>
-                    <div className="pg-sidebar-wrapper-profile-link">
-                        <img
-                            className="pg-sidebar-wrapper-profile-link-img"
-                            src={require(`../../assets/images/sidebar/profile${isLight ? 'Light' : '' }.svg`)}
-                            alt="icon"
-                        />
-                        <p className="pg-sidebar-wrapper-profile-link-text">
-                            <FormattedMessage id={'page.header.navbar.profile'} />
-                        </p>
-                    </div>
-                </Link>
-            </div>
-        );
-    };
-
-    public renderLogout = () => {
-        const { isLoggedIn, colorTheme } = this.props;
-        const isLight = colorTheme === 'light';
-        if (!isLoggedIn) {
-            return null;
-        }
-
-        return (
-            <div className="pg-sidebar-wrapper-logout">
-                <div className="pg-sidebar-wrapper-logout-link" onClick={this.props.logoutFetch}>
-                    <img
-                        className="pg-sidebar-wrapper-logout-link-img"
-                        src={require(`../../assets/images/sidebar/logout${isLight ? 'Light' : '' }.svg`)}
-                        alt="icon"
-                    />
-                    <p className="pg-sidebar-wrapper-logout-link-text">
-                        <FormattedMessage id={'page.body.profile.content.action.logout'} />
-                    </p>
-                </div>
-            </div>
         );
     };
 
@@ -186,10 +182,10 @@ class SidebarContainer extends React.Component<Props, State> {
         }
     };
 
-
     private handleChangeLanguage = (language: string) => {
         this.props.changeLanguage(language);
     }
+
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

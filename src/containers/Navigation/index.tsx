@@ -1,9 +1,10 @@
 import classnames from 'classnames';
 import { History } from 'history';
-import * as React from 'react';
+import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
+import { Timeline, Dvr, AccountCircle, Restore, AccountBalanceWallet, PersonAdd, Person, ExitToApp, Help } from '@material-ui/icons';
 import {  pgRoutes } from '../../constants';
 import {
     changeLanguage,
@@ -45,17 +46,16 @@ interface OwnProps {
 
 type Props = OwnProps & ReduxProps & RouteProps & DispatchProps;
 
-class NavigationContainer extends React.Component<Props, State> {
+class NavigationContainer extends Component<Props, State> {
     public state = {
         isOpenLanguage: false,
     };
 
     public render() {
-        const { isLoggedIn, colorTheme, lang } = this.props;
+        const { isLoggedIn, lang } = this.props;
         const { isOpenLanguage } = this.state;
 
         const address = this.props.history.location ? this.props.history.location.pathname : '';
-        const isLight = colorTheme === 'light';
         const languageName = lang.toUpperCase();
 
         const languageClassName = classnames('dropdown-menu-language-field', {
@@ -64,7 +64,7 @@ class NavigationContainer extends React.Component<Props, State> {
 
         return (
             <div className="pg-navigation-wrapper">
-                {pgRoutes(isLoggedIn, isLight).map(this.renderNavItems(address))}
+                {pgRoutes(isLoggedIn).map(this.renderNavItems(address))}
                 <div className="pg-navigations-wrapper-lng">
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">
                         <Dropdown>
@@ -81,78 +81,58 @@ class NavigationContainer extends React.Component<Props, State> {
                         </Dropdown>
                     </div>
                 </div>
-                {this.renderProfileLink()}
-                {this.renderLogout()}
             </div>
         );
     }
 
+    public renderNavImage = (imgName: string, isActive: boolean) => {
+        switch (imgName) {
+
+            case 'trade':
+                return <Timeline className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'signin':
+                return <Person className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'signup':
+                return <PersonAdd className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'wallets':
+                return <AccountBalanceWallet className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'orders':
+                return <Dvr className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'history':
+                return <Restore className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'profile':
+                return <AccountCircle className={`menu-icon ${isActive && 'route-selected'}`} />;
+            case 'logout':
+                return <ExitToApp className={`menu-icon ${isActive && 'route-selected'}`} />;
+            default:
+                return <Help className={`menu-icon ${isActive && 'route-selected'}`} />;
+        }
+    }
+
     public renderNavItems = (address: string) => (values: string[], index: number) => {
         const { currentMarket } = this.props;
+        const [name, url, imgName] = values;
 
-        const [name, url, img] = values;
         const handleLinkChange = () => this.props.toggleSidebar(false);
         const path = url.includes('/trading') && currentMarket ? `/trading/${currentMarket.id}` : url;
         const isActive = (url === '/trading/' && address.includes('/trading')) || address === url;
+
         return (
-            <Link to={path} key={index} onClick={handleLinkChange} className={`${isActive && 'route-selected'}`}>
+            <Link
+                to={path}
+                key={index}
+                onClick={() => { imgName === 'logout' ? this.props.logoutFetch() : handleLinkChange(); }}
+                className={`${isActive && 'route-selected'}`}
+            >
                 <div className="pg-navigations-wrapper-nav-item">
-                    <div className="pg-navigation-wrapper-nav-item-img-wrapper">
-                        <img
-                            className="pg-navigation-wrapper-nav-item-img"
-                            src={require(`../../assets/images/sidebar/${img}.svg`)}
-                            alt="icon"
-                        />
+                    <div className="menu-icon-wrapper">
+                        {this.renderNavImage(imgName, isActive)}
                     </div>
                     <p className="pg-navigation-wrapper-nav-item-text">
                         <FormattedMessage id={name} />
                     </p>
                 </div>
             </Link>
-        );
-    };
-
-    public renderProfileLink = () => {
-        const { isLoggedIn, colorTheme, location } = this.props;
-        const isLight = colorTheme === 'light';
-        const handleLinkChange = () => this.props.toggleSidebar(false);
-        const address = location ? location.pathname : '';
-        const isActive = address === '/profile';
-
-        return isLoggedIn && (
-            <Link to="/profile" onClick={handleLinkChange} className={`${isActive && 'route-selected'}`}>
-                <div className="pg-navigations-wrapper-nav-item">
-                    <img
-                        className="pg-navigation-wrapper-profile-link-img"
-                        src={require(`../../assets/images/sidebar/profile${isLight ? 'Light' : '' }.svg`)}
-                        alt="icon"
-                    />
-                    <p className="pg-navigation-wrapper-profile-link-text">
-                        <FormattedMessage id={'page.header.navbar.profile'} />
-                    </p>
-                </div>
-            </Link>
-        );
-    };
-
-    public renderLogout = () => {
-        const { isLoggedIn, colorTheme } = this.props;
-        const isLight = colorTheme === 'light';
-        if (!isLoggedIn) {
-            return null;
-        }
-
-        return (
-            <div className="pg-navigations-wrapper-nav-item" onClick={this.props.logoutFetch}>
-                <img
-                    className="pg-navigation-wrapper-logout-link-img"
-                    src={require(`../../assets/images/sidebar/logout${isLight ? 'Light' : '' }.svg`)}
-                    alt="icon"
-                />
-                <p className="pg-navigation-wrapper-logout-link-text">
-                    <FormattedMessage id={'page.body.profile.content.action.logout'} />
-                </p>
-            </div>
         );
     };
 

@@ -1,16 +1,18 @@
 export const PG_TITLE_PREFIX = 'RunesX';
 
-export const pgRoutes = (isLoggedIn: boolean, isLight?: boolean): string[][] => {
+export const pgRoutes = (isLoggedIn: boolean): string[][] => {
     const routes = [
-        ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.wallets', '/wallets', `wallets${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.openOrders', '/orders', `orders${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.history', '/history', `history${isLight ? 'Light' : ''}`],
+        ['page.header.navbar.trade', '/trading/', 'trade'],
+        ['page.header.navbar.wallets', '/wallets', 'wallets'],
+        ['page.header.navbar.openOrders', '/orders', 'orders'],
+        ['page.header.navbar.history', '/history', 'history'],
+        ['page.header.navbar.profile', '/profile', 'profile'],
+        ['page.header.navbar.logout', '/logout', 'logout'],
     ];
     const routesUnloggedIn = [
-        ['page.header.navbar.signIn', '/signin', `signin${isLight ? 'Light' : ''}`],
-        ['page.header.signUp', '/signup', `signup${isLight ? 'Light' : ''}`],
-        ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
+        ['page.header.navbar.trade', '/trading/', 'trade'],
+        ['page.header.navbar.signIn', '/signin', 'signin'],
+        ['page.header.signUp', '/signup', 'signup'],
     ];
     return isLoggedIn ? routes : routesUnloggedIn;
 };
