@@ -50,7 +50,7 @@ class YoursComponent extends React.Component<Props> {
         }
     }
 
-    public componentWillReceiveProps(next: Props) {
+    public UNSAFE_componentWillReceiveProps(next: Props) {
         if (next.currentMarket && this.props.currentMarket !== next.currentMarket) {
             this.props.fetchHistory({ type: 'trades', page: 0, time_from: timeFrom, market: next.currentMarket.id });
         }

@@ -61,7 +61,7 @@ export class Markets extends React.Component<MarketsProps, MarketsState> {
 
     private defaultHeaders: string[] = ['Pair', 'Price', '24h Change'];
 
-    public componentWillReceiveProps(nextProps: MarketsProps) {
+    public UNSAFE_componentWillReceiveProps(nextProps: MarketsProps) {
         if (nextProps.data !== this.props.data) {
             this.setState({
                 filteredData: nextProps.data.filter(w => (w[0] as string).toLowerCase().includes(this.state.searchKey.toLowerCase())),

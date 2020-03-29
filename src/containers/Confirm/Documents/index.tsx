@@ -70,7 +70,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         scans: [],
     };
 
-    public componentWillReceiveProps(next: Props) {
+    public UNSAFE_componentWillReceiveProps(next: Props) {
         if (next.success){
             this.props.history.push('/profile');
         }

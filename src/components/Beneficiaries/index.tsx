@@ -88,7 +88,7 @@ class BeneficiariesComponent extends React.Component<Props, State> {
         }
     }
 
-    public componentWillReceiveProps(nextProps: Props) {
+    public UNSAFE_componentWillReceiveProps(nextProps: Props) {
         const { currency, beneficiaries } = this.props;
 
         if ((nextProps.currency && nextProps.currency !== currency) ||

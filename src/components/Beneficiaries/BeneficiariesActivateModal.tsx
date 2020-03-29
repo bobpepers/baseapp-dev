@@ -48,7 +48,7 @@ class BeneficiariesActivateModalComponent extends React.Component<Props, State> 
         };
     }
 
-    public componentWillReceiveProps(nextProps: Props) {
+    public UNSAFE_componentWillReceiveProps(nextProps: Props) {
         const {
             beneficiariesActivateError,
             beneficiariesActivateSuccess,

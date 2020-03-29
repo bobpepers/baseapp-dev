@@ -149,7 +149,7 @@ class Trading extends React.Component<Props, StateProps> {
         this.props.setCurrentPrice(undefined);
     }
 
-    public componentWillReceiveProps(nextProps) {
+    public UNSAFE_componentWillReceiveProps(nextProps) {
         const {
             history,
             markets,

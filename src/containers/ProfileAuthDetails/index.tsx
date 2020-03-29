@@ -86,7 +86,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         };
     }
 
-    public componentWillReceiveProps(next: Props) {
+    public UNSAFE_componentWillReceiveProps(next: Props) {
         const { toggle2FASuccess } = this.props;
 
         if (next.passwordChangeSuccess) {

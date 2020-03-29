@@ -73,7 +73,7 @@ class SignIn extends React.Component<Props, SignInState> {
         this.props.signUpRequireVerification({requireVerification: false});
     }
 
-    public componentWillReceiveProps(props: Props) {
+    public UNSAFE_componentWillReceiveProps(props: Props) {
         if (props.isLoggedIn) {
             this.props.history.push('/wallets');
         }

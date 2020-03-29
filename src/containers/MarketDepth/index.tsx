@@ -26,7 +26,7 @@ const settings = {
 };
 
 class MarketDepthContainer extends React.Component<Props> {
-    public componentWillReceiveProps(next: Props) {
+    public UNSAFE_componentWillReceiveProps(next: Props) {
         const { currentMarket } = next;
         const { currentMarket: prevCurrentMarket} = this.props;
 

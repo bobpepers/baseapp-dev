@@ -81,7 +81,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         }
     }
 
-    public componentWillReceiveProps(next: Props) {
+    public UNSAFE_componentWillReceiveProps(next: Props) {
         const {userLoggedIn, accountWallets} = this.props;
         if (userLoggedIn && (!next.wallets || next.wallets.length === 0)) {
             accountWallets();

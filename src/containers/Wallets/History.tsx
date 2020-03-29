@@ -70,7 +70,7 @@ export class WalletTable extends Component<Props> {
         }
     }
 
-    public componentWillReceiveProps(nextProps) {
+    public UNSAFE_componentWillReceiveProps(nextProps) {
         const {
             currencies,
             currency,

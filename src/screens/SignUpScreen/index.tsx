@@ -93,7 +93,7 @@ class SignUp extends React.Component<Props> {
         }
     }
 
-    public componentWillReceiveProps(nextProps: Props) {
+    public UNSAFE_componentWillReceiveProps(nextProps: Props) {
         const { email } = this.state;
 
         if (nextProps.requireVerification) {

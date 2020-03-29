@@ -96,7 +96,7 @@ class Table extends React.Component<TableProps, TableState> {
         }
     }
 
-    public componentWillReceiveProps(next: TableProps) {
+    public UNSAFE_componentWillReceiveProps(next: TableProps) {
         if (next.selectedKey) {
             this.setState({selectedRowKey: next.selectedKey});
         }

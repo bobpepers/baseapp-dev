@@ -56,7 +56,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
         total: 0,
     };
 
-    public componentWillReceiveProps(nextProps) {
+    public UNSAFE_componentWillReceiveProps(nextProps) {
         const { currency, withdrawDone } = this.props;
 
         if ((nextProps && (JSON.stringify(nextProps.currency) !== JSON.stringify(currency))) || (nextProps.withdrawDone && !withdrawDone)) {

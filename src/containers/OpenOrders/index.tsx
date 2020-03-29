@@ -43,7 +43,7 @@ export class OpenOrdersContainer extends React.Component<Props> {
         }
     }
 
-    public componentWillReceiveProps(next: Props) {
+    public UNSAFE_componentWillReceiveProps(next: Props) {
         const { userLoggedIn, currentMarket } = next;
         const { userLoggedIn: prevUserLoggedIn, currentMarket: prevCurrentMarket } = this.props;
 

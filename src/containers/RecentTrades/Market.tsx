@@ -50,7 +50,7 @@ const handleHighlightValue = (prevValue: string, curValue: string) => {
 
 
 class MarketComponent extends React.Component<Props> {
-    public componentWillReceiveProps(next: Props) {
+    public UNSAFE_componentWillReceiveProps(next: Props) {
         if (next.currentMarket && this.props.currentMarket !== next.currentMarket) {
             this.props.tradesFetch(next.currentMarket);
         }

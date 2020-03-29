@@ -96,7 +96,7 @@ class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTa
         }
     }
 
-    public componentWillReceiveProps(next: TableProps) {
+    public UNSAFE_componentWillReceiveProps(next: TableProps) {
         if (next.selectedKey) {
             this.setState({selectedRowKey: next.selectedKey});
         }

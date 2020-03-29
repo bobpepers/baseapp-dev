@@ -24,7 +24,7 @@ class ProfileTwoFactorAuthComponent extends React.Component<Props, ProfileTwoFac
         };
     }
 
-    public componentWillReceiveProps(next: ProfileTwoFactorAuthProps) {
+    public UNSAFE_componentWillReceiveProps(next: ProfileTwoFactorAuthProps) {
         if (next.is2faEnabled !== this.props.is2faEnabled) {
             this.setState({
                 is2faEnabled: next.is2faEnabled || false,
