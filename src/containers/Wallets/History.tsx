@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { Fragment, Component } from 'react';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -56,7 +56,7 @@ interface DispatchProps {
 
 export type Props = HistoryProps & ReduxProps & DispatchProps & InjectedIntlProps;
 
-export class WalletTable extends React.Component<Props> {
+export class WalletTable extends Component<Props> {
     public componentDidMount() {
         const {
             currencies,
@@ -160,14 +160,13 @@ export class WalletTable extends React.Component<Props> {
     };
 
     private formatTxState = (tx: string, confirmations?: number, minConfirmations?: number) => {
-        console.log(tx);
         const statusMapping = {
-            succeed: <SucceedIcon />,
-            failed: <FailIcon />,
-            accepted: <PendingIcon />,
-            collected: <SucceedIcon />,
-            canceled: <FailIcon />,
-            rejected: <FailIcon />,
+            succeed: <Fragment>{this.props.intl.formatMessage({ id: 'page.body.wallets.table.success' })}<div className="ml-2 inlineBlock"><SucceedIcon /></div></Fragment>,
+            failed: <Fragment>{this.props.intl.formatMessage({ id: 'page.body.wallets.table.failed' })}<div className="ml-2 inlineBlock"><FailIcon /></div></Fragment>,
+            accepted: <Fragment>{this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' })}<div className="ml-2 inlineBlock"><PendingIcon /></div></Fragment>,
+            collected: <Fragment>{this.props.intl.formatMessage({ id: 'page.body.wallets.table.success' })}<div className="ml-2 inlineBlock"><SucceedIcon /></div></Fragment>,
+            canceled: <Fragment>{this.props.intl.formatMessage({ id: 'page.body.wallets.table.canceled' })}<div className="ml-2 inlineBlock"><FailIcon /></div></Fragment>,
+            rejected: <Fragment>{this.props.intl.formatMessage({ id: 'page.body.wallets.table.rejected' })}<div className="ml-2 inlineBlock"><FailIcon /></div></Fragment>,
             processing: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
             prepared: this.props.intl.formatMessage({ id: 'page.body.wallets.table.pending' }),
             submitted: (confirmations !== undefined && minConfirmations !== undefined) ? (
