@@ -86,7 +86,7 @@ class Voting extends React.Component<Props> {
     public render() {
         const { isLoading, items, error } = this.state;
         return (
-            <Grid container spacing={3} className="text-center">
+            <Grid container spacing={3} className="text-center wrapper-container">
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
                     <Typography variant="h4">
                         {this.translate('page.body.voting.description')}

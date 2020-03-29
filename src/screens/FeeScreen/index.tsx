@@ -42,7 +42,7 @@ class Fees extends Component<Props> {
     public renderTradeFeeBlock() {
         const { fees } = this.props;
         return (
-            <Grid container className="mb-32">
+            <Grid container className="mb-32 wrapper-container">
                 <Grid item xs={12} className="gridItemCenter">
                     <h2>{this.translate('page.body.feesTable.trade.header')}</h2>
                 </Grid>
@@ -70,7 +70,7 @@ class Fees extends Component<Props> {
     public renderCoinFeeBlock() {
         const { currencies } = this.props;
         return (
-            <Grid container>
+            <Grid container className="wrapper-container">
                 <Grid item xs={12} className="gridItemCenter">
                     <h2>{this.translate('page.body.feesTable.coin.header')}</h2>
                 </Grid>

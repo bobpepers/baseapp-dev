@@ -20,7 +20,7 @@ type Props = ReduxProps & RouteProps & InjectedIntlProps;
 class Landing extends Component<Props> {
     public renderMarketInfoBlock() {
         return (
-            <Grid container alignItems="center" justify="center" className="frontPage">
+            <Grid container alignItems="center" justify="center" className="frontPage wrapper-container">
                 <Grid item xs={2} className="logoWrapper">
                     <img src={LogoImage} alt="RuneX Logo" />
                 </Grid>

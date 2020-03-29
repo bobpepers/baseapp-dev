@@ -51,12 +51,14 @@ class AppLayout extends React.Component<Props, {}, {}> {
                 <Router history={history}>
                     <ErrorWrapper>
                         <div className="wrapper">
-                            <Header/>
-                            <Sidebar/>
-                            <Alerts/>
-                            <Layout/>
+                            <div className="wrapper-content">
+                                <Header />
+                                <Sidebar />
+                                <Alerts />
+                                <Layout />
+                            </div>
+                            <Footer />
                         </div>
-                        <Footer/>
                     </ErrorWrapper>
                 </Router>
             </IntlProvider>
