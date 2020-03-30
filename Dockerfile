@@ -10,6 +10,7 @@ RUN npm i -g yarn
 
 USER node
 
+RUN yarn config set network-timeout 600000 -g
 RUN yarn install
 RUN ./scripts/build.sh
 
