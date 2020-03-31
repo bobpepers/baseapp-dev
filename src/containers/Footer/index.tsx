@@ -4,6 +4,7 @@ import { withRouter, Link } from 'react-router-dom';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { Grid } from '@material-ui/core';
 import CookieConsent from 'react-cookie-consent';
+import { ThemeToggle } from '../../components/ThemeToggle';
 
 const TelegramIcon = require('../../assets/images/social/Telegram.svg');
 const TwitterIcon = require('../../assets/images/social/Twitter.svg');
@@ -43,6 +44,9 @@ class FooterComponent extends Component<Props> {
                         <Link to="/status">{this.translate('page.body.landing.footer.status')}</Link>
                     </Grid>
                     <Grid item xs={12} sm={12} md={3} lg={3} xl={3} className="footer-col-social mt-16 mb-16">
+                        <div className="footer-col-theme-row">
+                            <ThemeToggle />
+                        </div>
                         <div className="footer-col-social-row">
                             <a rel="noopener noreferrer" target="_blank" href="https://discord.gg/uTUXr43">
                                 <img src={DiscordIcon} alt="Discord" />

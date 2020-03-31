@@ -1,11 +1,56 @@
+.pg-header {
+
+  &__market-selector-toggle {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 14px;
+    border: 1px solid var(--trading-header-selector-title);
+    border-radius: 3px;
+    margin-left: 26px;
+    &-value {
+      color: var(--trading-header-selector-title);
+      margin: 0 14px 0 0;
+    }
+  }
+}
+.pg-header__toolbar {
+    display: flex;
+    &-item {
+      margin-left: 40px;
+      display: flex;
+      flex-flow: column;
+      justify-content: flex-end;
+      &-text {
+        color: var(--profile-grey);
+        text-align: right;
+        margin: 5px 0 0;
+        font-size: calc(var(--font-size) * 0.85);
+      }
+      &-value {
+        font-size: calc(var(--font-size) * 1.16);
+        font-weight: 600;
+        text-align: right;
+        margin: 0;
+        &-positive {
+          color: var(--trading-header-positive);
+        }
+        &-negative {
+          color: var(--trading-header-negative);
+        }
+      }
+    }
+}
+
 .pg-priceInfoBar {
   margin: auto;
   position: absolute;
-  top: 0; 
-  left: 0; 
-  bottom: 0; 
+  top: 0;
+  left: 0;
+  bottom: 0;
   right: 0;
-  width: 95%;  
+  width: 95%;
   align-items: center;
   justify-content: center !important;
   flex-wrap: wrap;
@@ -41,7 +86,7 @@
 .pg-header__toolbar-item:nth-of-type(1)
 {
     margin-left: 0px;
-} 
+}
 
 
 @media (min-width: 1200px) {

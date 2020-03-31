@@ -11,10 +11,8 @@ import {
     setMobileWalletUi,
     toggleSidebar,
 } from '../../modules';
-import { NavBar } from '../NavBar';
 import { Navigation } from '../Navigation';
 import logo from '../../assets/images/logo.svg';
-import logoLight from '../../assets/images/logoLight.svg';
 
 import { useWindowDimensions } from '../../hooks/getScreenWidth';
 
@@ -54,26 +52,26 @@ class Head extends React.Component<Props> {
 
     public render() {
         const { colorTheme, mobileWallet } = this.props;
-        const tradingCls = window.location.pathname.includes('/trading') ? 'pg-container-trading' : '';
+        const headerLogoImageActive = window.location.pathname === '/' ? '-active' : '';
         const shouldRenderHeader = !['/confirm'].some(r => window.location.pathname.includes(r));
 
         return (
             <React.Fragment>
             {shouldRenderHeader &&
-                <header className={`pg-header`}>
-                    <div className={`pg-container pg-header__content ${tradingCls}`}>
+                <header className="header">
+                    <div className="header-container header-content">
                         <ScreenWidth>
                             {
                                 width => {
                                     if (width < 996) {
                                         return (
                                             <div
-                                                className={`pg-sidebar__toggler ${mobileWallet && 'pg-sidebar__toggler-mobile'}`}
+                                                className={`header-mobile-toggle ${mobileWallet && 'header-mobile-toggle-menu'}`}
                                                 onClick={this.openSidebar}
                                             >
-                                                <span className="pg-sidebar__toggler-item"/>
-                                                <span className="pg-sidebar__toggler-item"/>
-                                                <span className="pg-sidebar__toggler-item"/>
+                                                <span className="header-mobile-toggle-item"/>
+                                                <span className="header-mobile-toggle-item"/>
+                                                <span className="header-mobile-toggle-item"/>
                                             </div>
                                         );
                                     } else {
@@ -83,17 +81,15 @@ class Head extends React.Component<Props> {
                             }
                         </ScreenWidth>
 
-                        <div onClick={e => this.redirectToLanding()} className="pg-header__logo">
-                            <div className="pg-logo">
-                                {colorTheme === 'light' ? (
-                                    <img src={logoLight} className="pg-logo__img" alt="Logo" />
-                                ) : (
-                                    <img src={logo} className="pg-logo__img" alt="Logo" />
-                               )}
-                            </div>
+                        <div onClick={e => this.redirectToLanding()} className="header-logo">
+                            <img
+                                src={logo}
+                                className={`header-logo-img ${colorTheme === 'light' ? `header-logo-img-light${headerLogoImageActive}` : `header-logo-img-dark${headerLogoImageActive}`}`}
+                                alt="Logo"
+                            />
                         </div>
 
-                        <div className="pg-header__location">
+                        <div className="header-location">
                             {mobileWallet ? <span>{mobileWallet}</span> : <span>{window.location.pathname.split('/')[1]}</span>}
                         </div>
                         {this.renderMobileWalletNav()}
@@ -102,6 +98,7 @@ class Head extends React.Component<Props> {
                             {
                                 width => {
                                     if (width >= 996) {
+                                        this.props.toggleSidebar(false);
                                         return <Navigation />;
                                     } else {
                                         return <span />;
@@ -109,10 +106,6 @@ class Head extends React.Component<Props> {
                                 }
                             }
                         </ScreenWidth>
-
-                        <div className="pg-header__navbar">
-                            <NavBar onLinkChange={this.closeMenu}/>
-                        </div>
                     </div>
                 </header>}
           </React.Fragment>
@@ -124,7 +117,7 @@ class Head extends React.Component<Props> {
         const isLight = colorTheme === 'light' ? 'Light' : '';
 
         return mobileWallet && (
-            <div onClick={this.backWallets} className="pg-header__toggler">
+            <div onClick={this.backWallets} className="header-toggler">
                 <img alt="" src={require(`./back${isLight}.svg`)} />
             </div>
         );
@@ -143,8 +136,6 @@ class Head extends React.Component<Props> {
     private openSidebar = () => this.props.toggleSidebar(!this.props.sidebarOpened);
 
     private backWallets = () => this.props.setMobileWalletUi('');
-
-    private closeMenu = (e: any) => this.props.setMobileWalletUi('');
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

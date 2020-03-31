@@ -33,4 +33,5 @@ export * from './OrderInput';
 export * from './FilterInput';
 export * from './TickerTable';
 export * from './MarketSelectionTable';
+export * from './ThemeToggle';
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Alert } from 'react-bootstrap';
+// import { Alert } from 'react-bootstrap';
+import { Alert } from '@material-ui/lab';
 import FadeIn from 'react-fade-in';
 import {
     InjectedIntlProps,
@@ -37,12 +38,12 @@ class AlertComponent extends React.Component<Props> {
     // tslint:disable:jsx-no-lambda
     public render() {
         return (
-            <div className="pg-alerts">
+            <div className="alerts">
                 {this.props.alerts.alerts.map(w => w.message.map((msg, index) => (
                     <FadeIn key={index}>
                         <div onClick={() => this.deleteAlertByIndex(index)}>
                             <Alert
-                                variant={w.type === 'error' ? 'danger' : w.type}
+                                severity={w.type}
                             >
                                 {this.translate(msg)}
                                 {w.code && ` ${w.code.toString(10)}`}
