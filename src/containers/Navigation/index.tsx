@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
 import { Timeline, Dvr, AccountCircle, Restore, AccountBalanceWallet, PersonAdd, Person, ExitToApp, Help } from '@material-ui/icons';
-import {  pgRoutes } from '../../constants';
+import { pgRoutes } from '../../constants';
 import {
     changeLanguage,
     logoutFetch,
@@ -67,7 +67,7 @@ class NavigationContainer extends Component<Props, State> {
                 {pgRoutes(isLoggedIn).map(this.renderNavItems(address))}
                 <div className="pg-navigations-wrapper-lng">
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">
-                        <Dropdown>
+                        <Dropdown alignRight>
                             <Dropdown.Toggle variant="primary" id={languageClassName}>
                                 <img
                                     src={this.tryRequire(lang) && require(`../../assets/images/languages/${lang}.svg`)}
