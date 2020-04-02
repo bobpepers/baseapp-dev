@@ -1,7 +1,8 @@
-import { MarketDepths } from '../../components/MarketDepths';
-import * as React from 'react';
+import React, { memo, useRef, FunctionComponent } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
+import BigNumber from 'bignumber.js';
+import useComponentSize from '@rehooks/component-size';
 import {
     Market,
     RootState,
@@ -9,7 +10,7 @@ import {
     selectDepthAsks,
     selectDepthBids,
 } from '../../modules';
-import { Decimal } from '../../components/Decimal';
+import { MarketDepth } from '../../components/MarketDepths';
 
 interface ReduxProps {
     asksItems: string[][];
@@ -17,123 +18,94 @@ interface ReduxProps {
     currentMarket: Market | undefined;
 }
 
-type Props = ReduxProps;
+type tProps = ReduxProps;
 
-const settings = {
-    tooltip: true,
-    dataKeyX: 'price',
-    dataKeyY: 'cumulativeVolume',
+const marketIsEqual = (prevProps, currentProps) => {
+  return currentProps.currentMarket === prevProps.currentMarket
+    && (currentProps.asksItems).toString() === (prevProps.asksItems).toString()
+    && (currentProps.bidsItems).toString() === (prevProps.bidsItems).toString();
 };
 
-class MarketDepthContainer extends React.Component<Props> {
-    public UNSAFE_componentWillReceiveProps(next: Props) {
-        const { currentMarket } = next;
-        const { currentMarket: prevCurrentMarket} = this.props;
 
-        if (currentMarket && currentMarket !== prevCurrentMarket) {
-            this.forceUpdate();
-        }
-    }
+const MarketDepthContainer: FunctionComponent<tProps> = Props => {
+    const { asksItems, bidsItems } = Props;
+    const ref = useRef(null);
+    const size = useComponentSize(ref);
+    const { width, height } = size;
 
-    public shouldComponentUpdate(prev, next) {
-        const { asksItems, bidsItems } = prev;
-        const ordersLength = Number(asksItems.length) + Number(bidsItems.length);
-
-        return ordersLength !== (this.props.asksItems.length + this.props.bidsItems.length);
-    }
-
-    public render() {
-        const { asksItems, bidsItems } = this.props;
-
-        const colors = {
-            fillAreaAsk: '#fa5252',
-            fillAreaBid: '#12b886',
-            gridBackgroundStart: '#1a243b',
-            gridBackgroundEnd: '#1a243b',
-            strokeAreaAsk: '#fa5252',
-            strokeAreaBid: '#12b886',
-            strokeGrid: ' #B8E9F5',
-            strokeAxis: '#cccccc',
-        };
-        return (
-            <div className="cr-market-depth">
-                <div className="cr-table-header__content">
-                    <div className={'pg-market-depth__title'}>
-                        <FormattedMessage id="page.body.trade.header.marketDepths" />
-                    </div>
-                </div>
-                {(asksItems.length || bidsItems.length) ? this.renderMarketDepth(colors) : null}
-            </div>
-        );
-    }
-
-    private renderMarketDepth(colors) {
-        return (
-            <MarketDepths
-                settings={settings}
-                className={'pg-market-depth'}
-                colors={colors}
-                data={this.convertToDepthFormat()}
-            />);
-    }
-
-    private convertToCumulative = (data, type) => {
-        const { currentMarket } = this.props;
-
-        if (!currentMarket) {
-            return;
-        }
-
-        const [askCurrency, bidCurrency] = [currentMarket.base_unit.toUpperCase(), currentMarket.quote_unit.toUpperCase()];
-        const tipLayout = ({ volume, price, cumulativeVolume, cumulativePrice }) => (
-            <span className={'pg-market-depth__tooltip'}>
-                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.price" /> : {Decimal.format(price, currentMarket.price_precision)} {bidCurrency}</span>
-                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.volume" /> : {Decimal.format(volume, currentMarket.amount_precision)} {askCurrency}</span>
-                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeVolume" /> : {Decimal.format(cumulativeVolume, currentMarket.amount_precision)} {askCurrency}</span>
-                <span><FormattedMessage id="page.body.trade.header.marketDepths.content.cumulativeValue" /> : {Decimal.format(cumulativePrice, currentMarket.price_precision)} {bidCurrency}</span>
-            </span>
-        );
-
-        let cumulativeVolumeData = 0;
-        let cumulativePriceData = 0;
-
-        const cumulative = data.map((item, index) => {
-            const [price, volume] = item;
-            const numberVolume = Decimal.format(volume, currentMarket.amount_precision);
-            const numberPrice = Decimal.format(price, currentMarket.price_precision);
-            cumulativeVolumeData = +numberVolume + cumulativeVolumeData;
-            cumulativePriceData = cumulativePriceData + (+numberPrice * +numberVolume);
-            return {
-                [type]: Decimal.format(cumulativeVolumeData, currentMarket.amount_precision),
-                cumulativePrice: Decimal.format(cumulativePriceData, currentMarket.price_precision),
-                cumulativeVolume: +Decimal.format(cumulativeVolumeData, currentMarket.amount_precision),
-                volume: Decimal.format(+volume, currentMarket.amount_precision),
-                price: Decimal.format(+numberPrice, currentMarket.price_precision),
-                name: tipLayout({ volume, price, cumulativeVolume: cumulativeVolumeData, cumulativePrice: cumulativePriceData }),
-            };
-        });
-
-        return type === 'bid' ? cumulative
-            .sort((a, b) => b.bid - a.bid) :
-            cumulative.sort((a, b) => a.ask - b.ask);
+    const fillArray = (arr, type) => {
+      while (arr.length < 3) {
+        arr.push({type: type, price: null, totalVolume: '0'});
+      }
+      return arr;
     };
 
-    private convertToDepthFormat() {
-        const { asksItems, bidsItems } = this.props;
-        const asksItemsLength = asksItems.length;
-        const bidsItemsLength = bidsItems.length;
+    const convertToDepthFormat = () => {
+        const fmt = {
+          decimalSeparator: '.',
+          groupSeparator: '',
+        };
 
+        const bids = bidsItems.reverse().map((item, index) => {
+          const [price, volume] = item;
+          const slice = bidsItems.slice(0, index + 1);
+          return {
+            price: (new BigNumber(price).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
+            volume: (new BigNumber(volume).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
+            type: 'bid',
+            totalVolume: slice.length > 0 ? (new BigNumber(slice.reduce((a, b) => (BigNumber.sum(a, b[1]).toString()), (0).toString())).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1') : (new BigNumber(volume).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
+          };
+        });
 
-        const resultLength = asksItemsLength > bidsItemsLength ? bidsItemsLength : asksItemsLength;
-        const asks = asksItems.slice(0, resultLength);
-        const bids = bidsItems.slice(0, resultLength);
+        const asks = asksItems.map((item, index) => {
+          const [price, volume] = item;
+          const slice = asksItems.slice(0, index + 1);
+          return {
+            price: (new BigNumber(price).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
+            volume: (new BigNumber(volume).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
+            type: 'ask',
+            totalVolume: slice.length > 0 ? (new BigNumber(slice.reduce((a, b) => (BigNumber.sum(a, b[1]).toString()), (0).toString())).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1') : (new BigNumber(volume).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
+          };
+        });
 
-        const asksVolume = this.convertToCumulative(asks, 'ask');
-        const bidsVolume = this.convertToCumulative(bids, 'bid');
+        const filledBids = fillArray(bids, 'bid');
+        const filledAsks = fillArray(asks, 'ask');
+        const concatArray = (filledBids.reverse() as any[]).concat({type: 'ask', price: null, totalVolume: '0'}).concat(filledAsks);
 
-        return [...bidsVolume, ...asksVolume];
-    }
-}
+        for (let i = 0, len = concatArray.length; i < len; i++) {
+            concatArray[i].x = i;
+        }
+
+        return concatArray;
+    };
+
+    const renderMarketDepth = (divHeight, divWidth) => {
+        const { currentMarket } = Props;
+        const { quote_unit, base_unit } = currentMarket as any;
+        return (
+            <MarketDepth
+                data={convertToDepthFormat()}
+                height={divHeight}
+                width={divWidth}
+                quoteUnit={quote_unit}
+                baseUnit={base_unit}
+            />
+        );
+    };
+
+    return (
+        <div className="market-depth-wrapper">
+            <div className="cr-table-header__content">
+                <div className="market-depth-title">
+                    <FormattedMessage id="page.body.trade.header.marketDepths" />
+                </div>
+            </div>
+            <div ref={ref} className="market-depth-content">
+                {(asksItems.length || bidsItems.length) ? renderMarketDepth(height, width) : null}
+            </div>
+        </div>
+    );
+};
 
 const mapStateToProps = (state: RootState) => ({
     asksItems: selectDepthAsks(state),
@@ -141,4 +113,4 @@ const mapStateToProps = (state: RootState) => ({
     currentMarket: selectCurrentMarket(state),
 });
 
-export const MarketDepthsComponent = connect(mapStateToProps)(MarketDepthContainer);
+export const MarketDepthsComponent = connect(mapStateToProps)(memo(MarketDepthContainer, marketIsEqual));

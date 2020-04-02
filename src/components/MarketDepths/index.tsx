@@ -1,297 +1,166 @@
-import classnames from 'classnames';
-import * as React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import BigNumber from 'bignumber.js';
+import { scaleLinear } from 'd3-scale';
+import { curveStep } from 'd3-shape';
+import { ChartCanvas, Chart } from 'react-stockcharts';
+import { AreaSeries } from 'react-stockcharts/lib/series';
+import { XAxis, YAxis } from 'react-stockcharts/lib/axes';
+import { fitWidth } from 'react-stockcharts/lib/helper';
+import { DepthHoverTooltip } from './DepthHoverTooltip';
 
-import {
-    Area,
-    AreaChart,
-    CartesianGrid,
-    ResponsiveContainer,
-    Tooltip,
-    TooltipPayload,
-    XAxis,
-    YAxis,
-} from 'recharts';
-
-export interface KeyValuePairMarketDepths {
-    x: string | number;
-    amt?: number;
-    ask?: number;
-    bid?: number;
-    name?: string | number;
+interface AppState {
+   data: any;
+   width: number;
+   height: number;
+   axisColor: string;
+   type: any;
+   ratio: number;
+   quoteUnit: string;
+   baseUnit: string;
 }
 
-export interface ChartStyles {
-    fillAreaAsk: string;
-    fillAreaBid: string;
-    gridBackgroundStart: string;
-    gridBackgroundEnd: string;
-    strokeAreaAsk: string;
-    strokeAreaBid: string;
-    strokeGrid: string;
-    strokeAxis: string;
-}
 
-export interface TooltipColors {
-    backgroundColor: string;
-    color: string;
-    border: string;
-}
-
-type TooltipPayloadProp = TooltipPayload & { payload?: TooltipPayload };
-
-interface CustomToolTipProps {
-    toolTipColors?: TooltipColors;
-    active?: boolean;
-    external: KeyValuePairMarketDepths[];
-    payload?: TooltipPayloadProp[];
-}
-
-interface CustomActiveDotProps {
-    stroke: string;
-    strokeWidth: number;
-    r: number;
-    fill: string;
-}
-
-export interface MarketDepthsProps {
-    /**
-     * Additional class name for styling. By default element receives `cr-market-depths`
-     * class
-     * @default empty
-     */
-    className?: string;
-    /**
-     * MarketDepths colors for chart
-     */
-    colors: ChartStyles;
-    /**
-     * MarketDepths details data for building the plot
-     */
-    data: KeyValuePairMarketDepths[];
-    /**
-     * Defines colors of tooltip
-     */
-    toolTipColors?: TooltipColors;
-    /**
-     * Settings to be applied to a chart
-     */
-    settings?: MarketDepthsSettings;
-    /**
-     * If true, grid will be hidden
-     * @default false
-     */
-    hideCartesianGrid?: boolean;
-    /**
-     * Defines interval of values that should be displayed on x-axis
-     */
-    intervalX?: number | 'preserveStartEnd' | 'preserveStart' | 'preserveEnd' | undefined;
-    /**
-     * Defines interval of values that should be displayed on y-axis
-     */
-    intervalY?: number | 'preserveStartEnd' | 'preserveStart' | 'preserveEnd' | undefined;
-    /**
-     * Orientation for y-axis
-     * @default 'left'
-     */
-    orientation?: 'left' | 'right';
-    /**
-     * Chart type
-     * @default 'step'
-     */
-    chartType?: 'basis' | 'basisClosed' | 'basisOpen' | 'linear' | 'linearClosed' | 'natural' | 'monotoneX' | 'monotoneY' | 'monotone' | 'step' | 'stepBefore' | 'stepAfter';
-    /**
-     * Property for gradient of background of ask or bid
-     * @default false
-     */
-    gradientHide?: boolean;
-}
-
-export interface MarketDepthsSettings {
-    /**
-     * Defines what value should be displayed on x-axis
-     */
-    dataKeyX?: string;
-    /**
-     * Defines what value should be displayed on y-axis
-     */
-    dataKeyY?: string;
-    /**
-     * Defines whether tooltip is shown or nor
-     * @default true
-     */
-    tooltip?: boolean;
-    /**
-     * Defines height of chart
-     * @default 100%
-     */
-    height?: string;
-    /**
-     * Defines properties for active dot
-     */
-    activeDot?: CustomActiveDotProps;
-}
-
-const CustomTooltip = (props: CustomToolTipProps) => {
-    const defaultToolTipColors = {
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-        color: 'black',
-        border: '1px solid #ccc',
-    };
-    const { active, payload, external, toolTipColors = defaultToolTipColors} = props;
-    const { backgroundColor, color, border } = toolTipColors;
-    const renderPayload = () => {
-        if (!payload || !payload[0]) {
-            return '';
-        }
-
-        const { name, value } = payload[0];
-        return <p>{`${name} : `}<em>{value}</em></p>;
-    };
-
-    if (active) {
-        const style = {
-            padding: 6,
-            backgroundColor,
-            border,
-            color,
-            fontSize: 13,
-            boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-        };
-        const payloadData = payload && payload[0] ? payload[0].payload : null;
-        const currData = payloadData ?
-            external.find((entry: KeyValuePairMarketDepths) => (entry.name === payloadData.name)) :
-            null;
-
-        return (
-            <div className="area-chart-tooltip" style={style}>
-                {!currData ? renderPayload() : null}
-                <p>{currData ? currData.name : null}</p>
-            </div>
-        );
-    }
-
-    return null;
+const getAccessorColor = d => {
+  return d.type === 'bid' ? '#00FF00' : '#FF0000';
 };
 
-/**
- * Component to display MarketDepths component.
- * It gives a visualization of demand or supply of a particular stock or commodity or a cryptocurrency.
- */
-export class MarketDepths extends React.PureComponent<MarketDepthsProps> {
-    public defaultSettings = {
-        dataKeyX: 'ask',
-        dataKeyY: 'bid',
-        tooltip: true,
-        height: '100%',
-        activeDot: {
-            stroke: 'rgba(31,42,52,1)',
-            strokeWidth: 1,
-            r: 4,
-            fill: 'rgba(91,165,132,1)',
-        },
-    };
-
-    public render() {
-        const {
-            chartType,
-            className,
-            colors,
-            data,
-            hideCartesianGrid,
-            intervalX,
-            intervalY,
-            toolTipColors,
-            settings = this.defaultSettings,
-            orientation,
-            gradientHide,
-        } = this.props;
-        const cx = classnames('cr-market-depths', className);
-
-        return (
-            <div className={cx}>
-                <ResponsiveContainer
-                    width="100%"
-                    height={settings.height}
-                >
-                    <AreaChart
-                        data={data}
-                        margin={{ top: 20, right: 30, left: 0, bottom: 20 }}
-                    >
-                        {this.defineGradient(gradientHide)}
-                        {hideCartesianGrid ? null : (<CartesianGrid stroke={colors.strokeGrid} strokeDasharray="1 1" fill="url(#fillGrid)" />)}
-                        <XAxis
-                            dataKey={settings.dataKeyX || 'ask'}
-                            interval={intervalX || 'preserveStartEnd'}
-                            stroke={colors.strokeAxis}
-                        />
-                        <YAxis
-                            orientation={orientation ? orientation : 'left'}
-                            dataKey={settings.dataKeyY || 'bid'}
-                            interval={intervalY || 'preserveStartEnd'}
-                            stroke={colors.strokeAxis}
-                        />
-                        {settings.tooltip ?
-                            <Tooltip
-                                content={<CustomTooltip toolTipColors={toolTipColors} external={data} />}
-                            /> : null}
-                        <Area
-                            type={chartType ? chartType : 'step'}
-                            dataKey="bid"
-                            stroke={colors.strokeAreaBid}
-                            fill="url(#bidChartColor)"
-                            activeDot={settings.activeDot}
-                        />
-                        <Area
-                            type={chartType ? chartType : 'step'}
-                            dataKey="ask"
-                            stroke={colors.strokeAreaAsk}
-                            fill="url(#askChartColor)"
-                            activeDot={settings.activeDot}
-                        />
-                    </AreaChart>
-                </ResponsiveContainer>
-            </div>
-        );
+const tooltipContent = (baseUnit, quoteUnit) => {
+  const fmt = {
+    decimalSeparator: '.',
+    groupSeparator: '',
+  };
+  return ({ currentItem, xAccessor }) => {
+    if (!currentItem.price) {
+      return null;
     }
-
-    public defineGradient = (value?: boolean) => {
-        const {
-            colors,
-        } = this.props;
-
-        if (value) {
-            return (
-                <defs>
-                    <linearGradient id="bidChartColor" x1="0" y1="0" x2="0" y2="1">
-                        <stop stopColor={colors.fillAreaBid} />
-                    </linearGradient>
-                    <linearGradient id="askChartColor" x1="0" y1="0" x2="0" y2="1">
-                        <stop stopColor={colors.fillAreaAsk} />
-                    </linearGradient>
-                    <linearGradient id="fillGrid" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor={colors.gridBackgroundStart} stopOpacity={0} />
-                        <stop offset="95%" stopColor={colors.gridBackgroundEnd} stopOpacity={1} />
-                    </linearGradient>
-                </defs>
-            );
-        }
-
-        return (
-            <defs>
-                <linearGradient id="bidChartColor" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={colors.fillAreaBid} stopOpacity={1} />
-                    <stop offset="95%" stopColor={colors.fillAreaBid} stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="askChartColor" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={colors.fillAreaAsk} stopOpacity={1} />
-                    <stop offset="95%" stopColor={colors.fillAreaAsk} stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="fillGrid" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor={colors.gridBackgroundStart} stopOpacity={0} />
-                    <stop offset="95%" stopColor={colors.gridBackgroundEnd} stopOpacity={1} />
-                </linearGradient>
-            </defs>
-        );
+    return {
+      x: xAccessor(currentItem),
+      y: [
+        {
+          label: currentItem.type === 'bid' ? 'Volume' : 'Volume',
+          value: currentItem.totalVolume && `${currentItem.totalVolume} ${baseUnit.toUpperCase()}`,
+          stroke: currentItem.type === 'bid' ? '#FF0000' : '#00FF00',
+          labelStroke: currentItem.type === 'bid' ? '#FF0000' : '#00FF00',
+          fontSize: 11,
+        },
+        {
+          label: 'Estimated Cost',
+          value:
+            currentItem.totalVolume &&
+            `${(new BigNumber(currentItem.totalVolume * currentItem.price).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} ${quoteUnit.toUpperCase()}`,
+          stroke: currentItem.type === 'bid' ? '#FF0000' : '#00FF00',
+          labelStroke: currentItem.type === 'bid' ? '#FF0000' : '#00FF00',
+          fontSize: 11,
+        },
+      ],
     };
+  };
+};
+
+class MyCharts extends Component<AppState> {
+  public static propTypes = {
+    data: PropTypes.array.isRequired,
+    width: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    ratio: PropTypes.number.isRequired,
+    axisColor: PropTypes.string.isRequired,
+    type: PropTypes.oneOf(['svg', 'hybrid']).isRequired,
+  };
+
+  public static defaultProps = {
+    type: 'svg',
+    ratio: 1,
+    axisColor: '#8A939F',
+  };
+
+  public render() {
+    const { data, width, height, axisColor, type, ratio, baseUnit, quoteUnit } = this.props;
+    const biggestVolume = data.reduce((a,b) => parseFloat(a.totalVolume) > parseFloat(b.totalVolume) ? a : b).totalVolume;
+    const xScale = scaleLinear();
+    const xExtents = [0, data.length - 1];
+    return (
+      <ChartCanvas
+        ratio={ratio}
+        width={width}
+        height={height}
+        margin={{ left: 10, right: 10, top: 10, bottom: 30 }}
+        seriesName="MSFT"
+        data={data}
+        type={type}
+        xAccessor={d => d.x}
+        // xAccessor={d => d.price}
+        xExtents={xExtents}
+        xScale={xScale}
+        //mouseMoveEvent={d=>d.price}
+        panEvent={true}
+        zoomEvent={true}
+        clamp={false}
+        displayXAccessor={d => d.price}
+      >
+        <Chart id={0} yExtents={d => [0, parseFloat(biggestVolume)]}>
+          <XAxis
+            axisAt="bottom"
+            orient="bottom"
+            tickStroke={axisColor}
+            stroke={'transparent'}
+            strokeWidth={0}
+            tickFormat={d => (d && data && data[d] !== undefined && data[d].price ? data[d].price.toString() : '')}
+            zoomEnabled={true}
+            ticks={10}
+          />
+          <YAxis
+            axisAt="right"
+            orient="left"
+            tickStroke={axisColor}
+            stroke={'transparent'}
+            strokeWidth={0}
+            zoomEnabled={true}
+            ticks={10}
+          />
+          <YAxis
+            axisAt="left"
+            orient="right"
+            tickStroke={axisColor}
+            stroke={'transparent'}
+            strokeWidth={0}
+            zoomEnabled={true}
+            ticks={10}
+          />
+          <AreaSeries
+            yAccessor={d => d.type === 'bid' && d.price && d.totalVolume}
+            strokeWidth={2}
+            interpolation={curveStep}
+            fill="#203D25"
+            stroke={'#84F766'}
+          />
+          <AreaSeries
+            yAccessor={d => d.type === 'ask' && d.price && d.totalVolume}
+            strokeWidth={2}
+            interpolation={curveStep}
+            fill="#f9672d"
+            stroke={'#f9672d'}
+          />
+          <DepthHoverTooltip
+            chartId={0}
+            fontSize={15}
+            fill={'#3d3d3d'}
+            stroke={'#3d3d3d'}
+            fontFamily={'sans-serif'}
+            fontFill={'#fff'}
+            opacity={1}
+            tooltipContent={tooltipContent(baseUnit, quoteUnit)}
+            yAccessor={d => d.totalVolume}
+            lineStroke={getAccessorColor}
+            r={5}
+          />
+        </Chart>
+      </ChartCanvas>
+    );
+  }
 }
 
+
+const MarketDepth = fitWidth(MyCharts);
+
+export { MarketDepth };
