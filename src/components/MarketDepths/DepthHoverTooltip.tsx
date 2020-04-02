@@ -223,7 +223,7 @@ const originCoords = (props, moreProps, bgSize, pointWidth) => {
   if (isDefined(chartId) && isDefined(yAccessor)) {
     const yValue = yAccessor(currentItem);
     if (chartConfig) {
-      if (chartConfig !== null && typeof chartConfig === 'object') {
+      if (chartConfig !== null && typeof chartConfig === 'object' && typeof chartConfig.yScale === 'function') {
         y = Math.round(chartConfig.yScale(yValue));
       } else if (chartConfig.isArray()) {
         const chartIndex = chartConfig.findIndex(z => z.id === chartId);

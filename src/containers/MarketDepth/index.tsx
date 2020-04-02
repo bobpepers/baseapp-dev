@@ -46,7 +46,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
           groupSeparator: '',
         };
 
-        const bids = bidsItems.reverse().map((item, index) => {
+        const bids = bidsItems.map((item, index) => {
           const [price, volume] = item;
           const slice = bidsItems.slice(0, index + 1);
           return {
@@ -55,7 +55,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
             type: 'bid',
             totalVolume: slice.length > 0 ? (new BigNumber(slice.reduce((a, b) => (BigNumber.sum(a, b[1]).toString()), (0).toString())).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1') : (new BigNumber(volume).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
           };
-        });
+        }).reverse();
 
         const asks = asksItems.map((item, index) => {
           const [price, volume] = item;
@@ -70,7 +70,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
 
         const filledBids = fillArray(bids, 'bid');
         const filledAsks = fillArray(asks, 'ask');
-        const concatArray = (filledBids.reverse() as any[]).concat({type: 'ask', price: null, totalVolume: '0'}).concat(filledAsks);
+        const concatArray = (filledBids as any[]).concat({type: 'ask', price: null, totalVolume: '0'}).concat(filledAsks);
 
         for (let i = 0, len = concatArray.length; i < len; i++) {
             concatArray[i].x = i;
