@@ -84,6 +84,7 @@ class MyCharts extends Component<AppState> {
         ratio={ratio}
         width={width}
         height={height}
+        position="absolute"
         margin={{ left: 10, right: 10, top: 10, bottom: 30 }}
         seriesName="MSFT"
         data={data}
