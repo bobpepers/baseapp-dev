@@ -115,6 +115,7 @@ class ForgotPasswordComponent extends React.Component<Props, ForgotPasswordState
             this.setState({
                 emailError: ERROR_INVALID_EMAIL,
             });
+
             return;
         }
     };

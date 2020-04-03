@@ -122,6 +122,7 @@ class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTa
         const cn = classNames('cr-table-header__content', {
             'cr-table-header__content-empty': !titleComponent && filters.length === 0,
         });
+
         return (
             <div className="cr-table-container">
                 <div className={cn}>
@@ -142,6 +143,7 @@ class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTa
 
     private renderTitleComponent() {
         const { titleComponent } = this.props;
+
         return <div className={'cr-title-component'}>{titleComponent}</div>;
     }
 
@@ -158,6 +160,7 @@ class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTa
             this.setState({
                 resultData: data,
             });
+
             return;
         }
         const resultData: MarketSelectionCellData[][] = [...data].filter(item.filter);
@@ -188,6 +191,7 @@ class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTa
         const cn = (filterName: string) => classNames('cr-table__filter', {
             'cr-table__filter--active': activeFilter === filterName,
         });
+
         return filters.map((item: MarketSelectionFilter) => {
             const handleFilterClick = () => {
                 this.handleFilter(item);
@@ -256,6 +260,7 @@ class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTa
         const dataToBeMapped = resultData || rows;
         const rowElements = dataToBeMapped.map((r, i) => {
             const rowKey = String((rowKeyIndex !== undefined) ? r[rowKeyIndex] : i);
+
             return (
                 <tr
                     className={rowClassName(rowKey)}

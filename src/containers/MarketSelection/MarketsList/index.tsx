@@ -77,6 +77,7 @@ class MarketsListComponent extends React.Component<Props, State> {
 
     public render() {
         const data = this.mapMarkets();
+
         return (
             <div className="pg-dropdown-markets-list-container">
                 <MarketSelectionTable
@@ -110,6 +111,7 @@ class MarketsListComponent extends React.Component<Props, State> {
         {id: 'price_change_percent_num', translationKey: 'change'},
     ].map(obj => {
         const {sortBy, reverseOrder} = this.state;
+
         return (
             {
                 ...obj,
@@ -173,6 +175,7 @@ class MarketsListComponent extends React.Component<Props, State> {
             ) {
                 pV.push(cV);
             }
+
             return pV;
         }, arr).map((market: Market & Ticker, index: number) => {
             const isPositive = /\+/.test((marketTickers[market.id] || defaultTicker).price_change_percent);
@@ -180,6 +183,7 @@ class MarketsListComponent extends React.Component<Props, State> {
                 'pg-dropdown-markets-list-container__positive': isPositive,
                 'pg-dropdown-markets-list-container__negative': !isPositive,
             });
+
             return [
                 market.name,
                 (<span><img src={`https://downloads.runebase.io/${market.base_unit}.svg` }alt={`${market.name} market icon`} className="MarketListCoinIcon" />{market.name}</span>),
@@ -199,7 +203,7 @@ class MarketsListComponent extends React.Component<Props, State> {
         } else {
             this.setState({sortBy: 'none', reverseOrder: false});
         }
-    }
+    };
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

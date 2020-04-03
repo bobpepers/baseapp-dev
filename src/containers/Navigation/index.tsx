@@ -107,7 +107,7 @@ class NavigationContainer extends Component<Props, State> {
             default:
                 return <Help className={`menu-icon ${isActive && 'route-selected'}`} />;
         }
-    }
+    };
 
     public renderNavItems = (address: string) => (values: string[], index: number) => {
         const { currentMarket } = this.props;
@@ -153,6 +153,7 @@ class NavigationContainer extends Component<Props, State> {
     private tryRequire = (name: string) => {
         try {
             require(`../../assets/images/languages/${name}.svg`);
+
             return true;
         } catch (err) {
             return false;
@@ -162,7 +163,7 @@ class NavigationContainer extends Component<Props, State> {
 
     private handleChangeLanguage = (language: string) => {
         this.props.changeLanguage(language);
-    }
+    };
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

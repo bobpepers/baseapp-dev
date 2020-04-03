@@ -106,7 +106,7 @@ export class SignInComponent extends React.Component<SignInProps> {
             event.preventDefault();
             this.props.onSubmit();
         }
-    }
+    };
 
     private handleChangeEmail = (value: string) => {
         this.props.changeEmail(value);

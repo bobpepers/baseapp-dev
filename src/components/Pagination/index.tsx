@@ -86,6 +86,7 @@ class Pagination extends React.Component<PaginationProps> {
         const { firstElemIndex, lastElemIndex, total, page, nextPageExists } = this.props;
         const prevDisabled = page === 0;
         const nextDisabled = !nextPageExists;
+
         return (
             <div className="pg-history-elem__pagination">
                 <p>{firstElemIndex} - {lastElemIndex} of {total}</p>

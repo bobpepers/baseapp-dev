@@ -28,8 +28,8 @@ type Props = ReduxProps & InjectedIntlProps;
 class Head extends React.Component<Props> {
     public render() {
         const { currentMarket } = this.props;
-
         const tradingCls = window.location.pathname.includes('/trading') ? 'pg-container-trading' : '';
+
         return (
             <React.Fragment>
                 <div className={`pg-priceInfoBar ${tradingCls}`}>

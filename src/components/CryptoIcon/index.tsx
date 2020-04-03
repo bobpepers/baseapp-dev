@@ -17,6 +17,7 @@ const findIcon = (code: string): string => {
 
 export const CryptoIcon: React.FunctionComponent<CryptoIconProps> = props => {
     const { code, className = '', children } = props;
+
     return (
         <span className={cx('cr-crypto-icon', className)}>
           <img src={findIcon(code)} alt="crypto-icon"/> {children}

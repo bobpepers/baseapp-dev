@@ -12,6 +12,7 @@ export const formatTicker = (events: { [pair: string]: TickerEvent }): { [pair: 
             tickers[market] = { open, low, high, last, sell, buy, vol: volume, avg_price, price_change_percent };
         }
     }
+
     return tickers;
 };
 
@@ -36,6 +37,7 @@ export const streamsBuilder = (withAuth: boolean, prevSubscriptions: string[], m
             streams.push(stream);
         }
     }
+
     return streams;
 };
 

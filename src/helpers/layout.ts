@@ -88,6 +88,7 @@ export const getLayoutFromLS = (key: string): LayoutGrid | undefined => {
             // ignore
         }
     }
+
     return obj[key];
 };
 

@@ -86,11 +86,11 @@ class RecentTradesComponent extends React.Component<RecentTradesProps, State> {
                 <MarketTab />
             </div>
         );
-
-    }
+    };
 
     private renderTabs = () => {
         const { tab, index } = this.state;
+
         return [
             {
                 content: tab === 'market' && index === 0 ? <MarketTab /> : null,

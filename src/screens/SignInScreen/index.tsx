@@ -85,6 +85,7 @@ class SignIn extends React.Component<Props, SignInState> {
     public render() {
         const { loading } = this.props;
         const className = cx('pg-sign-in-screen__container', { loading });
+
         return (
             <div className="pg-sign-in-screen">
                 <div className={className}>
@@ -231,6 +232,7 @@ class SignIn extends React.Component<Props, SignInState> {
         if (captchaType() === 'recaptcha' && !reCaptchaSuccess) {
             return true;
         }
+
         return false;
     };
 
@@ -258,7 +260,7 @@ class SignIn extends React.Component<Props, SignInState> {
                 return null;
 
         }
-    }
+    };
 
     private refreshError = () => {
         this.setState({
@@ -337,6 +339,7 @@ class SignIn extends React.Component<Props, SignInState> {
                 emailError: this.props.intl.formatMessage({ id: ERROR_INVALID_EMAIL }),
                 passwordError: '',
             });
+
             return;
         }
         if (!password) {
@@ -344,6 +347,7 @@ class SignIn extends React.Component<Props, SignInState> {
                 emailError: '',
                 passwordError: this.props.intl.formatMessage({ id: ERROR_EMPTY_PASSWORD }),
             });
+
             return;
         }
     };

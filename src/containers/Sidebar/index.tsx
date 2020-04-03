@@ -64,13 +64,13 @@ class SidebarContainer extends Component<Props, State> {
 
     public setWrapperRef = node => {
         this.wrapperRef = node;
-    }
+    };
 
     public handleClickOutside = event => {
         if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
             this.props.toggleSidebar(false);
         }
-    }
+    };
 
     public render() {
         const { isLoggedIn, colorTheme, isActive, lang } = this.props;
@@ -131,15 +131,15 @@ class SidebarContainer extends Component<Props, State> {
             default:
                 return <Help className={`menu-icon ${isActive && 'route-selected'}`} />;
         }
-    }
+    };
 
     public renderNavItems = (address: string) => (values: string[], index: number) => {
         const { currentMarket } = this.props;
-
         const [name, url, imgName] = values;
         const handleLinkChange = () => this.props.toggleSidebar(false);
         const path = url.includes('/trading') && currentMarket ? `/trading/${currentMarket.id}` : url;
         const isActive = (url === '/trading/' && address.includes('/trading')) || address === url;
+
         return (
             <Link
                 to={path}
@@ -176,6 +176,7 @@ class SidebarContainer extends Component<Props, State> {
     private tryRequire = (name: string) => {
         try {
             require(`../../assets/images/languages/${name}.svg`);
+
             return true;
         } catch (err) {
             return false;
@@ -184,7 +185,7 @@ class SidebarContainer extends Component<Props, State> {
 
     private handleChangeLanguage = (language: string) => {
         this.props.changeLanguage(language);
-    }
+    };
 
 }
 

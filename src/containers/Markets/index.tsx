@@ -62,6 +62,7 @@ class MarketsContainer extends React.Component<Props> {
         const className = classnames('pg-markets', {
             'pg-markets--loading': marketsLoading,
         });
+
         return (
             <div className={className}>
                 {marketsLoading ? <div><Spinner animation="border" variant="primary" /></div> : this.markets()}
@@ -72,6 +73,7 @@ class MarketsContainer extends React.Component<Props> {
     private markets = () => {
         const { currentMarket } = this.props;
         const key = currentMarket && currentMarket.name;
+
         return (
             <Markets
                 filters={false}

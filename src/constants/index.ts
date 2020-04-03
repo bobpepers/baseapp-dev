@@ -14,6 +14,7 @@ export const pgRoutes = (isLoggedIn: boolean): string[][] => {
         ['page.header.navbar.signIn', '/signin', 'signin'],
         ['page.header.signUp', '/signup', 'signup'],
     ];
+
     return isLoggedIn ? routes : routesUnloggedIn;
 };
 

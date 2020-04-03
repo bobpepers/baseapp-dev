@@ -42,6 +42,7 @@ const tooltipSVG = ({ fontFamily, fontSize, fontFill }, content) => {
       </tspan>,
     );
   }
+
   return (
     <text fontFamily={fontFamily} fontSize={fontSize} fill={fontFill}>
       <tspan x={X} y={startY}>
@@ -172,9 +173,11 @@ const calculateTooltipSize = ({ fontFamily, fontSize, fontFill }, content, ctx) 
       const lableFontFamily = rest.fontFamily || fontFamily;
       const lableFontSize = rest.fontSize || fontSize;
       ctx.font = `${lableFontSize}px ${lableFontFamily}`;
+
       return measureText(`${label}: ${value}`);
     })
     .reduce((res, size) => sumSizes(res, size), measureText(String(content.x))); // tslint:disable-line
+
   return {
     width: ((width as number) + X * 2),
     height: ((height as number) + X * 2),
@@ -234,6 +237,7 @@ const originCoords = (props, moreProps, bgSize, pointWidth) => {
   const xPoint = normalizeX(x, bgSize, pointWidth, width);
   const yPoint = normalizeY(y, bgSize.height, r, height);
   const point: any = { ...xPoint, ...yPoint };
+
   return [x, y, point];
 };
 
@@ -344,6 +348,7 @@ class DepthHoverTooltip extends Component<AppState> {
       return;
     }
     drawOnCanvas(ctx, this.props, this.context, pointer, height, moreProps);
+
     return;
   }
   public renderSVG(moreProps) {
@@ -373,6 +378,7 @@ class DepthHoverTooltip extends Component<AppState> {
       ? lineStroke
       : lineStroke(currentItem);
     const xAdjust = bgSize.reverse ? -1 : 1;
+
     return (
       <g>
         <circle className={className} cx={x} cy={y} r={r} fill={linestroke} />

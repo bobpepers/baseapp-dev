@@ -99,6 +99,7 @@ class Head extends React.Component<Props> {
                                 width => {
                                     if (width >= 996) {
                                         this.props.toggleSidebar(false);
+
                                         return <Navigation />;
                                     } else {
                                         return <span />;
@@ -131,7 +132,7 @@ class Head extends React.Component<Props> {
     private redirectToLanding = () => {
         this.props.toggleSidebar(false);
         this.props.history.push('/');
-    }
+    };
 
     private openSidebar = () => this.props.toggleSidebar(!this.props.sidebarOpened);
 

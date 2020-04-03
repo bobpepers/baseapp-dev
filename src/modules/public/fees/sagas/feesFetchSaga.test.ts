@@ -76,6 +76,7 @@ describe('Saga: feesFetchSaga', () => {
             });
         });
         store.dispatch(feesFetch());
+
         return promise;
     });
 
@@ -95,6 +96,7 @@ describe('Saga: feesFetchSaga', () => {
             });
         });
         store.dispatch(feesFetch());
+
         return promise;
     });
 });

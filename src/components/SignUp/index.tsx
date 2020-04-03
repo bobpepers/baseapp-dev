@@ -215,6 +215,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
         if (captchaType === 'recaptcha' && !reCaptchaSuccess) {
             return true;
         }
+
         return false;
     };
 

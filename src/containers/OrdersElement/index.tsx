@@ -67,6 +67,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
         }
 
         const emptyMsg = this.props.intl.formatMessage({id: 'page.noDataToShow'});
+
         return (
             <div className={`pg-history-elem ${updateList.length ? '' : 'pg-history-elem-empty'}`}>
                 {fetching && <div className="text-center"><Spinner animation="border" variant="primary" /></div>}
@@ -78,6 +79,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
 
     public renderContent = list => {
         const { firstElemIndex, lastElemIndex, total, pageIndex, nextPageExists } = this.props;
+
         return (
             <React.Fragment>
                 <History headers={this.renderHeaders()} data={this.retrieveData(list)}/>
@@ -166,6 +168,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
         if (!side || !orderType) {
             return '';
         }
+
         return this.props.intl.formatMessage({ id: `page.body.openOrders.header.orderType.${side}.${orderType}` });
     };
 

@@ -84,6 +84,7 @@ describe('Orders', () => {
             });
         });
         store.dispatch(orderExecuteFetch(order));
+
         return promise;
     });
 
@@ -100,6 +101,7 @@ describe('Orders', () => {
             });
         });
         store.dispatch(orderExecuteFetch(order));
+
         return promise;
     });
 });

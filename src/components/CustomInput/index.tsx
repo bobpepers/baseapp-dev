@@ -73,7 +73,7 @@ class CustomInput extends React.Component<Props> {
 
     private handleChangeValue = (e: OnChangeEvent) => {
         this.props.handleChangeInput && this.props.handleChangeInput(e.target.value);
-    }
+    };
 }
 
 export {

@@ -16,6 +16,7 @@ export const convertOrderAPI = (order: OrderAPI): OrderCommon => {
         avg_price,
         updated_at,
     } = order;
+
     return {
         id,
         side,
@@ -44,6 +45,7 @@ export const convertOrderEvent = (orderEvent: OrderEvent): OrderCommon => {
         market, ord_type,
         updated_at,
     } = orderEvent;
+
     return {
         id,
         side: kindToMakerType(kind),
@@ -67,10 +69,12 @@ export const insertOrUpdate = (list: OrderCommon[], order: OrderCommon): OrderCo
             if (index === -1) {
                 return list.concat({...order});
             }
+
             return list.map(item => {
                 if (item.id === order.id) {
                     return {...order};
                 }
+
                 return item;
             });
         default:
@@ -78,6 +82,7 @@ export const insertOrUpdate = (list: OrderCommon[], order: OrderCommon): OrderCo
                 if (id !== item.id) {
                     memo.push(item);
                 }
+
                 return memo;
             }, []);
     }
@@ -85,5 +90,6 @@ export const insertOrUpdate = (list: OrderCommon[], order: OrderCommon): OrderCo
 
 export const insertIfNotExisted = (list: OrderCommon[], order: OrderCommon): OrderCommon[] => {
     const index = list.findIndex((value: OrderCommon) => value.id === order.id);
+
     return (index === -1) ? list.concat({...order}) : [...list];
 };

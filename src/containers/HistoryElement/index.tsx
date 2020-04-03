@@ -81,6 +81,7 @@ class HistoryComponent extends React.Component<Props> {
 
     public render() {
         const { list, fetching } = this.props;
+
         return (
           <div className={`pg-history-elem ${list.length ? '' : 'pg-history-elem-empty'}`}>
               {fetching && <div className="text-center"><Spinner animation="border" variant="primary" /></div>}
@@ -92,6 +93,7 @@ class HistoryComponent extends React.Component<Props> {
 
     public renderContent = () => {
         const { type, firstElemIndex, lastElemIndex, fullHistory, page, nextPageExists } = this.props;
+
         return (
             <React.Fragment>
                 <History headers={this.renderHeaders(type)} data={this.retrieveData()}/>
@@ -154,6 +156,7 @@ class HistoryComponent extends React.Component<Props> {
 
     private retrieveData = () => {
         const { type, list } = this.props;
+
         return [...list]
             .map(item => this.renderTableRow(type, item));
     };
@@ -191,6 +194,7 @@ class HistoryComponent extends React.Component<Props> {
                 const state = intl.formatMessage({ id: `page.body.history.withdraw.content.status.${item.state}` });
                 const blockchainLink = this.getBlockchainLink(currency, txid, rid);
                 const wallet = wallets.find(obj => obj.currency === currency);
+
                 return [
                     <div className="pg-history-elem__hide" key={txid || rid}><a href={blockchainLink} target="_blank" rel="noopener noreferrer">{txid || rid}</a></div>,
                     localeDate(created_at, 'fullDate'),
@@ -206,6 +210,7 @@ class HistoryComponent extends React.Component<Props> {
                     { name: '', price_precision: 0, amount_precision: 0 };
                 const marketName = marketToDisplay ? marketToDisplay.name : market;
                 const sideText = setTradesType(side).text.toLowerCase() ? intl.formatMessage({id: `page.body.history.trade.content.side.${setTradesType(side).text.toLowerCase()}`}) : '';
+
                 return [
                     localeDate(created_at, 'fullDate'),
                     <span style={{ color: setTradesType(side).color }} key={id}>{sideText}</span>,
@@ -232,6 +237,7 @@ class HistoryComponent extends React.Component<Props> {
                 return currencyInfo.explorerAddress.replace('#{address}', rid);
             }
         }
+
         return '';
     };
 }

@@ -223,6 +223,7 @@ describe('Module: Wallets', () => {
         });
 
         store.dispatch(walletsFetch());
+
         return promise;
     });
 
@@ -238,6 +239,7 @@ describe('Module: Wallets', () => {
             });
         });
         store.dispatch(walletsFetch());
+
         return promise;
     });
 });

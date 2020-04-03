@@ -41,6 +41,7 @@ class Fees extends Component<Props> {
 
     public renderTradeFeeBlock() {
         const { fees } = this.props;
+
         return (
             <Grid container className="mb-32 wrapper-container">
                 <Grid item xs={12} className="gridItemCenter">
@@ -69,6 +70,7 @@ class Fees extends Component<Props> {
 
     public renderCoinFeeBlock() {
         const { currencies } = this.props;
+
         return (
             <Grid container className="wrapper-container">
                 <Grid item xs={12} className="gridItemCenter">

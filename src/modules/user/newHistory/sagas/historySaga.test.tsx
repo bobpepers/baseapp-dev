@@ -5,7 +5,6 @@ import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../he
 import { alertPush, rootSaga } from '../../../../modules/index';
 import { failNewHistory, fetchNewHistory, successNewHistory } from '../actions';
 
-
 describe('History saga', () => {
     let store: MockStoreEnhanced;
     let sagaMiddleware: SagaMiddleware<{}>;
@@ -79,6 +78,7 @@ describe('History saga', () => {
             });
         });
         store.dispatch(fetchNewHistory(fakeRequest));
+
         return promise;
     });
 
@@ -94,6 +94,7 @@ describe('History saga', () => {
             });
         });
         store.dispatch(fetchNewHistory(fakeRequest));
+
         return promise;
     });
 });

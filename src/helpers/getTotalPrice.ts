@@ -28,6 +28,7 @@ export const getTotalPrice = (amount: string, proposals: string[][]) => {
         const lastPrice = Number(list[list.length - 1][0]);
         total += lastPrice * sum;
     }
+
     return total;
 };
 
@@ -50,5 +51,6 @@ export const getAmount = (avaiblePrice: number, proposals: string[][], value: nu
             sum -= (Number(proposal[0]) * Number(proposal[1]));
         }
     }
+
     return totalAmount;
 };

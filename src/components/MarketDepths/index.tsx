@@ -30,10 +30,12 @@ const tooltipContent = (baseUnit, quoteUnit) => {
     decimalSeparator: '.',
     groupSeparator: '',
   };
+
   return ({ currentItem, xAccessor }) => {
     if (!currentItem.price) {
       return null;
     }
+
     return {
       x: xAccessor(currentItem),
       y: [
@@ -79,6 +81,7 @@ class MyCharts extends Component<AppState> {
     const biggestVolume = data.reduce((a,b) => parseFloat(a.totalVolume) > parseFloat(b.totalVolume) ? a : b).totalVolume;
     const xScale = scaleLinear();
     const xExtents = [0, data.length - 1];
+
     return (
       <ChartCanvas
         ratio={ratio}
@@ -90,10 +93,8 @@ class MyCharts extends Component<AppState> {
         data={data}
         type={type}
         xAccessor={d => d.x}
-        // xAccessor={d => d.price}
         xExtents={xExtents}
         xScale={xScale}
-        //mouseMoveEvent={d=>d.price}
         panEvent={true}
         zoomEvent={true}
         clamp={false}

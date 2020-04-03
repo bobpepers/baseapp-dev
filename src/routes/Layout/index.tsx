@@ -109,6 +109,7 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     }
 
     const renderCustomerComponent = props => <CustomComponent {...props} />;
+
     return <Route {...rest} render={renderCustomerComponent} />;
 };
 
@@ -208,6 +209,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         if (localStorage.getItem(STORE_KEY) !== null) {
             return parseInt(localStorage.getItem(STORE_KEY) || '0', 10);
         }
+
         return 0;
     };
 

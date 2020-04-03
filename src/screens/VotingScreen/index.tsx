@@ -50,6 +50,7 @@ class Voting extends React.Component<Props> {
     public votingGridItem(item) {
         const normalise = value => (value - 0) * 100 / (item.totalVotes - 0);
         const completed = parseFloat(item.votes) >= parseFloat(item.totalVotes);
+
         return (
             <Grid item xs={12} sm={12} md={6} lg={4} xl={3} key={item.ticker}>
                 <img className="coinImageVoting" src={`https://downloads.runebase.io/${(item.ticker).toLowerCase()}.svg`} alt={`${item.name}`} />
@@ -85,6 +86,7 @@ class Voting extends React.Component<Props> {
 
     public render() {
         const { isLoading, items, error } = this.state;
+
         return (
             <Grid container spacing={3} className="text-center wrapper-container">
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>

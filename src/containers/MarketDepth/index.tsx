@@ -37,6 +37,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
       while (arr.length < 3) {
         arr.push({type: type, price: null, totalVolume: '0'});
       }
+
       return arr;
     };
 
@@ -49,6 +50,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
         const bids = bidsItems.map((item, index) => {
           const [price, volume] = item;
           const slice = bidsItems.slice(0, index + 1);
+
           return {
             price: (new BigNumber(price).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
             volume: (new BigNumber(volume).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
@@ -60,6 +62,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
         const asks = asksItems.map((item, index) => {
           const [price, volume] = item;
           const slice = asksItems.slice(0, index + 1);
+
           return {
             price: (new BigNumber(price).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
             volume: (new BigNumber(volume).toFormat(8, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1'),
@@ -82,6 +85,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
     const renderMarketDepth = (divHeight, divWidth) => {
         const { currentMarket } = Props;
         const { quote_unit, base_unit } = currentMarket as any;
+
         return (
             <MarketDepth
                 data={convertToDepthFormat()}

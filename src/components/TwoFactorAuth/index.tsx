@@ -26,6 +26,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
         const emailGroupClass = cr('cr-email-form__group', {
             'cr-email-form__group--focused': codeFocused,
         });
+
         return (
             <form>
                 <div className="cr-2fa-form">
@@ -60,7 +61,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
             event.preventDefault();
             this.props.onSubmit();
         }
-    }
+    };
 }
 
 export const TwoFactorAuth = TwoFactorAuthComponent;

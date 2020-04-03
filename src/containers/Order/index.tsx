@@ -113,8 +113,8 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
                 <div className="cr-title-component"><FormattedMessage id="page.body.trade.header.newOrder" /></div>
             </div>
         );
-        return (
 
+        return (
             <div className={'pg-order'} ref={this.orderRef}>
                 {this.state.width > 448 ? headerContent : undefined}
                 <Order
@@ -236,6 +236,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
 
     private getWallet(currency: string, wallets: WalletItemProps[]) {
         const currencyLower = currency.toLowerCase();
+
         return wallets.find(w => w.currency === currencyLower) as Wallet;
     }
 
@@ -243,7 +244,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         this.setState({
             orderSide: label.toLowerCase(),
         });
-    }
+    };
 
     private getAvailableValue(wallet: Wallet | undefined) {
         return wallet ? wallet.balance : 0;
@@ -254,7 +255,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
             priceLimit: undefined,
         });
         this.props.setCurrentPrice();
-    }
+    };
 }
 
 const mapStateToProps = (state: RootState) => ({

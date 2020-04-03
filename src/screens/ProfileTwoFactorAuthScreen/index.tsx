@@ -88,6 +88,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 
     public render() {
         const enable2fa = this.get2faAction();
+
         return (
             <div className="pg-profile-two-factor-auth">
                 {this.renderToggle2fa(enable2fa)}
@@ -187,6 +188,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 
     private renderTwoFactorAuthQR = (barcode: string) => {
         const src = `data:image/png;base64,${barcode}`;
+
         return barcode.length > 0 && <img alt="" className="pg-profile-two-factor-auth__qr" src={src} />;
     };
 
@@ -241,6 +243,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 
     private get2faAction = () => {
         const routingState = this.props.history.location.state;
+
         return routingState ? routingState.enable2fa : false;
     };
 

@@ -127,6 +127,7 @@ const checkButtonIsDisabled = (safeAmount: number, safePrice: number, price: str
     const invalidAmount = safeAmount <= 0;
     const invalidLimitPrice = Number(price) <= 0 && state.orderType === 'Limit';
     const invalidMarketPrice = safePrice <= 0 && state.orderType === 'Market';
+
     return props.disabled || !props.available || invalidAmount || invalidLimitPrice || invalidMarketPrice;
 };
 

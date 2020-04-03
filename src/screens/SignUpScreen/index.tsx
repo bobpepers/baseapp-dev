@@ -127,6 +127,7 @@ class SignUp extends React.Component<Props> {
         } = this.state;
 
         const className = cx('pg-sign-up-screen__container', { loading });
+
         return (
             <div className="pg-sign-up-screen">
                 <div className={className}>
@@ -195,14 +196,14 @@ class SignUp extends React.Component<Props> {
                 return null;
 
         }
-    }
+    };
 
 
     private handleCheckboxClick = () => {
         this.setState({
             hasConfirmed: !this.state.hasConfirmed,
         });
-    }
+    };
 
     private handleChangeEmail = (value: string) => {
         this.setState({
@@ -381,6 +382,7 @@ class SignUp extends React.Component<Props> {
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
             });
+
             return;
         }
 
@@ -391,6 +393,7 @@ class SignUp extends React.Component<Props> {
                 passwordError: '',
                 hasConfirmed: false,
             });
+
             return;
         }
 
@@ -401,6 +404,7 @@ class SignUp extends React.Component<Props> {
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
             });
+
             return;
         }
 
@@ -411,9 +415,10 @@ class SignUp extends React.Component<Props> {
                 passwordError: '',
                 hasConfirmed: false,
             });
+
             return;
         }
-    }
+    };
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({

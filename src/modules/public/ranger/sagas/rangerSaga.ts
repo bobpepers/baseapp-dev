@@ -85,6 +85,7 @@ const initRanger = (
                         if (currentMarket && orderBookMatch[1] === currentMarket.id) {
                             emitter(depthData(event));
                         }
+
                         return;
                     }
 
@@ -93,6 +94,7 @@ const initRanger = (
                         if (currentMarket && orderBookMatchSnap[1] === currentMarket.id) {
                             emitter(depthDataSnapshot(event));
                         }
+
                         return;
                     }
 
@@ -101,6 +103,7 @@ const initRanger = (
                         if (currentMarket && orderBookMatchInc[1] === currentMarket.id) {
                             emitter(depthDataIncrement(event));
                         }
+
                         return;
                     }
 
@@ -114,6 +117,7 @@ const initRanger = (
                                 period: klineMatch[2],
                             }),
                         );
+
                         return;
                     }
 
@@ -126,6 +130,7 @@ const initRanger = (
                                 market: tradesMatch[1],
                             }),
                         );
+
                         return;
                     }
 
@@ -133,6 +138,7 @@ const initRanger = (
                         // public
                         case 'global.tickers':
                             emitter(marketsTickersData(formatTicker(event)));
+
                             return;
 
                         // public
@@ -141,19 +147,23 @@ const initRanger = (
                                 case 'subscribed':
                                 case 'unsubscribed':
                                     emitter(subscriptionsUpdate({ subscriptions: event.streams }));
+
                                     return;
                                 default:
                             }
+
                             return;
 
                         // private
                         case 'order':
                             emitter(rangerUserOrderUpdate(event));
+
                             return;
 
                         // private
                         case 'trade':
                             emitter(pushHistoryEmit(event));
+
                             return;
 
                         default:
@@ -163,10 +173,12 @@ const initRanger = (
             }
         };
         // unsubscribe function
+
         return () => {
             emitter(rangerDisconnectData());
         };
     });
+
     return [channel, ws];
 };
 

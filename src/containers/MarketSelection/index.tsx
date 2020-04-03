@@ -67,13 +67,13 @@ class MarketSelectorComponent extends React.Component<Props, State> {
         this.setState({
             searchFieldValue: e.target.value,
         });
-    }
+    };
 
     private marketsTabsSelectHandler = value => {
         this.setState({
             marketsTabsSelectedValue: value,
         });
-    }
+    };
 }
 
 const reduxProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
