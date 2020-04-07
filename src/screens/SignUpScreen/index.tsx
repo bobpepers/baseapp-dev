@@ -22,6 +22,9 @@ import {
     ERROR_PASSWORD_CONFIRMATION,
     PASSWORD_REGEX,
     setDocumentTitle,
+    passwordErrorFirstSolution,
+    passwordErrorSecondSolution,
+    passwordErrorThirdSolution,
 } from '../../helpers';
 import {
     Configs,
@@ -31,16 +34,20 @@ import {
     selectSignUpError,
     selectSignUpRequireVerification,
     signUp,
+    entropyPasswordFetch,
+    selectCurrentPasswordEntropy,
 } from '../../modules';
 
 interface ReduxProps {
     configs: Configs;
     requireVerification?: boolean;
     loading?: boolean;
+    currentPasswordEntropy: number;
 }
 
 interface DispatchProps {
     signUp: typeof signUp;
+    fetchCurrentPasswordEntropy: typeof entropyPasswordFetch;
 }
 
 interface RouterProps {
@@ -71,6 +78,11 @@ class SignUp extends React.Component<Props> {
         passwordFocused: false,
         confirmPasswordFocused: false,
         refIdFocused: false,
+        typingTimeout: 0,
+        passwordErrorFirstSolved: false,
+        passwordErrorSecondSolved: false,
+        passwordErrorThirdSolved: false,
+        passwordPopUp: false,
     };
 
     public constructor(props) {
@@ -78,6 +90,8 @@ class SignUp extends React.Component<Props> {
         this.reCaptchaRef = React.createRef();
     }
 
+    private myRef = React.createRef<HTMLInputElement>();
+    private passwordWrapper = React.createRef<HTMLDivElement>();
     private reCaptchaRef;
 
     public componentDidMount() {
@@ -91,6 +105,12 @@ class SignUp extends React.Component<Props> {
         if (refId && refId !== localReferralCode) {
             localStorage.setItem('referralCode', referralCode);
         }
+
+        document.addEventListener('click', this.handleOutsideClick, false);
+    }
+
+    public componentWillUnmount() {
+        document.removeEventListener('click', this.handleOutsideClick, false);
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps: Props) {
@@ -108,7 +128,7 @@ class SignUp extends React.Component<Props> {
     }
 
     public render() {
-        const { loading } = this.props;
+        const { configs, loading, currentPasswordEntropy } = this.props;
         const {
             email,
             password,
@@ -124,6 +144,10 @@ class SignUp extends React.Component<Props> {
             passwordFocused,
             confirmPasswordFocused,
             refIdFocused,
+            passwordErrorFirstSolved,
+            passwordErrorSecondSolved,
+            passwordErrorThirdSolved,
+            passwordPopUp,
         } = this.state;
 
         const className = cx('pg-sign-up-screen__container', { loading });
@@ -168,6 +192,15 @@ class SignUp extends React.Component<Props> {
                         renderCaptcha={this.renderCaptcha()}
                         reCaptchaSuccess={reCaptchaSuccess}
                         captcha_response={captcha_response}
+                        currentPasswordEntropy={currentPasswordEntropy}
+                        minPasswordEntropy={configs.password_min_entropy}
+                        passwordErrorFirstSolved={passwordErrorFirstSolved}
+                        passwordErrorSecondSolved={passwordErrorSecondSolved}
+                        passwordErrorThirdSolved={passwordErrorThirdSolved}
+                        passwordPopUp={passwordPopUp}
+                        myRef={this.myRef}
+                        passwordWrapper={this.passwordWrapper}
+                        translate={this.translate}
                     />
                     <Modal
                         show={this.state.showModal}
@@ -179,6 +212,18 @@ class SignUp extends React.Component<Props> {
             </div>
         );
     }
+
+    private translate = (key: string) => this.props.intl.formatMessage({id: key});
+
+    private handleOutsideClick = event => {
+        const wrapperElement = this.passwordWrapper.current;
+
+        if (wrapperElement && !wrapperElement.contains(event.target)) {
+            this.setState({
+                passwordPopUp: false,
+            });
+        }
+    };
 
     private renderCaptcha = () => {
         switch (captchaType()) {
@@ -212,8 +257,47 @@ class SignUp extends React.Component<Props> {
     };
 
     private handleChangePassword = (value: string) => {
+        const { passwordErrorFirstSolved, passwordErrorSecondSolved, passwordErrorThirdSolved } = this.state;
+
+        if (passwordErrorFirstSolution(value) && !passwordErrorFirstSolved) {
+            this.setState({
+                passwordErrorFirstSolved: true,
+            });
+        } else if (!passwordErrorFirstSolution(value) && passwordErrorFirstSolved) {
+            this.setState({
+                passwordErrorFirstSolved: false,
+            });
+        }
+
+        if (passwordErrorSecondSolution(value) && !passwordErrorSecondSolved) {
+            this.setState({
+                passwordErrorSecondSolved: true,
+            });
+        } else if (!passwordErrorSecondSolution(value) && passwordErrorSecondSolved) {
+            this.setState({
+                passwordErrorSecondSolved: false,
+            });
+        }
+
+        if (passwordErrorThirdSolution(value) && !passwordErrorThirdSolved) {
+            this.setState({
+                passwordErrorThirdSolved: true,
+            });
+        } else if (!passwordErrorThirdSolution(value) && passwordErrorThirdSolved) {
+            this.setState({
+                passwordErrorThirdSolved: false,
+            });
+        }
+
+        if (this.state.typingTimeout) {
+            clearTimeout(this.state.typingTimeout);
+         }
+
         this.setState({
             password: value,
+            typingTimeout: setTimeout(() => {
+                this.props.fetchCurrentPasswordEntropy({ password: value });
+            }, 500),
         });
     };
 
@@ -238,6 +322,7 @@ class SignUp extends React.Component<Props> {
     private handleFocusPassword = () => {
         this.setState({
             passwordFocused: !this.state.passwordFocused,
+            passwordPopUp: !this.state.passwordPopUp,
         });
     };
 
@@ -426,11 +511,13 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     i18n: selectCurrentLanguage(state),
     requireVerification: selectSignUpRequireVerification(state),
     signUpError: selectSignUpError(state),
+    currentPasswordEntropy: selectCurrentPasswordEntropy(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
         signUp: credentials => dispatch(signUp(credentials)),
+        fetchCurrentPasswordEntropy: payload => dispatch(entropyPasswordFetch(payload)),
     });
 
 // tslint:disable-next-line:no-any

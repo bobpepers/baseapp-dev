@@ -23,6 +23,7 @@ export const defaultConfig: Config = {
     isResizable: false,
     isDraggable: false,
     languages: ['en'],
+    passwordEntropyStep: 0,
 };
 
 export const Cryptobase = {
@@ -57,3 +58,4 @@ export const incrementalOrderBook = (): boolean => Cryptobase.config.incremental
 export const isResizableGrid = ():boolean => Cryptobase.config.isResizable || false;
 export const isDraggableGrid = ():boolean => Cryptobase.config.isDraggable || false;
 export const languages = Cryptobase.config.languages.length > 0 ? Cryptobase.config.languages : ['en'];
+export const passwordEntropyStep = ():number => Cryptobase.config.passwordEntropyStep;

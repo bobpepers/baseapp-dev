@@ -34,4 +34,5 @@ export * from './FilterInput';
 export * from './TickerTable';
 export * from './MarketSelectionTable';
 export * from './ThemeToggle';
-
+export * from './PasswordStrengthMeter';
+export * from './PasswordStrengthTip';

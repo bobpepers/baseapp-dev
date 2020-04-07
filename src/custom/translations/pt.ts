@@ -453,7 +453,7 @@ export const pt: LangType = {
     'page.forgotPassword': 'Forgot Password',
     'page.forgotPassword.message': 'Enter email to reset password',
     'page.password2fa': '2FA verification',
-    'page.password2fa.message': 'Enter 2fa code from the app',
+    'page.password2fa.message': 'Enter 2fa code (if enabled)',
     'page.forgotPassword.email': 'Email',
     'page.forgotPassword.send': 'Send',
     'page.noDataToShow': 'There is no data to show',
@@ -826,6 +826,17 @@ export const pt: LangType = {
 
     'page.body.voting.warning': 'Warning',
     'page.body.voting.warning.description': 'Successful integration is not garanteed',
+
+    'page.header.signUp.strength.password': 'Your password is',
+    'page.header.signUp.password.too.weak': 'too weak',
+    'page.header.signUp.password.weak': 'weak',
+    'page.header.signUp.password.good': 'good',
+    'page.header.signUp.password.strong': 'strong',
+    'page.header.signUp.password.very.strong': 'very strong',
+    'password.strength.tip.influence': 'Your password needs',
+    'password.strength.tip.number.characters': 'At least 8 characters',
+    'password.strength.tip.letter': 'At least One upper case and lower case letter',
+    'password.strength.tip.digit': 'At least One digit',
 
     'server.internal_error': 'Internal Server Error',
 
