@@ -58,10 +58,9 @@ describe('SignUp component', () => {
     });
 
     it('should render logo block', () => {
-        let wrapper = setup();
+        const wrapper = setup();
         const firstState = wrapper.find('.cr-sign-up-form__form-content').children();
         expect(firstState).toHaveLength(6);
-        wrapper = setup({ image: 'image'});
         const secondState  = wrapper.find('.cr-sign-up-form__form-content').children();
         expect(secondState).toHaveLength(7);
     });
@@ -69,12 +68,6 @@ describe('SignUp component', () => {
     it('should render captcha block', () => {
         const wrapper = setup({hasConfirmed: true, captchaType: 'recaptcha', renderCaptcha: <div className="cr-sign-up-form__recaptcha">Content</div>});
         expect(wrapper.find('.cr-sign-up-form__recaptcha').exists()).toBe(true);
-    });
-
-    it('should have correct labels', () => {
-        const wrapper = setup({ labelSignIn: 'label sign in', labelSignUp: 'label sign up'});
-        expect(wrapper.find('.cr-sign-up-form__option-inner').first().text()).toBe('label sign in');
-        expect(wrapper.find('.__selected').text()).toBe('label sign up');
     });
 
     it('should render error blocks', () => {

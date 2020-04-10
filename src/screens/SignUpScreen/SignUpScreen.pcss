@@ -1,3 +1,47 @@
+.signup {
+  display: flex;
+  justify-content: center;
+
+  &-container {
+    background: var(--base-bright);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+  }
+
+  &-options {
+    background: var(--header);
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 58px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  &-option {
+    &-selected {
+      border-bottom: 2px solid var(--sign-in-accent);
+      color: var(--color-white);
+      cursor: default;
+    }
+  }
+
+  &-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  button:disabled {
+    cursor: default;
+  }
+
+  &-recaptcha {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+
 .pg-sign-up-screen {
   display: flex;
   justify-content: center;

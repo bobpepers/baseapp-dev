@@ -8,10 +8,7 @@ export interface SignUpFormProps {
     isLoading?: boolean;
     title?: string;
     onSignUp: () => void;
-    onSignIn?: () => void;
     className?: string;
-    image?: string;
-    labelSignIn?: string;
     labelSignUp?: string;
     emailLabel?: string;
     passwordLabel?: string;
@@ -59,150 +56,102 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
     public render() {
         const {
             email,
-            //password,
+            labelSignUp,
             confirmPassword,
             refId,
-            onSignIn,
-            image,
             isLoading,
-            labelSignIn,
-            labelSignUp,
             emailLabel,
-            //passwordLabel,
             confirmPasswordLabel,
             referalCodeLabel,
             termsMessage,
             hasConfirmed,
             emailError,
-            //passwordError,
             confirmationError,
             emailFocused,
-            //passwordFocused,
             confirmPasswordFocused,
             refIdFocused,
         } = this.props;
 
-        const emailGroupClass = cr('cr-sign-up-form__group', {
-            'cr-sign-up-form__group--focused': emailFocused,
+        const emailGroupClass = cr('signup-form-group', {
+            'signup-form-group-focused': emailFocused,
         });
 
-        /*
-        const passwordGroupClass = cr('cr-sign-up-form__group', {
-            'cr-sign-up-form__group--focused': passwordFocused,
+        const confirmPasswordGroupClass = cr('signup-form-group', {
+            'signup-form-group-focused': confirmPasswordFocused,
         });
-        */
-
-        const confirmPasswordGroupClass = cr('cr-sign-up-form__group', {
-            'cr-sign-up-form__group--focused': confirmPasswordFocused,
+        const refIdGroupClass = cr('signup-form-group', {
+            'signup-form-group-focused': refIdFocused,
         });
-        const refIdGroupClass = cr('cr-sign-up-form__group', {
-            'cr-sign-up-form__group--focused': refIdFocused,
-        });
-        const logo = image ? (
-            <h1 className="cr-sign-up-form__title">
-                <img className="cr-sign-up-form__image" src={image} alt="logo" />
-            </h1>
-        ) : null;
 
         return (
-            <form>
-                <div className="cr-sign-up-form">
-                    <div className="cr-sign-up-form__options-group">
-                        <div className="cr-sign-up-form__option">
-                            <div className="cr-sign-up-form__option-inner cr-sign-in-form__tab-signin" onClick={onSignIn}>
-                                {labelSignIn ? labelSignIn : 'Sign In'}
-                            </div>
-                        </div>
-                        <div className="cr-sign-up-form__option">
-                            <div className="cr-sign-up-form__option-inner __selected">
-                                {labelSignUp ? labelSignUp : 'Sign Up'}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="cr-sign-up-form__form-content">
-                        {logo}
-                        <div className={emailGroupClass}>
-                            <CustomInput
-                                type="email"
-                                label={emailLabel || 'Email'}
-                                placeholder={emailLabel || 'Email'}
-                                defaultLabel="Email"
-                                handleChangeInput={this.props.handleChangeEmail}
-                                inputValue={email}
-                                handleFocusInput={this.props.handleFocusEmail}
-                                classNameLabel="cr-sign-up-form__label"
-                                classNameInput="cr-sign-up-form__input"
-                                autoFocus={true}
-                            />
-                            {emailError && <div className="cr-sign-up-form__error">{emailError}</div>}
-                        </div>
-                        {/*<div className={passwordGroupClass}>
-                            <CustomInput
-                                type="password"
-                                label={passwordLabel || 'Password'}
-                                placeholder={passwordLabel || 'Password'}
-                                defaultLabel="Password"
-                                handleChangeInput={this.props.handleChangePassword}
-                                inputValue={password}
-                                handleFocusInput={this.props.handleFocusPassword}
-                                classNameLabel="cr-sign-up-form__label"
-                                classNameInput="cr-sign-up-form__input"
-                                autoFocus={false}
-                            />
-                            {passwordError && <div className={'cr-sign-up-form__error'}>{passwordError}</div>}
-                        </div>*/}
-                        {this.renderPasswordInput()}
-                        <div className={confirmPasswordGroupClass}>
-                            <CustomInput
-                                type="password"
-                                label={confirmPasswordLabel || 'Confirm Password'}
-                                placeholder={confirmPasswordLabel || 'Confirm Password'}
-                                defaultLabel="Confirm Password"
-                                handleChangeInput={this.props.handleChangeConfirmPassword}
-                                inputValue={confirmPassword}
-                                handleFocusInput={this.props.handleFocusConfirmPassword}
-                                classNameLabel="cr-sign-up-form__label"
-                                classNameInput="cr-sign-up-form__input"
-                                autoFocus={false}
-                            />
-                            {confirmationError && <div className={'cr-sign-up-form__error'}>{confirmationError}</div>}
-                        </div>
-                        <div className={refIdGroupClass}>
-                            <CustomInput
-                                type="text"
-                                label={referalCodeLabel || 'Referral code'}
-                                placeholder={referalCodeLabel || 'Referral code'}
-                                defaultLabel="Referral code"
-                                handleChangeInput={this.props.handleChangeRefId}
-                                inputValue={refId}
-                                handleFocusInput={this.props.handleFocusRefId}
-                                classNameLabel="cr-sign-up-form__label"
-                                classNameInput="cr-sign-up-form__input"
-                                autoFocus={false}
-                            />
-                        </div>
-                        <Form.Check
-                            type="checkbox"
-                            custom
-                            id="agreeWithTerms"
-                            checked={hasConfirmed}
-                            onChange={this.props.clickCheckBox}
-                            label={termsMessage ? termsMessage : 'I  agree all statements in terms of service'}
-                        />
-                        {this.props.renderCaptcha}
-                        <div className="cr-sign-up-form__button-wrapper">
-                            <Button
-                                block={true}
-                                type="button"
-                                disabled={this.disableButton()}
-                                onClick={e => this.handleClick(e)}
-                                size="lg"
-                                variant="primary"
-                            >
-                                {isLoading ? 'Loading...' : (labelSignUp ? labelSignUp : 'Sign up')}
-                            </Button>
-                        </div>
-                    </div>
+            <form className="signup-form">
+                <div className={emailGroupClass}>
+                    <CustomInput
+                        type="email"
+                        label={emailLabel || 'Email'}
+                        placeholder={emailLabel || 'Email'}
+                        defaultLabel="Email"
+                        handleChangeInput={this.props.handleChangeEmail}
+                        inputValue={email}
+                        handleFocusInput={this.props.handleFocusEmail}
+                        classNameLabel="signup-form-label"
+                        classNameInput="signup-form-input"
+                        autoFocus={true}
+                    />
+                    {emailError && <div className="signup-form-error">{emailError}</div>}
+                </div>
+                {this.renderPasswordInput()}
+                <div className={confirmPasswordGroupClass}>
+                    <CustomInput
+                        type="password"
+                        label={confirmPasswordLabel || 'Confirm Password'}
+                        placeholder={confirmPasswordLabel || 'Confirm Password'}
+                        defaultLabel="Confirm Password"
+                        handleChangeInput={this.props.handleChangeConfirmPassword}
+                        inputValue={confirmPassword}
+                        handleFocusInput={this.props.handleFocusConfirmPassword}
+                        classNameLabel="signup-form-label"
+                        classNameInput="signup-form-input"
+                        autoFocus={false}
+                    />
+                    {confirmationError && <div className={'signup-form-error'}>{confirmationError}</div>}
+                </div>
+                <div className={refIdGroupClass}>
+                    <CustomInput
+                        type="text"
+                        label={referalCodeLabel || 'Referral code'}
+                        placeholder={referalCodeLabel || 'Referral code'}
+                        defaultLabel="Referral code"
+                        handleChangeInput={this.props.handleChangeRefId}
+                        inputValue={refId}
+                        handleFocusInput={this.props.handleFocusRefId}
+                        classNameLabel="signup-form-label"
+                        classNameInput="signup-form-input"
+                        autoFocus={false}
+                    />
+                </div>
+                <div className="signup-form-checkbox">
+                    <Form.Check
+                        type="checkbox"
+                        custom
+                        id="agreeWithTerms"
+                        checked={hasConfirmed}
+                        onChange={this.props.clickCheckBox}
+                        label={termsMessage ? termsMessage : 'I have read and agree to the Terms of Service'}
+                    />
+                </div>
+                {this.props.renderCaptcha}
+                <div className="signup-form-button">
+                    <Button
+                        block={true}
+                        type="button"
+                        disabled={this.disableButton()}
+                        onClick={e => this.handleClick(e)}
+                        size="lg"
+                        variant="primary"
+                    >
+                        {isLoading ? 'Loading...' : (labelSignUp ? labelSignUp : 'Sign up')}
+                    </Button>
                 </div>
             </form>
         );
@@ -218,8 +167,8 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
             translate,
         } = this.props;
 
-        const passwordGroupClass = cr('cr-sign-up-form__group', {
-            'cr-sign-up-form__group--focused': passwordFocused,
+        const passwordGroupClass = cr('signup-form-group', {
+            'signup-form-group-focused': passwordFocused,
         });
 
         return (
@@ -232,8 +181,8 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
                     handleChangeInput={this.props.handleChangePassword}
                     inputValue={password}
                     handleFocusInput={this.props.handleFocusPassword}
-                    classNameLabel="cr-sign-up-form__label"
-                    classNameInput="cr-sign-up-form__input"
+                    classNameLabel="signup-form-label"
+                    classNameInput="signup-form-input"
                     autoFocus={false}
                 />
                 {password ?

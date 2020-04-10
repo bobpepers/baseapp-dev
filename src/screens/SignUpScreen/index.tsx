@@ -1,6 +1,7 @@
 import cx from 'classnames';
 import { History } from 'history';
-import * as React from 'react';
+import React from 'react';
+import { Grid } from '@material-ui/core';
 import { Button } from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { captchaType, recaptchaSitekey } from '../../api/config';
@@ -150,66 +151,80 @@ class SignUp extends React.Component<Props> {
             passwordPopUp,
         } = this.state;
 
-        const className = cx('pg-sign-up-screen__container', { loading });
+        const className = cx('signup-container', { loading });
 
         return (
-            <div className="pg-sign-up-screen">
-                <div className={className}>
-                    <SignUpForm
-                        labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn'})}
-                        labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp'})}
-                        emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email'})}
-                        passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password'})}
-                        confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
-                        referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
-                        termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
-                        refId={refId}
-                        handleChangeRefId={this.handleChangeRefId}
-                        isLoading={loading}
-                        onSignIn={this.handleSignIn}
-                        onSignUp={this.handleSignUp}
-                        email={email}
-                        handleChangeEmail={this.handleChangeEmail}
-                        password={password}
-                        handleChangePassword={this.handleChangePassword}
-                        confirmPassword={confirmPassword}
-                        handleChangeConfirmPassword={this.handleChangeConfirmPassword}
-                        hasConfirmed={hasConfirmed}
-                        clickCheckBox={this.handleCheckboxClick}
-                        validateForm={this.handleValidateForm}
-                        emailError={emailError}
-                        passwordError={passwordError}
-                        confirmationError={confirmationError}
-                        confirmPasswordFocused={confirmPasswordFocused}
-                        refIdFocused={refIdFocused}
-                        emailFocused={emailFocused}
-                        passwordFocused={passwordFocused}
-                        handleFocusEmail={this.handleFocusEmail}
-                        handleFocusPassword={this.handleFocusPassword}
-                        handleFocusConfirmPassword={this.handleFocusConfirmPassword}
-                        handleFocusRefId={this.handleFocusRefId}
-                        captchaType={captchaType()}
-                        renderCaptcha={this.renderCaptcha()}
-                        reCaptchaSuccess={reCaptchaSuccess}
-                        captcha_response={captcha_response}
-                        currentPasswordEntropy={currentPasswordEntropy}
-                        minPasswordEntropy={configs.password_min_entropy}
-                        passwordErrorFirstSolved={passwordErrorFirstSolved}
-                        passwordErrorSecondSolved={passwordErrorSecondSolved}
-                        passwordErrorThirdSolved={passwordErrorThirdSolved}
-                        passwordPopUp={passwordPopUp}
-                        myRef={this.myRef}
-                        passwordWrapper={this.passwordWrapper}
-                        translate={this.translate}
-                    />
-                    <Modal
-                        show={this.state.showModal}
-                        header={this.renderModalHeader()}
-                        content={this.renderModalBody()}
-                        footer={this.renderModalFooter()}
-                    />
-                </div>
-            </div>
+            <Grid container alignItems="center" justify="center" className="signup wrapper-container">
+                <Grid item xs={12} sm={8} md={6} lg={4} xl={4} className={className}>
+                    <Grid container className="signup-options">
+                        <Grid item xs={6}>
+                            <div onClick={this.handleSignIn}>
+                                {this.props.intl.formatMessage({ id: 'page.header.signIn' })}
+                            </div>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <div className="signup-option-selected">
+                                {this.props.intl.formatMessage({ id: 'page.header.signUp' })}
+                            </div>
+                        </Grid>
+                    </Grid>
+                    <Grid container className="signup-content">
+                        <Grid item xs={12}>
+                            <SignUpForm
+                                labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp'})}
+                                emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email'})}
+                                passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password'})}
+                                confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
+                                referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
+                                termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
+                                refId={refId}
+                                handleChangeRefId={this.handleChangeRefId}
+                                isLoading={loading}
+                                onSignUp={this.handleSignUp}
+                                email={email}
+                                handleChangeEmail={this.handleChangeEmail}
+                                password={password}
+                                handleChangePassword={this.handleChangePassword}
+                                confirmPassword={confirmPassword}
+                                handleChangeConfirmPassword={this.handleChangeConfirmPassword}
+                                hasConfirmed={hasConfirmed}
+                                clickCheckBox={this.handleCheckboxClick}
+                                validateForm={this.handleValidateForm}
+                                emailError={emailError}
+                                passwordError={passwordError}
+                                confirmationError={confirmationError}
+                                confirmPasswordFocused={confirmPasswordFocused}
+                                refIdFocused={refIdFocused}
+                                emailFocused={emailFocused}
+                                passwordFocused={passwordFocused}
+                                handleFocusEmail={this.handleFocusEmail}
+                                handleFocusPassword={this.handleFocusPassword}
+                                handleFocusConfirmPassword={this.handleFocusConfirmPassword}
+                                handleFocusRefId={this.handleFocusRefId}
+                                captchaType={captchaType()}
+                                renderCaptcha={this.renderCaptcha()}
+                                reCaptchaSuccess={reCaptchaSuccess}
+                                captcha_response={captcha_response}
+                                currentPasswordEntropy={currentPasswordEntropy}
+                                minPasswordEntropy={configs.password_min_entropy}
+                                passwordErrorFirstSolved={passwordErrorFirstSolved}
+                                passwordErrorSecondSolved={passwordErrorSecondSolved}
+                                passwordErrorThirdSolved={passwordErrorThirdSolved}
+                                passwordPopUp={passwordPopUp}
+                                myRef={this.myRef}
+                                passwordWrapper={this.passwordWrapper}
+                                translate={this.translate}
+                            />
+                            <Modal
+                                show={this.state.showModal}
+                                header={this.renderModalHeader()}
+                                content={this.renderModalBody()}
+                                footer={this.renderModalFooter()}
+                            />
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
         );
     }
 
@@ -229,7 +244,7 @@ class SignUp extends React.Component<Props> {
         switch (captchaType()) {
             case 'recaptcha':
                 return (
-                    <div className="cr-sign-up-form__recaptcha">
+                    <div className="signup-recaptcha">
                         <ReCAPTCHA
                             ref={this.reCaptchaRef}
                             sitekey={recaptchaSitekey()}

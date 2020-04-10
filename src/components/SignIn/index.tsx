@@ -11,7 +11,6 @@ export interface SignInProps {
     onConfirmationResend?: (email?: string) => void;
     onSubmit: () => void;
     className?: string;
-    image?: string;
     email: string;
     emailError: string;
     password: string;
@@ -40,62 +39,53 @@ export class SignInComponent extends React.Component<SignInProps> {
             password,
             passwordError,
             passwordPlaceholder,
-            image,
             emailLabel,
             passwordLabel,
             emailFocused,
             passwordFocused,
             renderCaptcha,
         } = this.props;
-        const emailGroupClass = cr('cr-sign-in-form__group', {
-            'cr-sign-in-form__group--focused': emailFocused,
+        const emailGroupClass = cr('signin-form-group', {
+            'signin-form-group-focused': emailFocused,
         });
-        const passwordGroupClass = cr('cr-sign-in-form__group', {
-            'cr-sign-in-form__group--focused': passwordFocused,
+        const passwordGroupClass = cr('signin-form-group', {
+            'signin-form-group-focused': passwordFocused,
         });
-        const logo = image ? (
-            <h1 className="cr-sign-in-form__title">
-                <img className="cr-sign-in-form__image" src={image} alt="logo" />
-            </h1>
-        ) : null;
 
         // tslint:disable:jsx-no-lambda
         return (
             <form>
-                <div className="cr-sign-in-form__form-content">
-                    {logo}
-                    <div className={emailGroupClass}>
-                        <CustomInput
-                            type="email"
-                            label={emailLabel || 'Email'}
-                            placeholder={emailPlaceholder}
-                            defaultLabel="Email"
-                            handleChangeInput={this.handleChangeEmail}
-                            inputValue={email}
-                            handleFocusInput={() => this.handleFieldFocus('email')}
-                            classNameLabel="cr-sign-in-form__label"
-                            onKeyPress={this.handleEnterPress}
-                            autoFocus={true}
-                        />
-                        {emailError && <div className={'cr-sign-in-form__error'}>{emailError}</div>}
-                    </div>
-                    <div className={passwordGroupClass}>
-                        <CustomInput
-                            type="password"
-                            label={passwordLabel || 'Password'}
-                            placeholder={passwordPlaceholder}
-                            defaultLabel="Password"
-                            handleChangeInput={this.handleChangePassword}
-                            inputValue={password}
-                            handleFocusInput={() => this.handleFieldFocus('password')}
-                            classNameLabel="cr-sign-in-form__label"
-                            onKeyPress={this.handleEnterPress}
-                            autoFocus={false}
-                        />
-                        {passwordError && <div className={'cr-sign-in-form__error'}>{passwordError}</div>}
-                    </div>
-                    {renderCaptcha}
+                <div className={emailGroupClass}>
+                    <CustomInput
+                        type="email"
+                        label={emailLabel || 'Email'}
+                        placeholder={emailPlaceholder}
+                        defaultLabel="Email"
+                        handleChangeInput={this.handleChangeEmail}
+                        inputValue={email}
+                        handleFocusInput={() => this.handleFieldFocus('email')}
+                        classNameLabel="signin-form-label"
+                        onKeyPress={this.handleEnterPress}
+                        autoFocus={true}
+                    />
+                    {emailError && <div className={'signin-form-error'}>{emailError}</div>}
                 </div>
+                <div className={passwordGroupClass}>
+                    <CustomInput
+                        type="password"
+                        label={passwordLabel || 'Password'}
+                        placeholder={passwordPlaceholder}
+                        defaultLabel="Password"
+                        handleChangeInput={this.handleChangePassword}
+                        inputValue={password}
+                        handleFocusInput={() => this.handleFieldFocus('password')}
+                        classNameLabel="signin-form-label"
+                        onKeyPress={this.handleEnterPress}
+                        autoFocus={false}
+                    />
+                    {passwordError && <div className={'signin-form-error'}>{passwordError}</div>}
+                </div>
+                {renderCaptcha}
             </form>
         );
         // tslint:enable:jsx-no-lambda

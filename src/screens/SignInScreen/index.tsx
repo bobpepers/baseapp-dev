@@ -1,11 +1,12 @@
 import cx from 'classnames';
-import * as React from 'react';
+import React, { Fragment } from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
+import { Grid } from '@material-ui/core';
 import { captchaType, recaptchaSitekey } from '../../api/config';
 import { SignInComponent, TwoFactorAuth } from '../../components';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
@@ -84,14 +85,14 @@ class SignIn extends React.Component<Props, SignInState> {
 
     public render() {
         const { loading } = this.props;
-        const className = cx('pg-sign-in-screen__container', { loading });
+        const className = cx('signin-container', { loading });
 
         return (
-            <div className="pg-sign-in-screen">
-                <div className={className}>
+            <Grid container alignItems="center" justify="center" className="signin wrapper-container">
+                <Grid item xs={12} sm={8} md={6} lg={4} xl={4} className={className}>
                     {this.renderSignInForm()}
-                </div>
-            </div>
+                </Grid>
+            </Grid>
         );
     }
 
@@ -111,54 +112,54 @@ class SignIn extends React.Component<Props, SignInState> {
         } = this.state;
 
         return (
-            <React.Fragment>
-                <div className="cr-sign-in-form">
-                    <div className="cr-sign-in-form__options-group">
-                        <div className="cr-sign-in-form__option">
-                            <div className="cr-sign-in-form__option-inner __selected">
-                                {this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                            </div>
+            <Fragment>
+                <Grid container className="signin-options">
+                    <Grid item xs={6}>
+                        <div className="signin-option-selected">
+                            {this.props.intl.formatMessage({ id: 'page.header.signIn' })}
                         </div>
-                        <div className="cr-sign-in-form__option">
-                            <div className="cr-sign-in-form__option-inner cr-sign-in-form__tab-signup" onClick={this.handleSignUp}>
-                                {this.props.intl.formatMessage({ id: 'page.header.signUp' })}
-                            </div>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <div onClick={this.handleSignUp}>
+                            {this.props.intl.formatMessage({ id: 'page.header.signUp' })}
                         </div>
-                    </div>
-                    <SignInComponent
-                        email={email}
-                        emailError={emailError}
-                        emailFocused={emailFocused}
-                        emailPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
-                        password={password}
-                        passwordError={passwordError}
-                        passwordFocused={passwordFocused}
-                        passwordPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
-                        emailLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
-                        passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
-                        receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
-                        isLoading={loading}
-                        onSubmit={this.handleEnter}
-                        handleChangeFocusField={this.handleFieldFocus}
-                        isFormValid={this.validateForm}
-                        refreshError={this.refreshError}
-                        changeEmail={this.handleChangeEmailValue}
-                        changePassword={this.handleChangePasswordValue}
-                        renderCaptcha={this.renderCaptcha()}
-                        captchaType={captchaType()}
-                        reCaptchaSuccess={reCaptchaSuccess}
-                        captcha_response={captcha_response}
-                    />
-                    <TwoFactorAuth
-                        onSubmit={this.handleEnter}
-                        label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
-                        message={this.props.intl.formatMessage({ id: 'page.password2fa.message' })}
-                        codeFocused={codeFocused}
-                        otpCode={otpCode}
-                        handleOtpCodeChange={this.handleChangeOtpCode}
-                        handleChangeFocusField={this.handle2faFocus}
-                    />
-                    <div className="cr-sign-in-form__button-wrapper">
+                    </Grid>
+                </Grid>
+                <Grid container className="signin-content">
+                    <Grid item xs={12}>
+                        <SignInComponent
+                            email={email}
+                            emailError={emailError}
+                            emailFocused={emailFocused}
+                            emailPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
+                            password={password}
+                            passwordError={passwordError}
+                            passwordFocused={passwordFocused}
+                            passwordPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
+                            emailLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
+                            passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
+                            receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
+                            isLoading={loading}
+                            onSubmit={this.handleEnter}
+                            handleChangeFocusField={this.handleFieldFocus}
+                            isFormValid={this.validateForm}
+                            refreshError={this.refreshError}
+                            changeEmail={this.handleChangeEmailValue}
+                            changePassword={this.handleChangePasswordValue}
+                            renderCaptcha={this.renderCaptcha()}
+                            captchaType={captchaType()}
+                            reCaptchaSuccess={reCaptchaSuccess}
+                            captcha_response={captcha_response}
+                        />
+                        <TwoFactorAuth
+                            onSubmit={this.handleEnter}
+                            label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
+                            message={this.props.intl.formatMessage({ id: 'page.password2fa.message' })}
+                            codeFocused={codeFocused}
+                            otpCode={otpCode}
+                            handleOtpCodeChange={this.handleChangeOtpCode}
+                            handleChangeFocusField={this.handle2faFocus}
+                        />
                         <Button
                             block={true}
                             type="button"
@@ -169,17 +170,15 @@ class SignIn extends React.Component<Props, SignInState> {
                         >
                             {loading ? 'Loading...' : this.props.intl.formatMessage({ id: 'page.header.signIn' })}
                         </Button>
-                    </div>
-                    <div className="cr-sign-in-form__bottom-section">
                         <div
-                            className="cr-sign-in-form__bottom-section-password"
+                            className="signin-forgot"
                             onClick={() => this.forgotPassword()}
                         >
                             {this.props.intl.formatMessage({ id: 'page.header.signIn.forgotPassword' })}
                         </div>
-                    </div>
-                </div>
-            </React.Fragment>
+                    </Grid>
+                </Grid>
+            </Fragment>
         );
     };
 
@@ -247,13 +246,11 @@ class SignIn extends React.Component<Props, SignInState> {
         switch (captchaType()) {
             case 'recaptcha':
                 return (
-                    <div className="cr-sign-in-form__recaptcha-wrapper">
-                        <div className="cr-sign-in-form__recaptcha">
-                            <ReCAPTCHA
-                                sitekey={recaptchaSitekey()}
-                                onChange={this.handleReCaptchaSuccess}
-                            />
-                        </div>
+                    <div className="signin-recaptcha">
+                        <ReCAPTCHA
+                            sitekey={recaptchaSitekey()}
+                            onChange={this.handleReCaptchaSuccess}
+                        />
                     </div>
                 );
             default:
