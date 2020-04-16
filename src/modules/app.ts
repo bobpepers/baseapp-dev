@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import { alertReducer  } from './public/alert';
-import { changeColorThemeReducer  } from './public/colorTheme';
+import { alertReducer } from './public/alert';
+import { changeColorThemeReducer } from './public/colorTheme';
 import { configsReducer } from './public/configs';
 import { currenciesReducer } from './public/currencies';
 import { feesReducer } from './public/fees';
 import { gridLayoutReducer } from './public/gridLayout/reducer';
-import { changeLanguageReducer  } from './public/i18n';
+import { changeLanguageReducer } from './public/i18n';
 import { klineReducer  } from './public/kline';
 import { marketsReducer } from './public/markets';
 import { memberLevelsReducer } from './public/memberLevels';
@@ -14,14 +14,14 @@ import {
     incrementDepthReducer,
     orderBookReducer,
 } from './public/orderBook';
-import { rangerReducer  } from './public/ranger/reducer';
-import { recentTradesReducer  } from './public/recentTrades';
+import { rangerReducer } from './public/ranger/reducer';
+import { recentTradesReducer } from './public/recentTrades';
 import { apiKeysReducer } from './user/apiKeys';
-import { authReducer  } from './user/auth';
+import { authReducer } from './user/auth';
 import { beneficiariesReducer } from './user/beneficiaries';
 import { getGeetestCaptchaReducer } from './user/captcha';
 import { sendEmailVerificationReducer } from './user/emailVerification';
-import { historyReducer  } from './user/history';
+import { historyReducer } from './user/history';
 import {
     documentsReducer,
     identityReducer,
@@ -31,12 +31,16 @@ import {
 import { newHistoryReducer } from './user/newHistory';
 import { openOrdersReducer } from './user/openOrders';
 import { ordersReducer  } from './user/orders';
-import { ordersHistoryReducer  } from './user/ordersHistory';
-import { passwordReducer  } from './user/password';
-import { profileReducer  } from './user/profile';
-import { userActivityReducer  } from './user/userActivity';
-import { walletsReducer  } from './user/wallets';
-import { withdrawLimitReducer  } from './user/withdrawLimit';
+import { ordersHistoryReducer } from './user/ordersHistory';
+import { passwordReducer } from './user/password';
+import { profileReducer } from './user/profile';
+import { userActivityReducer } from './user/userActivity';
+import { walletsReducer } from './user/wallets';
+import { withdrawLimitReducer } from './user/withdrawLimit';
+
+import { adminAlertReducer } from './admin/adminAlert';
+import { metricsReducer } from './admin/metrics';
+
 
 export const publicReducer = combineReducers({
     colorTheme: changeColorThemeReducer,
@@ -76,4 +80,9 @@ export const userReducer = combineReducers({
     sendEmailVerification: sendEmailVerificationReducer,
     captchaKeys: getGeetestCaptchaReducer,
     withdrawLimit: withdrawLimitReducer,
+});
+
+export const adminReducer = combineReducers({
+    metrics: metricsReducer,
+    alerts: adminAlertReducer,
 });

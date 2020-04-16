@@ -117,6 +117,8 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             confirmPasswordFocus,
         } = this.state;
 
+        console.log(user);
+
         const oldPasswordClass = cr('cr-email-form__group', {
             'cr-email-form__group--focused': oldPasswordFocus,
         });

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 // tslint:disable-next-line no-submodule-imports
 import { all, call } from 'redux-saga/effects';
-import { publicReducer, userReducer } from './app';
+import { publicReducer, userReducer, adminReducer } from './app';
 import { AlertState, rootHandleAlertSaga } from './public/alert';
 import { ColorThemeState } from './public/colorTheme';
 import { ConfigsState, rootConfigsSaga } from './public/configs';
@@ -41,6 +41,10 @@ import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
 import { MemberLevelsState, rootMemberLevelsSaga } from './public/memberLevels';
 
+import { AdminAlertState, rootHandleAdminAlertSaga } from './admin/adminAlert';
+import { MetricsState } from './admin/metrics';
+import { rootMetricsSaga } from './admin/metrics/sagas';
+
 export * from './public/markets';
 export * from './public/orderBook';
 export * from './public/colorTheme';
@@ -67,6 +71,8 @@ export * from './user/kyc';
 export * from './user/emailVerification';
 export * from './user/withdrawLimit';
 export * from './public/memberLevels';
+export * from './admin/metrics';
+export * from './admin/adminAlert';
 
 export interface RootState {
     public: {
@@ -107,11 +113,16 @@ export interface RootState {
         captchaKeys: GeetestCaptchaState;
         withdrawLimit: WithdrawLimitState;
     };
+    admin: {
+        metrics: MetricsState;
+        alerts: AdminAlertState;
+    };
 }
 
 export const rootReducer = combineReducers({
     public: publicReducer,
     user: userReducer,
+    admin: adminReducer,
 });
 
 export function* rootSaga() {
@@ -144,5 +155,7 @@ export function* rootSaga() {
         call(rootUserActivitySaga),
         call(rootWalletsSaga),
         call(rootWithdrawLimitSaga),
+        call(rootMetricsSaga),
+        call(rootHandleAdminAlertSaga),
     ]);
 }

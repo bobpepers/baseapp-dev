@@ -19,3 +19,4 @@ export * from './StatusScreen';
 export * from './VotingScreen';
 export * from './FeeScreen';
 export * from './ApiScreen';
+export * from './Admin/DashboardScreen';

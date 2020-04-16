@@ -43,6 +43,7 @@ import {
     StatusScreen,
     ApiScreen,
     FeeScreen,
+    DashboardScreen,
 } from '../../screens';
 import { ExpiredSessionModal } from '../../components';
 
@@ -197,6 +198,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile" component={ProfileScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/wallets" component={WalletsScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/wpanel/dashboard" component={DashboardScreen} />
                     <Route path="**"><Redirect to="/trading/" /></Route>
                 </Switch>
                 {isLoggedIn && <WalletsFetch/>}

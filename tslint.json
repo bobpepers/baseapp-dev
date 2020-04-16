@@ -243,12 +243,6 @@
       true,
       "ignore-for-loop"
     ],
-    "prefer-switch": [
-      true,
-      {
-        "min-cases": 2
-      }
-    ],
     "prefer-template": true,
     "variable-name": [
       true,

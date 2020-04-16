@@ -17,6 +17,8 @@ import {
     selectSidebarState,
     selectUserLoggedIn,
     toggleSidebar,
+    selectUserInfo,
+    User,
 } from '../../modules';
 import { languages } from '../../api/config';
 import { Dropdown } from 'react-bootstrap';
@@ -37,6 +39,7 @@ interface ReduxProps {
     isLoggedIn: boolean;
     currentMarket: Market | undefined;
     isActive: boolean;
+    user: User;
 }
 
 interface OwnProps {
@@ -65,6 +68,7 @@ class NavigationContainer extends Component<Props, State> {
         return (
             <div className="pg-navigation-wrapper">
                 {pgRoutes(isLoggedIn).map(this.renderNavItems(address))}
+                {this.renderAdminNavigation()}
                 <div className="pg-navigations-wrapper-lng">
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">
                         <Dropdown alignRight>
@@ -84,6 +88,43 @@ class NavigationContainer extends Component<Props, State> {
             </div>
         );
     }
+
+    public renderAdminNavigation = () => {
+        const { isLoggedIn, user } = this.props;
+
+        if (isLoggedIn) {
+            if (user.role === 'superadmin' || user.role === 'admin') {
+                return (
+                    <div className="pg-navigations-wrapper-nav-item">
+                      <Dropdown alignRight>
+                            <Dropdown.Toggle variant="primary" id="admindropdown">
+                                <span className="dropdown-menu-language-selected">AdminMenu</span>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <Dropdown.Item>
+                                    <Link to="/wpanel/dashboard" key="1">
+                                        <span>Dashboard</span>
+                                    </Link>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    <div className="dropdown-row">
+                                        <span>User Directory</span>
+                                    </div>
+                                </Dropdown.Item>
+                                <Dropdown.Item>
+                                    <div className="dropdown-row">
+                                        <span>Users</span>
+                                    </div>
+                                </Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </div>
+                );
+            }
+        }
+
+        return true;
+    };
 
     public renderNavImage = (imgName: string, isActive: boolean) => {
         switch (imgName) {
@@ -172,6 +213,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     currentMarket: selectCurrentMarket(state),
     lang: selectCurrentLanguage(state),
     isActive: selectSidebarState(state),
+    user: selectUserInfo(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
