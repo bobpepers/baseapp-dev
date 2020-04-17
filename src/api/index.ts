@@ -1,11 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { JsonBody, makeRequest } from './requestBuilder';
 
-export * from './types';
 export * from './config';
 
 export interface RequestOptions {
-    apiVersion: 'applogic' | 'peatio' | 'barong' | 'arke';
+    apiVersion: 'applogic' | 'peatio' | 'barong';
     withHeaders?: boolean;
     headers?: Object;
 }

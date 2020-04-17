@@ -36,7 +36,7 @@ const styles = (theme: Theme) => createStyles({
     main: {
         display: 'flex',
         justifyContent: 'space-between',
-        fontFamily: 'Roboto',
+        fontFamily: 'Open Sans',
         fontStyle: 'normal',
         fontWeight: 500,
     },
@@ -68,7 +68,7 @@ const styles = (theme: Theme) => createStyles({
     },
     activity: {
         display: 'flex',
-        fontFamily: 'Roboto',
+        fontFamily: 'Open Sans',
         minHeight: '300px',
         padding: '5px',
         marginTop: '2%',

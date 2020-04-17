@@ -32,7 +32,7 @@ import {
 import {
     CurrentKlineSubscription,
     dataFeedObject,
-    print,
+    // print,
 } from './api';
 import {
     widgetOptions,
@@ -147,18 +147,18 @@ export class TradingChartComponent extends React.PureComponent<Props> {
 
         this.tvWidget.onChartReady(() => {
             this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
-                print('Symbol set', currentMarket.id);
+                console.log(currentMarket.id);
             });
 
             if (previousRange.from !== 0 && previousRange.to !== 0) {
                 this.tvWidget!.activeChart().setVisibleRange(previousRange, () => {
-                    print('Range set', previousRange);
+                    console.log(previousRange);
                 });
             }
 
             if (previousResolution) {
                 this.tvWidget!.activeChart().setResolution(previousResolution.toUpperCase(), () => {
-                    print('Resolution set', previousResolution);
+                    console.log(previousResolution);
                 });
             }
         });
@@ -168,7 +168,7 @@ export class TradingChartComponent extends React.PureComponent<Props> {
         if (this.tvWidget) {
             this.tvWidget.onChartReady(() => {
                 this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
-                    print('Symbol set', currentMarket.id);
+                    console.log(currentMarket.id);
                 });
             });
         }

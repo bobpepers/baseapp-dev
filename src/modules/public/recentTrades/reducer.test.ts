@@ -1,4 +1,3 @@
-import { Cryptobase, defaultStorageLimit } from '../../../api';
 import { getTimezone, setTimezone } from '../../../helpers/timezone';
 import { PublicTrade } from '../../user/history';
 import { Market } from '../markets';
@@ -112,13 +111,10 @@ describe('recentTrade reducer', () => {
             loading: false,
             list,
         };
-        const initialLimit = defaultStorageLimit();
-        Cryptobase.config.storage.defaultStorageLimit = 2;
         expect(recentTradesReducer(initialState, recentTradesData(fakeTrades))).toEqual({
             loading: false,
             list: fakeTrades,
         });
-        Cryptobase.config.storage.defaultStorageLimit = initialLimit;
 
     });
 
@@ -152,13 +148,10 @@ describe('recentTrade reducer', () => {
             loading: false,
             list,
         };
-        const initialLimit = defaultStorageLimit();
-        Cryptobase.config.storage.defaultStorageLimit = 2;
         expect(recentTradesReducer(initialState, recentTradesPush({ trades: fakeTradeEvents, market: 'bchbtc' }))).toEqual({
             loading: false,
             list: fakeTrades,
         });
-        Cryptobase.config.storage.defaultStorageLimit = initialLimit;
 
     });
 
