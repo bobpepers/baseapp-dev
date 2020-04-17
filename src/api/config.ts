@@ -1,32 +1,3 @@
-import { Config } from './types';
-
-export const defaultConfig: Config = {
-    api: {
-        authUrl: '',
-        tradeUrl: '',
-        applogicUrl: '',
-        rangerUrl: '',
-    },
-    minutesUntilAutoLogout: '5',
-    rangerReconnectPeriod: '1',
-    withCredentials: true,
-    storage: {},
-    gaTrackerKey: '',
-    captcha: {
-        type: 'recaptcha',
-        siteKey: '6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI',
-    },
-    msAlertDisplayTime: '5000',
-    incrementalOrderBook: false,
-    isResizable: false,
-    isDraggable: false,
-    languages: ['en'],
-    passwordEntropyStep: 0,
-};
-
-export const Cryptobase = {
-    config: defaultConfig,
-};
 // TODO: Development: 6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
 // TODO: Production: 6LfvluAUAAAAAKJf07njOp9d9oUznAW8sWmTp_jx
 export const recaptchaSitekey = (): string => '6LfvluAUAAAAAKJf07njOp9d9oUznAW8sWmTp_jx';

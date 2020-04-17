@@ -94,21 +94,25 @@ describe('Ranger module', () => {
 
                     switch (actions.length) {
                         case 1:
+                            console.log('case1');
                             expect(lastAction).toEqual({ type: RANGER_CONNECT_FETCH, payload: { withAuth: false } });
 
                             return;
 
                         case 2:
+                            console.log('case2');
                             expect(lastAction).toEqual({ type: RANGER_CONNECT_DATA });
                             pingServer.close();
                             break;
 
                         case 3:
+                            console.log('case3');
                             expect(lastAction).toEqual({ type: RANGER_DISCONNECT_DATA });
                             pingServer = createEchoServer(echoServerPort, debug);
                             break;
 
                         case 4:
+                            console.log('case4');
                             expect(lastAction).toEqual({ type: RANGER_CONNECT_DATA });
                             resolve();
                             break;
