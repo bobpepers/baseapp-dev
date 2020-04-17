@@ -32,7 +32,7 @@ describe('Orders', () => {
     };
 
     const mockOrderExecute = () => {
-        mockAxios.onPost('/api/v2/peatio/market/orders').reply(200, executedOrder);
+        mockAxios.onPost('/api/v2/exchange/market/orders').reply(200, executedOrder);
     };
 
     afterEach(() => {

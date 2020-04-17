@@ -1,6 +1,7 @@
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { rangerSagas } from '.';
+import { Cryptobase, defaultConfig } from '../../../../api';
 import { createEchoServer, setupMockStore } from '../../../../helpers/jest';
 import { OrderEvent } from '../../../types';
 import { PrivateTradeEvent } from '../../../user/history';
@@ -40,6 +41,16 @@ describe('Ranger module', () => {
 
     beforeAll(() => {
         pingServer = createEchoServer(echoServerPort, debug);
+        Cryptobase.config = {
+            ...defaultConfig,
+            api: {
+                authUrl: '',
+                tradeUrl: '',
+                applogicUrl: '',
+                rangerUrl: `ws://localhost:${echoServerPort}`,
+            },
+            rangerReconnectPeriod: '0.1',
+        };
     });
 
     afterAll(() => {
