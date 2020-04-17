@@ -3,7 +3,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { Decimal, TickerTable } from '../../components';
+import { Decimal, LandingTable } from '../../components';
 import {
     Market,
     marketsFetch,
@@ -124,7 +124,7 @@ class MarketsTableContainer extends React.Component<Props, State> {
         );
 
         return (
-            <TickerTable
+            <LandingTable
                 currentBidUnit={currentBidUnit}
                 currentBidUnitsList={currentBidUnitsList}
                 markets={formattedMarkets}

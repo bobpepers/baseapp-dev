@@ -1,0 +1,40 @@
+.landingTable {
+  background-color: var(--main-bg);
+  color: var(--placeholder-text);
+
+  &-head {
+    background-color: var(--header-bg);
+  }
+
+  &-row:hover {
+    background-color: var(--header-bg);
+    cursor: pointer;
+  }
+
+  &-cell{
+    color: var(--bright);
+  }
+}
+
+.nav-pills .nav-link{
+  font-weight: bold;
+  padding-top: 13px;
+  text-align: center;
+  background-color: var(--main-bg);
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  width: 100px;
+}
+
+.nav-pills .nav-link.active{
+  background-color: var(--header-bg);
+  color: var(--bright);
+}
+
+.nav-pills .nav-link:hover{
+  background-color: var(--header-bg);
+  color: #000;
+  cursor: pointer;
+}

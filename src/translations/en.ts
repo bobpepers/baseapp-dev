@@ -80,11 +80,11 @@ export const en = {
     /* Markets Table */
     'page.body.marketsTable.filter.all': 'All',
     'page.body.marketsTable.header.pair': 'Market',
-    'page.body.marketsTable.header.lastPrice': 'Last Price',
-    'page.body.marketsTable.header.change': '24 Change',
-    'page.body.marketsTable.header.high': '24  high',
-    'page.body.marketsTable.header.low': '24 low',
-    'page.body.marketsTable.header.volume': '24 Volume',
+    'page.body.marketsTable.header.lastPrice': 'Price',
+    'page.body.marketsTable.header.change': '24h Change',
+    'page.body.marketsTable.header.high': '24h high',
+    'page.body.marketsTable.header.low': '24h low',
+    'page.body.marketsTable.header.volume': '24h Volume',
 
 
     /* Landing */
