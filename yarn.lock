@@ -1354,13 +1354,6 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@openware/cryptofont@2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@openware/cryptofont/-/cryptofont-2.3.0.tgz#2c97ebc755b0f8c179951de1c367067499af580a"
-  integrity sha512-UpcHwDPRuiaYw2guvO+jj0h1HoCvnK6TKYiJZj2FD4g+yOTWvFaWsIr90AvB96NNKXCRTTQQzyduzT6otViCbA==
-  dependencies:
-    cryptocoins-icons "^2.8.0"
-
 "@rehooks/component-size@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@rehooks/component-size/-/component-size-1.0.3.tgz#823eabeb42084893d46d43e3a9d1d0e34252b3cb"
@@ -3936,11 +3929,6 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
-
-cryptocoins-icons@^2.8.0:
-  version "2.9.0"
-  resolved "https://registry.yarnpkg.com/cryptocoins-icons/-/cryptocoins-icons-2.9.0.tgz#2abd9db764ca5c5f87620acc4d75abfa6d8142f7"
-  integrity sha512-bfhtws/Hs4YOv7GXrCQfZ9yzgVLqkJsFzgsTFVFBY/D1qPIICQI0UjcoFxea8dlBlwerxNu3Shp0T0ucBLHwng==
 
 cryptocurrency-icons@^0.16.1:
   version "0.16.1"

@@ -1,5 +1,4 @@
 import { LayoutGrid } from '../components/Grid';
-import { customLayouts } from '../custom/helpers/layout';
 import { isResizableGrid, isDraggableGrid} from '../api/config';
 
 export const getStaticHeight = () => {
@@ -73,7 +72,6 @@ const getLayouts = () => {
             { i: '7', x: 0, y: 126, w: 12, h: 31, minH: 12, minW: 7, isDraggable: false },
             { i: '8', x: 0, y: 157, w: 12, h: 20, minH: 12, minW: 7, isDraggable: false },
         ],
-        ...customLayouts,
     };
 };
 

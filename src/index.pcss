@@ -1,14 +1,15 @@
 @import "styles/style.pcss";
-@import "custom/styles/style.pcss";
+
+@font-face {
+  font-family: 'Open Sans';
+  font-path: '/fonts/open-sans-v17-latin-regular';
+}
 
 :root {
   /* typography */
-  --font-family: Open Sans, Helvetica, sans-serif;
-  --font-weight: normal;
   --font-size: 12px !important;
   --font-size-smaller: calc(var(--font-size) * 0.9);
   --font-size-bigger: calc(var(--font-size) * 1.1);
-  --line-height: 1.2;
 
   /* layout */
   --alert-icon-size: calc(var(--gap) * 3.6);
@@ -34,8 +35,17 @@
 }
 
 html, body {
-    height: 100%;
-    font-family: 'Open Sans';
+  height: 100%;
+  font-family: 'Open Sans';
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
+  color: var(--base);
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background: var(--background);
 }
 
 .wrapper {
@@ -129,20 +139,6 @@ input[type=text], input[type=button] {
   th:first-child {
     text-align: left;
   }
-}
-
-body, html {
-  height: 100% !important;
-  font-family: var(--font-family);
-  font-size: var(--font-size);
-  font-weight: var(--font-weight);
-  color: var(--base);
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  background: var(--background);
 }
 
 .pg-container {

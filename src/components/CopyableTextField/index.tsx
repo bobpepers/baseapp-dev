@@ -1,4 +1,3 @@
-import '@openware/cryptofont';
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button, InputGroup } from 'react-bootstrap';

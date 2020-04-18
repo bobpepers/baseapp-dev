@@ -6,7 +6,6 @@
     "@material-ui/core": "4.9.11",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.47",
-    "@openware/cryptofont": "2.3.0",
     "@rehooks/component-size": "^1.0.3",
     "@types/compression-webpack-plugin": "^2.0.1",
     "@types/ws": "^6.0.4",

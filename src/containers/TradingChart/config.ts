@@ -1,7 +1,7 @@
 import {
     customWidgetOptions,
     customWidgetParams,
-} from '../../custom/tradingChartConfig';
+} from './tradingChartConfig';
 
 export const widgetParams = {
     interval: '15',
