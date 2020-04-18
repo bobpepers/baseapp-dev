@@ -3,6 +3,7 @@ module.exports = {
         'node_modules',
     ],
     plugins: [
+        require('postcss-fontpath'),
         require('postcss-import'),
         require('postcss-nested'),
         require('postcss-autoreset')({

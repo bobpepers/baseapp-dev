@@ -21,7 +21,7 @@ class Landing extends Component<Props> {
     public renderMarketInfoBlock() {
         return (
             <Grid container alignItems="center" justify="center" className="frontPage wrapper-container">
-                <Grid item xs={2} className="logoWrapper">
+                <Grid item xs={8} sm={4} md={3} lg={2} xl={2} className="logoWrapper">
                     <img src={LogoImage} alt="RuneX Logo" />
                 </Grid>
                 <Grid item xs={12} className="gridItemCenter">

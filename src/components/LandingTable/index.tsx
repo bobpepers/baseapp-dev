@@ -66,12 +66,12 @@ export class LandingTable extends React.Component<Props> {
                                 </TableCell>
                                 <TableCell align="right">
                                     <span className="landingTable-cell">
-                                        {translate('page.body.marketsTable.header.high')}
+                                        {translate('page.body.marketsTable.header.low')}
                                     </span>
                                 </TableCell>
                                 <TableCell align="right">
                                     <span className="landingTable-cell">
-                                        {translate('page.body.marketsTable.header.low')}
+                                        {translate('page.body.marketsTable.header.high')}
                                     </span>
                                 </TableCell>
                                 <TableCell align="right">
@@ -113,12 +113,12 @@ export class LandingTable extends React.Component<Props> {
                 </TableCell>
                 <TableCell align="right" className="landingTable-cell">
                     <span className="landingTable-cell">
-                        {market.high}
+                        {market.low}
                     </span>
                 </TableCell>
                 <TableCell align="right" className="landingTable-cell">
                     <span className="landingTable-cell">
-                        {market.low}
+                        {market.high}
                     </span>
                 </TableCell>
                 <TableCell align="right" className="landingTable-cell">
