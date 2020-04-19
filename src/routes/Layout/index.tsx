@@ -1,6 +1,6 @@
 import { History } from 'history';
 import { Spinner } from 'react-bootstrap';
-import * as React from 'react';
+import React, { Fragment } from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
@@ -172,11 +172,10 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         } = this.props;
         const { isShownExpSessionModal } = this.state;
 
-        const tradingCls = window.location.pathname.includes('/trading') ? 'trading-layout' : '';
         toggleColorTheme(colorTheme);
 
         return (
-            <div className={`container-fluid pg-layout ${tradingCls}`}>
+            <Fragment>
                 <Switch>
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={SignInScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/confirmation" component={VerificationScreen} />
@@ -203,7 +202,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                 </Switch>
                 {isLoggedIn && <WalletsFetch/>}
                 {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
-            </div>
+            </Fragment>
         );
     }
 

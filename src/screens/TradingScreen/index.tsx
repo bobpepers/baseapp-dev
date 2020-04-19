@@ -12,7 +12,6 @@ import {
     OrderBook,
     OrderComponent,
     RecentTrades,
-    ToolBar,
     TradeInfoBar,
     TradingChart,
 } from '../../containers';
@@ -187,21 +186,18 @@ class Trading extends React.Component<Props, StateProps> {
         const {rgl} = this.props;
 
         return (
-            <div className={'pg-trading-screen'}>
-                <div className={'pg-trading-wrap'}>
-                    <ToolBar />
-                    <Grid
-                        breakpoints={breakpoints}
-                        className="layout"
-                        children={allGridItems}
-                        cols={cols}
-                        draggableHandle=".cr-table-header__content, .pg-trading-screen__tab-panel, .draggable-container"
-                        layouts={rgl.layouts}
-                        rowHeight={rowHeight}
-                        onLayoutChange={() => {return;}}
-                        handleResize={this.handleResize}
-                    />
-                </div>
+            <div className="pg-trading-screen">
+                <Grid
+                    breakpoints={breakpoints}
+                    className="layout"
+                    children={allGridItems}
+                    cols={cols}
+                    draggableHandle=".cr-table-header__content, .pg-trading-screen__tab-panel, .draggable-container"
+                    layouts={rgl.layouts}
+                    rowHeight={rowHeight}
+                    onLayoutChange={() => {return;}}
+                    handleResize={this.handleResize}
+                />
             </div>
         );
     }
