@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { RouteProps, withRouter } from 'react-router-dom';
-import { Grid } from '@material-ui/core';
+import { Grid, TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
 import {
     RootState,
     selectUserLoggedIn,
@@ -47,23 +47,37 @@ class Fees extends Component<Props> {
                 <Grid item xs={12} className="gridItemCenter">
                     <h2>{this.translate('page.body.feesTable.trade.header')}</h2>
                 </Grid>
-                <div className="pg-ticker-table">
-                    <div className="pg-ticker-table__table-wrap">
-                        <table className="pg-ticker-table__table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.group')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.market')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.makerfee')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.trade.header.takerfee')}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {fees[0] && fees.map(this.renderTradeFeeItem)}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <TableContainer className="landingTable">
+                    <Table aria-label="simple table">
+                        <TableHead className="landingTable-head">
+                            <TableRow>
+                                <TableCell>
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.trade.header.group')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.trade.header.market')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.trade.header.makerfee')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.trade.header.takerfee')}
+                                    </span>
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {fees[0] && fees.map(this.renderTradeFeeItem)}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Grid>
         );
     }
@@ -76,25 +90,47 @@ class Fees extends Component<Props> {
                 <Grid item xs={12} className="gridItemCenter">
                     <h2>{this.translate('page.body.feesTable.coin.header')}</h2>
                 </Grid>
-                <div className="pg-ticker-table">
-                    <div className="pg-ticker-table__table-wrap">
-                        <table className="pg-ticker-table__table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.name')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.ticker')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.mindeposit')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.feedeposit')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.minwithdraw')}</th>
-                                    <th scope="col">{this.translate('page.body.feesTable.coin.header.feewithdraw')}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currencies[0] && currencies.map(this.renderCoinFeeItem)}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <TableContainer className="landingTable">
+                    <Table aria-label="simple table">
+                        <TableHead className="landingTable-head">
+                            <TableRow>
+                                <TableCell>
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.coin.header.name')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.coin.header.ticker')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.coin.header.mindeposit')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.coin.header.feedeposit')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.coin.header.minwithdraw')}
+                                    </span>
+                                </TableCell>
+                                <TableCell align="right">
+                                    <span className="landingTable-cell">
+                                        {this.translate('page.body.feesTable.coin.header.feewithdraw')}
+                                    </span>
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {currencies[0] && currencies.map(this.renderCoinFeeItem)}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </Grid>
         );
     }
@@ -110,65 +146,65 @@ class Fees extends Component<Props> {
 
     private renderTradeFeeItem = (trade, index: number) => {
         return (
-            <tr key={index}>
-                <td>
-                    <div>
+            <TableRow key={index} className="landingTable-row">
+                <TableCell>
+                    <span className="landingTable-cell">
                         {trade && trade.group}
-                    </div>
-                </td>
-                <td>
-                    <span>
+                    </span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                        {trade && trade.market_id}
                     </span>
-                </td>
-                <td>
-                    <span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                         {trade && (trade.maker * 100)}%
                     </span>
-                </td>
-                <td>
-                    <span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                         {trade && (trade.taker * 100)}%
                     </span>
-                </td>
-            </tr>
+                </TableCell>
+            </TableRow>
         );
     };
 
     private renderCoinFeeItem = (currency, index: number) => {
         return (
-            <tr key={index}>
-                <td>
-                    <div>
+            <TableRow key={index} className="landingTable-row">
+                <TableCell>
+                    <span className="landingTable-cell">
                         {currency && currency.name}
-                    </div>
-                </td>
-                <td>
-                    <span>
+                    </span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                        {currency && (currency.id).toUpperCase()}
                     </span>
-                </td>
-                <td>
-                    <span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                         {currency && currency.min_deposit_amount}
                     </span>
-                </td>
-                <td>
-                    <span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                         {currency && currency.deposit_fee}
                     </span>
-                </td>
-                <td>
-                    <span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                         {currency && currency.min_withdraw_amount}
                     </span>
-                </td>
-                <td>
-                    <span>
+                </TableCell>
+                <TableCell align="right">
+                    <span className="landingTable-cell">
                         {currency && currency.withdraw_fee}
                     </span>
-                </td>
-            </tr>
+                </TableCell>
+            </TableRow>
         );
     };
 
