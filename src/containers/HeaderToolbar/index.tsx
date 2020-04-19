@@ -37,11 +37,11 @@ class HeaderToolbarContainer extends React.Component<Props> {
         return (
             <div className="pg-header__toolbar">
                 <div className="pg-header__toolbar-item">
-                    <p className="pg-header__toolbar-item-value pg-header__toolbar-item-value-positive">
-                        {currentMarket && Decimal.format(Number(this.getTickerValue('low')), currentMarket.price_precision)} {bidUnit}
+                    <p className={`pg-header__toolbar-item-value pg-header__toolbar-item-value-${cls}`}>
+                        {currentMarket && (marketTickers[currentMarket.id] || defaultTicker).price_change_percent}
                     </p>
                     <p className="pg-header__toolbar-item-text">
-                        {this.translate('page.body.trade.toolBar.lowest')}
+                        {this.translate('page.body.trade.toolBar.change')}
                     </p>
                 </div>
                 <div className="pg-header__toolbar-item">
@@ -50,6 +50,14 @@ class HeaderToolbarContainer extends React.Component<Props> {
                     </p>
                     <p className="pg-header__toolbar-item-text">
                         {this.translate('page.body.trade.toolBar.lastPrice')}
+                    </p>
+                </div>
+                <div className="pg-header__toolbar-item">
+                    <p className="pg-header__toolbar-item-value pg-header__toolbar-item-value-positive">
+                        {currentMarket && Decimal.format(Number(this.getTickerValue('low')), currentMarket.price_precision)} {bidUnit}
+                    </p>
+                    <p className="pg-header__toolbar-item-text">
+                        {this.translate('page.body.trade.toolBar.lowest')}
                     </p>
                 </div>
                 <div className="pg-header__toolbar-item">
@@ -66,14 +74,6 @@ class HeaderToolbarContainer extends React.Component<Props> {
                     </p>
                     <p className="pg-header__toolbar-item-text">
                         {this.translate('page.body.trade.toolBar.volume')}
-                    </p>
-                </div>
-                <div className="pg-header__toolbar-item">
-                    <p className={`pg-header__toolbar-item-value pg-header__toolbar-item-value-${cls}`}>
-                        {currentMarket && (marketTickers[currentMarket.id] || defaultTicker).price_change_percent}
-                    </p>
-                    <p className="pg-header__toolbar-item-text">
-                        {this.translate('page.body.trade.toolBar.change')}
                     </p>
                 </div>
             </div>
