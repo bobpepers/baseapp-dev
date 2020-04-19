@@ -1,6 +1,6 @@
-import { Spinner } from 'react-bootstrap';
+import { Grid, CircularProgress, Button } from '@material-ui/core';
 import { History } from 'history';
-import * as React from 'react';
+import React, { Fragment } from 'react';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -50,17 +50,23 @@ class EmailVerificationComponent extends React.Component<Props> {
         const button = this.props.intl.formatMessage({ id: 'page.resendConfirmation' });
 
         return (
-            <div className="pg-emailverification-container">
-                <div className="pg-emailverification">
-                    <div className="pg-emailverification-title">{title}</div>
-                    <div className="pg-emailverification-body">
-                        <div className="pg-emailverification-body-text">{text}</div>
-                        <div className="pg-emailverification-body-container">
-                            {emailVerificationLoading ? <Spinner animation="border" variant="primary" /> : <button className="pg-emailverification-body-container-button" onClick={this.handleClick}>{button}</button>}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Fragment>
+                <Grid container alignItems="center" justify="center">
+                    <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
+                        <Grid container className="verify-email">
+                            <Grid item xs={12} className="verify-email-title">
+                                {title}
+                            </Grid>
+                            <Grid item xs={12} className="verify-email-description">
+                                {text}
+                            </Grid>
+                            <Grid item xs={12} className="verify-email-button">
+                                {emailVerificationLoading ? <CircularProgress disableShrink /> : <Button variant="contained" color="primary" onClick={this.handleClick}>{button}</Button>}
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Fragment>
         );
     }
 
