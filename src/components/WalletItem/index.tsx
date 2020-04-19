@@ -1,4 +1,3 @@
-import { CryptoIcon } from '../CryptoIcon';
 import { Decimal } from '../Decimal';
 import * as React from 'react';
 
@@ -37,7 +36,7 @@ export interface WalletItemProps {
     active?: boolean;
     fixed: number;
     /**
-     * Value for url for wallet icon. If empty string, then there will be icon displayed from @openware/cryptoicon
+     * Value for url for wallet icon.
      */
     iconUrl?: string;
 }
@@ -88,7 +87,7 @@ export const WalletItem: React.FunctionComponent<WalletItemProps> = (props: Wall
     return (
         <div style={style} className={cName}>
             <div className="cr-wallet-item__info">
-                {iconUrl ? (<img alt="" className="cr-wallet-item__image-icon" src={iconUrl} />) : (<CryptoIcon className="cr-wallet-item__icon" code={currency.toUpperCase()} />)}
+                {iconUrl ? (<img alt="" className="cr-wallet-item__image-icon" src={iconUrl} />) : (<span />)}
                 <div className="cr-wallet-item__description">
                     <span>{currency}</span>
                     <span>{name}</span>

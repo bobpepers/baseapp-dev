@@ -6,7 +6,11 @@ module.exports = function override(config, env) {
     if (!config.plugins) {
         config.plugins = [];
     }
-    config.plugins.push(new webpack.DefinePlugin({ 'process.env.BUILD_EXPIRE': JSON.stringify(process.env.BUILD_EXPIRE) }));
+    config.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env.BUILD_EXPIRE': JSON.stringify(process.env.BUILD_EXPIRE)
+        })
+    );
 
     const version = process.env.REACT_APP_GIT_SHA || 'snapshot';
     const commonJSFilename = `commons.${version}.js`;
@@ -23,7 +27,10 @@ module.exports = function override(config, env) {
         const domain = process.env.BUILD_DOMAIN ? process.env.BUILD_DOMAIN.split(',') : [];
 
         config.plugins.push(
-            new JavaScriptObfuscator({ rotateUnicodeArray: true, domainLock: domain }, [commonJSFilename])
+            new JavaScriptObfuscator({
+                rotateUnicodeArray: true,
+                domainLock: domain
+            }, [commonJSFilename])
         );
 
         config.plugins.push(
