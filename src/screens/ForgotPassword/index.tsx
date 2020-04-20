@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { Fragment } from 'react';
+import { Grid } from '@material-ui/core';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -62,9 +63,9 @@ class ForgotPasswordComponent extends React.Component<Props, ForgotPasswordState
         } = this.state;
 
         return (
-            <div className="pg-forgot-password-screen">
-                <div className="pg-forgot-password-screen__container">
-                    <div className="pg-forgot-password___form">
+            <Fragment>
+                <Grid container alignItems="center" justify="center">
+                    <Grid item xs={12} sm={8} md={6} lg={4} xl={4}>
                         <EmailForm
                             OnSubmit={this.handleChangeEmail}
                             title={this.props.intl.formatMessage({id: 'page.forgotPassword'})}
@@ -79,9 +80,9 @@ class ForgotPasswordComponent extends React.Component<Props, ForgotPasswordState
                             handleFieldFocus={this.handleFocusEmail}
                             handleReturnBack={this.handleComeBack}
                         />
-                    </div>
-                </div>
-            </div>
+                    </Grid>
+                </Grid>
+            </Fragment>
         );
     }
 

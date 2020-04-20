@@ -1,6 +1,6 @@
 import cr from 'classnames';
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Grid, CircularProgress, Button } from '@material-ui/core';
 import { CustomInput } from '../';
 import { EMAIL_REGEX } from '../../helpers';
 
@@ -35,27 +35,21 @@ export class EmailForm extends React.Component<EmailFormProps> {
             emailFocused,
             emailError,
         } = this.props;
-        const emailGroupClass = cr('cr-email-form__group', {
-            'cr-email-form__group--focused': emailFocused,
+        const emailGroupClass = cr('password-recovery-group', {
+            'password-recovery-group-focused': emailFocused,
         });
 
         return (
             <form>
-                <div className="cr-email-form">
-                    <div className="cr-email-form__options-group">
-                        <div className="cr-email-form__option">
-                            <div className="cr-email-form__option-inner">
-                                {title ? title : 'Forgot password'}
-                                <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
-                                    <img alt="close" src={require('./close.svg')}/>
-                                </div>
-                            </div>
+                <Grid container className="password-recovery">
+                    <Grid item xs={12} className="password-recovery-title">
+                        {title ? title : 'Forgot password'}
+                        <div className="password-recovery-close" onClick={this.handleCancel}>
+                            <img alt="close" src={require('./close.svg')}/>
                         </div>
-                    </div>
-                    <div className="cr-email-form__form-content">
-                        <div className="cr-email-form__header">
-                          {message}
-                        </div>
+                    </Grid>
+                    <Grid item xs={12} className="password-recovery-description">
+                        {message}
                         <div className={emailGroupClass}>
                             <CustomInput
                                 type="email"
@@ -65,26 +59,24 @@ export class EmailForm extends React.Component<EmailFormProps> {
                                 handleChangeInput={this.props.handleInputEmail}
                                 inputValue={email}
                                 handleFocusInput={this.props.handleFieldFocus}
-                                classNameLabel="cr-email-form__label"
-                                classNameInput="cr-email-form__input"
+                                classNameLabel="password-recovery-label"
+                                classNameInput="password-recovery-input"
                                 autoFocus={true}
                             />
-                            {emailError && <div className="cr-email-form__error">{emailError}</div>}
+                            {emailError && <div className="password-recovery-error">{emailError}</div>}
                         </div>
-                        <div className="cr-email-form__button-wrapper">
-                            <Button
-                                block={true}
-                                type="button"
-                                disabled={isLoading || !email.match(EMAIL_REGEX)}
-                                onClick={e => this.handleClick(e)}
-                                size="lg"
-                                variant="primary"
-                            >
-                                {isLoading ? 'Loading...' : buttonLabel ? buttonLabel : 'Send'}
-                            </Button>
-                        </div>
-                    </div>
-                </div>
+                    </Grid>
+                    <Grid item xs={12} className="password-recovery-button">
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            disabled={isLoading || !email.match(EMAIL_REGEX)}
+                            onClick={e => this.handleClick(e as any)}
+                        >
+                            {isLoading ? <CircularProgress disableShrink /> : buttonLabel ? buttonLabel : 'Send'}
+                        </Button>
+                    </Grid>
+                </Grid>
             </form>
         );
     }
