@@ -77,7 +77,7 @@ class ChangeForgottenPasswordComponent extends React.Component<Props, ChangeForg
 
     public UNSAFE_componentWillReceiveProps(next: Props) {
         if (next.changeForgotPassword && (!this.props.changeForgotPassword)) {
-            this.props.history.push('/signin');
+            this.props.history.push('/login');
         }
     }
 

@@ -94,7 +94,7 @@ const PrivateRoute: React.FunctionComponent<any> = ({ component: CustomComponent
 
     return (
         <Route {...rest}>
-            <Redirect to={'/signin'} />
+            <Redirect to={'/login'} />
         </Route>
     );
 };
@@ -177,9 +177,9 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
         return (
             <Fragment>
                 <Switch>
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={SignInScreen} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/login" component={SignInScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/confirmation" component={VerificationScreen} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={SignUpScreen} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/register" component={SignUpScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/forgot_password" component={ForgotPasswordScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/password_reset" component={ChangeForgottenPasswordScreen} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/email-verification" component={EmailVerificationScreen} />
@@ -253,7 +253,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     private handleSubmitExpSessionModal = () => {
         const { history } = this.props;
         this.handleChangeExpSessionModalState();
-        history.push('/signin');
+        history.push('/login');
     };
 
     private handleRenderExpiredSessionModal = () => (

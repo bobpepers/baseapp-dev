@@ -113,16 +113,9 @@ class SignIn extends React.Component<Props, SignInState> {
 
         return (
             <Fragment>
-                <Grid container className="signin-options">
-                    <Grid item xs={6}>
-                        <div className="signin-option-selected">
-                            {this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                        </div>
-                    </Grid>
-                    <Grid item xs={6}>
-                        <div onClick={this.handleSignUp}>
-                            {this.props.intl.formatMessage({ id: 'page.header.signUp' })}
-                        </div>
+                <Grid container className="signin-title">
+                    <Grid item xs={12}>
+                        {this.props.intl.formatMessage({ id: 'page.header.signIn' })}
                     </Grid>
                 </Grid>
                 <Grid container className="signin-content">
@@ -294,10 +287,6 @@ class SignIn extends React.Component<Props, SignInState> {
                 captcha_response,
             });
         }
-    };
-
-    private handleSignUp = () => {
-        this.props.history.push('/signup');
     };
 
     private forgotPassword = () => {

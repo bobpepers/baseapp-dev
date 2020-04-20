@@ -156,16 +156,9 @@ class SignUp extends React.Component<Props> {
         return (
             <Grid container alignItems="center" justify="center" className="signup wrapper-container">
                 <Grid item xs={12} sm={8} md={6} lg={4} xl={4} className={className}>
-                    <Grid container className="signup-options">
-                        <Grid item xs={6}>
-                            <div onClick={this.handleSignIn}>
-                                {this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                            </div>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <div className="signup-option-selected">
-                                {this.props.intl.formatMessage({ id: 'page.header.signUp' })}
-                            </div>
+                    <Grid container className="signup-title">
+                        <Grid item xs={12}>
+                            {this.props.intl.formatMessage({ id: 'page.header.signUp' })}
                         </Grid>
                     </Grid>
                     <Grid container className="signup-content">
@@ -353,10 +346,6 @@ class SignUp extends React.Component<Props> {
         });
     };
 
-    private handleSignIn = () => {
-        this.props.history.push('/signin');
-    };
-
     private handleReCaptchaSuccess = (value: string) => {
         this.setState({
             reCaptchaSuccess: true,
@@ -464,7 +453,7 @@ class SignUp extends React.Component<Props> {
 
     private closeModal = () => {
         this.setState({showModal: false});
-        this.props.history.push('/signin');
+        this.props.history.push('/login');
     };
 
     private extractRefID = (url: string) => new URLSearchParams(url).get('refid');

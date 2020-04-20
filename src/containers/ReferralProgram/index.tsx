@@ -55,7 +55,7 @@ class ReferralProgramClass extends React.Component<Props> {
 
     public render() {
         const { user } = this.props;
-        const referralLink = `${window.document.location.origin}/signup?refid=${user.uid}`;
+        const referralLink = `${window.document.location.origin}/register?refid=${user.uid}`;
 
         return (
             <div className="pg-profile-page__referral mb-3">

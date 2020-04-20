@@ -16,8 +16,8 @@ describe('Constants', () => {
 
     const expectedRoutesForNotLoggedInUser = [
         ['page.header.navbar.trade', '/trading/', 'trade'],
-        ['page.header.navbar.signIn', '/signin', 'signin'],
-        ['page.header.signUp', '/signup', 'signup'],
+        ['page.header.navbar.signIn', '/login', 'login'],
+        ['page.header.signUp', '/register', 'register'],
     ];
 
     it('Rendering correct title prefix', () => {

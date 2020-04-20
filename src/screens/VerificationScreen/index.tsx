@@ -49,7 +49,7 @@ class Verification extends React.Component<Props, InjectedIntlProps> {
 
     public render() {
         return (
-            <Redirect to={'/signin'} />
+            <Redirect to={'/login'} />
         );
     }
 }

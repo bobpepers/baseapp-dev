@@ -2,7 +2,7 @@ import { en as customTranslations } from '../custom/translations/en';
 import { nationalitiesNames } from './nationalities';
 
 export const en = {
-    'page.header.navbar.signIn': 'Sign In',
+    'page.header.navbar.signIn': 'Log in',
     'page.header.navbar.trade': 'Trade',
     'page.header.navbar.wallets': 'Wallets',
     'page.header.navbar.openOrders': 'Orders',
@@ -422,7 +422,7 @@ export const en = {
     'page.footer.legalDocuments': 'Legal documents',
     'page.footer.faq': 'FAQ',
 
-    'page.header.signIn': 'Sign In',
+    'page.header.signIn': 'Log in',
     'page.header.signIn.email': 'Email',
     'page.header.signIn.password': 'Password',
     'page.header.signIn.password.message.error': 'Password is invalid',
@@ -434,7 +434,7 @@ export const en = {
     'page.header.signIn.resetPassword.button': 'Change',
     'page.header.signIn.resetPassword.error': 'Fields are empty or don`t matches',
 
-    'page.header.signUp': 'Sign Up',
+    'page.header.signUp': 'Register',
     'page.header.signUp.email': 'Email',
     'page.header.signUp.email.message.error': 'Email is invalid',
     'page.header.signUp.password': 'Password',

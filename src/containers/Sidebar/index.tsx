@@ -114,9 +114,9 @@ class SidebarContainer extends Component<Props, State> {
         switch (imgName) {
             case 'trade':
                 return <Timeline className={`menu-icon ${isActive && 'route-selected'}`} />;
-            case 'signin':
+            case 'login':
                 return <Person className={`menu-icon ${isActive && 'route-selected'}`} />;
-            case 'signup':
+            case 'register':
                 return <PersonAdd className={`menu-icon ${isActive && 'route-selected'}`} />;
             case 'wallets':
                 return <AccountBalanceWallet className={`menu-icon ${isActive && 'route-selected'}`} />;
