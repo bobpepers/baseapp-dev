@@ -32,7 +32,7 @@ describe('EmailForm component', () => {
 
     it('should render error block', () => {
         const wrapper = setup({emailError: 'error email'});
-        expect(wrapper.find('.cr-email-form__error').text()).toBe('error email');
+        expect(wrapper.find('.password-recovery-error').text()).toBe('error email');
     });
 
     it('should send request', () => {
