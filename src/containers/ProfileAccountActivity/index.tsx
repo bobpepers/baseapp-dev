@@ -1,7 +1,6 @@
 import classnames from 'classnames';
-import * as React from 'react';
+import React, { Fragment } from 'react';
 import {
-    FormattedMessage,
     InjectedIntlProps,
     injectIntl,
 } from 'react-intl';
@@ -51,14 +50,9 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
         const emptyMsg = this.props.intl.formatMessage({id: 'page.noDataToShow'});
 
         return (
-            <div className="pg-profile-page__activity">
-                <div className="pg-profile-page-header">
-                    <h3><FormattedMessage id="page.body.profile.header.accountActivity" /></h3>
-                </div>
-                <div className={`pg-history-elem ${userActivity.length ? '' : 'pg-history-empty'}`}>
-                    {userActivity.length ? this.renderContent() : null}
-                    {!userActivity.length && !loading ? <p className="pg-history-elem__empty">{emptyMsg}</p> : null}
-                </div>
+            <div className={`pg-history-elem ${userActivity.length ? '' : 'pg-history-empty'}`}>
+                {userActivity.length ? this.renderContent() : null}
+                {!userActivity.length && !loading ? <p className="pg-history-elem__empty">{emptyMsg}</p> : null}
             </div>
         );
     }
@@ -67,7 +61,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
         const { total, firstElemIndex, lastElemIndex, page, nextPageExists, userActivity } = this.props;
 
         return (
-            <React.Fragment>
+            <Fragment>
                 <Table
                     header={this.getHeaders()}
                     data={this.getActivityData(userActivity)}
@@ -81,7 +75,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
                     onClickPrevPage={this.onClickPrevPage}
                     onClickNextPage={this.onClickNextPage}
                 />
-            </React.Fragment>
+            </Fragment>
         );
     };
 

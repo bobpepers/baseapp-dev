@@ -32,7 +32,7 @@
     "react-dom": "16.13.1",
     "react-fade-in": "^0.1.6",
     "react-ga": "^2.6.0",
-    "react-google-recaptcha": "^1.0.4",
+    "react-google-recaptcha": "2.0.1",
     "react-grid-layout": "^0.17.1",
     "react-intl": "^2.8.0",
     "react-maskinput": "^1.0.1",

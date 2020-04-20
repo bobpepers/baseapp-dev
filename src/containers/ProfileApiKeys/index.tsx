@@ -1,5 +1,5 @@
 import cr from 'classnames';
-import * as React from 'react';
+import React, { Fragment } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
@@ -88,19 +88,15 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
         ) : null;
 
         return (
-            <div className="pg-profile-page__api-keys">
-                <div className="pg-profile-page-header">
-                    <div className="pg-profile-page__api-keys__header">
-                        <h3>{this.t('page.body.profile.apiKeys.header')}</h3>
-                        {user.otp && dataLoaded && (
-                            <span
-                                className="pg-profile-page__pull-right"
-                                onClick={this.handleCreateKeyClick}
-                            >
-                                {this.t('page.body.profile.apiKeys.header.create')}
-                            </span>)}
-                    </div>
-                </div>
+            <Fragment>
+                {user.otp && dataLoaded && (
+                    <span
+                        className="pg-profile-page__pull-right"
+                        onClick={this.handleCreateKeyClick}
+                    >
+                        {this.t('page.body.profile.apiKeys.header.create')}
+                    </span>
+                )}
 
                 {!user.otp && (
                     <p className="pg-profile-page__label pg-profile-page__text-center">
@@ -122,7 +118,7 @@ class ProfileApiKeysComponent extends React.Component<Props, ProfileApiKeysState
                 )}
 
                 {modal}
-            </div>
+            </Fragment>
 
         );
     }
