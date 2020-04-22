@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const ProfileAuthDetailsComponent: FunctionComponent<Props> = (props) => {
+const ProfileAuthDetailsComponent: FunctionComponent<Props> = props => {
     const {
         passwordChangeSuccess,
         //toggle2FASuccess,
