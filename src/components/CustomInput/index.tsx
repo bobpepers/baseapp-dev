@@ -7,7 +7,7 @@ export interface CustomInputProps {
     defaultLabel: string;
     handleChangeInput?: (value: string) => void;
     inputValue: string | number;
-    handleFocusInput?: () => void;
+    handleFocusInput?: any;
     placeholder: string;
     classNameLabel?: string;
     classNameInput?: string;

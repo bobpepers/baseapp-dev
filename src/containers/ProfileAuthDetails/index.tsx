@@ -1,7 +1,22 @@
-import cr from 'classnames';
+import React, { SFC, useEffect, useState } from 'react';
 import { History } from 'history';
-import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import {
+    Grid,
+    Button,
+    Modal,
+    Backdrop,
+    Fade,
+    TextField,
+    IconButton,
+    InputAdornment,
+    Switch,
+} from '@material-ui/core'
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import {
+    makeStyles,
+    Theme,
+    createStyles,
+} from '@material-ui/core/styles';
 import {
     FormattedMessage,
     InjectedIntlProps,
@@ -9,8 +24,7 @@ import {
 } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { ProfileTwoFactorAuth } from '../';
-import { CustomInput, Modal } from '../../components';
+//import { ProfileTwoFactorAuth } from '../';
 import { PASSWORD_REGEX } from '../../helpers';
 import {
     RootState,
@@ -24,7 +38,6 @@ import {
     toggle2faFetch,
     toggleUser2fa,
 } from '../../modules/user/profile';
-
 
 interface ReduxProps {
     user: User;
@@ -53,376 +66,329 @@ interface ProfileProps {
     showModal: boolean;
 }
 
-interface State {
-    showChangeModal: boolean;
-    showModal: boolean;
-    oldPassword: string;
-    newPassword: string;
-    confirmationPassword: string;
-    oldPasswordFocus: boolean;
-    newPasswordFocus: boolean;
-    confirmPasswordFocus: boolean;
-    code2FA: string;
-    code2FAFocus: boolean;
-}
-
 type Props = ReduxProps & DispatchProps & RouterProps & ProfileProps & InjectedIntlProps & OnChangeEvent;
 
-class ProfileAuthDetailsComponent extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        modal: {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        },
+    }),
+);
 
-        this.state = {
-            showChangeModal: false,
-            showModal: false,
-            oldPassword: '',
-            newPassword: '',
-            confirmationPassword: '',
-            oldPasswordFocus: false,
-            newPasswordFocus: false,
-            confirmPasswordFocus: false,
-            code2FA: '',
-            code2FAFocus: false,
-        };
-    }
+const ProfileAuthDetailsComponent: SFC<Props> = (props) => {
+    const {
+        passwordChangeSuccess,
+        //toggle2FASuccess,
+        //toggleUser2fa,
+        toggle2fa,
+        changePassword,
+        history,
+        user,
+    } = props;
+    const classes = useStyles();
+    const [showChangeModal, setshowChangeModal] = useState(false);
+    const [showModal, setshowModal] = useState(false);
+    const [oldPassword, setoldPassword] = useState('');
+    const [newPassword, setnewPassword] = useState('');
+    const [confirmationPassword, setconfirmationPassword] = useState('');
+    const [code2FA, setcode2FA] = useState('');
+    const [showNewPassword, setshowNewPassword] = useState(false);
+    const [showOldPassword, setshowOldPassword] = useState(false);
+    const [showConfirmPassword, setshowConfirmPassword] = useState(false);
+    const isValid2FA = code2FA.match('^[0-9]{6}$');
 
-    public UNSAFE_componentWillReceiveProps(next: Props) {
-        const { toggle2FASuccess } = this.props;
-
-        if (next.passwordChangeSuccess) {
-            this.setState({
-                showChangeModal: false,
-                oldPassword: '',
-                newPassword: '',
-                confirmationPassword: '',
-                confirmPasswordFocus: false,
-            });
+    useEffect(() => {
+        if (passwordChangeSuccess) {
+            setshowChangeModal(false);
+            setoldPassword('');
+            setnewPassword('');
+            setconfirmationPassword('');
         }
+    }, [passwordChangeSuccess]);
 
-        if (next.toggle2FASuccess && next.toggle2FASuccess !== toggle2FASuccess) {
-            this.props.toggleUser2fa();
-        }
-    }
-
-    public render() {
-        const {
-            user,
-        } = this.props;
-        const {
-            oldPasswordFocus,
-            newPasswordFocus,
-            confirmationPassword,
-            oldPassword,
-            newPassword,
-            confirmPasswordFocus,
-        } = this.state;
-
-        console.log(user);
-
-        const oldPasswordClass = cr('cr-email-form__group', {
-            'cr-email-form__group--focused': oldPasswordFocus,
-        });
-
-        const newPasswordClass = cr('cr-email-form__group', {
-            'cr-email-form__group--focused': newPasswordFocus,
-        });
-
-        const confirmPasswordClass = cr('cr-email-form__group', {
-            'cr-email-form__group--focused': confirmPasswordFocus,
-        });
-
-        const changeModalBody = (
-            <div className="cr-email-form__form-content">
-                <div className={oldPasswordClass}>
-                    <CustomInput
-                        type="password"
-                        label={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.old'})}
-                        placeholder={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.old'})}
-                        defaultLabel="Old password"
-                        handleChangeInput={this.handleOldPassword}
-                        inputValue={oldPassword}
-                        handleFocusInput={this.handleClickFieldFocus('oldPasswordFocus')}
-                        classNameLabel="cr-email-form__label"
-                        classNameInput="cr-email-form__input"
-                        autoFocus={true}
-                    />
-                </div>
-                <div className={newPasswordClass}>
-                    <CustomInput
-                        type="password"
-                        label={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.new'})}
-                        placeholder={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.new'})}
-                        defaultLabel="New password"
-                        handleChangeInput={this.handleNewPassword}
-                        inputValue={newPassword}
-                        handleFocusInput={this.handleClickFieldFocus('newPasswordFocus')}
-                        classNameLabel="cr-email-form__label"
-                        classNameInput="cr-email-form__input"
-                        autoFocus={false}
-                    />
-                </div>
-                <div className={confirmPasswordClass}>
-                    <CustomInput
-                        type="password"
-                        label={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.conf'})}
-                        placeholder={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.conf'})}
-                        defaultLabel="Password confirmation"
-                        handleChangeInput={this.handleConfPassword}
-                        inputValue={confirmationPassword}
-                        handleFocusInput={this.handleClickFieldFocus('confirmPasswordFocus')}
-                        classNameLabel="cr-email-form__label"
-                        classNameInput="cr-email-form__input"
-                        autoFocus={false}
-                    />
-                </div>
-                <div className="cr-email-form__button-wrapper">
-                    <Button
-                        disabled={!this.isValidForm()}
-                        type="submit"
-                        variant="primary"
-                        size="lg"
-                    >
-                        {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.button.change' })}
-                    </Button>
-                </div>
-            </div>
-        );
-
-        const modal = this.state.showChangeModal ? (
-            <div className="cr-modal">
-              <form className="cr-email-form" onSubmit={this.handleChangePassword}>
-                <div className="pg-change-password-screen">
-                  {this.renderChangeModalHeader()}
-                  {changeModalBody}
-                </div>
-              </form>
-            </div>
-        ) : null;
-
-        return (
-            <div className="pg-profile-page__box pg-profile-page__left-col__basic">
-                <div className="pg-profile-page__box-header pg-profile-page__left-col__basic__info-row">
-                    <div className="pg-profile-page__left-col__basic__info-row__block">
-                        <div className="pg-profile-page__row pg-profile-page__details-user">
-                            <p>{user.email}</p>
-                        </div>
-                        <div className="pg-profile-page__row">
-                            <h2>UID: {user.uid}</h2>
-                        </div>
-                    </div>
-                </div>
-                <div className="pg-profile-page__row">
-                    <div>
-                        <div className="pg-profile-page__label">
-                            {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password'})}
-                        </div>
-                        <div>
-                            ************
-                        </div>
-                    </div>
-                    <Button
-                        className="btn-block mt-3 mb-3 btn-lg btn btn-primary w-25"
-                        onClick={this.showChangeModal}
-                        size="lg"
-                        variant="primary"
-                    >
-                        {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.button.change'})}
-                    </Button>
-                    {modal}
-                </div>
-                {this.renderProfileTwoFactor()}
-                <Modal
-                    className="pg-profile-page__disable-2fa-modal"
-                    show={this.state.showModal}
-                    header={this.renderModalHeader()}
-                    content={this.renderModalBody()}
-                    footer={this.renderModalFooter()}
-                />
-            </div>
-        );
-    }
-
-    private renderProfileTwoFactor = () => {
-        return (
-            <React.Fragment>
-                <div className="pg-profile-page__row">
-                    <ProfileTwoFactorAuth is2faEnabled={this.props.user.otp} navigateTo2fa={this.handleNavigateTo2fa}/>
-                </div>
-            </React.Fragment>
-        );
+    const handleClickShowNewPassword = () => {
+        setshowNewPassword(!showNewPassword);
     };
 
-    private renderModalHeader = () => {
-        return (
-            <div className="cr-email-form__options-group">
-                <div className="cr-email-form__option">
-                    <div className="cr-email-form__option-inner">
-                        <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalHeader"/>
-                        <div className="cr-email-form__cros-icon" onClick={this.closeModal}>
-                            <img alt="close" src={require('./close.svg')}/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
     };
 
-    private renderModalBody = () => {
-        const { code2FA, code2FAFocus } = this.state;
-
-        const code2FAClass = cr('cr-email-form__group', {
-            'cr-email-form__group--focused': code2FAFocus,
-        });
-
-        return (
-            <div className="pg-exchange-modal-submit-body pg-exchange-modal-submit-body-2fa">
-                <div className={code2FAClass}>
-                    <CustomInput
-                        type="text"
-                        label="2FA code"
-                        placeholder="2FA code"
-                        defaultLabel=""
-                        handleFocusInput={this.handleClickFieldFocus('code2FAFocus')}
-                        handleChangeInput={this.handleChange2FACode}
-                        inputValue={code2FA}
-                        classNameLabel="cr-email-form__label"
-                        classNameInput="cr-email-form__input"
-                        autoFocus={true}
-                    />
-                </div>
-            </div>
-        );
+    const handleClickShowOldPassword = () => {
+        setshowOldPassword(!showOldPassword);
     };
 
-    private renderModalFooter = () => {
-        const { code2FA } = this.state;
-        const isValid2FA = code2FA.match('^[0-9]{6}$');
-
-        return (
-            <div className="pg-exchange-modal-submit-footer">
-                <Button
-                    block={true}
-                    disabled={!isValid2FA}
-                    onClick={this.handleDisable2FA}
-                    size="lg"
-                    variant="primary"
-                >
-                    {this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.twoFactorAuthentication.disable'})}
-                </Button>
-            </div>
-        );
+    const handleClickShowConfirmPassword = () => {
+        setshowConfirmPassword(!showConfirmPassword);
     };
 
-    private renderChangeModalHeader = () => (
-        <div className="cr-email-form__options-group">
-            <div className="cr-email-form__option">
-              <div className="cr-email-form__option-inner">
-                  <FormattedMessage id="page.body.profile.header.account.content.password.change"/>
-                  <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
-                      <img alt="close" src={require('./close.svg')}/>
-                  </div>
-              </div>
-            </div>
-        </div>
-    );
-
-    private handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        this.props.changePassword({
-            old_password: this.state.oldPassword,
-            new_password: this.state.newPassword,
-            confirm_password: this.state.confirmationPassword,
-        });
+    const handleOldPassword = (e: any) => {
+        setoldPassword(e.target.value);
     };
 
-    private handleChange2FACode = (value: string) => {
-        this.setState({
-            code2FA: value,
-        });
+    const handleNewPassword = (e: any) => {
+        setnewPassword(e.target.value);
     };
 
-    private handleDisable2FA = () => {
-        this.props.toggle2fa({
-            code: this.state.code2FA,
-            enable: false,
-        });
-        this.closeModal();
-        this.handleChange2FACode('');
+    const handleConfPassword = (e: any) => {
+        setconfirmationPassword(e.target.value);
     };
 
-    private closeModal = () => {
-        this.setState({
-            showModal: false,
-        });
-      };
-
-    private showChangeModal = () => {
-        this.setState({
-            showChangeModal: true,
-        });
+    const handleChange2FACode = (e: any) => {
+        setcode2FA(e.target.value);
     };
 
-    private handleNavigateTo2fa = (enable2fa: boolean) => {
-        if (enable2fa) {
-            this.props.history.push('/security/2fa', { enable2fa });
-        } else {
-            this.setState({
-                showModal: !this.state.showModal,
-            });
-        }
-    };
-
-    private handleOldPassword = (value: string) => {
-        this.setState({
-            oldPassword: value,
-        });
-    };
-
-    private handleConfPassword = (value: string) => {
-        this.setState({
-            confirmationPassword: value,
-        });
-    };
-
-    private handleNewPassword = (value: string) => {
-        this.setState({
-            newPassword: value,
-        });
-    };
-
-    private handleCancel = () => {
-        this.setState({
-            showChangeModal: false,
-            oldPassword: '',
-            newPassword: '',
-            confirmationPassword: '',
-        });
-    };
-
-    private handleClickFieldFocus = (field: string) => () => {
-        this.handleFieldFocus(field);
-    };
-
-    private handleFieldFocus = (field: string) => {
-        // @ts-ignore
-        this.setState(prev => ({
-            [field]: !prev[field],
-        }));
-    };
-
-    private isValidForm() {
-        const {
-            confirmationPassword,
-            oldPassword,
-            newPassword,
-        } = this.state;
+    const isValidForm = () => {
         const isNewPasswordValid = newPassword.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = newPassword === confirmationPassword;
 
         return oldPassword && isNewPasswordValid && isConfirmPasswordValid;
-    }
+    };
+
+    const handleChangePassword = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        changePassword({
+            old_password: oldPassword,
+            new_password: newPassword,
+            confirm_password: confirmationPassword,
+        });
+    };
+
+    const handleDisable2FA = () => {
+        toggle2fa({
+            code: code2FA,
+            enable: false,
+        });
+        setshowModal(false)
+        setcode2FA('');
+        // ToDo: Fix 2FA redux state on disable. state of user.otp is not properly updated after otp disable.
+    };
+
+    const handleNavigateTo2fa = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const enable2fa = event.target.checked;
+        if (event.target.checked) {
+            history.push('/security/2fa', { enable2fa });
+        } else {
+            setshowModal(!showModal);
+        }
+    };
+
+    const handleCancel = () => {
+        setshowChangeModal(false);
+        setoldPassword('');
+        setnewPassword('');
+    };
+
+    const renderChangePasswordModal = (
+        <Grid container alignContent="center" alignItems="center" justify="center">
+            <Modal
+                aria-labelledby="Change Password"
+                aria-describedby="Change Password Modal"
+                className={classes.modal}
+                open={showChangeModal}
+                onClose={handleCancel}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={showChangeModal}>
+                    <Grid item xs={12} sm={10} md={10} lg={8}>
+                        <Grid container className="changePassword">
+                            <Grid item xs={12} className="changePassword-title">
+                                <FormattedMessage id="page.body.profile.header.account.content.password.change"/>
+                                <div className="changePassword-title-close" onClick={handleCancel}>
+                                    <img alt="close" src={require('./close.svg')}/>
+                                </div>
+                            </Grid>
+                            <Grid item xs={12} className="changePassword-input">
+                                <TextField
+                                    id="old-password"
+                                    variant="outlined"
+                                    label={props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.old'})}
+                                    autoFocus={true}
+                                    fullWidth={true}
+                                    type={showOldPassword ? 'text' : 'password'}
+                                    onChange={handleOldPassword}
+                                    InputProps={{
+                                        endAdornment:
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                  aria-label="toggle password visibility"
+                                                  onClick={handleClickShowOldPassword}
+                                                  onMouseDown={handleMouseDownPassword}
+                                                  edge="end"
+                                                >
+                                                    {showOldPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} className="changePassword-input">
+                                <TextField
+                                    id="new-password"
+                                    variant="outlined"
+                                    label={props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.new'})}
+                                    autoFocus={false}
+                                    fullWidth={true}
+                                    type={showNewPassword ? 'text' : 'password'}
+                                    onChange={handleNewPassword}
+                                    InputProps={{
+                                        endAdornment:
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                  aria-label="toggle password visibility"
+                                                  onClick={handleClickShowNewPassword}
+                                                  onMouseDown={handleMouseDownPassword}
+                                                  edge="end"
+                                                >
+                                                    {showNewPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} className="changePassword-input">
+                                <TextField
+                                    id="confirmation-password"
+                                    variant="outlined"
+                                    label={props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.conf'})}
+                                    autoFocus={false}
+                                    fullWidth={true}
+                                    type={showConfirmPassword ? 'text' : 'password'}
+                                    onChange={handleConfPassword}
+                                    InputProps={{
+                                        endAdornment:
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                  aria-label="toggle password visibility"
+                                                  onClick={handleClickShowConfirmPassword}
+                                                  onMouseDown={handleMouseDownPassword}
+                                                  edge="end"
+                                                >
+                                                    {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                                                </IconButton>
+                                            </InputAdornment>
+                                    }}
+                                />
+                            </Grid>
+                            <Grid item xs={12} className="changePassword-button">
+                                <Button
+                                    fullWidth={true}
+                                    onClick={handleChangePassword}
+                                    disabled={!isValidForm()}
+                                    type="submit"
+                                    variant="contained"
+                                    color="primary"
+                                >
+                                    <FormattedMessage id="page.body.profile.header.account.content.password.button.change" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Fade>
+            </Modal>
+        </Grid>
+    );
+
+    const renderChange2FAModal = (
+        <Grid container alignContent="center" alignItems="center" justify="center">
+            <Modal
+                aria-labelledby="Disable 2FA"
+                aria-describedby="Modal to disable Two Factor Authentication"
+                className={classes.modal}
+                open={showModal}
+                onClose={() => setshowModal(false)}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={showModal}>
+                    <Grid item xs={12} sm={10} md={10} lg={8}>
+                        <Grid container className="changePassword">
+                            <Grid item xs={12} className="changePassword-title">
+                                <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalHeader"/>
+                                <div className="changePassword-title-close" onClick={() => setshowModal(false)}>
+                                    <img alt="close" src={require('./close.svg')}/>
+                                </div>
+                            </Grid>
+                            <Grid item xs={12} className="changePassword-input">
+                                <TextField
+                                    id="2fa-code"
+                                    variant="outlined"
+                                    label="2FA code"
+                                    autoFocus={true}
+                                    fullWidth={true}
+                                    type="text"
+                                    onChange={handleChange2FACode}
+                                />
+                            </Grid>
+                            <Grid item xs={12} className="changePassword-button">
+                                <Button
+                                    disabled={!isValid2FA}
+                                    onClick={handleDisable2FA}
+                                    fullWidth={true}
+                                    variant="contained"
+                                    color="primary"
+                                >
+                                    <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.disable" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Fade>
+            </Modal>
+        </Grid>
+    );
+
+    return (
+        <Grid container>
+            <Grid item xs={12} sm={12} md={6} lg={6} xl={3} className="profile-item">
+                <p className="profile-item-title">Email:</p>
+                <p className="profile-item-description">{user.email}</p>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6} xl={3} className="profile-item">
+                <p className="profile-item-title">ID:</p>
+                <p className="profile-item-description">{user.uid}</p>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6} xl={3} className="profile-item">
+                {/* <p>{this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password'})}</p> */}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setshowChangeModal(true)}
+                >
+                    <FormattedMessage id="page.body.profile.header.account.content.password.button.change" />
+                </Button>
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6} xl={3} className="profile-item">
+                <label>
+                    <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication" />
+                </label>
+                <Switch
+                    checked={user.otp}
+                    onChange={handleNavigateTo2fa}
+                    name="2fa-switch"
+                    inputProps={{ 'aria-label': 'secondary checkbox' }}
+                />
+                <span className={user.otp ? 'pg-profile-page__label-value__enabled' : 'pg-profile-page__label-value__disabled'}>
+                    {user.otp ? <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.message.enable" />
+                                  : <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.message.disable" />}
+                </span>
+            </Grid>
+            {renderChangePasswordModal}
+            {renderChange2FAModal}
+        </Grid>
+    );
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

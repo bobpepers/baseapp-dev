@@ -283,7 +283,7 @@ export const en = {
     'page.body.profile.header.account': 'Profile',
 
     'page.body.profile.header.account.content.password': 'Password',
-    'page.body.profile.header.account.content.password.button.change': 'Change',
+    'page.body.profile.header.account.content.password.button.change': 'Change Password',
     'page.body.profile.header.account.content.password.old': 'Old password',
     'page.body.profile.header.account.content.password.new': 'New password',
     'page.body.profile.header.account.content.password.button.save': 'Save',
