@@ -1,4 +1,4 @@
-import React, { SFC, useEffect, useState } from 'react';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 import { History } from 'history';
 import {
     Grid,
@@ -10,7 +10,7 @@ import {
     IconButton,
     InputAdornment,
     Switch,
-} from '@material-ui/core'
+} from '@material-ui/core';
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 import {
     makeStyles,
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const ProfileAuthDetailsComponent: SFC<Props> = (props) => {
+const ProfileAuthDetailsComponent: FunctionComponent<Props> = (props) => {
     const {
         passwordChangeSuccess,
         //toggle2FASuccess,
@@ -164,9 +164,9 @@ const ProfileAuthDetailsComponent: SFC<Props> = (props) => {
             code: code2FA,
             enable: false,
         });
-        setshowModal(false)
+        setshowModal(false);
         setcode2FA('');
-        // ToDo: Fix 2FA redux state on disable. state of user.otp is not properly updated after otp disable.
+        // TODO: Fix 2FA redux state on disable. state of user.otp is not properly updated after otp disable.
     };
 
     const handleNavigateTo2fa = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -227,7 +227,7 @@ const ProfileAuthDetailsComponent: SFC<Props> = (props) => {
                                                 >
                                                     {showOldPassword ? <Visibility /> : <VisibilityOff />}
                                                 </IconButton>
-                                            </InputAdornment>
+                                            </InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -251,7 +251,7 @@ const ProfileAuthDetailsComponent: SFC<Props> = (props) => {
                                                 >
                                                     {showNewPassword ? <Visibility /> : <VisibilityOff />}
                                                 </IconButton>
-                                            </InputAdornment>
+                                            </InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -275,7 +275,7 @@ const ProfileAuthDetailsComponent: SFC<Props> = (props) => {
                                                 >
                                                     {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                                                 </IconButton>
-                                            </InputAdornment>
+                                            </InputAdornment>,
                                     }}
                                 />
                             </Grid>
@@ -389,7 +389,7 @@ const ProfileAuthDetailsComponent: SFC<Props> = (props) => {
             {renderChange2FAModal}
         </Grid>
     );
-}
+};
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     user: selectUserInfo(state),
