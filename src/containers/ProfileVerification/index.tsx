@@ -1,5 +1,6 @@
-import cn from 'classnames';
-import * as React from 'react';
+import React, { Fragment } from 'react';
+import { Grid } from '@material-ui/core';
+import { BorderColor, AccessTime, DoneOutline } from '@material-ui/icons';
 import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { Label, labelFetch, selectLabelData, selectUserInfo, User } from '../../modules';
@@ -28,35 +29,33 @@ class ProfileVerificationComponent extends React.Component<Props> {
         const userLevel = user.level;
 
         return (
-            <div className="pg-profile-page__box pg-profile-page__left-col__verification">
-                <div className="pg-profile-page__box-header">
-                    <div className="pg-profile-page__row">
-                        <div className="pg-profile-page__verification-header">
-                            <FormattedMessage id="page.body.profile.header.account.profile" />
-                        </div>
-                    </div>
-                </div>
-                {this.renderFirstLevel(userLevel)}
-                {this.renderSecondLevel(userLevel)}
-                {/*
-                    {this.renderThirdLevel(userLevel)}
-                */}
-            </div>
+            <Grid container className="profile-item">
+                <Grid item xs={12}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <p className="profile-item-title">
+                                <FormattedMessage id="page.body.profile.header.account.profile" />:
+                            </p>
+                        </Grid>
+                        <Grid item xs={6}>
+                            {this.renderFirstLevel(userLevel)}
+                        </Grid>
+                        <Grid item xs={6}>
+                            {this.renderSecondLevel(userLevel)}
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Grid>
         );
     }
 
     private renderFirstLevel(userLevel: number) {
         const targetLevel = 1;
-        const {
-            titleClassName,
-        } = this.getLevelsClassNames(userLevel, targetLevel);
 
         return (
-            <div className="pg-profile-page__row pg-profile-page__level-verification">
-                <div className={titleClassName}>
-                    {this.renderVerificationLevel('page.body.profile.header.account.profile.email', userLevel, targetLevel)}
-                    <p><FormattedMessage id="page.body.profile.header.account.profile.email.message" /></p>
-                </div>
+            <div>
+                {this.renderVerificationLevel('page.body.profile.header.account.profile.email', userLevel, targetLevel)}
+                <p><FormattedMessage id="page.body.profile.header.account.profile.email.message" /></p>
             </div>
         );
     }
@@ -84,28 +83,12 @@ class ProfileVerificationComponent extends React.Component<Props> {
     private renderSecondLevel(userLevel: number) {
         const targetLevel = 2;
         const documentLabel = this.props.label.find((label: Label) => label.key === 'document');
-        const isPending = documentLabel && documentLabel.value === 'pending' ? this.renderPendingIcon() : '';
-
-        const {
-            titleClassName,
-        } = this.getLevelsClassNames(userLevel, targetLevel);
+        //const isPending = documentLabel && documentLabel.value === 'pending' ? this.renderPendingIcon() : '';
 
         return (
-            <div className="pg-profile-page__row pg-profile-page__level-verification">
-                <div className={titleClassName}>
-                    {this.renderIdentityVerification('page.body.profile.header.account.profile.identity', userLevel, targetLevel, documentLabel)}
-                    <p><FormattedMessage id="page.body.profile.header.account.profile.identity.message" /></p>
-                </div>
-                {isPending}
-            </div>
-        );
-    }
-
-    private renderPendingIcon() {
-        return (
-            <div className="pg-profile-page__level-verification__pending">
-                <p><FormattedMessage id="page.body.wallets.table.pending" /></p>
-                <img alt="pending" src={require('../../assets/images/pending.svg')} />
+            <div>
+                {this.renderIdentityVerification('page.body.profile.header.account.profile.identity', userLevel, targetLevel, documentLabel)}
+                <p><FormattedMessage id="page.body.profile.header.account.profile.identity.message" /></p>
             </div>
         );
     }
@@ -113,22 +96,45 @@ class ProfileVerificationComponent extends React.Component<Props> {
     private renderVerificationLevel(text: string, userLevel, targetLevel) {
         if (userLevel === (targetLevel - 1)) {
             return (
-                <a href="/confirm" className="pg-profile-page__level-verification__url">
-                    <FormattedMessage id={`${text}.unverified.title`}/>
-                </a>
+                <Fragment>
+                    <div className="inline-block">
+                        <a href="/confirm">
+                            <BorderColor />
+                        </a>
+                    </div>
+                    <div className="inline-block">
+                        <a href="/confirm">
+                            <FormattedMessage id={`${text}.unverified.title`}/>
+                        </a>
+                    </div>
+                </Fragment>
             );
         } else {
             if (userLevel < targetLevel) {
                 return (
-                    <p className="pg-profile-page__level-verification__name">
-                        <FormattedMessage id={`${text}.unverified.title`}/>
-                    </p>
+                    <Fragment>
+                        <div className="inline-block">
+                            <AccessTime />
+                        </div>
+                        <div className="inline-block">
+                            <p className="verification-paragraph">
+                                <FormattedMessage id={`${text}.unverified.title`}/>
+                            </p>
+                        </div>
+                    </Fragment>
                 );
             } else {
                 return (
-                    <p className="pg-profile-page__level-verification__name">
-                        <FormattedMessage id={`${text}.title`}/>
-                    </p>
+                    <Fragment>
+                        <div className="inline-block">
+                            <DoneOutline />
+                        </div>
+                        <div className="inline-block">
+                            <p className="verification-paragraph">
+                                <FormattedMessage id={`${text}.title`}/>
+                            </p>
+                        </div>
+                    </Fragment>
                 );
             }
         }
@@ -142,49 +148,73 @@ class ProfileVerificationComponent extends React.Component<Props> {
           case targetLevel - 1: {
             if (documentLabel) {
               return (
-                <p className="pg-profile-page__level-verification__name">
-                  <FormattedMessage id={`${text}.unverified.title`}/>
-                </p>
+                <Fragment>
+                    <div className="inline-block">
+                        <AccessTime />
+                    </div>
+                    <div className="inline-block">
+                        <p className="verification-paragraph">
+                          <FormattedMessage id={`${text}.unverified.title`}/>
+                        </p>
+                    </div>
+                </Fragment>
               );
             } else {
               return (
-                <a href="/confirm" className="pg-profile-page__level-verification__url">
-                  <FormattedMessage id={`${text}.unverified.title`}/>
-                </a>
+                <Fragment>
+                    <div className="inline-block">
+                        <a href="/confirm">
+                          <BorderColor />
+                        </a>
+                    </div>
+                    <div className="inline-block">
+                        <a href="/confirm">
+                          <FormattedMessage id={`${text}.unverified.title`}/>
+                        </a>
+                    </div>
+                </Fragment>
               );
             }
           }
           case targetLevel: return (
-            <p className="pg-profile-page__level-verification__name">
-              <FormattedMessage id={`${text}.title`}/>
-            </p>
+            <Fragment>
+                <div className="inline-block">
+                    <DoneOutline />
+                </div>
+                <div className="inline-block">
+                    <p className="verification-paragraph">
+                      <FormattedMessage id={`${text}.title`}/>
+                    </p>
+                </div>
+            </Fragment>
           );
           default: return(
-            <p className="pg-profile-page__level-verification__name">
-              <FormattedMessage id={`${text}.unverified.title`}/>
-            </p>
+            <Fragment>
+                <div className="inline-block">
+                    <AccessTime />
+                </div>
+                <div className="inline-block">
+                    <p className="verification-paragraph">
+                      <FormattedMessage id={`${text}.unverified.title`}/>
+                    </p>
+                </div>
+            </Fragment>
           );
         }
       } else {
         return (
-          <p className="pg-profile-page__level-verification__name">
-            <FormattedMessage id={`${text}.unverified.title`}/>
-          </p>
+            <Fragment>
+                <div className="inline-block">
+                    <DoneOutline />
+                </div>
+                <div className="inline-block">
+                    <p className="verification-paragraph">
+                        <FormattedMessage id={`${text}.unverified.title`}/>
+                    </p>
+                </div>
+            </Fragment>
         );
       }
-    }
-
-    private getLevelsClassNames(currentLevel: number, targetLevel: number) {
-        const levelSatisfied = currentLevel >= targetLevel;
-
-        const levelClassName = cn({
-            'pg-profile-page__text-purple': levelSatisfied,
-        });
-        const titleClassName = cn('pg-profile-page__ml-gap', {
-            'pg-profile-page__text-success': levelSatisfied,
-        });
-
-        return { levelClassName, titleClassName };
     }
 }
 

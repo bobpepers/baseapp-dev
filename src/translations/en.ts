@@ -315,9 +315,9 @@ export const en = {
     'page.body.profile.header.account.profile.phone.unverified.title': 'Phone verification',
     'page.body.profile.header.account.profile.phone.title': 'Phone verified',
     'page.body.profile.header.account.profile.phone.message': 'Deposit/Trade enabled',
-    'page.body.profile.header.account.profile.identity.unverified.title': 'Identity verification',
+    'page.body.profile.header.account.profile.identity.unverified.title': 'KYC (Optional)',
     'page.body.profile.header.account.profile.identity.title': 'Identity verified',
-    'page.body.profile.header.account.profile.identity.message': 'Withdraw enabled',
+    'page.body.profile.header.account.profile.identity.message': 'Optional Verification',
 
     'page.body.profile.header.referralProgram': 'Referral Link',
     'page.body.profile.content.copyLink': 'Copy',
