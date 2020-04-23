@@ -72,7 +72,7 @@ export const SignInComponent: FunctionComponent<SignInProps> = props => {
                     label={emailLabel || 'Email'}
                     autoFocus={true}
                     fullWidth={true}
-                    type="text"
+                    type="email"
                     onChange={handleChangeEmail}
                     onKeyPress={handleEnterPress}
                 />

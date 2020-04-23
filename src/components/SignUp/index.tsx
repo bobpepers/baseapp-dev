@@ -1,7 +1,13 @@
-import cr from 'classnames';
-import * as React from 'react';
-import { Button, Form } from 'react-bootstrap';
-import { CustomInput, PasswordStrengthMeter } from '../';
+import React, { FunctionComponent, useState } from 'react';
+import {
+    TextField,
+    IconButton,
+    InputAdornment,
+    Button,
+} from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
+import { Form } from 'react-bootstrap';
+import { PasswordStrengthMeter } from '../';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../helpers';
 
 export interface SignUpFormProps {
@@ -19,24 +25,16 @@ export interface SignUpFormProps {
     password: string;
     email: string;
     confirmPassword: string;
-    handleChangeEmail: (value: string) => void;
-    handleChangePassword: (value: string) => void;
-    handleChangeConfirmPassword: (value: string) => void;
-    handleChangeRefId: (value: string) => void;
+    handleChangeEmail: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    handleChangePassword: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    handleChangeConfirmPassword: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    handleChangeRefId: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     hasConfirmed: boolean;
     clickCheckBox: () => void;
     validateForm: () => void;
     emailError: string;
     passwordError: string;
     confirmationError: string;
-    handleFocusEmail: () => void;
-    handleFocusPassword: () => void;
-    handleFocusConfirmPassword: () => void;
-    handleFocusRefId: () => void;
-    confirmPasswordFocused: boolean;
-    refIdFocused: boolean;
-    emailFocused: boolean;
-    passwordFocused: boolean;
     captchaType: string;
     renderCaptcha: JSX.Element | null;
     reCaptchaSuccess: boolean;
@@ -50,149 +48,109 @@ export interface SignUpFormProps {
     myRef: any;
     passwordWrapper: any;
     translate: (id: string) => string;
+    handleFocusPassword: () => void;
 }
 
-export class SignUpForm extends React.Component<SignUpFormProps> {
-    public render() {
-        const {
-            email,
-            labelSignUp,
-            confirmPassword,
-            refId,
-            isLoading,
-            emailLabel,
-            confirmPasswordLabel,
-            referalCodeLabel,
-            termsMessage,
-            hasConfirmed,
-            emailError,
-            confirmationError,
-            emailFocused,
-            confirmPasswordFocused,
-            refIdFocused,
-        } = this.props;
+export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
+    const {
+        email,
+        labelSignUp,
+        confirmPassword,
+        refId,
+        isLoading,
+        emailLabel,
+        confirmPasswordLabel,
+        referalCodeLabel,
+        termsMessage,
+        hasConfirmed,
+        emailError,
+        confirmationError,
+        password,
+        passwordLabel,
+        currentPasswordEntropy,
+        passwordPopUp,
+        translate,
+        reCaptchaSuccess,
+        captchaType,
+        onSignUp,
+        validateForm,
+        handleChangeEmail,
+        handleChangeRefId,
+        handleChangePassword,
+        minPasswordEntropy,
+        passwordErrorFirstSolved,
+        passwordErrorSecondSolved,
+        passwordErrorThirdSolved,
+        handleChangeConfirmPassword,
+        clickCheckBox,
+        renderCaptcha,
+        handleFocusPassword,
+    } = props;
 
-        const emailGroupClass = cr('signup-form-group', {
-            'signup-form-group-focused': emailFocused,
-        });
+    const [showPassword, setshowPassword] = useState(false);
+    const [showConfirmPassword, setshowConfirmPassword] = useState(false);
 
-        const confirmPasswordGroupClass = cr('signup-form-group', {
-            'signup-form-group-focused': confirmPasswordFocused,
-        });
-        const refIdGroupClass = cr('signup-form-group', {
-            'signup-form-group-focused': refIdFocused,
-        });
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    };
 
-        return (
-            <form className="signup-form">
-                <div className={emailGroupClass}>
-                    <CustomInput
-                        type="email"
-                        label={emailLabel || 'Email'}
-                        placeholder={emailLabel || 'Email'}
-                        defaultLabel="Email"
-                        handleChangeInput={this.props.handleChangeEmail}
-                        inputValue={email}
-                        handleFocusInput={this.props.handleFocusEmail}
-                        classNameLabel="signup-form-label"
-                        classNameInput="signup-form-input"
-                        autoFocus={true}
-                    />
-                    {emailError && <div className="signup-form-error">{emailError}</div>}
-                </div>
-                {this.renderPasswordInput()}
-                <div className={confirmPasswordGroupClass}>
-                    <CustomInput
-                        type="password"
-                        label={confirmPasswordLabel || 'Confirm Password'}
-                        placeholder={confirmPasswordLabel || 'Confirm Password'}
-                        defaultLabel="Confirm Password"
-                        handleChangeInput={this.props.handleChangeConfirmPassword}
-                        inputValue={confirmPassword}
-                        handleFocusInput={this.props.handleFocusConfirmPassword}
-                        classNameLabel="signup-form-label"
-                        classNameInput="signup-form-input"
-                        autoFocus={false}
-                    />
-                    {confirmationError && <div className={'signup-form-error'}>{confirmationError}</div>}
-                </div>
-                <div className={refIdGroupClass}>
-                    <CustomInput
-                        type="text"
-                        label={referalCodeLabel || 'Referral code'}
-                        placeholder={referalCodeLabel || 'Referral code'}
-                        defaultLabel="Referral code"
-                        handleChangeInput={this.props.handleChangeRefId}
-                        inputValue={refId}
-                        handleFocusInput={this.props.handleFocusRefId}
-                        classNameLabel="signup-form-label"
-                        classNameInput="signup-form-input"
-                        autoFocus={false}
-                    />
-                </div>
-                <div className="signup-form-checkbox">
-                    <Form.Check
-                        type="checkbox"
-                        custom
-                        id="agreeWithTerms"
-                        checked={hasConfirmed}
-                        onChange={this.props.clickCheckBox}
-                        label={termsMessage ? termsMessage : 'I have read and agree to the Terms of Service'}
-                    />
-                </div>
-                {this.props.renderCaptcha}
-                <div className="signup-form-button">
-                    <Button
-                        block={true}
-                        type="button"
-                        disabled={this.disableButton()}
-                        onClick={e => this.handleClick(e)}
-                        size="lg"
-                        variant="primary"
-                    >
-                        {isLoading ? 'Loading...' : (labelSignUp ? labelSignUp : 'Sign up')}
-                    </Button>
-                </div>
-            </form>
-        );
+    const handleClickShowPassword = () => {
+        setshowPassword(!showPassword);
+    };
+
+    const handleClickShowConfirmPassword = () => {
+        setshowConfirmPassword(!showConfirmPassword);
+    };
+
+
+    const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            onSignUp();
+        }
+    };
+
+    const handleSubmitForm = () => {
+        onSignUp();
     }
 
-    private renderPasswordInput = () => {
-        const {
-            password,
-            passwordLabel,
-            passwordFocused,
-            currentPasswordEntropy,
-            passwordPopUp,
-            translate,
-        } = this.props;
-
-        const passwordGroupClass = cr('signup-form-group', {
-            'signup-form-group-focused': passwordFocused,
-        });
-
+    const renderPasswordInput = () => {
         return (
-            <div className={passwordGroupClass}>
-                <CustomInput
-                    type="password"
+            <div className="signin-form-input">
+                <TextField
+                    id="password"
+                    variant="outlined"
                     label={passwordLabel || 'Password'}
-                    placeholder={passwordLabel || 'Password'}
-                    defaultLabel="Password"
-                    handleChangeInput={this.props.handleChangePassword}
-                    inputValue={password}
-                    handleFocusInput={this.props.handleFocusPassword}
-                    classNameLabel="signup-form-label"
-                    classNameInput="signup-form-input"
                     autoFocus={false}
+                    fullWidth={true}
+                    type={showPassword ? 'text' : 'password'}
+                    onChange={handleChangePassword}
+                    onKeyPress={handleEnterPress}
+                    onFocus={handleFocusPassword}
+                    onBlur={handleFocusPassword}
+                    value={password.toString()}
+                    InputProps={{
+                        endAdornment:
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>,
+                    }}
                 />
                 {password ?
                     <PasswordStrengthMeter
-                        minPasswordEntropy={this.props.minPasswordEntropy}
+                        minPasswordEntropy={minPasswordEntropy}
                         currentPasswordEntropy={currentPasswordEntropy}
                         passwordExist={password !== ''}
-                        passwordErrorFirstSolved={this.props.passwordErrorFirstSolved}
-                        passwordErrorSecondSolved={this.props.passwordErrorSecondSolved}
-                        passwordErrorThirdSolved={this.props.passwordErrorThirdSolved}
+                        passwordErrorFirstSolved={passwordErrorFirstSolved}
+                        passwordErrorSecondSolved={passwordErrorSecondSolved}
+                        passwordErrorThirdSolved={passwordErrorThirdSolved}
                         passwordPopUp={passwordPopUp}
                         translate={translate}
                     /> : null}
@@ -200,17 +158,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
         );
     };
 
-    private disableButton = (): boolean => {
-        const {
-            email,
-            password,
-            confirmPassword,
-            hasConfirmed,
-            reCaptchaSuccess,
-            isLoading,
-            captchaType,
-        } = this.props;
-
+    const disableButton = (): boolean => {
         if (!hasConfirmed || isLoading || !email.match(EMAIL_REGEX) || !password || !confirmPassword) {
             return true;
         }
@@ -221,12 +169,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
         return false;
     };
 
-    private handleSubmitForm() {
-        this.props.onSignUp();
-    }
-
-    private isValidForm() {
-        const { email, password, confirmPassword } = this.props;
+    const isValidForm = () => {
         const isEmailValid = email.match(EMAIL_REGEX);
         const isPasswordValid = password.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
@@ -236,15 +179,98 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
             (confirmPassword && isConfirmPasswordValid);
     }
 
-    private handleClick = (label?: string, e?: React.FormEvent<HTMLInputElement>) => {
+    const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (e) {
             e.preventDefault();
         }
 
-        if (!this.isValidForm()) {
-            this.props.validateForm();
+        if (!isValidForm()) {
+            validateForm();
         } else {
-            this.handleSubmitForm();
+            handleSubmitForm();
         }
     };
+
+    return (
+            <form className="signup-form">
+                <div className="signin-form-input">
+                    <TextField
+                        id="email"
+                        variant="outlined"
+                        label={emailLabel || 'Email'}
+                        autoFocus={true}
+                        fullWidth={true}
+                        type="email"
+                        onChange={handleChangeEmail}
+                        onKeyPress={handleEnterPress}
+                        value={email.toString()}
+                    />
+                    {emailError && <div className="signup-form-error">{emailError}</div>}
+                </div>
+                {renderPasswordInput()}
+                <div className="signin-form-input">
+                    <TextField
+                        id="confirm-password"
+                        variant="outlined"
+                        label={confirmPasswordLabel || 'Confirm Password'}
+                        autoFocus={false}
+                        fullWidth={true}
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        onChange={handleChangeConfirmPassword}
+                        onKeyPress={handleEnterPress}
+                        value={confirmPassword.toString()}
+                        InputProps={{
+                            endAdornment:
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowConfirmPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>,
+                        }}
+                    />
+                    {confirmationError && <div className={'signup-form-error'}>{confirmationError}</div>}
+                </div>
+                <div className="signin-form-input">
+                    <TextField
+                        id="referal-code"
+                        variant="outlined"
+                        label={referalCodeLabel || 'Referral code'}
+                        autoFocus={false}
+                        fullWidth={true}
+                        type="text"
+                        onChange={handleChangeRefId}
+                        onKeyPress={handleEnterPress}
+                        value={refId.toString()}
+                    />
+                </div>
+                <div className="signin-form-input">
+                    <Form.Check
+                        type="checkbox"
+                        custom
+                        id="agreeWithTerms"
+                        checked={hasConfirmed}
+                        onChange={clickCheckBox}
+                        label={termsMessage ? termsMessage : 'I have read and agree to the Terms of Service'}
+                    />
+                </div>
+                {renderCaptcha}
+                <div className="signup-form-button">
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        disabled={disableButton()}
+                        onClick={e => handleClick(e)}
+                        fullWidth={true}
+                        size="large"
+                    >
+                        {isLoading ? 'Loading...' : (labelSignUp ? labelSignUp : 'Sign up')}
+                    </Button>
+                </div>
+            </form>
+    );
 }

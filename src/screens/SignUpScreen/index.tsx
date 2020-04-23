@@ -75,15 +75,12 @@ class SignUp extends React.Component<Props> {
         emailError: '',
         passwordError: '',
         confirmationError: '',
-        emailFocused: false,
-        passwordFocused: false,
-        confirmPasswordFocused: false,
-        refIdFocused: false,
         typingTimeout: 0,
         passwordErrorFirstSolved: false,
         passwordErrorSecondSolved: false,
         passwordErrorThirdSolved: false,
         passwordPopUp: false,
+        passwordFocused: false,
     };
 
     public constructor(props) {
@@ -141,10 +138,6 @@ class SignUp extends React.Component<Props> {
             emailError,
             passwordError,
             confirmationError,
-            emailFocused,
-            passwordFocused,
-            confirmPasswordFocused,
-            refIdFocused,
             passwordErrorFirstSolved,
             passwordErrorSecondSolved,
             passwordErrorThirdSolved,
@@ -186,14 +179,6 @@ class SignUp extends React.Component<Props> {
                                 emailError={emailError}
                                 passwordError={passwordError}
                                 confirmationError={confirmationError}
-                                confirmPasswordFocused={confirmPasswordFocused}
-                                refIdFocused={refIdFocused}
-                                emailFocused={emailFocused}
-                                passwordFocused={passwordFocused}
-                                handleFocusEmail={this.handleFocusEmail}
-                                handleFocusPassword={this.handleFocusPassword}
-                                handleFocusConfirmPassword={this.handleFocusConfirmPassword}
-                                handleFocusRefId={this.handleFocusRefId}
                                 captchaType={captchaType()}
                                 renderCaptcha={this.renderCaptcha()}
                                 reCaptchaSuccess={reCaptchaSuccess}
@@ -207,6 +192,7 @@ class SignUp extends React.Component<Props> {
                                 myRef={this.myRef}
                                 passwordWrapper={this.passwordWrapper}
                                 translate={this.translate}
+                                handleFocusPassword={this.handleFocusPassword}
                             />
                             <Modal
                                 show={this.state.showModal}
@@ -251,21 +237,22 @@ class SignUp extends React.Component<Props> {
         }
     };
 
-
     private handleCheckboxClick = () => {
         this.setState({
             hasConfirmed: !this.state.hasConfirmed,
         });
     };
 
-    private handleChangeEmail = (value: string) => {
+    private handleChangeEmail = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState({
-            email: value,
+            email: e.target.value,
         });
     };
 
-    private handleChangePassword = (value: string) => {
+    private handleChangePassword = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { passwordErrorFirstSolved, passwordErrorSecondSolved, passwordErrorThirdSolved } = this.state;
+
+        const value = e.target.value;
 
         if (passwordErrorFirstSolution(value) && !passwordErrorFirstSolved) {
             this.setState({
@@ -274,7 +261,9 @@ class SignUp extends React.Component<Props> {
         } else if (!passwordErrorFirstSolution(value) && passwordErrorFirstSolved) {
             this.setState({
                 passwordErrorFirstSolved: false,
+
             });
+
         }
 
         if (passwordErrorSecondSolution(value) && !passwordErrorSecondSolved) {
@@ -309,40 +298,23 @@ class SignUp extends React.Component<Props> {
         });
     };
 
-    private handleChangeConfirmPassword = (value: string) => {
+    private handleChangeConfirmPassword = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState({
-            confirmPassword: value,
+            confirmPassword: e.target.value,
         });
     };
 
-    private handleChangeRefId = (value: string) => {
+    private handleChangeRefId = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         this.setState({
-            refId: value,
+            refId: e.target.value,
         });
     };
 
-    private handleFocusEmail = () => {
-        this.setState({
-            emailFocused: !this.state.emailFocused,
-        });
-    };
 
     private handleFocusPassword = () => {
         this.setState({
             passwordFocused: !this.state.passwordFocused,
             passwordPopUp: !this.state.passwordPopUp,
-        });
-    };
-
-    private handleFocusConfirmPassword = () => {
-        this.setState({
-            confirmPasswordFocused: !this.state.confirmPasswordFocused,
-        });
-    };
-
-    private handleFocusRefId = () => {
-        this.setState({
-            refIdFocused: !this.state.refIdFocused,
         });
     };
 
