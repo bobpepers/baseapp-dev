@@ -107,4 +107,4 @@ export const SignInComponent: FunctionComponent<SignInProps> = props => {
             {renderCaptcha}
         </form>
     );
-}
+};

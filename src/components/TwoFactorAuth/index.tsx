@@ -13,7 +13,7 @@ const TwoFactorAuthComponent: FunctionComponent<TwoFactorAuthProps> = props => {
         errorMessage,
         label,
         handleOtpCodeChange,
-        onSubmit
+        onSubmit,
     } = props;
 
     const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -38,6 +38,6 @@ const TwoFactorAuthComponent: FunctionComponent<TwoFactorAuthProps> = props => {
             {errorMessage && <div className="login-error-message">{errorMessage}</div>}
         </form>
     );
-}
+};
 
 export const TwoFactorAuth = TwoFactorAuthComponent;
