@@ -29,7 +29,7 @@ const TwoFactorAuthComponent: FunctionComponent<TwoFactorAuthProps> = props => {
                 id="2fa"
                 variant="outlined"
                 label={label || 'Two Factor Authenticator Code'}
-                autoFocus={true}
+                autoFocus={false}
                 fullWidth={true}
                 type="number"
                 onChange={handleOtpCodeChange}

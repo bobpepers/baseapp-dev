@@ -2,6 +2,10 @@ import { LangType } from '../../translations';
 import { nationalitiesNames } from '../../translations/nationalities';
 
 export const pt: LangType = {
+    /* New */
+    'login.2facode': 'Two Factor Authenticator (if enabled)',
+
+    /* Old */
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',
     'page.header.navbar.wallets': 'Wallets',

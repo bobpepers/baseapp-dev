@@ -132,7 +132,7 @@ class SignIn extends React.Component<Props, SignInState> {
                         />
                         <TwoFactorAuth
                             onSubmit={this.handleEnter}
-                            label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
+                            label={this.props.intl.formatMessage({ id: 'login.2facode' })}
                             handleOtpCodeChange={this.handleChangeOtpCode}
                         />
                         <div className="signin-form-input">

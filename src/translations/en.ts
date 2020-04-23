@@ -2,6 +2,11 @@ import { en as customTranslations } from '../custom/translations/en';
 import { nationalitiesNames } from './nationalities';
 
 export const en = {
+
+    /* New */
+    'login.2facode': 'Two Factor Authenticator (if enabled)',
+
+    /* Old */
     'page.header.navbar.signIn': 'Log in',
     'page.header.navbar.trade': 'Trade',
     'page.header.navbar.wallets': 'Wallets',
