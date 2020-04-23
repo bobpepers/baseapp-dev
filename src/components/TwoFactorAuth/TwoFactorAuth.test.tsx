@@ -6,7 +6,6 @@ import { shallow } from 'enzyme';
 const defaults: TwoFactorAuthProps = {
     onSubmit: jest.fn(),
     label: '',
-    codeFocused: false,
     handleOtpCodeChange: jest.fn(),
 };
 
