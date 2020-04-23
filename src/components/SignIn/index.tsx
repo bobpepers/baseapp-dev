@@ -1,6 +1,10 @@
-import cr from 'classnames';
-import * as React from 'react';
-import { CustomInput } from '../';
+import React, { FunctionComponent, useState } from 'react';
+import {
+    TextField,
+    IconButton,
+    InputAdornment,
+} from '@material-ui/core';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 export interface SignInProps {
     emailLabel?: string;
@@ -11,17 +15,10 @@ export interface SignInProps {
     onConfirmationResend?: (email?: string) => void;
     onSubmit: () => void;
     className?: string;
-    email: string;
     emailError: string;
-    password: string;
     passwordError: string;
-    emailFocused: boolean;
-    emailPlaceholder: string;
-    passwordFocused: boolean;
-    passwordPlaceholder: string;
     isFormValid: () => void;
     refreshError: () => void;
-    handleChangeFocusField: (value: string) => void;
     changePassword: (value: string) => void;
     changeEmail: (value: string) => void;
     captchaType: string;
@@ -30,84 +27,84 @@ export interface SignInProps {
     captcha_response: string;
 }
 
-export class SignInComponent extends React.Component<SignInProps> {
-    public render() {
-        const {
-            email,
-            emailError,
-            emailPlaceholder,
-            password,
-            passwordError,
-            passwordPlaceholder,
-            emailLabel,
-            passwordLabel,
-            emailFocused,
-            passwordFocused,
-            renderCaptcha,
-        } = this.props;
-        const emailGroupClass = cr('signin-form-group', {
-            'signin-form-group-focused': emailFocused,
-        });
-        const passwordGroupClass = cr('signin-form-group', {
-            'signin-form-group-focused': passwordFocused,
-        });
+export const SignInComponent: FunctionComponent<SignInProps> = props => {
+    const {
+        emailError,
+        passwordError,
+        emailLabel,
+        passwordLabel,
+        renderCaptcha,
+        onSubmit,
+        changeEmail,
+        changePassword,
+    } = props;
+    const [showPassword, setshowPassword] = useState(false);
 
-        // tslint:disable:jsx-no-lambda
-        return (
-            <form>
-                <div className={emailGroupClass}>
-                    <CustomInput
-                        type="email"
-                        label={emailLabel || 'Email'}
-                        placeholder={emailPlaceholder}
-                        defaultLabel="Email"
-                        handleChangeInput={this.handleChangeEmail}
-                        inputValue={email}
-                        handleFocusInput={() => this.handleFieldFocus('email')}
-                        classNameLabel="signin-form-label"
-                        onKeyPress={this.handleEnterPress}
-                        autoFocus={true}
-                    />
-                    {emailError && <div className={'signin-form-error'}>{emailError}</div>}
-                </div>
-                <div className={passwordGroupClass}>
-                    <CustomInput
-                        type="password"
-                        label={passwordLabel || 'Password'}
-                        placeholder={passwordPlaceholder}
-                        defaultLabel="Password"
-                        handleChangeInput={this.handleChangePassword}
-                        inputValue={password}
-                        handleFocusInput={() => this.handleFieldFocus('password')}
-                        classNameLabel="signin-form-label"
-                        onKeyPress={this.handleEnterPress}
-                        autoFocus={false}
-                    />
-                    {passwordError && <div className={'signin-form-error'}>{passwordError}</div>}
-                </div>
-                {renderCaptcha}
-            </form>
-        );
-        // tslint:enable:jsx-no-lambda
-    }
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    };
 
-    private handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    const handleClickShowPassword = () => {
+        setshowPassword(!showPassword);
+    };
+
+    const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
-            this.props.onSubmit();
+            onSubmit();
         }
     };
 
-    private handleChangeEmail = (value: string) => {
-        this.props.changeEmail(value);
+    const handleChangeEmail = (e: any) => {
+        changeEmail(e.target.value);
     };
 
-    private handleChangePassword = (value: string) => {
-        this.props.changePassword(value);
+    const handleChangePassword = (e: any) => {
+        changePassword(e.target.value);
     };
 
-    private handleFieldFocus = (field: string) => {
-        this.props.handleChangeFocusField(field);
-    };
-
+    return (
+        <form>
+            <div className="signin-form-input">
+                <TextField
+                    id="email"
+                    variant="outlined"
+                    label={emailLabel || 'Email'}
+                    autoFocus={true}
+                    fullWidth={true}
+                    type="text"
+                    onChange={handleChangeEmail}
+                    onKeyPress={handleEnterPress}
+                />
+                {emailError && <div className={'signin-form-error'}>{emailError}</div>}
+            </div>
+            <div className="signin-form-input">
+                <TextField
+                    id="password"
+                    variant="outlined"
+                    label={passwordLabel || 'Password'}
+                    autoFocus={false}
+                    fullWidth={true}
+                    type={showPassword ? 'text' : 'password'}
+                    onChange={handleChangePassword}
+                    onKeyPress={handleEnterPress}
+                    InputProps={{
+                        endAdornment:
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <Visibility /> : <VisibilityOff />}
+                                </IconButton>
+                            </InputAdornment>,
+                    }}
+                />
+                {passwordError && <div className={'signin-form-error'}>{passwordError}</div>}
+            </div>
+            {renderCaptcha}
+        </form>
+    );
 }

@@ -4,9 +4,8 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 import ReCAPTCHA from 'react-google-recaptcha';
-import { Grid } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 import { captchaType, recaptchaSitekey } from '../../api/config';
 import { SignInComponent, TwoFactorAuth } from '../../components';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
@@ -99,16 +98,10 @@ class SignIn extends React.Component<Props, SignInState> {
     private renderSignInForm = () => {
         const { loading } = this.props;
         const {
-            email,
             emailError,
-            emailFocused,
-            password,
             passwordError,
-            passwordFocused,
             reCaptchaSuccess,
             captcha_response,
-            otpCode,
-            codeFocused,
         } = this.state;
 
         return (
@@ -121,20 +114,13 @@ class SignIn extends React.Component<Props, SignInState> {
                 <Grid container className="signin-content">
                     <Grid item xs={12}>
                         <SignInComponent
-                            email={email}
                             emailError={emailError}
-                            emailFocused={emailFocused}
-                            emailPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
-                            password={password}
                             passwordError={passwordError}
-                            passwordFocused={passwordFocused}
-                            passwordPlaceholder={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
                             emailLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.email' })}
                             passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.password' })}
                             receiveConfirmationLabel={this.props.intl.formatMessage({ id: 'page.header.signIn.receiveConfirmation' })}
                             isLoading={loading}
                             onSubmit={this.handleEnter}
-                            handleChangeFocusField={this.handleFieldFocus}
                             isFormValid={this.validateForm}
                             refreshError={this.refreshError}
                             changeEmail={this.handleChangeEmailValue}
@@ -147,22 +133,20 @@ class SignIn extends React.Component<Props, SignInState> {
                         <TwoFactorAuth
                             onSubmit={this.handleEnter}
                             label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
-                            message={this.props.intl.formatMessage({ id: 'page.password2fa.message' })}
-                            codeFocused={codeFocused}
-                            otpCode={otpCode}
                             handleOtpCodeChange={this.handleChangeOtpCode}
-                            handleChangeFocusField={this.handle2faFocus}
                         />
-                        <Button
-                            block={true}
-                            type="button"
-                            disabled={this.disableButton()}
-                            onClick={e => this.handleClick(e)}
-                            size="lg"
-                            variant="primary"
-                        >
-                            {loading ? 'Loading...' : this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                        </Button>
+                        <div className="signin-form-input">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                disabled={this.disableButton()}
+                                onClick={e => this.handleClick(e)}
+                                fullWidth={true}
+                                size="large"
+                            >
+                                {loading ? 'Loading...' : this.props.intl.formatMessage({ id: 'page.header.signIn' })}
+                            </Button>
+                        </div>
                         <div
                             className="signin-forgot"
                             onClick={() => this.forgotPassword()}
@@ -199,7 +183,7 @@ class SignIn extends React.Component<Props, SignInState> {
         }
     };
 
-    private handleClick = (label?: string, e?: React.FormEvent<HTMLInputElement>) => {
+    private handleClick = (e?: React.MouseEvent<HTMLButtonElement>) => {
         if (e) {
             e.preventDefault();
         }
@@ -259,10 +243,10 @@ class SignIn extends React.Component<Props, SignInState> {
         });
     };
 
-    private handleChangeOtpCode = (value: string) => {
+    private handleChangeOtpCode = (e: any) => {
         this.setState({
             error2fa: '',
-            otpCode: value,
+            otpCode: e.target.value,
         });
     };
 
@@ -291,29 +275,6 @@ class SignIn extends React.Component<Props, SignInState> {
 
     private forgotPassword = () => {
         this.props.history.push('/forgot_password');
-    };
-
-    private handleFieldFocus = (field: string) => {
-        switch (field) {
-            case 'email':
-                this.setState(prev => ({
-                    emailFocused: !prev.emailFocused,
-                }));
-                break;
-            case 'password':
-                this.setState(prev => ({
-                    passwordFocused: !prev.passwordFocused,
-                }));
-                break;
-            default:
-                break;
-        }
-    };
-
-    private handle2faFocus = () => {
-        this.setState(prev => ({
-            codeFocused: !prev.codeFocused,
-        }));
     };
 
     private validateForm = () => {

@@ -107,6 +107,24 @@ body {
   color: var(--color-white);
 }
 
+input:-webkit-autofill {
+    background-color: var(--base-bright) !important;
+    color: var(--color-white) !important;
+}
+
+input:focus {
+    background-position: 0 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px var(--base-bright) inset !important;
+    -webkit-text-fill-color: var(--color-white) !important;
+    color: var(--color-white) !important;
+}
+
 .inline-block {
   display: inline-block;
 }
