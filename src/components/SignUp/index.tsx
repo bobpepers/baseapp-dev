@@ -112,7 +112,7 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
 
     const handleSubmitForm = () => {
         onSignUp();
-    }
+    };
 
     const renderPasswordInput = () => {
         return (
@@ -177,7 +177,7 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
         return (email && isEmailValid) &&
             (password && isPasswordValid) &&
             (confirmPassword && isConfirmPasswordValid);
-    }
+    };
 
     const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (e) {
@@ -264,7 +264,7 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
                         variant="contained"
                         color="primary"
                         disabled={disableButton()}
-                        onClick={e => handleClick(e)}
+                        onClick={handleClick}
                         fullWidth={true}
                         size="large"
                     >
@@ -273,4 +273,4 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
                 </div>
             </form>
     );
-}
+};
