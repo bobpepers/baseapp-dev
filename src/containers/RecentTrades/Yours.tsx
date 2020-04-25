@@ -1,12 +1,12 @@
-import { Spinner } from 'react-bootstrap';
-import classnames from 'classnames';
-import * as React from 'react';
+import React, { FunctionComponent, memo, useEffect } from 'react';
+import { Table, TableBody, TableCell, TableHead, TableRow, CircularProgress } from '@material-ui/core';
+import BigNumber from 'bignumber.js';
 import {
     InjectedIntlProps,
     injectIntl,
+    FormattedMessage,
 } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Decimal, Table } from '../../components';
 import { localeDate, setTradesType } from '../../helpers';
 import {
     fetchHistory,
@@ -41,85 +41,134 @@ type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 
 const timeFrom = Math.floor((Date.now() - 1000 * 60 * 60 * 24) / 1000);
 
-class YoursComponent extends React.Component<Props> {
+const YoursComponent: FunctionComponent<Props> = props => {
+    const {
+        currentMarket,
+        fetchHistory,
+        fetching,
+        list,
+        currentPrice,
+    } = props;
 
-    public componentDidMount() {
-        const { currentMarket } = this.props;
-        if (currentMarket) {
-            this.props.fetchHistory({ type: 'trades', page: 0, time_from: timeFrom, market: currentMarket.id});
-        }
-    }
+    const fmt = {
+        decimalSeparator: '.',
+        groupSeparator: '',
+    };
 
-    public UNSAFE_componentWillReceiveProps(next: Props) {
-        if (next.currentMarket && this.props.currentMarket !== next.currentMarket) {
-            this.props.fetchHistory({ type: 'trades', page: 0, time_from: timeFrom, market: next.currentMarket.id });
-        }
-    }
+    useEffect( () => {
+        console.log('currentmarket updated');
+        fetchHistory({ type: 'trades', page: 0, time_from: timeFrom, market: currentMarket.id});
+    }, [currentMarket, fetchHistory]);
 
-    public render() {
-        const { fetching } = this.props;
-        const className = classnames({
-            'cr-tab-content__noData': this.retrieveData()[0][1] === this.props.intl.formatMessage({ id: 'page.noDataToShow' }),
-        });
-
+    const renderContent = () => {
         return (
-            <div className={className}>
-                {fetching ? <div className="cr-tab-content-loading"><Spinner animation="border" variant="primary" /></div> : this.renderContent()}
-            </div>
+            <Table aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.recentTrades.content.time"/>
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.recentTrades.content.amount"/>
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.recentTrades.content.price"/>
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.recentTrades.content.total"/>
+                            </span>
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {retrieveData().map((r, i) => {
+                        const rowKey = String(i);
+                        return (
+                            <TableRow
+                                key={rowKey}
+                                onClick={e => handleOnSelect(e, rowKey)}
+                                className="landingTable-row"
+                            >
+                                <TableCell>
+                                    {r[0]}
+                                </TableCell>
+                                <TableCell>
+                                    {r[1]}
+                                </TableCell>
+                                <TableCell>
+                                    {r[2]}
+                                </TableCell>
+                                <TableCell>
+                                    {r[3]}
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
         );
-    }
-
-    public renderContent = () => {
-        return (
-            <React.Fragment>
-                <Table
-                    header={this.getHeaders()}
-                    data={this.retrieveData()}
-                    onSelect={this.handleOnSelect}
-                />
-            </React.Fragment>
-        );
     };
 
-    private getHeaders = () => {
-        return [
-            this.props.intl.formatMessage({ id: 'page.body.trade.header.recentTrades.content.time' }),
-            this.props.intl.formatMessage({ id: 'page.body.trade.header.recentTrades.content.amount' }),
-            this.props.intl.formatMessage({ id: 'page.body.trade.header.recentTrades.content.price' }),
-        ];
-    };
-
-    private retrieveData = () => {
-        const { list } = this.props;
-
-        return [...list].length > 0
-            ? [...list].map(this.renderRow)
-            : [[[''], this.props.intl.formatMessage({ id: 'page.noDataToShow' })]];
-    };
-
-    private renderRow = (item, i) => {
-        const { currentMarket, list } = this.props;
+    const renderRow = (item, i) => {
         const { id, created_at, price, amount, side } = item;
         const priceFixed = currentMarket ? currentMarket.price_precision : 0;
         const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
+        const baseunit = currentMarket ? currentMarket.base_unit.toUpperCase() : "";
+        const quoteunit = currentMarket ? currentMarket.quote_unit.toUpperCase() : "";
+        const total = price * amount;
         const orderSide = side === 'sell' ?  'sell' : 'buy';
-        const higlightedDate = handleHighlightValue(String(localeDate([...list][i - 1] ? [...list][i - 1].created_at : '', 'time')), String(localeDate(created_at, 'time')));
+        const higlightedDate = handleHighlightValue(String(localeDate([...list][i - 1] ? [...list][i - 1].created_at : '', 'fullDate')), String(localeDate(created_at, 'fullDate')));
 
         return [
-            <span style={{ color: setTradesType(orderSide).color }} key={id}>{higlightedDate}</span>,
-            <span style={{ color: setTradesType(orderSide).color }} key={id}><Decimal key={id} fixed={amountFixed}>{amount}</Decimal></span>,
-            <span style={{ color: setTradesType(orderSide).color }} key={id}><Decimal key={id} fixed={priceFixed} prevValue={[...list][i - 1] ? [...list][i - 1].price : 0}>{price}</Decimal></span>,
+            <span style={{ color: setTradesType(orderSide).color }} key={id}>
+                {higlightedDate}
+            </span>,
+            <span style={{ color: setTradesType(orderSide).color }} key={id}>
+                {(new BigNumber(amount).toFormat(amountFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {baseunit}
+            </span>,
+            <span style={{ color: setTradesType(orderSide).color }} key={id}>
+                {(new BigNumber(price).toFormat(priceFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
+            </span>,
+            <span style={{ color: setTradesType(orderSide).color }} key={id}>
+                {(new BigNumber(total).toFormat(priceFixed + amountFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
+            </span>,
         ];
     };
 
-    private handleOnSelect = (index: string) => {
-        const { list, currentPrice } = this.props;
+    const retrieveData: any = () => {
+
+        return [...list].length > 0
+            ? [...list].map(renderRow)
+            : [[['']]];
+    };
+
+
+    const handleOnSelect = (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, index: string) => {
         const priceToSet = list[Number(index)] ? list[Number(index)].price : '';
 
         if (currentPrice !== priceToSet) {
-            this.props.setCurrentPrice(priceToSet);
+            setCurrentPrice(priceToSet);
         }
     };
+
+    console.log(fetching);
+    return (
+        <div>
+            {fetching ?
+                <div className="cr-tab-content-loading">
+                    <CircularProgress disableShrink />
+                </div> : renderContent()
+            }
+        </div>
+    );
+
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
@@ -137,7 +186,13 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
         setCurrentPrice: payload => dispatch(setCurrentPrice(payload)),
     });
 
-const YoursTab = injectIntl(connect(mapStateToProps, mapDispatchToProps)(YoursComponent));
+const areEqual = (prevMarket, nextMarket) => {
+    return JSON.stringify(prevMarket.recentTrades) === JSON.stringify(nextMarket.recentTrades)
+        && JSON.stringify(prevMarket.list) === JSON.stringify(nextMarket.list)
+        && JSON.stringify(prevMarket.currentMarket) === JSON.stringify(nextMarket.currentMarket);
+}
+
+const YoursTab = injectIntl(connect(mapStateToProps, mapDispatchToProps)(memo(YoursComponent, areEqual)));
 
 export {
     YoursTab,

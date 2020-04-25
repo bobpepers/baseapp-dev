@@ -5,6 +5,8 @@ export const pt: LangType = {
     /* New */
     'login.2facode': 'Two Factor Authenticator (if enabled)',
 
+    'page.body.trade.header.recentTrades.content.total': 'Estimated Total',
+
     /* Old */
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',

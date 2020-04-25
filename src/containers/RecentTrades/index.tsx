@@ -1,4 +1,4 @@
-import {TabPanel } from '../../components';
+import { TabPanel } from '../../components';
 import classnames from 'classnames';
 import * as React from 'react';
 import {
@@ -44,7 +44,7 @@ export type RecentTradesProps = DispatchProps & ReduxProps & InjectedIntlProps;
 class RecentTradesComponent extends React.Component<RecentTradesProps, State> {
     public state = { tab: 'market', index: 0, disable: false };
 
-    public tabMapping = ['market', 'yours'];
+    public tabMapping = ['market', 'my'];
 
     public componentWillUnmount() {
         this.props.resetHistory();
@@ -97,7 +97,7 @@ class RecentTradesComponent extends React.Component<RecentTradesProps, State> {
                 label: this.props.intl.formatMessage({ id: 'page.body.trade.header.market' }),
             },
             {
-                content: tab === 'yours' ? <YoursTab /> : null,
+                content: tab === 'my' ? <YoursTab /> : null,
                 label: this.props.intl.formatMessage({ id: 'page.body.trade.header.yours' }),
             },
         ];

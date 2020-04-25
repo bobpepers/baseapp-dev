@@ -6,6 +6,8 @@ export const en = {
     /* New */
     'login.2facode': 'Two Factor Authenticator (if enabled)',
 
+    'page.body.trade.header.recentTrades.content.total': 'Estimated Total',
+
     /* Old */
     'page.header.navbar.signIn': 'Log in',
     'page.header.navbar.trade': 'Trade',
