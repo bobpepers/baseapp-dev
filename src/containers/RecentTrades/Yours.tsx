@@ -120,8 +120,8 @@ const YoursComponent: FunctionComponent<Props> = props => {
         const { id, created_at, price, amount, side } = item;
         const priceFixed = currentMarket ? currentMarket.price_precision : 0;
         const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
-        const baseunit = currentMarket ? currentMarket.base_unit.toUpperCase() : "";
-        const quoteunit = currentMarket ? currentMarket.quote_unit.toUpperCase() : "";
+        const baseunit = currentMarket ? currentMarket.base_unit.toUpperCase() : '';
+        const quoteunit = currentMarket ? currentMarket.quote_unit.toUpperCase() : '';
         const total = price * amount;
         const orderSide = side === 'sell' ?  'sell' : 'buy';
         const higlightedDate = handleHighlightValue(String(localeDate([...list][i - 1] ? [...list][i - 1].created_at : '', 'fullDate')), String(localeDate(created_at, 'fullDate')));
@@ -137,7 +137,7 @@ const YoursComponent: FunctionComponent<Props> = props => {
                 {(new BigNumber(price).toFormat(priceFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
             </span>,
             <span style={{ color: setTradesType(orderSide).color }} key={id}>
-                {(new BigNumber(total).toFormat(priceFixed + amountFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
+                {(new BigNumber(total).toFormat(priceFixed as number + amountFixed as number, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
             </span>,
         ];
     };
@@ -157,8 +157,8 @@ const YoursComponent: FunctionComponent<Props> = props => {
             setCurrentPrice(priceToSet);
         }
     };
-
     console.log(fetching);
+
     return (
         <div>
             {fetching ?
@@ -168,8 +168,7 @@ const YoursComponent: FunctionComponent<Props> = props => {
             }
         </div>
     );
-
-}
+};
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     marketsData: selectMarkets(state),
@@ -190,7 +189,7 @@ const areEqual = (prevMarket, nextMarket) => {
     return JSON.stringify(prevMarket.recentTrades) === JSON.stringify(nextMarket.recentTrades)
         && JSON.stringify(prevMarket.list) === JSON.stringify(nextMarket.list)
         && JSON.stringify(prevMarket.currentMarket) === JSON.stringify(nextMarket.currentMarket);
-}
+};
 
 const YoursTab = injectIntl(connect(mapStateToProps, mapDispatchToProps)(memo(YoursComponent, areEqual)));
 
