@@ -117,8 +117,8 @@ const YoursComponent: FunctionComponent<Props> = props => {
 
     const renderRow = (item, i) => {
         const { id, created_at, price, amount, side } = item;
-        const priceFixed = currentMarket ? currentMarket.price_precision : 0;
-        const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
+        const priceFixed: number = currentMarket ? currentMarket.price_precision : 0;
+        const amountFixed: number = currentMarket ? currentMarket.amount_precision : 0;
         const baseunit = currentMarket ? currentMarket.base_unit.toUpperCase() : '';
         const quoteunit = currentMarket ? currentMarket.quote_unit.toUpperCase() : '';
         const total = price * amount;
