@@ -67,8 +67,8 @@ const MarketComponent: FunctionComponent<Props> = props => {
     }, [currentMarket, props]);
 
     const getTrades: any = (trades: PublicTrade[]) => {
-        const priceFixed = currentMarket ? currentMarket.price_precision : 0;
-        const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
+        const priceFixed: number = currentMarket ? currentMarket.price_precision : 0;
+        const amountFixed: number = currentMarket ? currentMarket.amount_precision : 0;
         const baseunit = currentMarket ? currentMarket.base_unit.toUpperCase() : '';
         const quoteunit = currentMarket ? currentMarket.quote_unit.toUpperCase() : '';
 
@@ -88,7 +88,7 @@ const MarketComponent: FunctionComponent<Props> = props => {
                     {(new BigNumber(price).toFormat(priceFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
                 </span>,
                 <span style={{ color: setTradeColor(taker_type).color }} key={i}>
-                    {(new BigNumber(total as number).toFormat(priceFixed as number + amountFixed as number, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
+                    {(new BigNumber(total).toFormat(priceFixed + amountFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
                 </span>,
             ];
         };
