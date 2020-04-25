@@ -52,7 +52,6 @@ const handleHighlightValue = (prevValue: string, curValue: string) => {
 
 const MarketComponent: FunctionComponent<Props> = props => {
     const {
-        tradesFetch,
         currentMarket,
         recentTrades,
         currentPrice,
@@ -65,8 +64,8 @@ const MarketComponent: FunctionComponent<Props> = props => {
     };
 
     useEffect( () => {
-        tradesFetch(currentMarket);
-    }, [currentMarket, tradesFetch]);
+        props.tradesFetch(currentMarket);
+    }, [currentMarket, props]);
 
     const getTrades: any = (trades: PublicTrade[]) => {
         const priceFixed = currentMarket ? currentMarket.price_precision : 0;
@@ -101,7 +100,6 @@ const MarketComponent: FunctionComponent<Props> = props => {
     };
 
     const handleOnSelect = (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, index: string) => {
-        console.log(index);
         const priceToSet = recentTrades[Number(index)] ? recentTrades[Number(index)].price : '';
 
         if (currentPrice !== priceToSet) {

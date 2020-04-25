@@ -44,7 +44,6 @@ const timeFrom = Math.floor((Date.now() - 1000 * 60 * 60 * 24) / 1000);
 const YoursComponent: FunctionComponent<Props> = props => {
     const {
         currentMarket,
-        fetchHistory,
         fetching,
         list,
         currentPrice,
@@ -56,9 +55,8 @@ const YoursComponent: FunctionComponent<Props> = props => {
     };
 
     useEffect( () => {
-        console.log('currentmarket updated');
-        fetchHistory({ type: 'trades', page: 0, time_from: timeFrom, market: currentMarket.id});
-    }, [currentMarket, fetchHistory]);
+        props.fetchHistory({ type: 'trades', page: 0, time_from: timeFrom, market: currentMarket.id});
+    }, [currentMarket, props]);
 
     const renderContent = () => {
         return (
@@ -90,6 +88,7 @@ const YoursComponent: FunctionComponent<Props> = props => {
                 <TableBody>
                     {retrieveData().map((r, i) => {
                         const rowKey = String(i);
+
                         return (
                             <TableRow
                                 key={rowKey}
