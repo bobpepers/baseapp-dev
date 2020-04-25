@@ -71,8 +71,8 @@ const MarketComponent: FunctionComponent<Props> = props => {
     const getTrades: any = (trades: PublicTrade[]) => {
         const priceFixed = currentMarket ? currentMarket.price_precision : 0;
         const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
-        const baseunit = currentMarket ? currentMarket.base_unit.toUpperCase() : "";
-        const quoteunit = currentMarket ? currentMarket.quote_unit.toUpperCase() : "";
+        const baseunit = currentMarket ? currentMarket.base_unit.toUpperCase() : '';
+        const quoteunit = currentMarket ? currentMarket.quote_unit.toUpperCase() : '';
 
         const renderRow = (item, i) => {
             const { created_at, taker_type, price, amount } = item;
@@ -90,7 +90,7 @@ const MarketComponent: FunctionComponent<Props> = props => {
                     {(new BigNumber(price).toFormat(priceFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
                 </span>,
                 <span style={{ color: setTradeColor(taker_type).color }} key={i}>
-                    {(new BigNumber(total).toFormat(priceFixed + amountFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
+                    {(new BigNumber(total).toFormat(priceFixed as number + amountFixed as number, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
                 </span>,
             ];
         };
@@ -98,7 +98,7 @@ const MarketComponent: FunctionComponent<Props> = props => {
         return (trades.length > 0)
             ? trades.map(renderRow)
             : [[['']]];
-    }
+    };
 
     const handleOnSelect = (e: React.MouseEvent<HTMLTableRowElement, MouseEvent>, index: string) => {
         console.log(index);
@@ -138,6 +138,7 @@ const MarketComponent: FunctionComponent<Props> = props => {
             <TableBody>
                 {getTrades(recentTrades).map((r, i) => {
                     const rowKey = String(i);
+
                     return (
                         <TableRow
                             key={rowKey}
@@ -162,9 +163,7 @@ const MarketComponent: FunctionComponent<Props> = props => {
             </TableBody>
         </Table>
     );
-}
-
-
+};
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     recentTrades: selectRecentTradesOfCurrentMarket(state),
@@ -180,7 +179,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
 const marketComponentPropsAreEqual = (prevMarket, nextMarket) => {
     return JSON.stringify(prevMarket.recentTrades) === JSON.stringify(nextMarket.recentTrades)
         && JSON.stringify(prevMarket.currentMarket) === JSON.stringify(nextMarket.currentMarket);
-}
+};
 
 const MarketTab = injectIntl(connect(mapStateToProps, mapDispatchToProps)(memo(MarketComponent, marketComponentPropsAreEqual)));
 

@@ -21,8 +21,8 @@ export const en = {
     'page.sidebar.group.text': 'Fee Group:',
     'page.sidebar.group.value': 'Base',
 
-    'page.body.trade.header.market': 'Market',
-    'page.body.trade.header.yours': 'Yours',
+    'page.body.trade.header.market': 'Market trades',
+    'page.body.trade.header.yours': 'My trades',
 
     'page.body.trade.header.markets': 'Markets',
     'page.body.trade.header.markets.content.market': 'Market',
@@ -73,7 +73,7 @@ export const en = {
     'page.body.trade.header.recentTrades': 'Recent Trades',
     'page.body.trade.header.recentTrades.content.time': 'Time',
     'page.body.trade.header.recentTrades.content.price': 'Price',
-    'page.body.trade.header.recentTrades.content.amount': 'Amount',
+    'page.body.trade.header.recentTrades.content.amount': 'Volume',
 
     'page.body.trade.header.openOrders': 'Open Orders',
     'page.body.trade.header.openOrders.content.date': 'Date',
