@@ -55,7 +55,6 @@ const MarketComponent: FunctionComponent<Props> = props => {
         currentMarket,
         recentTrades,
         currentPrice,
-        setCurrentPrice,
     } = props;
 
     const fmt = {
@@ -89,7 +88,7 @@ const MarketComponent: FunctionComponent<Props> = props => {
                     {(new BigNumber(price).toFormat(priceFixed, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
                 </span>,
                 <span style={{ color: setTradeColor(taker_type).color }} key={i}>
-                    {(new BigNumber(total).toFormat(priceFixed as number + amountFixed as number, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
+                    {(new BigNumber(total as number).toFormat(priceFixed as number + amountFixed as number, fmt)).replace(/(\.[0-9]*[1-9])0+$|\.0*$/,'$1')} {quoteunit}
                 </span>,
             ];
         };
@@ -103,7 +102,7 @@ const MarketComponent: FunctionComponent<Props> = props => {
         const priceToSet = recentTrades[Number(index)] ? recentTrades[Number(index)].price : '';
 
         if (currentPrice !== priceToSet) {
-            setCurrentPrice(priceToSet);
+            props.setCurrentPrice(priceToSet);
         }
     };
 
