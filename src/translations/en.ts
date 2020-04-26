@@ -8,6 +8,9 @@ export const en = {
 
     'page.body.trade.header.recentTrades.content.total': 'Estimated Total',
 
+    'page.body.trade.header.openOrders.content.type': 'Type',
+    'page.body.trade.header.openOrders.content.cancel': 'Cancel Order',
+
     /* Old */
     'page.header.navbar.signIn': 'Log in',
     'page.header.navbar.trade': 'Trade',

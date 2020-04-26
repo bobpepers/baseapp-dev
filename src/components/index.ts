@@ -7,7 +7,6 @@ export * from './DepositCrypto';
 export * from './DepositFiat';
 export * from './SummaryField';
 export * from './CopyableTextField';
-export * from './OpenOrders';
 export * from './History';
 export * from './WalletList';
 export * from './WalletItem';

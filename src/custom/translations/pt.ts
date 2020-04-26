@@ -7,6 +7,9 @@ export const pt: LangType = {
 
     'page.body.trade.header.recentTrades.content.total': 'Estimated Total',
 
+    'page.body.trade.header.openOrders.content.type': 'type',
+    'page.body.trade.header.openOrders.content.cancel': 'cancel order',
+
     /* Old */
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',

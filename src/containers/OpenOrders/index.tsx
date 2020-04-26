@@ -1,9 +1,9 @@
-import { Spinner } from 'react-bootstrap';
+import React, { FunctionComponent, useEffect } from 'react';
+import { Table, TableBody, TableCell, TableHead, TableRow, CircularProgress } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import classnames from 'classnames';
-import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { OpenOrders } from '../../components';
 import { localeDate, preciseData, setTradeColor } from '../../helpers';
 import {
     Market,
@@ -35,90 +35,31 @@ interface DispatchProps {
 
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 
-export class OpenOrdersContainer extends React.Component<Props> {
-    public componentDidMount() {
-        const { currentMarket, userLoggedIn } = this.props;
+const OpenOrdersContainer: FunctionComponent<Props> = props => {
+    const {
+        currentMarket,
+        userLoggedIn,
+        userOpenOrdersFetch,
+        list,
+        fetching,
+        openOrdersCancelFetch,
+        ordersCancelAll,
+    } = props;
+
+    useEffect( () => {
         if (userLoggedIn && currentMarket) {
-            this.props.userOpenOrdersFetch({ market: currentMarket });
+            userOpenOrdersFetch({ market: currentMarket });
         }
-    }
+    }, [currentMarket, userLoggedIn, userOpenOrdersFetch]);
 
-    public UNSAFE_componentWillReceiveProps(next: Props) {
-        const { userLoggedIn, currentMarket } = next;
-        const { userLoggedIn: prevUserLoggedIn, currentMarket: prevCurrentMarket } = this.props;
+    const classNames = classnames('pg-open-orders', {
+        'pg-open-orders--empty': !list.length,
+        'pg-open-orders--loading': fetching,
+    });
 
-        if (!prevUserLoggedIn && userLoggedIn && currentMarket) {
-            this.props.userOpenOrdersFetch({ market: currentMarket });
-        } else if (userLoggedIn && currentMarket && prevCurrentMarket !== currentMarket) {
-            this.props.userOpenOrdersFetch({ market: currentMarket });
-        }
-    }
-
-    public render() {
-        const { list, fetching } = this.props;
-        const classNames = classnames('pg-open-orders', {
-            'pg-open-orders--empty': !list.length,
-            'pg-open-orders--loading': fetching,
-        });
-
-        return (
-            <div className={classNames}>
-                <div className="cr-table-header__content">
-                    <div className="cr-title-component">
-                        <FormattedMessage id="page.body.trade.header.openOrders" />
-
-                        <span className="cr-table-header__cancel" onClick={this.handleCancelAll}>
-                            <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
-                            <span className="cr-table-header__close" />
-                        </span>
-                    </div>
-                </div>
-                {fetching ? <div className="open-order-loading"><Spinner animation="border" variant="primary" /></div> : this.openOrders()}
-            </div>
-        );
-    }
-
-    private renderHeadersKeys = () => {
-        return [
-            'Date',
-            'Price',
-            'Amount',
-            'Total',
-            'Filled',
-            '',
-        ];
-    };
-
-    private renderHeaders = () => {
-        const currentAskUnit = this.props.currentMarket ? ` (${this.props.currentMarket.base_unit.toUpperCase()})` : null;
-        const currentBidUnit = this.props.currentMarket ? ` (${this.props.currentMarket.quote_unit.toUpperCase()})` : null;
-
-        return [
-            this.translate('page.body.trade.header.openOrders.content.date'),
-            this.translate('page.body.trade.header.openOrders.content.price').concat(currentBidUnit),
-            this.translate('page.body.trade.header.openOrders.content.amount').concat(currentAskUnit),
-            this.translate('page.body.trade.header.openOrders.content.total').concat(currentBidUnit),
-            this.translate('page.body.trade.header.openOrders.content.filled'),
-            '',
-        ];
-    };
-
-    private openOrders = () => {
-        return (
-            <OpenOrders
-                headersKeys={this.renderHeadersKeys()}
-                headers={this.renderHeaders()}
-                data={this.renderData()}
-                onCancel={this.handleCancel}
-            />
-        );
-    };
-
-    private renderData = () => {
-        const { list, currentMarket } = this.props;
-
+    const renderData = () => {
         if (list.length === 0) {
-            return [[[''],[''], this.translate('page.noDataToShow')]];
+            return [[['']]];
         }
 
         return list.map((item: OrderCommon) => {
@@ -131,28 +72,128 @@ export class OpenOrdersContainer extends React.Component<Props> {
             const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
 
             return [
-                localeDate(created_at, 'fullDate'),
-                <span style={{ color: setTradeColor(side).color }} key={id}>{preciseData(price, priceFixed)}</span>,
+                <span style={{ color: setTradeColor(side).color }} key={id}>{localeDate(created_at, 'fullDate')}</span>,
+                side,
                 <span style={{ color: setTradeColor(side).color }} key={id}>{preciseData(remainingAmount, amountFixed)}</span>,
+                <span style={{ color: setTradeColor(side).color }} key={id}>{preciseData(price, priceFixed)}</span>,
                 <span style={{ color: setTradeColor(side).color }} key={id}>{preciseData(total, amountFixed)}</span>,
                 <span style={{ color: setTradeColor(side).color }} key={id}>{filled}%</span>,
-                side,
             ];
         });
     };
 
-    private translate = (e: string) => this.props.intl.formatMessage({ id: e });
-
-    private handleCancel = (index: number) => {
-        const { list } = this.props;
+    const handleCancel = (e, index: number) => {
         const orderToDelete = list[index];
-        this.props.openOrdersCancelFetch({ id: orderToDelete.id, list });
+        console.log(orderToDelete);
+        openOrdersCancelFetch({ id: orderToDelete.id, list });
     };
 
-    private handleCancelAll = () => {
-        const { currentMarket } = this.props;
-        this.props.ordersCancelAll({market: currentMarket.id});
+    const handleCancelAll = () => {
+        ordersCancelAll({market: currentMarket.id});
     };
+
+    const openOrders = () => {
+        const currentAskUnit = currentMarket ? ` (${currentMarket.base_unit.toUpperCase()})` : null;
+        const currentBidUnit = currentMarket ? ` (${currentMarket.quote_unit.toUpperCase()})` : null;
+        return (
+            <Table aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.openOrders.content.date"/>
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.openOrders.content.type"/>
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.openOrders.content.amount"/> {currentAskUnit}
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.openOrders.content.price"/> {currentBidUnit}
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.openOrders.content.total"/> {currentBidUnit}
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell">
+                                <FormattedMessage id="page.body.trade.header.openOrders.content.filled"/>
+                            </span>
+                        </TableCell>
+                        <TableCell>
+                            <span className="landingTable-cell cancel-order-header-span">
+                                <FormattedMessage id="page.body.trade.header.openOrders.content.cancel"/>
+                            </span>
+                        </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {renderData().map((r, i) => {
+                        return (
+                            <TableRow
+                                key={String(i)}
+                            >
+                                <TableCell>
+                                    {r[0]}
+                                </TableCell>
+                                <TableCell>
+                                    <span style={{ color: setTradeColor(r[1]).color }}>
+                                        {r[1]}
+                                    </span>
+                                </TableCell>
+                                <TableCell>
+                                    {r[2]}
+                                </TableCell>
+                                <TableCell>
+                                    {r[3]}
+                                </TableCell>
+                                <TableCell>
+                                    {r[4]}
+                                </TableCell>
+                                <TableCell>
+                                    {r[5]}
+                                </TableCell>
+                                <TableCell>
+                                    {r[1] ? (
+                                        <div onClick={e => handleCancel(e, i)} className="cancel-order">
+                                            <CloseIcon style={{ color: setTradeColor(r[1]).color }} />
+                                        </div>
+                                    ) : (
+                                        <span />
+                                    )}
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
+                </TableBody>
+            </Table>
+        );
+    };
+
+    return (
+        <div className={classNames}>
+            <div className="cr-table-header__content">
+                <div className="cr-title-component">
+                    <FormattedMessage id="page.body.trade.header.openOrders" />
+
+                    <span className="cr-table-header__cancel" onClick={handleCancelAll}>
+                        <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
+                        <CloseIcon />
+                    </span>
+                </div>
+            </div>
+            {fetching ? <div className="open-order-loading"><CircularProgress disableShrink /></div> : openOrders()}
+        </div>
+    );
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
