@@ -177,8 +177,6 @@ const OpenOrdersContainer: FunctionComponent<Props> = props => {
         );
     };
 
-    console.log('rerender check');
-
     return (
         <div className={classNames}>
             <div className="cr-table-header__content">
