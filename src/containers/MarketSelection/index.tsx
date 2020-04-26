@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { connect, MapStateToProps } from 'react-redux';
+import { InputAdornment, TextField  } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -47,16 +49,20 @@ class MarketSelectorComponent extends React.Component<Props, State> {
                     <MarketsTabs onSelect={this.marketsTabsSelectHandler}/>
                     <MarketsList search={searchFieldValue} currencyQuote={marketsTabsSelectedValue}/>
                     <div className={'pg-trading-header-market-selector-search-wrapper'}>
-                        <div className="pg-trading-header-selector-search">
-                            <div className="pg-trading-header-selector-search-icon">
-                                <img alt="" src={require('./icons/search.svg')} />
-                            </div>
-                            <input
-                                className="pg-trading-header-selector-search-field"
+                            <TextField
+                                id="searchfield"
+                                fullWidth={true}
                                 onChange={this.searchFieldChangeHandler}
                                 value={searchFieldValue}
+                                variant="outlined"
+                                InputProps={{
+                                  endAdornment: (
+                                    <InputAdornment position="end">
+                                      <Search />
+                                    </InputAdornment>
+                                  ),
+                                }}
                             />
-                        </div>
                     </div>
                 </div>
             </div>

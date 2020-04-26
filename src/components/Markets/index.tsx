@@ -2,6 +2,7 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { CellData, Table, FilterInput } from '../';
 
+
 export interface MarketsProps {
     /**
      * List of markets data

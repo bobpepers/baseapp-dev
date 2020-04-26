@@ -1,9 +1,8 @@
 import classnames from 'classnames';
-import * as React from 'react';
+import React, { useState, FunctionComponent } from 'react';
 import {
     InjectedIntlProps,
     injectIntl,
-    intlShape,
 } from 'react-intl';
 import { connect } from 'react-redux';
 import { incrementalOrderBook } from '../../../api';
@@ -40,11 +39,6 @@ interface OwnProps {
     currencyQuote: string;
 }
 
-interface State {
-    sortBy: string;
-    reverseOrder: boolean;
-}
-
 const handleChangeSortIcon = (sortBy: string, id: string, reverseOrder: boolean) => {
     if (sortBy !== 'none' && id === sortBy && !reverseOrder) {
         return <SortDesc/>;
@@ -59,59 +53,39 @@ const handleChangeSortIcon = (sortBy: string, id: string, reverseOrder: boolean)
 
 type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
 
-//tslint:disable jsx-no-lambda
-class MarketsListComponent extends React.Component<Props, State> {
-    //tslint:disable-next-line:no-any
-    public static propTypes: React.ValidationMap<any> = {
-        intl: intlShape.isRequired,
-    };
+const MarketsListComponent: FunctionComponent<Props> = (props) => {
 
-    constructor(props: Props) {
-        super(props);
+    const {
+        setCurrentPrice,
+        depthFetch,
+        markets,
+        marketTickers,
+        search,
+        currencyQuote,
+        currentMarket,
+    } = props;
 
-        this.state = {
-            sortBy: 'none',
-            reverseOrder: false,
-        };
-    }
+    const [sortBy, setsortBy] = useState('none');
+    const [reverseOrder, setreverseOrder] = useState(false);
 
-    public render() {
-        const data = this.mapMarkets();
-
-        return (
-            <div className="pg-dropdown-markets-list-container">
-                <MarketSelectionTable
-                    data={data.length > 0 ? data : [[]]}
-                    header={this.getHeaders()}
-                    onSelect={this.currencyPairSelectHandler}
-                    selectedKey={this.props.currentMarket && this.props.currentMarket.name}
-                    rowKeyIndex={0}
-                />
-            </div>
-        );
-    }
-
-    private currencyPairSelectHandler = (key: string) => {
-        const { markets } = this.props;
+    const currencyPairSelectHandler = (key: string) => {
         const marketToSet = markets.find(el => el.name === key);
 
-        this.props.setCurrentPrice();
+        setCurrentPrice();
         if (marketToSet) {
-            this.props.setCurrentMarket(marketToSet);
+            setCurrentMarket(marketToSet);
             if (!incrementalOrderBook()) {
-              this.props.depthFetch(marketToSet);
+              depthFetch(marketToSet);
             }
         }
     };
 
-    private getHeaders = () => [
+    const getHeaders = () => [
         {id: 'id', translationKey: 'market'},
         {id: 'last', translationKey: 'last_price'},
         {id: 'vol', translationKey: 'volume'},
         {id: 'price_change_percent_num', translationKey: 'change'},
     ].map(obj => {
-        const {sortBy, reverseOrder} = this.state;
-
         return (
             {
                 ...obj,
@@ -120,14 +94,13 @@ class MarketsListComponent extends React.Component<Props, State> {
             }
         );
     }).map(obj => {
-        const {sortBy, reverseOrder} = this.state;
         const classname = classnames({
             'pg-dropdown-markets-list-container__header-selected': obj.selected,
         });
 
         return (
-            <span className={classname} key={obj.id} onClick={() => this.handleHeaderClick(obj.id)}>
-            {this.props.intl.formatMessage({id: `page.body.trade.header.markets.content.${obj.translationKey}`})}
+            <span className={classname} key={obj.id} onClick={() => handleHeaderClick(obj.id)}>
+            {props.intl.formatMessage({id: `page.body.trade.header.markets.content.${obj.translationKey}`})}
                 <span className="sort-icon">
                     {handleChangeSortIcon(sortBy, obj.id, reverseOrder)}
                 </span>
@@ -135,8 +108,7 @@ class MarketsListComponent extends React.Component<Props, State> {
         );
     });
 
-    private mapMarkets() {
-        const { markets, marketTickers, search, currencyQuote } = this.props;
+    const mapMarkets = () => {
         const defaultTicker = {
             last: 0,
             vol: 0,
@@ -155,7 +127,6 @@ class MarketsListComponent extends React.Component<Props, State> {
             };
         });
 
-        const {sortBy, reverseOrder} = this.state;
 
         if (sortBy !== 'none') {
             marketsMapped.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : b[sortBy] > a[sortBy] ? -1 : 0);
@@ -194,16 +165,31 @@ class MarketsListComponent extends React.Component<Props, State> {
         });
     }
 
-    private handleHeaderClick = (key: string) => {
-        const {sortBy, reverseOrder} = this.state;
+    const handleHeaderClick = (key: string) => {
         if (key !== sortBy) {
-            this.setState({sortBy: key, reverseOrder: false});
+            setsortBy(key);
+            setreverseOrder(false);
         } else if (key === sortBy && !reverseOrder) {
-            this.setState({reverseOrder: true});
+            setreverseOrder(true);
         } else {
-            this.setState({sortBy: 'none', reverseOrder: false});
+            setsortBy('none');
+            setreverseOrder(false);
         }
     };
+
+    const data = mapMarkets();
+
+    return (
+        <div className="pg-dropdown-markets-list-container">
+            <MarketSelectionTable
+                data={data.length > 0 ? data : [[]]}
+                header={getHeaders()}
+                onSelect={currencyPairSelectHandler}
+                selectedKey={currentMarket && currentMarket.name}
+                rowKeyIndex={0}
+            />
+        </div>
+    );
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
