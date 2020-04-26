@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent, useEffect, memo } from 'react';
 import { Table, TableBody, TableCell, TableHead, TableRow, CircularProgress } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import classnames from 'classnames';
@@ -39,18 +39,16 @@ const OpenOrdersContainer: FunctionComponent<Props> = props => {
     const {
         currentMarket,
         userLoggedIn,
-        userOpenOrdersFetch,
         list,
         fetching,
-        openOrdersCancelFetch,
         ordersCancelAll,
     } = props;
 
     useEffect( () => {
         if (userLoggedIn && currentMarket) {
-            userOpenOrdersFetch({ market: currentMarket });
+            props.userOpenOrdersFetch({ market: currentMarket });
         }
-    }, [currentMarket, userLoggedIn, userOpenOrdersFetch]);
+    }, [currentMarket, userLoggedIn, props]);
 
     const classNames = classnames('pg-open-orders', {
         'pg-open-orders--empty': !list.length,
@@ -84,8 +82,7 @@ const OpenOrdersContainer: FunctionComponent<Props> = props => {
 
     const handleCancel = (e, index: number) => {
         const orderToDelete = list[index];
-        console.log(orderToDelete);
-        openOrdersCancelFetch({ id: orderToDelete.id, list });
+        props.openOrdersCancelFetch({ id: orderToDelete.id, list });
     };
 
     const handleCancelAll = () => {
@@ -95,6 +92,7 @@ const OpenOrdersContainer: FunctionComponent<Props> = props => {
     const openOrders = () => {
         const currentAskUnit = currentMarket ? ` (${currentMarket.base_unit.toUpperCase()})` : null;
         const currentBidUnit = currentMarket ? ` (${currentMarket.quote_unit.toUpperCase()})` : null;
+
         return (
             <Table aria-label="simple table">
                 <TableHead>
@@ -179,6 +177,8 @@ const OpenOrdersContainer: FunctionComponent<Props> = props => {
         );
     };
 
+    console.log('rerender check');
+
     return (
         <div className={classNames}>
             <div className="cr-table-header__content">
@@ -194,7 +194,7 @@ const OpenOrdersContainer: FunctionComponent<Props> = props => {
             {fetching ? <div className="open-order-loading"><CircularProgress disableShrink /></div> : openOrders()}
         </div>
     );
-}
+};
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     currentMarket: selectCurrentMarket(state),
@@ -212,9 +212,15 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
 
 export type OpenOrdersProps = ReduxProps;
 
+const areEqual = (prevOrders, nextOrders) => {
+    return JSON.stringify(prevOrders.userLoggedIn) === JSON.stringify(nextOrders.userLoggedIn)
+        && JSON.stringify(prevOrders.list) === JSON.stringify(nextOrders.list)
+        && JSON.stringify(prevOrders.currentMarket) === JSON.stringify(nextOrders.currentMarket);
+};
+
 export const OpenOrdersComponent = injectIntl(
     connect(
         mapStateToProps,
         mapDispatchToProps,
-    )(OpenOrdersContainer),
+    )(memo(OpenOrdersContainer, areEqual)),
 );
