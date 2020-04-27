@@ -53,11 +53,9 @@ const handleChangeSortIcon = (sortBy: string, id: string, reverseOrder: boolean)
 
 type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
 
-const MarketsListComponent: FunctionComponent<Props> = (props) => {
+const MarketsListComponent: FunctionComponent<Props> = props => {
 
     const {
-        setCurrentPrice,
-        depthFetch,
         markets,
         marketTickers,
         search,
@@ -71,11 +69,11 @@ const MarketsListComponent: FunctionComponent<Props> = (props) => {
     const currencyPairSelectHandler = (key: string) => {
         const marketToSet = markets.find(el => el.name === key);
 
-        setCurrentPrice();
+        props.setCurrentPrice();
         if (marketToSet) {
             setCurrentMarket(marketToSet);
             if (!incrementalOrderBook()) {
-              depthFetch(marketToSet);
+              props.depthFetch(marketToSet);
             }
         }
     };
@@ -163,7 +161,7 @@ const MarketsListComponent: FunctionComponent<Props> = (props) => {
                 (<span className={classname}>{market.price_change_percent}</span>),
             ];
         });
-    }
+    };
 
     const handleHeaderClick = (key: string) => {
         if (key !== sortBy) {
@@ -190,7 +188,7 @@ const MarketsListComponent: FunctionComponent<Props> = (props) => {
             />
         </div>
     );
-}
+};
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     currentMarket: selectCurrentMarket(state),
