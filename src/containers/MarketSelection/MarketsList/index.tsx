@@ -252,11 +252,7 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
   const data = mapMarkets();
 
   const currencyPairSelectHandler = (e: any, key: string) => {
-        console.log(key);
-        console.log(markets);
         const marketToSet = markets.find(el => el.name === key);
-        console.log(marketToSet);
-        console.log(currencyQuote);
 
         props.setCurrentPrice();
         if (marketToSet) {
@@ -339,5 +335,3 @@ const mapDispatchToProps = {
 };
 
 export const MarketsList = injectIntl(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent));
-
-
