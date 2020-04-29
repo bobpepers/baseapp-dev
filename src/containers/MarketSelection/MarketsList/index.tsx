@@ -256,10 +256,9 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
 
   const currencyPairSelectHandler = (e: any, key: string) => {
         const marketToSet = markets.find(el => el.name === key);
-
         props.setCurrentPrice();
         if (marketToSet) {
-            setCurrentMarket(marketToSet);
+            props.setCurrentMarket(marketToSet);
             if (!incrementalOrderBook()) {
               props.depthFetch(marketToSet);
             }
