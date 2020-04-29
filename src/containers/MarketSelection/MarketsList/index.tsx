@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
 import { connect } from 'react-redux';
 import { incrementalOrderBook } from '../../../api';
@@ -18,6 +17,7 @@ import {
 import {
     InjectedIntlProps,
     injectIntl,
+    FormattedMessage,
 } from 'react-intl';
 
 import {
@@ -86,7 +86,7 @@ const createData = (
   base_unit: string,
 ): Data => {
   return { id, last, vol, price_change_percent_num, isPositiveChange, base_unit };
-}
+};
 
 const descendingComparator = <T extends unknown>(a: T, b: T, orderBy: keyof T) => {
   if (b[orderBy] < a[orderBy]) {
@@ -95,8 +95,9 @@ const descendingComparator = <T extends unknown>(a: T, b: T, orderBy: keyof T) =
   if (b[orderBy] > a[orderBy]) {
     return 1;
   }
+
   return 0;
-}
+};
 
 const getComparator: { <Key extends keyof any>(
   order: Order,
@@ -105,7 +106,7 @@ const getComparator: { <Key extends keyof any>(
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
-}
+};
 
 const stableSort = <T extends unknown>(array: T[], comparator: (a: T, b: T) => number) => {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
@@ -119,7 +120,7 @@ const stableSort = <T extends unknown>(array: T[], comparator: (a: T, b: T) => n
   });
 
   return stabilizedThis.map(el => el[0]);
-}
+};
 
 const headCells: HeadCell[] = [
   { id: 'id', numeric: false, disablePadding: true, label: 'markets.market' },
@@ -181,7 +182,7 @@ const EnhancedTableHead = (props: EnhancedTableProps) => {
       </TableRow>
     </TableHead>
   );
-}
+};
 
 const MarketsListComponent: FunctionComponent<Props> = props => {
   const {
