@@ -88,7 +88,7 @@ function createData(
 type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
 
 
-function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+const descendingComparator<T> = (a: T, b: T, orderBy: keyof T) => {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -109,14 +109,18 @@ function getComparator<Key extends keyof any>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
+const stableSort<T> = (array: T[], comparator: (a: T, b: T) => number) => {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
-    if (order !== 0) return order;
+    if (order !== 0) {
+      return order;
+    }
+
     return a[1] - b[1];
   });
-  return stabilizedThis.map((el) => el[0]);
+
+  return stabilizedThis.map(el => el[0]);
 }
 
 const headCells: HeadCell[] = [
@@ -145,7 +149,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-function EnhancedTableHead(props: EnhancedTableProps) {
+const EnhancedTableHead = (props: EnhancedTableProps) => {
   const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property);
@@ -320,7 +324,7 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
           </Table>
         </TableContainer>
   );
-}
+};
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     currentMarket: selectCurrentMarket(state),
