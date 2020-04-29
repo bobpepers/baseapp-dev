@@ -53,11 +53,11 @@ interface OwnProps {
 
 interface Data {
   last: string;
-  price_change_percent_num: string;
+  priceChangePercentNum: string;
   vol: string;
   id: string;
   isPositiveChange: boolean;
-  base_unit: string;
+  baseUnit: string;
 }
 
 interface EnhancedTableProps {
@@ -81,11 +81,11 @@ const createData = (
   id: string,
   last: string,
   vol: string,
-  price_change_percent_num: string,
+  priceChangePercentNum: string,
   isPositiveChange: boolean,
-  base_unit: string,
+  baseUnit: string,
 ): Data => {
-  return { id, last, vol, price_change_percent_num, isPositiveChange, base_unit };
+  return { id, last, vol, priceChangePercentNum, isPositiveChange, baseUnit };
 };
 
 const descendingComparator = <T extends unknown>(a: T, b: T, orderBy: keyof T) => {
@@ -99,10 +99,10 @@ const descendingComparator = <T extends unknown>(a: T, b: T, orderBy: keyof T) =
   return 0;
 };
 
-const getComparator: { <Key extends keyof any>(
+const getComparator: <Key extends keyof any>(
   order: Order,
   orderBy: Key,
-): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number } = (order, orderBy) => {
+) => (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number = (order, orderBy) => {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
@@ -126,7 +126,7 @@ const headCells: HeadCell[] = [
   { id: 'id', numeric: false, disablePadding: true, label: 'markets.market' },
   { id: 'last', numeric: true, disablePadding: false, label: 'markets.price' },
   { id: 'vol', numeric: true, disablePadding: false, label: 'markets.volume' },
-  { id: 'price_change_percent_num', numeric: true, disablePadding: false, label: 'markets.change' },
+  { id: 'priceChangePercentNum', numeric: true, disablePadding: false, label: 'markets.change' },
 ];
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -217,7 +217,7 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
                 last: (marketTickers[market.id] || defaultTicker).last,
                 vol: (marketTickers[market.id] || defaultTicker).vol,
                 price_change_percent: (marketTickers[market.id] || defaultTicker).price_change_percent,
-                price_change_percent_num: Number.parseFloat((marketTickers[market.id] || defaultTicker).price_change_percent),
+                priceChangePercentNum: Number.parseFloat((marketTickers[market.id] || defaultTicker).price_change_percent),
             };
         });
 
@@ -297,7 +297,7 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
                     >
                       <TableCell>
                         <span className="landingTable-cell">
-                            <img src={`https://downloads.runebase.io/${row.base_unit}.svg`} alt={`${row.id} market icon`} className="MarketListCoinIcon" />
+                            <img src={`https://downloads.runebase.io/${row.baseUnit}.svg`} alt={`${row.id} market icon`} className="MarketListCoinIcon" />
                                 {row.id}
                         </span>
                       </TableCell>
@@ -313,7 +313,7 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
                       </TableCell>
                       <TableCell align="right">
                             <span className={classname}>
-                                {row.price_change_percent_num}
+                                {row.priceChangePercentNum}
                             </span>
                       </TableCell>
                     </TableRow>
