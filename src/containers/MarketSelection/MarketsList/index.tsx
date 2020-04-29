@@ -74,21 +74,21 @@ interface HeadCell {
   numeric: boolean;
 }
 
-function createData(
+type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
+type Order = 'asc' | 'desc';
+
+const createData = (
   id: string,
   last: string,
   vol: string,
   price_change_percent_num: string,
   isPositiveChange: boolean,
   base_unit: string,
-): Data {
+): Data => {
   return { id, last, vol, price_change_percent_num, isPositiveChange, base_unit };
 }
 
-type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
-
-
-const descendingComparator<T> = (a: T, b: T, orderBy: keyof T) => {
+const descendingComparator = <T extends unknown>(a: T, b: T, orderBy: keyof T) => {
   if (b[orderBy] < a[orderBy]) {
     return -1;
   }
@@ -98,18 +98,16 @@ const descendingComparator<T> = (a: T, b: T, orderBy: keyof T) => {
   return 0;
 }
 
-type Order = 'asc' | 'desc';
-
-function getComparator<Key extends keyof any>(
+const getComparator: { <Key extends keyof any>(
   order: Order,
   orderBy: Key,
-): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
+): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number } = (order, orderBy) => {
   return order === 'desc'
     ? (a, b) => descendingComparator(a, b, orderBy)
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-const stableSort<T> = (array: T[], comparator: (a: T, b: T) => number) => {
+const stableSort = <T extends unknown>(array: T[], comparator: (a: T, b: T) => number) => {
   const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
   stabilizedThis.sort((a, b) => {
     const order = comparator(a[0], b[0]);
