@@ -11,6 +11,13 @@ export const en = {
     'page.body.trade.header.openOrders.content.type': 'Type',
     'page.body.trade.header.openOrders.content.cancel': 'Cancel Order',
 
+    /*Market Selection*/
+
+    'markets.market': 'Market',
+    'markets.price': 'Price',
+    'markets.volume': 'Volume',
+    'markets.change': '24H Change',
+
     /* Old */
     'page.header.navbar.signIn': 'Log in',
     'page.header.navbar.trade': 'Trade',

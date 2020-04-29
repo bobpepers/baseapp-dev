@@ -106,11 +106,11 @@ class Trading extends React.Component<Props, StateProps> {
         },
         {
             i: 5,
-            render: () => <OpenOrdersComponent/>,
+            render: () => <OpenOrdersComponent />,
         },
         {
             i: 6,
-            render: () => <MarketSelection/>,
+            render: () => <MarketSelection />,
         },
         {
             i: 7,
@@ -118,7 +118,7 @@ class Trading extends React.Component<Props, StateProps> {
         },
         {
             i: 8,
-            render: () => <RecentTrades/>,
+            render: () => <RecentTrades />,
         },
     ];
 

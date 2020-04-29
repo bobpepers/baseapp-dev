@@ -1,13 +1,25 @@
+import React, { FunctionComponent } from 'react';
+import { FormattedMessage } from 'react-intl';
 import classnames from 'classnames';
-import React, { useState, FunctionComponent } from 'react';
+import { connect } from 'react-redux';
+import { incrementalOrderBook } from '../../../api';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Decimal } from '../../../components';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    TableSortLabel,
+} from '@material-ui/core';
+
 import {
     InjectedIntlProps,
     injectIntl,
 } from 'react-intl';
-import { connect } from 'react-redux';
-import { incrementalOrderBook } from '../../../api';
-import { SortAsc, SortDefault, SortDesc } from '../../../assets/images/SortIcons';
-import { Decimal, MarketSelectionTable } from '../../../components';
+
 import {
     depthFetch,
     Market,
@@ -39,74 +51,155 @@ interface OwnProps {
     currencyQuote: string;
 }
 
-const handleChangeSortIcon = (sortBy: string, id: string, reverseOrder: boolean) => {
-    if (sortBy !== 'none' && id === sortBy && !reverseOrder) {
-        return <SortDesc/>;
-    }
+interface Data {
+  last: string;
+  price_change_percent_num: string;
+  vol: string;
+  id: string;
+  isPositiveChange: boolean;
+  base_unit: string;
+}
 
-    if (sortBy !== 'none' && id === sortBy && reverseOrder) {
-        return <SortAsc/>;
-    }
+interface EnhancedTableProps {
+  classes: ReturnType<typeof useStyles>;
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
+  order: Order;
+  orderBy: string;
+}
 
-    return <SortDefault/>;
-};
+interface HeadCell {
+  disablePadding: boolean;
+  id: keyof Data;
+  label: string;
+  numeric: boolean;
+}
+
+function createData(
+  id: string,
+  last: string,
+  vol: string,
+  price_change_percent_num: string,
+  isPositiveChange: boolean,
+  base_unit: string,
+): Data {
+  return { id, last, vol, price_change_percent_num, isPositiveChange, base_unit };
+}
 
 type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
 
-const MarketsListComponent: FunctionComponent<Props> = props => {
 
-    const {
-        markets,
-        marketTickers,
-        search,
-        currencyQuote,
-        currentMarket,
-    } = props;
+function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
+  if (b[orderBy] < a[orderBy]) {
+    return -1;
+  }
+  if (b[orderBy] > a[orderBy]) {
+    return 1;
+  }
+  return 0;
+}
 
-    const [sortBy, setsortBy] = useState('none');
-    const [reverseOrder, setreverseOrder] = useState(false);
+type Order = 'asc' | 'desc';
 
-    const currencyPairSelectHandler = (key: string) => {
-        const marketToSet = markets.find(el => el.name === key);
+function getComparator<Key extends keyof any>(
+  order: Order,
+  orderBy: Key,
+): (a: { [key in Key]: number | string }, b: { [key in Key]: number | string }) => number {
+  return order === 'desc'
+    ? (a, b) => descendingComparator(a, b, orderBy)
+    : (a, b) => -descendingComparator(a, b, orderBy);
+}
 
-        props.setCurrentPrice();
-        if (marketToSet) {
-            setCurrentMarket(marketToSet);
-            if (!incrementalOrderBook()) {
-              props.depthFetch(marketToSet);
-            }
-        }
-    };
+function stableSort<T>(array: T[], comparator: (a: T, b: T) => number) {
+  const stabilizedThis = array.map((el, index) => [el, index] as [T, number]);
+  stabilizedThis.sort((a, b) => {
+    const order = comparator(a[0], b[0]);
+    if (order !== 0) return order;
+    return a[1] - b[1];
+  });
+  return stabilizedThis.map((el) => el[0]);
+}
 
-    const getHeaders = () => [
-        {id: 'id', translationKey: 'market'},
-        {id: 'last', translationKey: 'last_price'},
-        {id: 'vol', translationKey: 'volume'},
-        {id: 'price_change_percent_num', translationKey: 'change'},
-    ].map(obj => {
-        return (
-            {
-                ...obj,
-                selected: sortBy === obj.id,
-                reversed: sortBy === obj.id && reverseOrder,
-            }
-        );
-    }).map(obj => {
-        const classname = classnames({
-            'pg-dropdown-markets-list-container__header-selected': obj.selected,
-        });
+const headCells: HeadCell[] = [
+  { id: 'id', numeric: false, disablePadding: true, label: 'markets.market' },
+  { id: 'last', numeric: true, disablePadding: false, label: 'markets.price' },
+  { id: 'vol', numeric: true, disablePadding: false, label: 'markets.volume' },
+  { id: 'price_change_percent_num', numeric: true, disablePadding: false, label: 'markets.change' },
+];
 
-        return (
-            <span className={classname} key={obj.id} onClick={() => handleHeaderClick(obj.id)}>
-            {props.intl.formatMessage({id: `page.body.trade.header.markets.content.${obj.translationKey}`})}
-                <span className="sort-icon">
-                    {handleChangeSortIcon(sortBy, obj.id, reverseOrder)}
-                </span>
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    table: {
+      width: '100%',
+    },
+    visuallyHidden: {
+      border: 0,
+      clip: 'rect(0 0 0 0)',
+      height: 1,
+      margin: -1,
+      overflow: 'hidden',
+      padding: 0,
+      position: 'absolute',
+      top: 20,
+      width: 1,
+    },
+  }),
+);
+
+function EnhancedTableHead(props: EnhancedTableProps) {
+  const { classes, order, orderBy, onRequestSort } = props;
+  const createSortHandler = (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+    onRequestSort(event, property);
+  };
+
+  return (
+    <TableHead className="landingTable-head">
+      <TableRow>
+        {headCells.map((headCell, i) => (
+          <TableCell
+            key={headCell.id}
+            align={headCell.numeric ? 'right' : 'left'}
+            sortDirection={orderBy === headCell.id ? order : false}
+          >
+            <span className={`landingTable-cell ${i === 0 ? '' : 'label-reverse'}`}>
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : 'asc'}
+                onClick={createSortHandler(headCell.id)}
+              >
+                <FormattedMessage id={headCell.label} />
+                {orderBy === headCell.id ? (
+                  <span className={classes.visuallyHidden}>
+                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  </span>
+                ) : null}
+              </TableSortLabel>
             </span>
-        );
-    });
+          </TableCell>
+        ))}
+      </TableRow>
+    </TableHead>
+  );
+}
 
-    const mapMarkets = () => {
+const MarketsListComponent: FunctionComponent<Props> = props => {
+  const {
+    markets,
+    marketTickers,
+    search,
+    currencyQuote,
+  } = props;
+
+  const classes = useStyles();
+  const [order, setOrder] = React.useState<Order>('desc');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('vol');
+
+  const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const mapMarkets = () => {
         const defaultTicker = {
             last: 0,
             vol: 0,
@@ -126,12 +219,6 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
         });
 
 
-        if (sortBy !== 'none') {
-            marketsMapped.sort((a, b) => a[sortBy] > b[sortBy] ? 1 : b[sortBy] > a[sortBy] ? -1 : 0);
-        }
-
-        reverseOrder && marketsMapped.reverse();
-
         return marketsMapped.reduce((pV, cV) => {
             const [,quote] = cV.name.toLowerCase().split('/');
             if (
@@ -148,47 +235,96 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
             return pV;
         }, arr).map((market: Market & Ticker, index: number) => {
             const isPositive = /\+/.test((marketTickers[market.id] || defaultTicker).price_change_percent);
-            const classname = classnames({
-                'pg-dropdown-markets-list-container__positive': isPositive,
-                'pg-dropdown-markets-list-container__negative': !isPositive,
-            });
 
-            return [
-                market.name,
-                (<span><img src={`https://downloads.runebase.io/${market.base_unit}.svg` }alt={`${market.name} market icon`} className="MarketListCoinIcon" />{market.name}</span>),
-                (<span className={classname}>{Decimal.format(Number(market.last), market.price_precision)}</span>),
-                (<span className={classname}>{Decimal.format(Number(market.vol), market.amount_precision)}</span>),
-                (<span className={classname}>{market.price_change_percent}</span>),
-            ];
+            return (
+                createData(
+                    market.name,
+                    Decimal.format(Number(market.last), market.price_precision),
+                    Decimal.format(Number(market.vol), market.amount_precision),
+                    market.price_change_percent,
+                    isPositive,
+                    market.base_unit,
+                )
+            );
         });
     };
 
-    const handleHeaderClick = (key: string) => {
-        if (key !== sortBy) {
-            setsortBy(key);
-            setreverseOrder(false);
-        } else if (key === sortBy && !reverseOrder) {
-            setreverseOrder(true);
-        } else {
-            setsortBy('none');
-            setreverseOrder(false);
+  const data = mapMarkets();
+
+  const currencyPairSelectHandler = (e: any, key: string) => {
+        console.log(key);
+        console.log(markets);
+        const marketToSet = markets.find(el => el.name === key);
+        console.log(marketToSet);
+        console.log(currencyQuote);
+
+        props.setCurrentPrice();
+        if (marketToSet) {
+            setCurrentMarket(marketToSet);
+            if (!incrementalOrderBook()) {
+              props.depthFetch(marketToSet);
+            }
         }
     };
 
-    const data = mapMarkets();
-
-    return (
-        <div className="pg-dropdown-markets-list-container">
-            <MarketSelectionTable
-                data={data.length > 0 ? data : [[]]}
-                header={getHeaders()}
-                onSelect={currencyPairSelectHandler}
-                selectedKey={currentMarket && currentMarket.name}
-                rowKeyIndex={0}
+  return (
+        <TableContainer>
+          <Table
+            className={classes.table}
+            aria-labelledby="tableTitle"
+            aria-label="enhanced table"
+          >
+            <EnhancedTableHead
+              classes={classes}
+              order={order}
+              orderBy={orderBy}
+              onRequestSort={handleRequestSort}
             />
-        </div>
-    );
-};
+            <TableBody>
+              {stableSort(data, getComparator(order, orderBy))
+                .map((row, index) => {
+                  const classname = classnames({
+                    'pg-dropdown-markets-list-container__positive': row.isPositiveChange,
+                    'pg-dropdown-markets-list-container__negative': !row.isPositiveChange,
+                  });
+
+                  return (
+                    <TableRow
+                      hover
+                      tabIndex={-1}
+                      key={row.id}
+                      onClick={e => currencyPairSelectHandler(e, String(row.id))}
+                      className="landingTable-row"
+                    >
+                      <TableCell>
+                        <span className="landingTable-cell">
+                            <img src={`https://downloads.runebase.io/${row.base_unit}.svg`} alt={`${row.id} market icon`} className="MarketListCoinIcon" />
+                                {row.id}
+                        </span>
+                      </TableCell>
+                      <TableCell align="right">
+                        <span className={classname}>
+                            {row.last}
+                        </span>
+                      </TableCell>
+                      <TableCell align="right">
+                            <span className={classname}>
+                                {row.vol}
+                            </span>
+                      </TableCell>
+                      <TableCell align="right">
+                            <span className={classname}>
+                                {row.price_change_percent_num}
+                            </span>
+                      </TableCell>
+                    </TableRow>
+                  );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+  );
+}
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     currentMarket: selectCurrentMarket(state),
@@ -203,3 +339,5 @@ const mapDispatchToProps = {
 };
 
 export const MarketsList = injectIntl(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent));
+
+

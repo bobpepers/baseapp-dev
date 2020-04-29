@@ -1,4 +1,3 @@
-import classnames from 'classnames';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { RootState } from '../../../modules';
@@ -48,22 +47,21 @@ export class MarketsTabsComponent extends React.Component<Props, State> {
         }
 
         return (
-            <div className="pg-trading-header-market-fast-search-container" onWheel={this.handleOnMouseWheel} ref={this.tabsRef}>
+            <ul className="nav nav-pills" role="tablist" onWheel={this.handleOnMouseWheel} ref={this.tabsRef}>
                 {listOfQuote.map(this.renderFastSearchButton)}
-            </div>
+            </ul>
         );
     };
 
     private renderFastSearchButton = (item: string, index: number) => {
-        const classname = classnames('pg-trading-header-fast-search-button', {
-            'pg-trading-header-fast-search-button-active': this.state.selectedItem === index,
-        });
 
         return (
             //tslint:disable-next-line
-            <div className={classname} key={index} onClick={() => this.handleSelectButton(index)}>
-                {item}
-            </div>
+            <li key={index} onClick={() => this.handleSelectButton(index)}>
+                <span className={`nav-link ${this.state.selectedItem === index && 'active'}`}>
+                    {item}
+                </span>
+            </li>
         );
     };
 

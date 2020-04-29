@@ -10,6 +10,13 @@ export const pt: LangType = {
     'page.body.trade.header.openOrders.content.type': 'type',
     'page.body.trade.header.openOrders.content.cancel': 'cancel order',
 
+    /*Market Selection*/
+
+    'markets.market': 'Market',
+    'markets.price': 'Price',
+    'markets.volume': 'Volume',
+    'markets.change': '24H Change',
+
     /* Old */
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',

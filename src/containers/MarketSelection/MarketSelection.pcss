@@ -1,5 +1,30 @@
+.nav {
+  background: var(--background);
+}
 .pg-trading-header-market-selector-list-container {
-    background: var(--market-selector-header-background);
+    background-color: var(--main-bg);
+}
+
+.landingTable-cell .MuiTableSortLabel-active {
+  color: var(--bright) !important;
+}
+
+.landingTable-cell svg {
+  color: var(--bright) !important;
+}
+
+.search-padding .MuiInputBase-root {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.label-reverse {
+    flex-direction: row-reverse;
+}
+
+
+.pg-trading-header-market-selector-list-container {
+    height: 100% !important;
     box-shadow: 4px 4px 10px rgba(46, 76, 128, 0.2);
     display: block;
     height: 100vh;
@@ -9,7 +34,6 @@
     top: 0;
     width: 100%;
     z-index: 10;
-    padding-top: 30px;
     overflow-y: auto;
     overflow-x: hidden;
     -webkit-animation-name: pg-trading-header-selector-list-container-open;
