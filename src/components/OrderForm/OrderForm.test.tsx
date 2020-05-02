@@ -52,43 +52,6 @@ describe('OrderForm', () => {
         expect(wrapper.hasClass(className)).toBeTruthy();
     });
 
-    it('should render dropdown', () => {
-        const wrapper = setup();
-        const dropdown = wrapper.find(DropdownComponent);
-        expect(dropdown.at(0).props().list).toEqual(['Limit', 'Market']);
-    });
-
-    it('should render percentage buttons', () => {
-        const wrapper = setup();
-        const percentageButton = wrapper.find(PercentageButton);
-        expect(percentageButton.at(0).props().label.toLowerCase()).toBe('25%');
-        expect(percentageButton.at(1).props().label.toLowerCase()).toBe('50%');
-        expect(percentageButton.at(2).props().label.toLowerCase()).toBe('75%');
-        expect(percentageButton.at(3).props().label.toLowerCase()).toBe('100%');
-    });
-
-    it('should render submit button', () => {
-        let wrapper = setup();
-        let submitButton = wrapper.find(Button);
-        expect(submitButton.props().children).toBe('buy');
-
-        wrapper = setup({ type: 'sell' });
-        submitButton = wrapper.find(Button);
-        expect(submitButton.props().children).toBe('sell');
-    });
-
-    it('should call onSubmit callback', () => {
-        const onSubmit: SinonSpy = spy();
-        const wrapper = setup({ onSubmit });
-
-        const nextState = { price: '135.58', amount: '0.34' };
-        wrapper.setState(nextState);
-
-        const submitButton = wrapper.find(Button);
-        submitButton.simulate('click');
-
-        expect(onSubmit.calledOnceWith({type: 'buy', orderType: 'Limit', price: nextState.price, amount: nextState.amount, available: 50})).toBeTruthy();
-    });
 
     it('should disable button if price is 0 in Limit order', () => {
         const onSubmit: SinonSpy = spy();
