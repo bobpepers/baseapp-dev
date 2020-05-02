@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import {
     Order,
     OrderProps,
-    WalletItemProps
+    WalletItemProps,
 } from '../../components';
 import {
     alertPush,
@@ -26,7 +26,7 @@ import {
 import {
     Market,
     selectCurrentMarket,
-    selectMarketTickers
+    selectMarketTickers,
 } from '../../modules/public/markets';
 import {
     orderExecuteFetch,

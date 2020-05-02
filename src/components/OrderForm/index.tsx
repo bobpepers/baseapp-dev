@@ -500,7 +500,6 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
 
         const condition = new RegExp(`^(?:[\\d-]*\\.?[\\d-]{0,${currentMarketBidPrecision}}|[\\d-]*\\.[\\d-])$`);
 
-        // Buy
         if (type === 'buy' && convertedValue.match(condition) && percBuy && Number(percBuy) <= 100) {
             this.setState({
                 price: convertedValue,
@@ -515,8 +514,6 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                 amount: String(roundDownAmount),
             });
         }
-
-        // Sell
 
         if (type === 'sell' && convertedValue.match(condition)) {
             this.setState({
@@ -548,7 +545,6 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
         BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_FLOOR });
         const roundDownAmount = available && new BigNumber(available).dividedBy(price).toFormat(currentMarketAskPrecision, fmt);
 
-        // Buy
         if (type === 'buy' && convertedValue.match(condition) && Number(percBuy) <= 100) {
             this.setState({
                 amount: convertedValue,
@@ -563,7 +559,6 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             });
         }
 
-        // Sell
         if (type === 'sell' && convertedValue.match(condition) && percSell && Number(percSell) <= 100) {
             this.setState({
                 amount: convertedValue,
