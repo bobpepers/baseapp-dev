@@ -1,12 +1,30 @@
-import { OrderInput } from '../OrderInput';
-import { PercentageButton } from '../PercentageButton';
-import classnames from 'classnames';
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import classnames from 'classnames';
+import {
+    withStyles,
+    Theme,
+} from '@material-ui/core/styles';
+import {
+    green,
+    red,
+} from '@material-ui/core/colors';
+import {
+    Button,
+    Slider,
+    InputLabel,
+    FormControl,
+    Select,
+    MenuItem,
+    InputAdornment,
+    OutlinedInput,
+} from '@material-ui/core';
 import BigNumber from 'bignumber.js';
 import { Decimal } from '../Decimal';
-import { cleanPositiveFloatInput, getAmount, getTotalPrice } from '../../helpers';
-import { DropdownComponent } from '../Dropdown';
+import {
+    cleanPositiveFloatInput,
+    getAmount,
+    getTotalPrice
+} from '../../helpers';
 import { OrderProps } from '../Order';
 
 // tslint:disable:no-magic-numbers jsx-no-lambda jsx-no-multiline-js
@@ -117,6 +135,8 @@ interface OrderFormState {
     currentMarketBidPrecision: number;
     amountFocused: boolean;
     priceFocused: boolean;
+    sliderValue: number | number[];
+    orderTypeSelected: number;
 }
 
 const handleSetValue = (value: string | number | undefined, defaultValue: string) => (
@@ -131,6 +151,54 @@ const checkButtonIsDisabled = (safeAmount: number, safePrice: number, price: str
     return props.disabled || !props.available || invalidAmount || invalidLimitPrice || invalidMarketPrice;
 };
 
+const BuyButton = withStyles((theme: Theme) => ({
+  root: {
+    color: green[50],
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+}))(Button);
+
+const SellButton = withStyles((theme: Theme) => ({
+  root: {
+    color: red[50],
+    backgroundColor: red[500],
+    '&:hover': {
+      backgroundColor: red[700],
+    },
+  },
+}))(Button);
+
+const sliderMarks = [
+  {
+    value: 0,
+    label: '0%',
+  },
+  {
+    value: 25,
+    label: '25%',
+  },
+  {
+    value: 50,
+    label: '50%',
+  },
+  {
+    value: 75,
+    label: '75%',
+  },
+  {
+    value: 100,
+    label: '100%',
+  },
+];
+
+const fmt = {
+    decimalSeparator: '.',
+    groupSeparator: '',
+};
+
 export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
     constructor(props: OrderFormProps) {
         super(props);
@@ -143,6 +211,8 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             currentMarketBidPrecision: this.props.currentMarketBidPrecision || 6,
             priceFocused: false,
             amountFocused: false,
+            sliderValue: 0,
+            orderTypeSelected: 0,
         };
     }
 
@@ -169,7 +239,7 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             from,
             to,
             available,
-            orderTypeText,
+            //orderTypeText,
             priceText,
             amountText,
             totalText,
@@ -184,8 +254,10 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             priceMarket,
             currentMarketAskPrecision,
             currentMarketBidPrecision,
-            priceFocused,
-            amountFocused,
+            //priceFocused,
+            //amountFocused,
+            sliderValue,
+            orderTypeSelected,
         } = this.state;
         const safeAmount = Number(amount) || 0;
         const totalPrice = getTotalPrice(amount, proposals);
@@ -193,186 +265,324 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
 
         const total = orderType === 'Market'
             ? totalPrice : safeAmount * (Number(price) || 0);
-        const amountPercentageArray = [0.25, 0.5, 0.75, 1];
 
         const cx = classnames('cr-order-form', className);
         const availablePrecision = type === 'buy' ? currentMarketBidPrecision : currentMarketAskPrecision;
         const availableCurrency = type === 'buy' ? from : to;
-
-        const fmt = {
-          decimalSeparator: '.',
-          groupSeparator: '',
-        };
+        console.log(orderTypes);
 
         return (
             <div className={cx}>
-                <div className="cr-order-item">
-                    {orderTypeText ? <div className="cr-order-item__dropdown__label">{orderTypeText}</div> : null}
-                    <DropdownComponent list={orderTypes} onSelect={this.handleOrderTypeChange} placeholder=""/>
+                <div className="order-item-wrapper">
+                    <div className="ordertype-select">
+                        <FormControl
+                            variant="outlined"
+                            style={{width: '100%'}}
+                            className="ordertype-select"
+                        >
+                            <InputLabel htmlFor="outlined-ordertype-native-simple">OrderType</InputLabel>
+                            <Select
+                                MenuProps={{
+                                    classes: { paper: "ordertype-option-wrapper" },
+                                    anchorOrigin: {
+                                        vertical: "bottom",
+                                        horizontal: "left"
+                                    },
+                                    transformOrigin: {
+                                        vertical: "top",
+                                        horizontal: "left"
+                                    },
+                                    getContentAnchorEl: null
+                                }}
+                                value={orderTypeSelected}
+                                onChange={this.handleOrderTypeChange}
+                                label="OrderType"
+                                inputProps={{
+                                    name: 'orderType',
+                                    id: 'outlined-ordertype-native-simple',
+                                }}
+                            >
+                                <MenuItem
+                                    value={0}
+                                    className="ordertype-select-option"
+                                >
+                                    {orderTypes[0]}
+                                </MenuItem>
+                                <MenuItem
+                                    value={1}
+                                    className="ordertype-select-option"
+                                >
+                                    {orderTypes[1]}
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>
                 {orderType === 'Limit' ? (
-                    <div className="cr-order-item">
-                        <OrderInput
-                            currency={from}
-                            label={priceText}
-                            placeholder={priceText}
-                            value={handleSetValue(price,'')}
-                            isFocused={priceFocused}
-                            handleChangeValue={this.handlePriceChange}
-                            handleFocusInput={() => this.handleFieldFocus(priceText)}
-                        />
+                    <div className="order-item-wrapper">
+                        <FormControl variant="outlined" fullWidth={true}>
+                          <InputLabel htmlFor="outlined-adornment-order-price">{priceText}</InputLabel>
+                          <OutlinedInput
+                            id="outlined-adornment-order-price"
+                            type={'number'}
+                            value={handleSetValue(price, '')}
+                            onChange={this.handlePriceChange}
+                            endAdornment={
+                                <InputAdornment
+                                    position="end"
+                                    className="text-end-input-price"
+                                >
+                                    <img src={`https://downloads.runebase.io/${from}.svg`} alt={`${from} icon`} className="fieldImage-input" />
+                                    {from.toUpperCase()}
+                                </InputAdornment>
+                            }
+                            labelWidth={70}
+                          />
+                        </FormControl>
                     </div>
                 ) : (
-                    <div className="cr-order-item">
-                        <div className="cr-order-input">
-                            <fieldset className="cr-order-input__fieldset">
-                                <legend className={'cr-order-input__fieldset__label'}>
-                                    {handleSetValue(priceText, '')}
-                                </legend>
-                                <div className="cr-order-input__fieldset__input">
-                                    &asymp;<span className="cr-order-input__fieldset__input__price">{handleSetValue(Decimal.format(safePrice, currentMarketBidPrecision), '0')}</span>
-                                </div>
-                            </fieldset>
-                            <div className="cr-order-input__crypto-icon">
-                                {from.toUpperCase()}
-                            </div>
-                        </div>
+                    <div className="order-item-wrapper">
+                        <FormControl variant="outlined" fullWidth={true}>
+                          <InputLabel htmlFor="outlined-adornment-order-price">{priceText}</InputLabel>
+                          <OutlinedInput
+                            inputProps={{
+                                readOnly: Boolean(true),
+                                disabled: Boolean(true),
+                            }}
+                            id="outlined-adornment-order-price"
+                            type={'number'}
+                            value={handleSetValue(Decimal.format(safePrice, currentMarketBidPrecision), '0')}
+                            endAdornment={
+                                <InputAdornment
+                                    position="end"
+                                    className="text-end-input-price"
+                                >
+                                    <img src={`https://downloads.runebase.io/${from}.svg`} alt={`${from} icon`} className="fieldImage-input" />
+                                    {from.toUpperCase()}
+                                </InputAdornment>
+                            }
+                            startAdornment={
+                                <InputAdornment
+                                    position="start"
+                                    className="text-start-input-price"
+                                >
+                                    ~
+                                </InputAdornment>
+                            }
+                            labelWidth={70}
+                          />
+                        </FormControl>
                     </div>
                 )}
-                <div className="cr-order-item">
-                    <OrderInput
-                        currency={to}
-                        label={amountText}
-                        placeholder={amountText}
+                <div className="order-item-wrapper">
+                    <FormControl variant="outlined" fullWidth={true}>
+                      <InputLabel htmlFor="outlined-adornment-order">{amountText}</InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-order"
+                        type={'number'}
                         value={handleSetValue(amount, '')}
-                        isFocused={amountFocused}
-                        handleChangeValue={this.handleAmountChange}
-                        handleFocusInput={() => this.handleFieldFocus(amountText)}
+                        onChange={this.handleAmountChange}
+                        endAdornment={
+                            <InputAdornment
+                                position="end"
+                                className="text-end-input-amount"
+                            >
+                                <img src={`https://downloads.runebase.io/${to}.svg`} alt={`${to} icon`} className="fieldImage-input" />
+                                {to.toUpperCase()}
+                            </InputAdornment>
+                        }
+                        labelWidth={70}
+                      />
+                    </FormControl>
+                </div>
+
+                <div className="order-slider-wrapper">
+                    <Slider
+                        value={typeof sliderValue === 'number' ? sliderValue : 0}
+                        onChange={(e, val) => this.handleSliderChange(e, val, type)}
+                        aria-labelledby="input-slider"
+                        marks={sliderMarks}
                     />
                 </div>
 
-                <div className="cr-order-item">
-                    <div className="cr-order-item__percentage-buttons">
-                        <PercentageButton
-                            label={`${amountPercentageArray[0] * 100}%`}
-                            onClick={() => this.handleChangeAmountByButton(amountPercentageArray[0], type)}
-                        />
-                        <PercentageButton
-                            label={`${amountPercentageArray[1] * 100}%`}
-                            onClick={() => this.handleChangeAmountByButton(amountPercentageArray[1], type)}
-                        />
-                        <PercentageButton
-                            label={`${amountPercentageArray[2] * 100}%`}
-                            onClick={() => this.handleChangeAmountByButton(amountPercentageArray[2], type)}
-                        />
-                        <PercentageButton
-                            label={`${amountPercentageArray[3] * 100}%`}
-                            onClick={() => this.handleChangeAmountByButton(amountPercentageArray[3], type)}
-                        />
-                    </div>
-                </div>
-
-                <div className="cr-order-item">
-                    <div className="cr-order-item__total">
-                        <label className="cr-order-item__total__label">
+                <div className="order-item-wrapper">
+                    <div className="order-total-wrapper">
+                        <label>
                             {handleSetValue(totalText, 'Total')}
                         </label>
-                        <div className="cr-order-item__total__content">
+                        <div className="order-total-content">
                             {orderType === 'Limit' ? (
-                                <span className="cr-order-item__total__content__amount">
+                                <span className="order-total-content-num">
                                     {new BigNumber(total).toFormat(currentMarketBidPrecision + currentMarketAskPrecision, fmt)}
                                     {/* Decimal.format(total, currentMarketBidPrecision + currentMarketAskPrecision) */}
                                 </span>
                             ) : (
-                                <span className="cr-order-item__total__content__amount">
+                                <span className="order-total-content-num">
                                     {new BigNumber(total).toFormat(currentMarketBidPrecision + currentMarketAskPrecision, fmt)}
-                                    &asymp;{/* Decimal.format(total, currentMarketBidPrecision + currentMarketAskPrecision) */}
+                                    {'\u00A0'}{/* Decimal.format(total, currentMarketBidPrecision + currentMarketAskPrecision) */}
                                 </span>
                             )}
-                            <span className="cr-order-item__total__content__currency">
-                                {from.toUpperCase()}
+                            <span className="order-total-coin">
+                                {'\u00A0'}{from.toUpperCase()}
                             </span>
                         </div>
                     </div>
                 </div>
-                <div className="cr-order-item">
-                    <div className="cr-order-item__available">
-                        <label className="cr-order-item__available__label">
+                <div className="order-item-wrapper">
+                    <div className="order-amount-available-wrapper">
+                        <label>
                             {handleSetValue(availableText, 'Available')}
                         </label>
-                        <div className="cr-order-item__available__content">
-                            <span className="cr-order-item__available__content__amount">
+                        <div className="order-amount-available-content">
+                            <span className="order-amount-available-content-num">
                                 {available ? Decimal.format(available, availablePrecision) : ''}
                             </span>
-                            <span className="cr-order-item__available__content__currency">
-                                {available ? availableCurrency.toUpperCase() : ''}
+                            <span className="order-amount-available-content-num">
+                               {'\u00A0'}{available ? availableCurrency.toUpperCase() : ''}
                             </span>
                         </div>
                     </div>
                 </div>
-                <div className="cr-order-item">
-                    <Button
-                        block={true}
-                        className="btn-block mr-1 mt-1 btn-lg"
-                        disabled={checkButtonIsDisabled(safeAmount, safePrice, price, this.props, this.state)}
-                        onClick={this.handleSubmit}
-                        size="lg"
-                        variant={type === 'buy' ? 'success' : 'danger'}
-                    >
-                        {submitButtonText || type}
-                    </Button>
+                <div className="order-item-wrapper">
+                    {type === 'buy' ? (
+                        <BuyButton
+                            variant="contained"
+                            fullWidth={true}
+                            disabled={checkButtonIsDisabled(safeAmount, safePrice, price, this.props, this.state)}
+                            onClick={this.handleSubmit}
+                        >
+                            {submitButtonText || type}
+                        </BuyButton>
+                    ) : (
+                        <SellButton
+                            variant="contained"
+                            fullWidth={true}
+                            disabled={checkButtonIsDisabled(safeAmount, safePrice, price, this.props, this.state)}
+                            onClick={this.handleSubmit}
+                        >
+                            {submitButtonText || type}
+                        </SellButton>
+                    )
+                    }
                 </div>
             </div>
         );
     }
 
-    private handleOrderTypeChange = (index: number) => {
+    private handleOrderTypeChange = (event: any) => {
+        console.log(event.target.value);
         const { orderTypesIndex } = this.props;
         this.setState({
-            orderType: orderTypesIndex[index],
+            orderType: orderTypesIndex[event.target.value],
+            orderTypeSelected: event.target.value,
         });
+        console.log(this.state.orderType);
     };
 
-    private handleFieldFocus = (field: string | undefined) => {
-        switch (field) {
-            case this.props.priceText:
-                this.setState(prev => ({
-                    priceFocused: !prev.priceFocused,
-                }));
-                this.props.listenInputPrice && this.props.listenInputPrice();
-                break;
-            case this.props.amountText:
-                this.setState(prev => ({
-                    amountFocused: !prev.amountFocused,
-                }));
-                break;
-            default:
-                break;
-        }
-    };
+    private handlePriceChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const {
+            available,
+            type,
+        } = this.props;
+        const {
+            amount,
+            currentMarketBidPrecision,
+        } = this.state;
+        const value = event.target.value
+        const amountNumber = Number(amount);
+        const buyTotal = Number(value) * amountNumber;
+        const percSell = available && ((amountNumber/available) * 100).toFixed(0);
+        const percBuy = available && ((buyTotal/available) * 100).toFixed(0);
+        BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_FLOOR });
+        const roundDownAmount = available && new BigNumber(available).dividedBy(value).toFormat(currentMarketBidPrecision, fmt);
 
-    private handlePriceChange = (value: string) => {
         const convertedValue = cleanPositiveFloatInput(String(value));
-        const condition = new RegExp(`^(?:[\\d-]*\\.?[\\d-]{0,${this.state.currentMarketBidPrecision}}|[\\d-]*\\.[\\d-])$`);
-        if (convertedValue.match(condition)) {
+
+        const condition = new RegExp(`^(?:[\\d-]*\\.?[\\d-]{0,${currentMarketBidPrecision}}|[\\d-]*\\.[\\d-])$`);
+
+        // Buy
+        if (type === 'buy' && convertedValue.match(condition) && percBuy && Number(percBuy) <= 100) {
             this.setState({
                 price: convertedValue,
+                sliderValue: Number(percBuy),
             });
         }
+
+        if (type === 'buy' && convertedValue.match(condition) && percBuy && Number(percBuy) > 100) {
+            this.setState({
+                price: convertedValue,
+                sliderValue: 100,
+                amount: String(roundDownAmount),
+            });
+        }
+
+        // Sell
+
+        if (type === 'sell' && convertedValue.match(condition)) {
+            this.setState({
+                price: convertedValue,
+                sliderValue: Number(percSell),
+            });
+        }
+
         this.props.listenInputPrice && this.props.listenInputPrice();
     };
 
-    private handleAmountChange = (value: string) => {
+    private handleAmountChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const {
+            available,
+            type,
+        } = this.props;
+        const {
+            price,
+            currentMarketAskPrecision,
+        } = this.state;
+        const value = event.target.value;
+        const valueNumber = Number(value);
+        const buyTotal = Number(price) * valueNumber;
+        const percSell = available && ((valueNumber/available) * 100).toFixed(0);
+        const percBuy = available && ((buyTotal/available) * 100)
+        const percBuyFixed = percBuy && percBuy.toFixed(0);
         const convertedValue = cleanPositiveFloatInput(String(value));
-        const condition = new RegExp(`^(?:[\\d-]*\\.?[\\d-]{0,${this.state.currentMarketAskPrecision}}|[\\d-]*\\.[\\d-])$`);
-        if (convertedValue.match(condition)) {
+        const condition = new RegExp(`^(?:[\\d-]*\\.?[\\d-]{0,${currentMarketAskPrecision}}|[\\d-]*\\.[\\d-])$`);
+        BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_FLOOR });
+        const roundDownAmount = available && new BigNumber(available).dividedBy(price).toFormat(currentMarketAskPrecision, fmt);
+
+        // Buy
+        if (type === 'buy' && convertedValue.match(condition) && Number(percBuy) <= 100) {
             this.setState({
                 amount: convertedValue,
+                sliderValue: Number(percBuyFixed),
             });
         }
+
+        if (type === 'buy' && convertedValue.match(condition) && Number(percBuy) > 100) {
+            this.setState({
+                amount: String(roundDownAmount),
+                sliderValue: 100,
+            });
+        }
+
+        // Sell
+        if (type === 'sell' && convertedValue.match(condition) && percSell && Number(percSell) <= 100) {
+            this.setState({
+                amount: convertedValue,
+                sliderValue: Number(percSell),
+            });
+        }
+
+        if (type === 'sell' && convertedValue.match(condition) && valueNumber > Number(available)) {
+            this.setState({
+                amount: String(available),
+                sliderValue: 100,
+            });
+        }
+
     };
 
-    private handleChangeAmountByButton = (value: number, type: string) => {
+    private handleSliderChange = (event: any, val: number | number[], type: string) => {
+        this.setState({ sliderValue: val });
+        const value = val as number / 100;
         switch (type) {
             case 'buy':
                 switch (this.state.orderType) {
@@ -417,7 +627,7 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             price: orderType === 'Market' ? priceMarket : price,
             available: available || 0,
         };
-
+        console.log(order);
         this.props.onSubmit(order);
         this.setState({
             amount: '',

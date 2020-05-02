@@ -6,7 +6,11 @@ import {
     injectIntl,
 } from 'react-intl';
 import { connect } from 'react-redux';
-import { Order, OrderProps, WalletItemProps } from '../../components';
+import {
+    Order,
+    OrderProps,
+    WalletItemProps
+} from '../../components';
 import {
     alertPush,
     RootState,
@@ -16,9 +20,14 @@ import {
     selectUserLoggedIn,
     selectWallets,
     setCurrentPrice,
-    Wallet, walletsFetch,
+    Wallet,
+    walletsFetch,
 } from '../../modules';
-import { Market, selectCurrentMarket, selectMarketTickers } from '../../modules/public/markets';
+import {
+    Market,
+    selectCurrentMarket,
+    selectMarketTickers
+} from '../../modules/public/markets';
 import {
     orderExecuteFetch,
     selectOrderExecuteLoading,

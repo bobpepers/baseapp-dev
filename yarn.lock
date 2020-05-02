@@ -11922,10 +11922,10 @@ react-error-overlay@^6.0.7:
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-6.0.7.tgz#1dcfb459ab671d53f660a991513cb2f0a0553108"
   integrity sha512-TAv1KJFh3RhqxNvhzxj6LeT5NWklP6rDr2a0jaTfsZ5wSZWHOGeqQyejUp3xxLfPt2UpyJEcVQB/zyPcmonNFA==
 
-react-fade-in@^0.1.6:
-  version "0.1.6"
-  resolved "https://registry.yarnpkg.com/react-fade-in/-/react-fade-in-0.1.6.tgz#59efdd54c3ddc7b1dbe0c7a2993f4efe4af4049f"
-  integrity sha512-ZlZPWckmXA74KMOZFxTnB74mRAxpkbGcTG8kbgzhZguSksY7+7LpwQG01yDkz9Y4f01toH5N31rU7lNcbxE7qg==
+react-fade-in@1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-fade-in/-/react-fade-in-1.0.0.tgz#613039eb79ac965532a9fe643270d4ac14ba57ea"
+  integrity sha512-FlB945gicE9gKWwEMXPiLHUPKZcacec2ALSh0FXaDkeTPmfGogLkVHqlK4PSOR7AFSTEKy/ixslcVhsIoIPPOQ==
 
 react-fit@^1.0.3:
   version "1.0.5"

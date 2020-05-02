@@ -1,82 +1,68 @@
-.cr-order-item {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: calc(var(--gap) * 2);
+.ordertype-option-wrapper {
+    background: var(--main-bg) !important;
+}
+.ordertype-select {
     width: 100%;
+}
+.ordertype-select-option {
+    color: var(--bright) !important;
+}
 
-    .cr-dropdown,
-    .cr-order-input,
-    &__percentage-buttons,
-    &__total,
-    &__available,
-    &__fee {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
+.MuiSelect-iconOutlined {
+    color: var(--bright) !important;
+}
+.MuiSlider-markLabel {
+    color: var(--bright) !important;
+}
 
-    .dropdown-toggle {
-        text-align: left;
-        font-size: calc(var(--gap) * 2);
-        padding-left: calc(var(--gap) * 2);
-        height: calc(var(--gap) * 7);
+.order-slider-wrapper {
+    padding: 0 20px;
+}
 
-    }
+.fieldImage-input {
+    height: 20px;
+    margin-right: 5px;
+}
 
-    &__dropdown__label {
-        background-color: inherit;
-        margin-left: calc(var(--gap) * 2);
-        padding: 0 calc(var(--gap) * 0.5);
-        position: absolute;
-        top: calc(var(--gap) * -1.3);
-        z-index: 1;
-    }
+.text-end-input-amount {
+    color: var(--bright) !important;
+}
 
-    &--compact {
-        align-items: flex-start;
-        flex-direction: column;
-    }
+.text-start-input-price p {
+    color: var(--bright) !important;
+}
 
-    &__label {
-        font-size: var(--font-size);
-        font-weight: 200;
-        color: var(--base-2);
-        line-height: calc(var(--font-size) * 2);
-    }
+.text-end-input-price {
+    color: var(--bright) !important;
+}
 
-    &__total,
-    &__available,
-    &__fee {
-        &__label {
-            text-align: left;
-        }
+.order-item-wrapper {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.order-total-content {
+    float: right;
+}
 
-        &__content {
-            text-align: right;
+.order-total-content-num{
+    color: var(--bright) !important;
+}
 
-            &__currency {
-                margin-left: var(--gap);
-            }
-        }
-    }
+.order-amount-available-content {
+    float: right;
+}
 
-    .cr-order-input {
-        &__fieldset__input {
-            color: var(--placeholder-text);
-            &__price {
-                font-size: calc(var(--gap) * 1.75);
-            }
-        }
+.order-amount-available-content-num {
+    color: var(--bright) !important;
+}
+.order-total-coin {
+    color: var(--bright) !important;
+}
 
-        &__input {
-            .cr-order-input__price {
-                display: inline-block;
-                background: transparent !important;
-                margin-bottom: 5px;
-                margin-top: 5px;
-                margin-right: 20px;
-            }
-        }
-    }
+.order-total-wrapper label {
+    color: var(--bright) !important;
+}
+
+.order-amount-available-wrapper label {
+    color: var(--bright) !important;
 }
