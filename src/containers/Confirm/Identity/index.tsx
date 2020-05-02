@@ -1,6 +1,6 @@
 import { Button } from 'react-bootstrap';
 import cr from 'classnames';
-import * as moment from 'moment';
+import moment from 'moment/moment';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import MaskInput from 'react-maskinput';
