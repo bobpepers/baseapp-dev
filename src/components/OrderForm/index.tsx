@@ -23,7 +23,7 @@ import { Decimal } from '../Decimal';
 import {
     cleanPositiveFloatInput,
     getAmount,
-    getTotalPrice
+    getTotalPrice,
 } from '../../helpers';
 import { OrderProps } from '../Order';
 
@@ -283,16 +283,16 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                             <InputLabel htmlFor="outlined-ordertype-native-simple">OrderType</InputLabel>
                             <Select
                                 MenuProps={{
-                                    classes: { paper: "ordertype-option-wrapper" },
+                                    classes: { paper: 'ordertype-option-wrapper' },
                                     anchorOrigin: {
-                                        vertical: "bottom",
-                                        horizontal: "left"
+                                        vertical: 'bottom',
+                                        horizontal: 'left',
                                     },
                                     transformOrigin: {
-                                        vertical: "top",
-                                        horizontal: "left"
+                                        vertical: 'top',
+                                        horizontal: 'left',
                                     },
-                                    getContentAnchorEl: null
+                                    getContentAnchorEl: null,
                                 }}
                                 value={orderTypeSelected}
                                 onChange={this.handleOrderTypeChange}
@@ -488,11 +488,11 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             amount,
             currentMarketBidPrecision,
         } = this.state;
-        const value = event.target.value
+        const value = event.target.value;
         const amountNumber = Number(amount);
         const buyTotal = Number(value) * amountNumber;
-        const percSell = available && ((amountNumber/available) * 100).toFixed(0);
-        const percBuy = available && ((buyTotal/available) * 100).toFixed(0);
+        const percSell = available && ((amountNumber / available) * 100).toFixed(0);
+        const percBuy = available && ((buyTotal / available) * 100).toFixed(0);
         BigNumber.config({ ROUNDING_MODE: BigNumber.ROUND_FLOOR });
         const roundDownAmount = available && new BigNumber(available).dividedBy(value).toFormat(currentMarketBidPrecision, fmt);
 
@@ -537,8 +537,8 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
         const value = event.target.value;
         const valueNumber = Number(value);
         const buyTotal = Number(price) * valueNumber;
-        const percSell = available && ((valueNumber/available) * 100).toFixed(0);
-        const percBuy = available && ((buyTotal/available) * 100)
+        const percSell = available && ((valueNumber / available) * 100).toFixed(0);
+        const percBuy = available && ((buyTotal / available) * 100);
         const percBuyFixed = percBuy && percBuy.toFixed(0);
         const convertedValue = cleanPositiveFloatInput(String(value));
         const condition = new RegExp(`^(?:[\\d-]*\\.?[\\d-]{0,${currentMarketAskPrecision}}|[\\d-]*\\.[\\d-])$`);
@@ -622,7 +622,6 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             price: orderType === 'Market' ? priceMarket : price,
             available: available || 0,
         };
-        console.log(order);
         this.props.onSubmit(order);
         this.setState({
             amount: '',
