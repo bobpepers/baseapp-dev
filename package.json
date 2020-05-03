@@ -91,7 +91,7 @@
     "@types/react-test-renderer": "16.9.2",
     "@types/webpack-env": "1.15.2",
     "autoprefixer": "9.7.6",
-    "axios-mock-adapter": "1.18.1",
+    "axios-mock-adapter": "1.16.0",
     "babel-jest": "24.9.0",
     "chalk": "^2.4.1",
     "classnames": "^2.2.6",
