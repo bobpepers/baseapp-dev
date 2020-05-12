@@ -44,7 +44,7 @@
   }
 
   .cr-wallet-list {
-    background-color: var(--wallets-item-bg);
+    background-color: var(--main-bg);
     margin-top: 0;
     overflow: hidden;
     margin-bottom: 0;
@@ -53,7 +53,7 @@
       padding: 0 !important;
       &:last-child {
         .cr-wallet-item {
-          border-bottom: 0.5px solid var(--wallets-item-border);
+          border-bottom: 0.5px solid var(--selected-item);
         }
       }
 
@@ -61,12 +61,12 @@
     }
 
     .cr-wallet-item {
-      border-color: var(--wallets-item-border);
+      border-color: var(--selected-item);
       border-radius: 0;
-      color: var(--wallets-item-font);
+      color: var(--bright);
 
       &:hover {
-        background: var(--wallets-item-bg-hover);
+        background: var(--main-bg-hover);
       }
 
       &__info {
@@ -82,14 +82,14 @@
         background: transparent;
 
         span {
-          color: var(--color-white);
+          color: var(--bright);
           &:nth-child(1) {
             opacity: 0.5
           }
           &:nth-child(2) {
             font-weight: normal;
             margin-top: calc(var(--gap) * .6);
-            color: var(--wallets-locked-amount);
+            color: var(--bright);
             font-size: calc(var(--gap) * 1.9);
             opacity: 0.3
           }
@@ -97,13 +97,13 @@
       }
 
       &__amount-locked {
-        color: var(--wallets-locked-amount);
+        color: var(--bright);
         padding-top: calc(var(--gap) * .6);
         font-size: calc(var(--gap) * 1.9);
         opacity: 0.60;
 
         path {
-          fill: var(--color-white);
+          fill: var(--bright);
         }
       }
 
@@ -119,13 +119,13 @@
       }
 
       &--active {
-        background-color: var(--wallets-item-bg-active);
+        background-color: var(--selected-item);
         outline: none;
         border: none;
-        color: var(--wallets-item-font-active);
+        color: var(--bright);
 
         &:hover {
-          background: var(--wallets-item-bg-active);
+          background: var(--selected-item);
         }
 
         .cr-crypto-icon {
@@ -134,11 +134,11 @@
         }
 
         .cr-wallet-item__amount-locked {
-          color: var(--wallets-item-font-active);
+          color: var(--bright);
           opacity: 1;
 
           path {
-            fill: var(--color-white);
+            fill: var(--bright);
           }
         }
 
@@ -159,7 +159,7 @@
         &::before {
           content: '';
           width: 4px;
-          background-color: var(--color-blue);
+          background-color: var(--accent);
           height: calc(var(--gap) * 9);
           border-top-left-radius: calc(var(--gap) * 0.66);
           border-bottom-left-radius: calc(var(--gap) * 0.66);
@@ -169,15 +169,15 @@
   }
 
   .pg-wallet__tabs {
-    background: var(--base-bright);
-    border-left: 1px solid var(--wallets-item-border);
+    background: var(--main-bg);
+    border-left: 1px solid var(--selected-item);
   }
 
   .cr-withdraw {
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
-    color: var(--table-text-color);
+    color: var(--placeholder-text);
     padding: calc(var(--gap) * 5) calc(var(--gap) * 3) calc(var(--gap) * 3);
 
     &-column {
@@ -319,9 +319,9 @@
       &__copyable {
         fieldset {
           &:focus-within {
-            border-color: var(--base-2);
+            border-color: var(--text);
             legend {
-              color: var(--table-text-color);
+              color: var(--placeholder-text);
             }
           }
         }
@@ -345,7 +345,7 @@
   }
 
   .cr-tab-panel__navigation-container {
-    background: var(--table-dark-header-color);
+    background: var(--header);
     border-bottom: 1px solid var(--header-border);
     border-radius: 0;
     margin-bottom: 0;
@@ -356,7 +356,7 @@
   }
 
   .cr-tab-content {
-    background: var(--base-bright);
+    background: var(--main-bg);
     display: none;
     border-bottom-right-radius: calc(var(--gap) * .5);
     border-bottom-left-radius: calc(var(--gap) * .5);
@@ -368,11 +368,11 @@
 
   .cr-wallet-item {
     cursor: pointer;
-    background: var(--background-wallet-item);
-    color: var(--bright-1);
+    background: var(--header);
+    color: var(--bright);
     height: calc(var(--gap) * 9);
     box-sizing: border-box;
-    border-bottom: 1px solid var(--wallets-item-border);
+    border-bottom: 1px solid var(--selected-item);
     border-radius: calc(var(--gap) * 0.5);
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12);
     font-size: calc(var(--gap) * 2.66);
@@ -425,7 +425,7 @@
 
   .pg-wallet__tabs-content {
     display: flex;
-    background: var(--background);
+    background: var(--bg);
   }
 
   .cr-search {
@@ -475,7 +475,7 @@
   padding: calc(var(--gap) * 3);
 
   .pg-history-elem__label {
-    color: var(--wallets-balance);
+    color: var(--bright);
     font-size: calc(var(--gap) * 5);
     font-weight: 300;
   }
@@ -504,8 +504,8 @@
         &-row {
           border-bottom: 1px solid var(--header-border);
           th {
-            background-color: var(--background-dark);
-            color: var(--table-text-color);
+            background-color: var(--main-bg);
+            color: var(--placeholder-text);
             font-size: 12px !important;
             font-weight: 500;
             font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
@@ -526,13 +526,13 @@
         }
       }
       &__body {
-        background-color: var(--background-dark);
+        background-color: var(--main-bg);
         tr {
-          background-color: var(--background-dark);
+          background-color: var(--main-bg);
           border-bottom: 1px solid var(--header-border);
           td {
-            background-color: var(--background-dark);
-            color: var(--table-text-color);
+            background-color: var(--main-bg);
+            color: var(--placeholder-text);
             font-size: 13px !important;
             font-weight: 400;
             padding: calc(var(--gap) * 2.5) var(--gap) calc(var(--gap) * 2.5) var(--gap) !important;
@@ -552,7 +552,7 @@
               }
             }
             a {
-              color: var(--table-text-color);
+              color: var(--placeholder-text);
               text-decoration: none;
             }
           }

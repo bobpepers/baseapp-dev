@@ -1915,16 +1915,15 @@
   dependencies:
     stream "^0.0.2"
 
-"@material-ui/core@4.9.12":
-  version "4.9.12"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.9.12.tgz#0156d87c8b5db5a8aad992d6883a081a32684e2e"
-  integrity sha512-JtRm1iNw3PRg+bzULS1uRKhdIJ2jhKO3/5ptO6kTADARsv5KmhzMbM+PYmVS09qm9Yu3ilwka4dYrtjqea53Lw==
+"@material-ui/core@4.9.14":
+  version "4.9.14"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.9.14.tgz#4388f82cf94554cd3a935774fc12820f3c607a8a"
+  integrity sha512-71oYrOpInx5honJ9GzZlygPjmsFhn7Bui61/SWLJsPTkMnfvuZfU3qVqlEHjXyDsnZ+uKmLAIdsrOYnphJxxXw==
   dependencies:
     "@babel/runtime" "^7.4.4"
-    "@material-ui/react-transition-group" "^4.3.0"
-    "@material-ui/styles" "^4.9.10"
-    "@material-ui/system" "^4.9.10"
-    "@material-ui/types" "^5.0.1"
+    "@material-ui/styles" "^4.9.14"
+    "@material-ui/system" "^4.9.14"
+    "@material-ui/types" "^5.1.0"
     "@material-ui/utils" "^4.9.12"
     "@types/react-transition-group" "^4.2.0"
     clsx "^1.0.4"
@@ -1932,7 +1931,7 @@
     popper.js "^1.16.1-lts"
     prop-types "^15.7.2"
     react-is "^16.8.0"
-    react-transition-group "^4.3.0"
+    react-transition-group "^4.4.0"
 
 "@material-ui/icons@^4.9.1":
   version "4.9.1"
@@ -1952,26 +1951,16 @@
     prop-types "^15.7.2"
     react-is "^16.8.0"
 
-"@material-ui/react-transition-group@^4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@material-ui/react-transition-group/-/react-transition-group-4.3.0.tgz#92529142addb5cc179dbf42d246c7e3fe4d6104b"
-  integrity sha512-CwQ0aXrlUynUTY6sh3UvKuvye1o92en20VGAs6TORnSxUYeRmkX8YeTUN3lAkGiBX1z222FxLFO36WWh6q73rQ==
-  dependencies:
-    "@babel/runtime" "^7.5.5"
-    dom-helpers "^5.0.1"
-    loose-envify "^1.4.0"
-    prop-types "^15.6.2"
-
-"@material-ui/styles@^4.9.10":
-  version "4.9.10"
-  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.9.10.tgz#182ccdd0bc8525a459486499bbaebcd92b0db3ab"
-  integrity sha512-EXIXlqVyFDnjXF6tj72y6ZxiSy+mHtrsCo3Srkm3XUeu3Z01aftDBy7ZSr3TQ02gXHTvDSBvegp3Le6p/tl7eA==
+"@material-ui/styles@^4.9.14":
+  version "4.9.14"
+  resolved "https://registry.yarnpkg.com/@material-ui/styles/-/styles-4.9.14.tgz#0a9e93a2bf24e8daa0811411a6f3dabdafbe9a07"
+  integrity sha512-zecwWKgRU2VzdmutNovPB4s5LKI0TWyZKc/AHfPu9iY8tg4UoLjpa4Rn9roYrRfuTbBZHI6b0BXcQ8zkis0nzQ==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@emotion/hash" "^0.8.0"
-    "@material-ui/types" "^5.0.1"
+    "@material-ui/types" "^5.1.0"
     "@material-ui/utils" "^4.9.6"
-    clsx "^1.0.2"
+    clsx "^1.0.4"
     csstype "^2.5.2"
     hoist-non-react-statics "^3.3.2"
     jss "^10.0.3"
@@ -1984,19 +1973,20 @@
     jss-plugin-vendor-prefixer "^10.0.3"
     prop-types "^15.7.2"
 
-"@material-ui/system@^4.9.10":
-  version "4.9.10"
-  resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.9.10.tgz#5de6ec7bea0f222b10b45e5bd5bb8b9a7b938926"
-  integrity sha512-E+t0baX2TBZk6ALm8twG6objpsxLdMM4MDm1++LMt2m7CetCAEc3aIAfDaprk4+tm5hFT1Cah5dRWk8EeIFQYw==
+"@material-ui/system@^4.9.14":
+  version "4.9.14"
+  resolved "https://registry.yarnpkg.com/@material-ui/system/-/system-4.9.14.tgz#4b00c48b569340cefb2036d0596b93ac6c587a5f"
+  integrity sha512-oQbaqfSnNlEkXEziDcJDDIy8pbvwUmZXWNqlmIwDqr/ZdCK8FuV3f4nxikUh7hvClKV2gnQ9djh5CZFTHkZj3w==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/utils" "^4.9.6"
+    csstype "^2.5.2"
     prop-types "^15.7.2"
 
-"@material-ui/types@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-5.0.1.tgz#c4954063cdc196eb327ee62c041368b1aebb6d61"
-  integrity sha512-wURPSY7/3+MAtng3i26g+WKwwNE3HEeqa/trDBR5+zWKmcjO+u9t7Npu/J1r+3dmIa/OeziN9D/18IrBKvKffw==
+"@material-ui/types@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/types/-/types-5.1.0.tgz#efa1c7a0b0eaa4c7c87ac0390445f0f88b0d88f2"
+  integrity sha512-7cqRjrY50b8QzRSYyhSpx4WRw2YuO0KKIGQEVk5J8uoz2BanawykgZGoWEqKm7pVIbzFDN0SpPcVV4IhOFkl8A==
 
 "@material-ui/utils@^4.9.12":
   version "4.9.12"
@@ -4287,7 +4277,7 @@ clone-deep@^4.0.1:
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
 
-clsx@^1.0.2, clsx@^1.0.4:
+clsx@^1.0.4:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.0.tgz#62937c6adfea771247c34b54d320fb99624f5702"
   integrity sha512-3avwM37fSK5oP6M5rQ9CNe99lwxhXDOeSWVPAOYF6OazUTgZCMb0yWlJpmdD74REy1gkEaFiub2ULv4fq9GUhA==
@@ -4668,13 +4658,13 @@ create-react-context@^0.3.0:
     gud "^1.0.0"
     warning "^4.0.3"
 
-cross-fetch@0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-0.0.8.tgz#01ed94dc407df2c00f1807fde700a7cfa48a205c"
-  integrity sha1-Ae2U3EB98sAPGAf95wCnz6SKIFw=
+cross-fetch@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/cross-fetch/-/cross-fetch-3.0.4.tgz#7bef7020207e684a7638ef5f2f698e24d9eb283c"
+  integrity sha512-MSHgpjQqgbT/94D4CyADeNoYh52zMkCX4pcJvPP5WqPsLFMKjr2TCMg381ox5qI0ii2dPwaLx/00477knXqXVw==
   dependencies:
-    node-fetch "1.7.3"
-    whatwg-fetch "2.0.3"
+    node-fetch "2.6.0"
+    whatwg-fetch "3.0.0"
 
 cross-spawn@7.0.1:
   version "7.0.1"
@@ -9851,7 +9841,12 @@ node-fetch@1.6.3:
     encoding "^0.1.11"
     is-stream "^1.0.1"
 
-node-fetch@1.7.3, node-fetch@^1.0.1:
+node-fetch@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+
+node-fetch@^1.0.1:
   version "1.7.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.7.3.tgz#980f6f72d85211a5347c6b2bc18c5b84c3eb47ef"
   integrity sha512-NhZ4CsKx7cYm2vSrBAr2PvFOe6sWDf0UYLRqA6svUYg7+/TSfVAu49jYC4BvQ4Sms9SZgdqGBgroqfDhJdTyKQ==
@@ -12314,10 +12309,20 @@ react-transition-group@^2.3.1, react-transition-group@^2.5.0:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react-transition-group@^4.0.0, react-transition-group@^4.3.0:
+react-transition-group@^4.0.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.3.0.tgz#fea832e386cf8796c58b61874a3319704f5ce683"
   integrity sha512-1qRV1ZuVSdxPlPf4O8t7inxUGpdyO5zG9IoNfJxSO0ImU2A1YWkEQvFPuIPZmMLkg5hYs7vv5mMOyfgSkvAwvw==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
+    dom-helpers "^5.0.1"
+    loose-envify "^1.4.0"
+    prop-types "^15.6.2"
+
+react-transition-group@^4.4.0:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
+  integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==
   dependencies:
     "@babel/runtime" "^7.5.5"
     dom-helpers "^5.0.1"
@@ -13980,17 +13985,17 @@ svgo@^1.0.0, svgo@^1.2.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swagger-client@^3.10.1:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/swagger-client/-/swagger-client-3.10.1.tgz#c0180922e4c938a0e7b8adc44c56cf032ec9e804"
-  integrity sha512-dlmAUcJcCVcIWJCJPqEdfPGLdGvzvF/lh6Hx1KLt9Hwgb74uA9GugpJEk0UzwgsRMVqfkzW/DK5tGVyKPesiFg==
+swagger-client@^3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/swagger-client/-/swagger-client-3.10.2.tgz#660e5e0c4378de64ba5e7943977c9937ed3ba6c2"
+  integrity sha512-Ey/nTz1gr/rOuenuhVHYMYMofDwcniIYiT/SyjR40pOyMKX8NmKfMDFbcqkp62eldiqMx3BGv/GotcfWXCgU1w==
   dependencies:
     "@babel/runtime-corejs2" "^7.0.0"
     "@kyleshockey/object-assign-deep" "^0.4.0"
     btoa "1.1.2"
     buffer "^5.1.0"
     cookie "^0.3.1"
-    cross-fetch "0.0.8"
+    cross-fetch "^3.0.4"
     deep-extend "^0.5.1"
     encode-3986 "^1.0.0"
     fast-json-patch "~2.1.0"
@@ -14004,10 +14009,10 @@ swagger-client@^3.10.1:
     utf8-bytes "0.0.1"
     utfstring "^2.0.0"
 
-swagger-ui@3.25.1:
-  version "3.25.1"
-  resolved "https://registry.yarnpkg.com/swagger-ui/-/swagger-ui-3.25.1.tgz#c714295f9016a374a5e461b6f2eb8c071189dd04"
-  integrity sha512-VMVDb/oL9s45hGOCKsxstN0BUmnciYQ9h8UQINZJ7rdr2Bn6mUeY4xiNAEW8KfRK6WNe5m9aDNvBc91vqUt/Ew==
+swagger-ui@3.25.2:
+  version "3.25.2"
+  resolved "https://registry.yarnpkg.com/swagger-ui/-/swagger-ui-3.25.2.tgz#c633232d8422abaef67747a96a07ee5faf132c9f"
+  integrity sha512-ynuoi2NG4OVJZtcrrBEh0FNRZO//VxG9tJRylNQGQiBAvlq3QdwPOOEN4VQgjR6CBCtKryDOpD3+ZrujrrAYiA==
   dependencies:
     "@babel/runtime-corejs2" "^7.5.5"
     "@braintree/sanitize-url" "^4.0.0"
@@ -14041,7 +14046,7 @@ swagger-ui@3.25.1:
     reselect "^4.0.0"
     serialize-error "^2.1.0"
     sha.js "^2.4.11"
-    swagger-client "^3.10.1"
+    swagger-client "^3.10.2"
     url-parse "^1.4.7"
     xml-but-prettier "^1.0.1"
     zenscroll "^4.0.2"
@@ -14901,12 +14906,7 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.3, whatwg-encoding@^1.0.5:
   dependencies:
     iconv-lite "0.4.24"
 
-whatwg-fetch@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
-  integrity sha1-nITsLc9oGH/wC8ZOEnS0QhduHIQ=
-
-whatwg-fetch@>=0.10.0, whatwg-fetch@^3.0.0:
+whatwg-fetch@3.0.0, whatwg-fetch@>=0.10.0, whatwg-fetch@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.0.0.tgz#fc804e458cc460009b1a2b966bc8817d2578aefb"
   integrity sha512-9GSJUgz1D4MfyKU7KRqwOjXCXTqWdFNvEr7eUBYchQiVc744mqK/MzXPNR2WsPkmkOa4ywfg8C2n8h+13Bey1Q==

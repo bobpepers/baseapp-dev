@@ -1,9 +1,9 @@
 .profile {
-  background: var(--base-bright);
+  background: var(--main-bg);
   margin-top: 4px;
   &-title {
-    background-color: var(--email-confirmation-screen-title-background);
-    color: var(--bright-1);
+    background-color: var(--header);
+    color: var(--bright);
     padding: 20px 0;
     border-bottom: 2px solid var(--text);
     text-align: center;
@@ -19,7 +19,7 @@
     padding-top: 20px;
 
     &-title {
-      color: var(--profile-grey);
+      color: var(--placeholder-text);
       font-size: 14px;
     }
 
@@ -33,7 +33,7 @@
   flex-wrap: wrap;
   height: 100%;
   align-items: flex-start !important;
-  color: var(--profile-grey);
+  color: var(--placeholder-text);
   margin-bottom: 24px !important;
 
   h1, h2, h3, h4, h5, h6 {
@@ -64,7 +64,7 @@
 
     &__url {
       font-size: calc(var(--font-size) * 1.335);
-      color: var(--profile-url) !important;
+      color: var(--accent) !important;
     }
 
     &__pending {
@@ -85,7 +85,7 @@
 
   &__details {
     box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.1);
-    background-color: var(--profile-box);
+    background-color: var(--main-bg);
     width: 100%;
     margin-top: calc(var(--gap) * 2);
     border-radius: calc(var(--gap) * 0.66);
@@ -108,22 +108,22 @@
   &-header {
     display: flex;
     padding: 0 calc(var(--gap) * 3) 0 calc(var(--gap) * 3.4);
-    background: var(--profile-activity-header);
-    border-bottom: 1px solid var(--profile-activity-border);
-    color: var(--profile-activity-header-font);
+    background: var(--header);
+    border-bottom: 1px solid var(--header-border);
+    color: var(--header-text);
     border-radius: calc(var(--gap) * 0.66) calc(var(--gap) * 0.66) 0 0;
     margin-right: 0;
     margin-left: 0;
   }
 
   &__box {
-    box-shadow: var(--profile-box-shadow);
+    box-shadow: var(--main-bg-shadow);
     padding: calc(var(--gap) * 4) calc(var(--gap) * 4) calc(var(--gap) * 4) calc(var(--gap) * 1);
     width: 100%;
 
     &-header {
       display: flex;
-      border-bottom: 1px solid var(--profile-box-header-line);
+      border-bottom: 1px solid var(--main-bg-header-line);
 
       h1 {
         margin: 0;
@@ -149,7 +149,7 @@
   &__label {
     padding-top: calc(var(--gap) * 2);
     font-size: calc(var(--font-size) * 1.33);
-    color: var(--profile-grey);
+    color: var(--placeholder-text);
     padding-bottom: var(--gap);
 
     &-value {
@@ -160,13 +160,13 @@
       &__enabled {
         margin-top: calc(var(--gap) * 2);
         font-size: var(--font-size);
-        color: var(--color-green);
+        color: var(--green);
       }
 
       &__disabled {
         margin-top: calc(var(--gap) * 2);
         font-size: var(--font-size);
-        color: var(--color-red);
+        color: var(--red);
       }
     }
   }
@@ -183,7 +183,7 @@
       height: 25%;
 
       &__info-row {
-        color: var(--bright-1);
+        color: var(--bright);
         display: flex;
         margin-bottom: calc(var(--gap) * 2);
 
@@ -192,7 +192,7 @@
 
           &__image {
             border: none;
-            background-color: var(--profile-box-bg);
+            background-color: var(--main-bg-bg);
             color: var(--profile-accent-color);
           }
         }
@@ -260,7 +260,7 @@
 
     &__verification {
       .pg-profile-page__box-header {
-        color: var(--bright-1);
+        color: var(--bright);
 
         .pg-profile-page__row > .pg-profile-page__col:last-child {
           display: flex;
@@ -288,7 +288,7 @@
       }
 
       .pg-profile-page__row:last-child {
-        border-top: 1px solid var(--profile-box-header-line);
+        border-top: 1px solid var(--main-bg-header-line);
         padding-top: calc(var(--gap) * 3);
       }
     }
@@ -326,7 +326,7 @@
     width: 100%;
     box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.1);
     margin-top: calc(var(--gap) * 2);
-    background: var(--profile-box);
+    background: var(--main-bg);
     border-radius: calc(var(--gap) * 0.66);
 
     .cr-table {
@@ -357,7 +357,7 @@
       }
 
       tr, td {
-        background: var(--profile-box);
+        background: var(--main-bg);
         border-top: 1px solid var(--header-border);
       }
 
@@ -387,7 +387,7 @@
     width: 100%;
     box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.1);
     margin-top: calc(var(--gap) * 2);
-    background: var(--profile-box);
+    background: var(--main-bg);
     border-radius: calc(var(--gap) * 0.66);
 
     .cr-table {
@@ -455,11 +455,11 @@
       text-transform: capitalize;
 
       &__active {
-        color: var(--color-green);
+        color: var(--green);
       }
 
       &__disabled {
-        color: var(--color-red)
+        color: var(--red)
       }
     }
 
@@ -604,7 +604,7 @@
 
     &::before,
     &::after {
-      background: var(--text-table-grey);
+      background: var(--placeholder-text);
       content: '';
       position: absolute;
       top: 55%;
@@ -636,7 +636,7 @@
   }
 
   &__text-success {
-    color: var(--color-white);
+    color: var(--bright);
     width: 100%;
     position: relative;
 
@@ -656,7 +656,7 @@
     width: calc(var(--gap) * 69.3);
 
     &-header {
-      background-color: var(--email-confirmation-screen-title-background);
+      background-color: var(--header);
       margin-bottom: 0;
     }
 
@@ -664,9 +664,9 @@
       padding: 0 calc(var(--gap) * 2.23) !important;
 
       fieldset {
-        color: var(--kyc-grey);
+        color: var(--placeholder-text);
         border-radius: calc(var(--gap) * 0.66);
-        border: 1px solid var(--kyc-grey);
+        border: 1px solid var(--placeholder-text);
         box-sizing: border-box;
         height: calc(var(--gap) * 8.16);
         margin-top: calc(var(--gap) * 3.6);
@@ -691,7 +691,7 @@
   &__vertical-line {
     min-height: calc(var(--gap) * 3.2);
     height: calc(var(--gap) * 6.4);
-    background: var(--profile-box-header-line);
+    background: var(--main-bg-header-line);
     width: calc(var(--gap) * 0.5);
   }
 
@@ -702,7 +702,7 @@
   }
 
   &__btn-secondary {
-    color: var(--color-white);
+    color: var(--bright);
     max-width: calc(var(--gap) * 25);
 
     &:visited {
@@ -711,17 +711,17 @@
 
     &__active {
       &:visited {
-        color: var(--color-white);
+        color: var(--bright);
       }
     }
 
     &:active {
-      color: var(--color-white);
+      color: var(--bright);
     }
 
     &:hover {
       color: var(--white);
-      background: var(--profile-btn);
+      background: var(--button-normal);
     }
 
     &:focus {
@@ -786,7 +786,7 @@
 
 .cr-modal {
   .cr-email-form {
-    background: var(--email-form-bg);
+    background: var(--main-bg);
     min-height: calc(var(--big-gap) * 5);
     width: calc(var(--big-gap) * 7.06);
 
@@ -797,18 +797,18 @@
     &__options-group {
       width: 100%;
       height: calc(var(--big-gap) * 0.97);
-      border-bottom: 2px solid var(--email-form-border);
+      border-bottom: 2px solid var(--text);
     }
 
     &__label {
-      background: var(--email-form-bg);
+      background: var(--main-bg);
       position: absolute;
       top: 0px;
     }
 
     &__input {
       input {
-        color: var(--color-white);
+        color: var(--bright);
         font-size: calc(var(--gap) * 2.33);
         border: 1px solid var(--input-block-border-color);
         border-radius: calc(var(--gap) * 0.66);
@@ -848,7 +848,7 @@
 
     &__button {
       color: var(--white);
-      background: var(--button-primary);
+      background: var(--button-normal);
       border-radius: calc(var(--gap) * 0.5);
       font-size: calc(var(--gap) * 2.66);
       width: calc(var(--big-gap) * 6.3);

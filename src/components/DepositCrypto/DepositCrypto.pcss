@@ -1,6 +1,6 @@
 .cr-deposit-crypto {
   background: transparent;
-  color: var(--table-text-color);
+  color: var(--placeholder-text);
   display: flex;
   font-size: var(--font-size);
   padding: calc(var(--gap) * 3);
@@ -31,7 +31,7 @@
 
     &-title {
       background-color: inherit;
-      color: var(--table-text-color);
+      color: var(--placeholder-text);
       font-size: calc(var(--gap) * 2);
       margin-left: var(--gap);
     }
@@ -42,7 +42,7 @@
       .input-group {
         &:first-child {
           &:focus-within {
-            border: 1px solid var(--color-blue);
+            border: 1px solid var(--accent);
           }
         }
       }
@@ -55,7 +55,7 @@
 
         input {
           background: unset;
-          color: var(--table-text-color);
+          color: var(--placeholder-text);
         }
 
         .cr-copyable-text-field__button {
@@ -75,7 +75,7 @@
 
       &:focus-within {
         legend {
-          color: var(--color-blue);
+          color: var(--accent);
         }
       }
 

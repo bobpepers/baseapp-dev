@@ -4,14 +4,14 @@
   width: 535px;
 
   &__header {
-    border-bottom: 2px solid var(--email-form-border);
+    border-bottom: 2px solid var(--text);
     background: var(--header);
     height: calc(var(--gap) * 9.66);
     text-transform: uppercase;
     line-height: calc(var(--gap) * 9.66);
     font-style: normal;
     font-size: calc(var(--gap) * 2.33);
-    color: var(--bright-1);
+    color: var(--bright);
 
     img {
       cursor: pointer;
@@ -36,7 +36,7 @@
         left: 5%;
         z-index: 5;
         top: -10px;
-        background: var(--base-bright)
+        background: var(--main-bg)
       }
 
       &:focus-within {
@@ -79,15 +79,15 @@
 
       &:focus-within {
         overflow: hidden;
-        border: 1px solid var(--color-blue) !important;
+        border: 1px solid var(--accent) !important;
         border-radius: calc(var(--gap) * 0.66);
         legend {
-          color: var(--color-blue) !important;
+          color: var(--accent) !important;
         }
       }
 
       .cr-deposit-crypto__copyable-title {
-        background: var(--base-bright);
+        background: var(--main-bg);
         margin-top: calc(var(--gap) * -1.5);
         position: absolute;
         width: max-content;
@@ -119,9 +119,9 @@
 
   &__body {
     fieldset {
-      color: var(--kyc-grey);
+      color: var(--placeholder-text);
       border-radius: calc(var(--gap) * 0.6);
-      border: 1px solid var(--kyc-grey);
+      border: 1px solid var(--placeholder-text);
       box-sizing: border-box;
       padding-left: 0;
       height: calc(var(--gap) * 6.56);
@@ -135,7 +135,7 @@
       }
 
       input {
-        color: var(--color-white);
+        color: var(--bright);
         background: transparent;
         border: unset;
         bottom: 0;
@@ -209,7 +209,7 @@
 
       input {
         font-size: var(--font-size);
-        color: var(--base-3);
+        color: var(--placeholder-text);
         text-align: left;
         width: 100%;
       }
@@ -217,14 +217,14 @@
   }
 
   &__form {
-    background: var(--base-bright);
+    background: var(--main-bg);
     box-shadow: 1px 1px 5px rgba(46, 76, 128, 0.2);
 
     .cr-copyable-text-field {
       border: none;
 
       .cr-button {
-        color: var(--bright-1);
+        color: var(--bright);
         width: 55%;
       }
 
@@ -243,13 +243,13 @@
   }
 
   .cr-button {
-    background: var(--button-primary);
+    background: var(--button-normal);
     color: var(--white);
     font-size: calc(var(--gap) * 2.66);
   }
 
   .cr-copyable-text-field {
-    border-color: var(--sign-in-input-border-color);
+    border-color: var(--placeholder-text);
 
     input {
       font-size: var(--font-size);

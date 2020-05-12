@@ -14,11 +14,11 @@
     max-width: 95%;
 
     input {
-      color: var(--orders-text-primary-color);
+      color: var(--bright);
       text-align: left;
 
       &:placeholder-shown {
-        color: var(--orders-placeholder-color) !important;
+        color: var(--placeholder-text) !important;
       }
     }
   }
@@ -46,7 +46,7 @@
           width: 100%;
 
           &__active {
-            color: var(--orders-text-primary-color);
+            color: var(--bright);
             font-weight: 600;
           }
 
@@ -68,8 +68,8 @@
           }
 
           &__dropdown__label {
-            color: var(--order-input-input-color);
-            background-color: var(--base-bright);
+            color: var(--bright);
+            background-color: var(--main-bg);
             font-size: calc(var(--gap) * 1.5);
             margin-left: calc(var(--gap) * 1.75);
             padding: 0 calc(var(--gap) * 0.75);
@@ -78,26 +78,26 @@
 
           .cr-dropdown {
             &__input {
-              background-color: var(--base-bright);
+              background-color: var(--main-bg);
               border-radius: calc(var(--gap) * 0.5);
               border: solid 1px var(--orders-border-color);
               height: calc(var(--gap) * 5.875);
   
               &--open {
-                background-color: var(--base-bright);
+                background-color: var(--main-bg);
                 border: solid 1px var(--orders-border-color);
                 border-radius: calc(var(--gap) * 0.5);
-                color: var(--background-dropdown-text);
+                color: var(--placeholder-text);
                 height: calc(var(--gap) * 5.875);
               }
   
               &-label {
-                color: var(--bright-1);
+                color: var(--bright);
                 font-size: calc(var(--gap) * 1.75);
                 font-weight: var(--font-weight);
                 line-height: calc(var(--gap) * 6.98);
                 margin-left: calc(var(--gap) * 2);
-                text-shadow: 0 0 0 var(--base-3);
+                text-shadow: 0 0 0 var(--placeholder-text);
               }
   
               &-icon {
@@ -112,7 +112,7 @@
             }
       
             &__list {
-              color: var(--base-3);
+              color: var(--placeholder-text);
               border: 0px;
               border-radius: calc(var(--gap) * 0.5);
               background: var(--background-dropdown);
@@ -125,7 +125,7 @@
                 height: calc(var(--gap) * 4.875) !important;
 
                 &:hover {
-                  color: var(--color-white);
+                  color: var(--bright);
                   background: var(--background-dropdown-hover);
                 }
                 &-label {
@@ -149,26 +149,26 @@
               padding: calc(var(--gap) * 0.75) calc(var(--gap) * 1.5);
 
               &__label {
-                background-color: var(--base-bright);
+                background-color: var(--main-bg);
                 font-size: calc(var(--gap) * 1.5);
                 margin-left: calc(var(--gap) * -0.35);
                 padding: 0 calc(var(--gap) * 0.75);
                 width: max-content;
                 position: absolute;
                 top: -10px;
-                color: var(--order-input-input-color);
+                color: var(--bright);
               }
 
               &__input {
                 margin-left: calc(var(--gap) * 0.25);
 
                 input {
-                  color: var(--orders-text-primary-color);
+                  color: var(--bright);
                   font-size: calc(var(--gap) * 1.75);
                 }
 
                 input::placeholder {
-                  color: var(--orders-placeholder-color);
+                  color: var(--placeholder-text);
                 }
               }
             }
@@ -180,7 +180,7 @@
               margin-top: calc(var(--gap) * 1.15);
 
               span {
-                color: var(--orders-placeholder-color);
+                color: var(--placeholder-text);
                 vertical-align: bottom;
 
                 &::before {
@@ -225,11 +225,11 @@
             }
 
             &__label {
-              color: var(--orders-text-secondary-color);
+              color: var(--header-text);
             }
 
             &__content {
-              color: var(--orders-text-primary-color);
+              color: var(--bright);
             }
           }
 
@@ -323,7 +323,7 @@
           padding-left: calc(var(--gap) * 2);
 
           &__active {
-            color: var(--title-component-color);
+            color: var(--header-text);
             font-weight: var(--font-weight);
           }
 
@@ -434,7 +434,7 @@
 
               input, &__price {
                 font-size: calc(var(--gap) * 2.34);
-                color: var(--order-input-input-color);
+                color: var(--bright);
               }
             }
           }

@@ -17,7 +17,7 @@
       &:hover {
         color: var(--text-muted);
         text-decoration: underline;
-        text-decoration-color: var(--base-3);
+        text-decoration-color: var(--placeholder-text);
       }
       img {
         margin: 2px;
@@ -33,12 +33,12 @@
     &-row {
       display: inline-block;
       margin-top: calc(var(--gap) * 2);
-      color: var(--kyc-grey);
+      color: var(--placeholder-text);
 
       fieldset {
-        color: var(--kyc-grey);
+        color: var(--placeholder-text);
         border-radius: 4px;
-        border: 1px solid var(--kyc-grey);
+        border: 1px solid var(--placeholder-text);
         box-sizing: border-box;
         height: 49px;
         padding-left: calc(var(--gap) * 1.5);
@@ -66,7 +66,7 @@
         }
 
         legend {
-          background-color: var(--base-bright);
+          background-color: var(--main-bg);
           position:absolute;
           top: -8px;
           font-size: calc(var(--gap) * 2);
@@ -75,7 +75,7 @@
         }
 
         input {
-          color: var(--color-white);
+          color: var(--bright);
           background: transparent;
           border: unset;
           bottom: 0;
@@ -116,7 +116,7 @@
         }
 
         &-documents {
-          border: 1px dashed var(--kyc-grey);
+          border: 1px dashed var(--placeholder-text);
           box-sizing: border-box;
           margin-top: calc(var(--gap) * 1.2);
           margin-bottom: calc(var(--gap) * 1.2);
@@ -155,7 +155,7 @@
               text-align: center;
 
               .active {
-                color: var(--color-white);
+                color: var(--bright);
               }
 
               .muted {
@@ -181,7 +181,7 @@
           margin-left: calc(var(--gap) * 1.42);
           margin-top: calc(var(--gap) * (-1.33));
           padding: 0 var(--gap);
-          background-color: var(--base-bright);
+          background-color: var(--main-bg);
           z-index: 1;
         }
 

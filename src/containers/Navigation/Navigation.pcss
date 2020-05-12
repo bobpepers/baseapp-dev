@@ -1,6 +1,6 @@
 .menu-icon {
   font-size: 32px !important;
-  color: var(--navbar-text-color);
+  color: var(--navbar-text);
 
   &-wrapper {
     text-align: center;
@@ -29,7 +29,7 @@
   display: block;
   margin-right: 18px;
   &-item {
-    background: var(--navbar-text-color);
+    background: var(--navbar-text);
     display: block;
     width: 18px;
     height: 2px;
@@ -63,7 +63,7 @@
   }
   a {
     text-decoration: none;
-    color: var(--profile-grey);
+    color: var(--placeholder-text);
   }
 
   &-profile {
@@ -72,7 +72,7 @@
     align-items: center;
     padding: 7px 0;
     margin-bottom: 7px;
-    border-bottom: 1px solid var(--profile-activity-border);
+    border-bottom: 1px solid var(--header-border);
 
     a {
       width: 100%;
@@ -87,7 +87,7 @@
 
       &:hover {
         background-color: var(--nav-item-hover) !important;
-        color: var(--color-white);
+        color: var(--bright);
       }
 
       &-img {
@@ -104,19 +104,19 @@
       align-items: center;
       &-text {
         margin: 0 6px 0 0;
-        color: var(--profile-grey);
+        color: var(--placeholder-text);
       }
       &-value {
         font-weight: 600;
         margin: 0 6px 0 0;
         font-size: calc(var(--font-size) * 1.16);
-        color: var(--profile-grey);
+        color: var(--placeholder-text);
       }
     }
   }
 
   .route-selected {
-    color: var(--color-white);
+    color: var(--bright);
 
     .pg-navigation-wrapper-nav-item,
     .pg-navigation-wrapper-profile-link {
@@ -126,7 +126,7 @@
 
   &-nav {
     padding: 0 0 11px;
-    border-bottom: 1px solid var(--profile-activity-border);
+    border-bottom: 1px solid var(--header-border);
     &-item {
       display: flex;
       justify-content: flex-start;
@@ -135,7 +135,7 @@
 
       &:hover {
         background-color: var(--nav-item-hover) !important;
-        color: var(--color-white);
+        color: var(--bright);
       }
       &-text {
         margin: 0;
@@ -162,14 +162,14 @@
         background-color: var(--nav-item-hover) !important;
 
         p {
-          color: var(--color-white);
+          color: var(--bright);
         }
       }
       &-img {
         margin-right: 14px;
       }
       &-text {
-        color: var(--profile-grey);
+        color: var(--placeholder-text);
         margin: 0;
         font-weight: 600;
         font-size: calc(var(--font-size) * 1.16);
@@ -215,7 +215,7 @@
   .dropdown-menu {
     position: absolute;
     margin-right: 100px;
-    background-color: var(--button-primary);
+    background-color: var(--button-normal);
     cursor: pointer !important;
     border: 1px solid rgba(7, 7, 7, 0.15);
     border-radius: var(--gap) * 0.5;
@@ -235,13 +235,13 @@
         opacity: 0,5;
         a {
           opacity: 1;
-          color: var(--background-dropdown-hover-text);
+          color: var(--bright);
         }
       }
 
       a, span {
         text-decoration: none;
-        color: var(--background-dropdown-text);
+        color: var(--placeholder-text);
         font-size: 14px;
       }
     }
@@ -260,7 +260,7 @@
         }
 
         .bootstrap-dropdown-menu {
-          color: var(--color-white);
+          color: var(--bright);
           img {
             margin-right: 5px;
           }
@@ -345,7 +345,7 @@
     user-select: none;
 
     .icon {
-      color: var(--navbar-text-color);
+      color: var(--navbar-text);
       margin-left: calc(var(--gap) * 0.5);
     }
 
@@ -365,7 +365,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  color: var(--color-white);
+  color: var(--bright);
 
   img {
     margin-right: 5px;

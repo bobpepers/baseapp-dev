@@ -4,14 +4,14 @@
   margin-top: 4px;
 
   &-container {
-    background: var(--base-bright);
+    background: var(--main-bg);
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.25);
     border-radius: 3px;
   }
 
   &-title {
-    background-color: var(--email-confirmation-screen-title-background);
-    color: var(--bright-1);
+    background-color: var(--header);
+    color: var(--bright);
     padding: 20px 0;
     border-bottom: 2px solid var(--text);
     text-align: center;
@@ -46,14 +46,14 @@
     width: calc(var(--gap) * 70.66);
   }
   .cr-sign-up-form {
-    background: var(--base-bright);
+    background: var(--main-bg);
     margin: 0 auto;
     border-radius: calc(var(--gap) * 0.66);
 
     &__options-group {
       width: 100%;
       height: calc(var(--big-gap) * 0.97);
-      border-bottom: 2px solid var(--sign-in-text);
+      border-bottom: 2px solid var(--text);
     }
 
     &__form-content {
@@ -68,7 +68,7 @@
       background: var(--header);
       .__selected {
         border-bottom: 2px solid var(--sign-in-accent);
-        color: var(--color-white);
+        color: var(--bright);
       }
     }
 
@@ -83,8 +83,8 @@
     }
 
     .cr-button {
-      color: var(--color-white);
-      background: var(--button-primary) !important;
+      color: var(--bright);
+      background: var(--button-normal) !important;
       border-radius: calc(var(--gap) * 0.5);
       font-size: calc(var(--gap) * 2.66);
       margin-top: calc(var(--gap) * 1.55);
@@ -110,7 +110,7 @@
       margin: calc(var(--gap) * 6.66) !important;
     }
     &__label {
-      background: var(--base-bright);
+      background: var(--main-bg);
       color: var(--text-muted);
       font-size: calc(var(--gap) * 2);
       top: calc(var(--gap) * (-1.33));
@@ -118,7 +118,7 @@
     }
     &__input {
       input {
-        color: var(--color-white);
+        color: var(--bright);
         font-size: calc(var(--gap) * 2.33);
         border: 1px solid var(--input-block-border-color);
         border-radius: calc(var(--gap) * 0.66);
@@ -139,18 +139,18 @@
     .cr-checkbox {
       padding-left: calc(2.6 * var(--checkbox-general-intent));
       &__checkitem {
-        border-color: var(--checkbox-border-color);
+        border-color: var(--placeholder-text);
         &::after {
-          border-color: var(--color-white);
+          border-color: var(--bright);
         }
       }
       &__label {
-        color: var(--c--base-9);
+        color: var(--c--placeholder-text);
         font-size: calc(var(--gap) * 2.33);
       }
     }
     &__error {
-      color: var(--color-red);
+      color: var(--red);
     }
     &__recaptcha {
       position: relative;
@@ -171,10 +171,10 @@
     border-radius: calc(var(--gap) * 0.66);
     min-width: 30% !important;
     width: calc(var(--big-gap) * 10);
-    background-color: var(--background-dark);
+    background-color: var(--main-bg);
     .cr-modal__container-header {
-      border-bottom: 2px solid var(--sign-up-modal-border);
-      color: var(--bright-1);
+      border-bottom: 2px solid var(--header);
+      color: var(--bright);
       border-top-left-radius: calc(var(--gap) * 0.66);
       border-top-right-radius: calc(var(--gap) * 0.66);
       text-align: center;
@@ -185,7 +185,7 @@
       }
     }
     .cr-modal__container-content {
-      color: var(--sign-up--modal-text);
+      color: var(--placeholder-text);
       padding: 0 calc(var(--gap) * 8.33);
       margin-bottom: 0;
     }

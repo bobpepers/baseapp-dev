@@ -6,11 +6,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 14px;
-    border: 1px solid var(--trading-header-selector-title);
+    border: 1px solid var(--placeholder-text);
     border-radius: 3px;
     margin-left: 26px;
     &-value {
-      color: var(--trading-header-selector-title);
+      color: var(--placeholder-text);
       margin: 0 14px 0 0;
     }
   }
@@ -23,7 +23,7 @@
       flex-flow: column;
       justify-content: flex-end;
       &-text {
-        color: var(--profile-grey);
+        color: var(--placeholder-text);
         text-align: right;
         margin: 5px 0 0;
         font-size: calc(var(--font-size) * 0.85);
@@ -34,10 +34,10 @@
         text-align: right;
         margin: 0;
         &-positive {
-          color: var(--trading-header-positive);
+          color: var(--green);
         }
         &-negative {
-          color: var(--trading-header-negative);
+          color: var(--red);
         }
       }
     }
@@ -140,7 +140,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: var(--trading-header-btn-close);
+      background: var(--header);
       border-radius: calc(var(--big-gap) * 0.07);
       position: relative;
 
@@ -281,13 +281,13 @@
 
     &-progress {
         &-positive {
-            color: var(--trading-header-positive);
+            color: var(--green);
             font-size: var(--trading-header-font-size-bigger);
             width: max-content;
         }
 
         &-negative {
-            color: var(--trading-header-negative);
+            color: var(--red);
             font-size: var(--trading-header-font-size-bigger);
             width: max-content;
         }
@@ -347,7 +347,7 @@
 }
 
 .pg-trading-header-selector {
-  background-color: var(--trading-header-selector-background);
+  background-color: var(--main-bg);
   border-radius: 4px;
   height: 100%;
   display: flex;
@@ -368,7 +368,7 @@
   &-search {
     height: calc(var(--big-gap) * 0.7);
     margin: 0 6px 6px 6px;
-    border: solid 1px var(--trading-header-search-border);
+    border: solid 1px var(--header-border);
     border-radius: 4px;
     display: flex;
     overflow: hidden;
@@ -379,7 +379,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      border-right: solid 1px var(--trading-header-search-border);
+      border-right: solid 1px var(--header-border);
     }
 
     &-field {
@@ -387,7 +387,7 @@
       border: none;
       outline: none;
       background: none;
-      color: var(--bright-1);
+      color: var(--bright);
       padding: 0 calc(var(--big-gap) * 0.1);
       font-size: calc(var(--big-gap) * 0.25);
       line-height: calc(var(--big-gap) * 0.25);
@@ -396,13 +396,13 @@
 
   &-market {
     font-size: var(--trading-header-font-size-bigger);
-    color: var(--trading-header-white);
+    color: var(--bright);
     padding: 0 calc(var(--big-gap) * 0.23);
   }
 
   &-title {
     font-size: var(--trading-header-font-size);
-    color: var(--trading-header-selector-title);
+    color: var(--placeholder-text);
     padding-left: calc(var(--big-gap) * 0.95);
     white-space: nowrap;
   }
@@ -580,8 +580,8 @@
     display: flex;
     overflow: hidden;
     flex-direction: row;
-    background-color: var(--trading-header-selector-background);
-    border-bottom: 1px solid var(--trading-header-selector-border);
+    background-color: var(--main-bg);
+    border-bottom: 1px solid var(--header-border);
     z-index: 9999;
     position: sticky;
     top: 0;
@@ -595,13 +595,13 @@
     padding: 0 calc(var(--big-gap) * 0.3);
     color: var(--trading-header-fastsearch-button-color);
     font-size: var(--trading-header-font-size);
-    background-color: var(--trading-header-selector-background);
-    border-bottom: 2px solid var(--trading-header-selector-background);
+    background-color: var(--main-bg);
+    border-bottom: 2px solid var(--main-bg);
     cursor: pointer;
 
     &-active {
-      color: var(--trading-header-fastsearch-button-color-active);
-      border-bottom: 2px solid var(--trading-header-fastsearch-button-border-active);
+      color: var(--bright);
+      border-bottom: 2px solid var(--accent);
     }
   }
 }
@@ -613,7 +613,7 @@
 
   .cr-table thead th {
     top: 0;
-    background-color: var(--trading-header-list-background);
+    background-color: var(--trading-header-background);
   }
 
   .cr-table tbody td {
@@ -624,7 +624,7 @@
     background-color: var(--nav-item-hover);
 
     &:first-child {
-      color: var(--bright-1);
+      color: var(--bright);
     }
   }
 
@@ -643,15 +643,15 @@
   }
 
   &__positive {
-    color: var(--trading-header-positive);
+    color: var(--green);
   }
 
   &__negative {
-    color: var(--trading-header-negative);
+    color: var(--red);
   }
 
   &__header-selected {
-    color: var(--bright-1);
+    color: var(--bright);
   }
 
   .sort-icon {
@@ -663,7 +663,7 @@
       opacity: 1;
 
       path {
-        fill: var(--bright-1);
+        fill: var(--bright);
       }
     }
   }

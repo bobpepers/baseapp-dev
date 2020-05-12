@@ -1,6 +1,6 @@
 .pg-orders-tab {
   align-items: flex-start !important;
-  background: var(--base-bright);
+  background: var(--main-bg);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -20,7 +20,7 @@
 
     .cr-tab-panel__navigation-container {
       position: relative;
-      background: var(--table-dark-header-color);
+      background: var(--header);
       border-bottom: 1px solid var(--header-border);
       border-top-left-radius: calc(var(--gap) * 0.66);
       border-top-right-radius: calc(var(--gap) * 0.66);
@@ -42,7 +42,7 @@
   .pg-history-elem {
     &__empty {
       text-align: center;
-      color: var(--table-text-color);
+      color: var(--placeholder-text);
     }
 
     &__pagination {
@@ -82,8 +82,8 @@
             border-bottom: 1px solid var(--header-border);
 
             th {
-              background-color: var(--background-dark);
-              color: var(--table-text-color);
+              background-color: var(--main-bg);
+              color: var(--placeholder-text);
               font-size: 12px !important;
               font-weight: 500;
               font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
@@ -105,15 +105,15 @@
         }
 
         &__body {
-          background-color: var(--background-dark);
+          background-color: var(--main-bg);
 
           tr {
-            background-color: var(--background-dark);
+            background-color: var(--main-bg);
             border-bottom: 1px solid var(--header-border);
 
             td {
-              background-color: var(--background-dark);
-              color: var(--table-text-color);
+              background-color: var(--main-bg);
+              color: var(--placeholder-text);
               font-size: 13px !important;
               font-weight: 400;
               padding: calc(var(--gap) * 2.7) 0 calc(var(--gap) * 2.7) !important;
@@ -138,12 +138,12 @@
               }
 
               a {
-                color: var(--table-text-color);
+                color: var(--placeholder-text);
                 text-decoration: none;
               }
 
               .close {
-                color: var(--table-text-color);
+                color: var(--placeholder-text);
               }
             }
           }
@@ -156,11 +156,11 @@
     }
 
     &-canceled {
-      color: var(--color-red);
+      color: var(--red);
     }
 
     &-opened {
-      color: var(--color-green);
+      color: var(--green);
     }
   }
 
@@ -170,13 +170,13 @@
     margin-top: 1%;
     cursor: pointer;
     text-align: right;
-    color: var(--base-new);
+    color: var(--placeholder-text);
     font-size: 12px !important;
     font-weight: 500;
     font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
 
     &:hover {
-      color: var(--color-white);
+      color: var(--bright);
     }
   }
 
@@ -189,7 +189,7 @@
 
     &::before,
     &::after {
-      background: var(--text-table-grey);
+      background: var(--placeholder-text);
       content: '';
       position: absolute;
       top: 65%;
@@ -213,13 +213,13 @@
     margin-top: 1%;
     cursor: pointer;
     text-align: right;
-    color: var(--base-new);
+    color: var(--placeholder-text);
     font-size: 12px !important;
     font-weight: 500;
     font-family: "Open Sans", "Helvetica", "Arial", sans-serif;
 
     &:hover {
-      color: var(--color-white);
+      color: var(--bright);
     }
   }
 

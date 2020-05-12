@@ -15,11 +15,11 @@
     }
 
     &::-webkit-scrollbar-track {
-      background-color: var(--kyc-grey);
+      background-color: var(--placeholder-text);
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: var(--color-blue);
+      background-color: var(--accent);
     }
   }
 
@@ -43,13 +43,13 @@
         margin-top: 0 !important;
         height: calc(var(--gap) * 10.5)!important;
         margin-bottom: calc(var(--gap) * 0.5);
-        border: 1px solid var(--kyc-active-color) !important;
+        border: 1px solid var(--accent) !important;
       }
 
       fieldset {
-        color: var(--kyc-grey);
+        color: var(--placeholder-text);
         border-radius: calc(var(--gap) * 0.6);
-        border: 1px solid var(--kyc-grey);
+        border: 1px solid var(--placeholder-text);
         box-sizing: border-box;
         height: calc(var(--gap) * 8.16);
         width: 95%;
@@ -74,7 +74,7 @@
           position: absolute;
           margin-left: calc(var(--gap) * 1.42);
           padding: 0 calc(var(--gap) * 0.33);
-          background-color: var(--base-bright);
+          background-color: var(--main-bg);
           margin-top: calc(var(--gap) * -1.5);
           z-index: 1;
         }
@@ -102,7 +102,7 @@
         }
 
         legend {
-          background-color: var(--base-bright);
+          background-color: var(--main-bg);
           position:absolute;
           top: calc(var(--gap) * -1.5);
           left: 5%;
@@ -113,7 +113,7 @@
 
         input {
           width: 100%;
-          color: var(--color-white);
+          color: var(--bright);
           background: transparent;
           border: unset;
           bottom: 0;
@@ -141,7 +141,7 @@
         }
 
         &:focus-within {
-          color: var(--color-blue);
+          color: var(--accent);
         }
       }
     }

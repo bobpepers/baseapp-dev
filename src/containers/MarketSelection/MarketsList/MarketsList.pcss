@@ -14,11 +14,11 @@
 
   .cr-table thead th {
     top: 0;
-    background-color: var(--market-selection-header-th-background);
+    background-color: var(--market-selector-td-bg);
   }
 
   .cr-table tbody td {
-    background-color: var(--market-selection-header-td-background);
+    background-color: var(--market-selector-th-bg);
     width: calc(100% / 4);
   }
 
@@ -26,7 +26,7 @@
     background-color: var(--nav-item-hover);
 
     &:first-child {
-      color: var(--bright-1);
+      color: var(--bright);
     }
   }
 
@@ -45,15 +45,15 @@
   }
 
   &__positive {
-    color: var(--trading-header-positive);
+    color: var(--green);
   }
 
   &__negative {
-    color: var(--trading-header-negative);
+    color: var(--red);
   }
 
   &__header-selected {
-    color: var(--bright-1);
+    color: var(--bright);
   }
 
   .sort-icon {
@@ -65,7 +65,7 @@
       opacity: 1;
 
       path {
-        fill: var(--bright-1);
+        fill: var(--bright);
       }
     }
   }

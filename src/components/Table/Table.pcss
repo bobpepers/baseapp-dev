@@ -4,7 +4,7 @@
 
 .cr-table {
   border-collapse: collapse;
-  background: var(--table-background);
+  background: var(--market-selector-td-bg);
   text-align: center;
   position: relative;
   width: 100%;
@@ -38,13 +38,13 @@
     }
 
     tr:nth-child(even) {
-      background-color: var(--table-even-row-background);
+      background-color: var(--main-bg);
     }
   }
 
   &__row {
     &--selected {
-      background: var(--base-3);
+      background: var(--placeholder-text);
     }
   }
 }
@@ -83,7 +83,7 @@
   background: var(--transparent);
 
   &--active {
-    color: var(--base-bright);
+    color: var(--main-bg);
   }
 }
 
@@ -94,7 +94,7 @@
 
 .cr-table-header__content {
   height: calc(var(--gap) * 6);
-  background: var(--table-dark-header-color);
+  background: var(--header);
   padding: 10px 0 0 10px;
   align-items: center;
   display: flex;
@@ -107,6 +107,6 @@
 
 .cr-title-component {
   background: var(--transparent);
-  color: var(--title-component-color);
+  color: var(--header-text);
   font-size: calc(var(--gap) * 4);
 }
