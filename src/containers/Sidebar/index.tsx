@@ -86,11 +86,11 @@ class SidebarContainer extends Component<Props, State> {
         });
 
         return (
-            <div ref={this.setWrapperRef} className={`pg-sidebar-wrapper ${lightBox} pg-sidebar-wrapper--${isActive ? 'active' : 'hidden'}`}>
-                <div className="pg-sidebar-wrapper-nav">
+            <div ref={this.setWrapperRef} className={`mobile-navigation ${lightBox} mobile-navigation-${isActive ? 'active' : 'hidden'}`}>
+                <div className="mobile-navigation-nav">
                     {pgRoutes(isLoggedIn).map(this.renderNavItems(address))}
                 </div>
-                <div className="pg-sidebar-wrapper-lng">
+                <div className="mobile-navigation-lng">
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-menu-language-container">
                         <Dropdown>
                             <Dropdown.Toggle variant="primary" id={languageClassName}>
@@ -147,11 +147,11 @@ class SidebarContainer extends Component<Props, State> {
                 onClick={ () => { imgName === 'logout' ? this.props.logoutFetch() : handleLinkChange(); } }
                 className={`${isActive && 'route-selected'}`}
             >
-                <div className="pg-sidebar-wrapper-nav-item">
+                <div className="mobile-navigation-nav-item">
                     <div className="menu-icon-wrapper">
                         {this.renderNavImage(imgName, isActive)}
                     </div>
-                    <p className="pg-sidebar-wrapper-nav-item-text">
+                    <p className="mobile-navigation-nav-item-text">
                         <FormattedMessage id={name} />
                     </p>
                 </div>
