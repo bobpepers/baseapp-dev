@@ -120,8 +120,8 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                 </div>
 
                 <div className="row m-0 pg-profile-two-factor-auth__body">
-                    <div className="col-12 col-lg-8 col-md-9 pr-0 pl-2 pg-profile-two-factor-auth__body--text d-inline-block">
-                        <div className="row col-12 pg-profile-two-factor-auth__body--text--group">
+                    <div className="col-12 col-lg-8 col-md-9 pr-0 pl-2 pg-profile-two-factor-auth__body--text-primary d-inline-block">
+                        <div className="row col-12 pg-profile-two-factor-auth__body--text-primary--group">
                             <div className="d-inline">
                                 <span>1   </span>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.1')}
@@ -130,7 +130,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                                 <a target="_blank" rel="noopener noreferrer" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl">Google play</a>
                             </div>
                         </div>
-                        <div className="row col-12 pg-profile-two-factor-auth__body--text--group">
+                        <div className="row col-12 pg-profile-two-factor-auth__body--text-primary--group">
                             <div className="d-inline">
                                 <span>2    </span>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.2')}
@@ -147,8 +147,8 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                     {enable2fa && secret && this.renderSecret(secret)}
                 </div>
                 <div className="row m-0 pg-profile-two-factor-auth__body">
-                    <div className="col-12 pl-2 pg-profile-two-factor-auth__body--text d-inline-block">
-                        <div className="row col-12 pg-profile-two-factor-auth__body--text--group">
+                    <div className="col-12 pl-2 pg-profile-two-factor-auth__body--text-primary d-inline-block">
+                        <div className="row col-12 pg-profile-two-factor-auth__body--text-primary--group">
                             <div className="col-12 col-md-8 col-sm-7">
                                 <span>3   </span>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.4')}

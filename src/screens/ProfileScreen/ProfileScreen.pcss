@@ -5,7 +5,7 @@
     background-color: var(--header);
     color: var(--bright);
     padding: 20px 0;
-    border-bottom: 2px solid var(--text);
+    border-bottom: 2px solid var(--text-primary);
     text-align: center;
     text-transform: uppercase;
     font-size: 14px;
@@ -19,7 +19,7 @@
     padding-top: 20px;
 
     &-title {
-      color: var(--placeholder-text);
+      color: var(--text-secondary);
       font-size: 14px;
     }
 
@@ -33,7 +33,7 @@
   flex-wrap: wrap;
   height: 100%;
   align-items: flex-start !important;
-  color: var(--placeholder-text);
+  color: var(--text-secondary);
   margin-bottom: 24px !important;
 
   h1, h2, h3, h4, h5, h6 {
@@ -149,7 +149,7 @@
   &__label {
     padding-top: calc(var(--gap) * 2);
     font-size: calc(var(--font-size) * 1.33);
-    color: var(--placeholder-text);
+    color: var(--text-secondary);
     padding-bottom: var(--gap);
 
     &-value {
@@ -471,7 +471,7 @@
     }
 
     .secret-section {
-      color: var(--gamboge);
+      color: var(--brown);
       margin: calc(var(--gap) * 3);
       font-style: normal;
       font-weight: bold;
@@ -554,7 +554,7 @@
           border-radius: var(--gap);
 
           legend {
-            color: var(--text-muted);
+            color: var(--text-primary-muted);
           }
 
           &:focus-within {
@@ -604,7 +604,7 @@
 
     &::before,
     &::after {
-      background: var(--placeholder-text);
+      background: var(--text-secondary);
       content: '';
       position: absolute;
       top: 55%;
@@ -664,9 +664,9 @@
       padding: 0 calc(var(--gap) * 2.23) !important;
 
       fieldset {
-        color: var(--placeholder-text);
+        color: var(--text-secondary);
         border-radius: calc(var(--gap) * 0.66);
-        border: 1px solid var(--placeholder-text);
+        border: 1px solid var(--text-secondary);
         box-sizing: border-box;
         height: calc(var(--gap) * 8.16);
         margin-top: calc(var(--gap) * 3.6);
@@ -706,7 +706,7 @@
     max-width: calc(var(--gap) * 25);
 
     &:visited {
-      color: var(--text-muted);
+      color: var(--text-primary-muted);
     }
 
     &__active {
@@ -797,7 +797,7 @@
     &__options-group {
       width: 100%;
       height: calc(var(--big-gap) * 0.97);
-      border-bottom: 2px solid var(--text);
+      border-bottom: 2px solid var(--text-primary);
     }
 
     &__label {
@@ -828,7 +828,7 @@
       font-weight: normal;
       line-height: calc(var(--gap) * 2.66);
       font-size: calc(var(--gap) * 2.33);
-      color: var(--placeholder-text);
+      color: var(--text-secondary);
       margin: calc(var(--gap) * 0.83);
     }
 

@@ -15,9 +15,9 @@
     text-decoration: none;
     margin-bottom: calc(var(--gap) * 1.2);
       &:hover {
-        color: var(--text-muted);
+        color: var(--text-primary-muted);
         text-decoration: underline;
-        text-decoration-color: var(--placeholder-text);
+        text-decoration-color: var(--text-secondary);
       }
       img {
         margin: 2px;
@@ -33,12 +33,12 @@
     &-row {
       display: inline-block;
       margin-top: calc(var(--gap) * 2);
-      color: var(--placeholder-text);
+      color: var(--text-secondary);
 
       fieldset {
-        color: var(--placeholder-text);
+        color: var(--text-secondary);
         border-radius: 4px;
-        border: 1px solid var(--placeholder-text);
+        border: 1px solid var(--text-secondary);
         box-sizing: border-box;
         height: 49px;
         padding-left: calc(var(--gap) * 1.5);
@@ -83,7 +83,7 @@
           margin-top: 10px;
           width: 100%;
           &::placeholder {
-            color: var(--text-muted);
+            color: var(--text-primary-muted);
           }
         }
 
@@ -111,12 +111,12 @@
           padding-bottom: calc(var(--gap) * 0.33);
 
           &::placeholder {
-            color: var(--text-muted);
+            color: var(--text-primary-muted);
           }
         }
 
         &-documents {
-          border: 1px dashed var(--placeholder-text);
+          border: 1px dashed var(--text-secondary);
           box-sizing: border-box;
           margin-top: calc(var(--gap) * 1.2);
           margin-bottom: calc(var(--gap) * 1.2);
@@ -159,7 +159,7 @@
               }
 
               .muted {
-                color: var(--text-muted);
+                color: var(--text-primary-muted);
               }
 
               div {

@@ -13,7 +13,7 @@
     background-color: var(--header);
     color: var(--bright);
     padding: 20px 0;
-    border-bottom: 2px solid var(--text);
+    border-bottom: 2px solid var(--text-primary);
     text-align: center;
     text-transform: uppercase;
     font-size: 14px;
@@ -53,7 +53,7 @@
     &__options-group {
       width: 100%;
       height: calc(var(--big-gap) * 0.97);
-      border-bottom: 2px solid var(--text);
+      border-bottom: 2px solid var(--text-primary);
     }
 
     &__form-content {
@@ -111,7 +111,7 @@
     }
     &__label {
       background: var(--bg-2);
-      color: var(--text-muted);
+      color: var(--text-primary-muted);
       font-size: calc(var(--gap) * 2);
       top: calc(var(--gap) * (-1.33));
       position: absolute;
@@ -139,13 +139,13 @@
     .cr-checkbox {
       padding-left: calc(2.6 * var(--checkbox-general-intent));
       &__checkitem {
-        border-color: var(--placeholder-text);
+        border-color: var(--text-secondary);
         &::after {
           border-color: var(--bright);
         }
       }
       &__label {
-        color: var(--c--placeholder-text);
+        color: var(--c--text-secondary);
         font-size: calc(var(--gap) * 2.33);
       }
     }
@@ -185,7 +185,7 @@
       }
     }
     .cr-modal__container-content {
-      color: var(--placeholder-text);
+      color: var(--text-secondary);
       padding: 0 calc(var(--gap) * 8.33);
       margin-bottom: 0;
     }
