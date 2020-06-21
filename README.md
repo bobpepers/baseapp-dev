@@ -1,4 +1,3 @@
-
 # Trade-UI
 
 ## dependencies
