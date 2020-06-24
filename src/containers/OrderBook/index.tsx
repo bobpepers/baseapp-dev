@@ -90,8 +90,8 @@ class OrderBookContainer extends React.Component<Props, State> {
         console.log(arrayAsks);
 
         return (
-            <Grid container style={{'height': '100%'}}>
-                <Grid item xs={12} style={{'height' : '5%'}} className="orderbook-text-color">
+            <Grid container style={{height: '100%'}}>
+                <Grid item xs={12} style={{height : '5%'}} className="orderbook-text-color">
                     <Grid container>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.price'})}
@@ -123,44 +123,44 @@ class OrderBookContainer extends React.Component<Props, State> {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} className="orderbook-text-color" style={{'height' : '44%', 'display': 'flex', 'alignItems': 'flex-end', 'flexDirection': 'row'}}>
-                    <div style={{'flex' : '0 0 auto', 'width': '100%'}}>
+                <Grid item xs={12} className="orderbook-text-color" style={{height : '44%', display: 'flex', alignItems: 'flex-end', flexDirection: 'row'}}>
+                    <div style={{flex : '0 0 auto', width: '100%'}}>
                     {arrayAsks.map((object, i) => {
                         const currentPercentage = Math.floor((object[4] / totalAsks) * 100);
-                        if (object[0] === "empty") {
+                        if (object[0] === 'empty') {
                             return (
-                                <Grid container key={i} className="orderbook-border-top" style={{'position': 'relative'}}>
-                                    <Grid container item xs={12} justify="center" style={{'zIndex': 30}}>
+                                <Grid container key={i} className="orderbook-border-top" style={{position: 'relative'}}>
+                                    <Grid container item xs={12} justify="center" style={{zIndex: 30}}>
                                         {object[1]}
                                     </Grid>
                                 </Grid>
                             );
                         } else {
                             return (
-                                <Grid container key={i} onClick={e => this.handleOnSelectAsks(e, i)} className="orderbook-border-top orderbook-item" style={{'position': 'relative', 'cursor': 'pointer'}}>
-                                    <Grid container item xs={3} justify="center" style={{'zIndex': 30}}>
+                                <Grid container key={i} onClick={e => this.handleOnSelectAsks(e, i)} className="orderbook-border-top orderbook-item" style={{position: 'relative', cursor: 'pointer'}}>
+                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
                                         {object[0]}
                                     </Grid>
-                                    <Grid container item xs={3} justify="center" style={{'zIndex': 30}}>
+                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
                                         {object[1]}
                                     </Grid>
-                                    <Grid container item xs={3} justify="center" style={{'zIndex': 30}}>
+                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
                                         {object[2]}
                                     </Grid>
-                                    <Grid container item xs={3} justify="center" style={{'zIndex': 30}}>
+                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
                                         {object[3]}
                                     </Grid>
-                                    <span style={{'backgroundColor': 'rgba(215, 38, 44, 0.2)', 'position': 'absolute', 'right': 0, 'top': 0, 'bottom': 0, 'zIndex': 20, 'width': `${currentPercentage}%`}}/>
+                                    <span style={{backgroundColor: 'rgba(215, 38, 44, 0.2)', position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 20, width: `${currentPercentage}%`}}/>
                                 </Grid>
                             );
                         }
                     })}
                     </div>
                 </Grid>
-                <Grid container item xs={12} justify="center" className="orderbook-border-both" style={{'height': '7%'}}>
+                <Grid container item xs={12} justify="center" className="orderbook-border-both" style={{height: '7%'}}>
                     {
                        (() => {
-                           if (currentMarket && marketTickers[currentMarket.id] && marketTickers[currentMarket.id].price_change_percent) {
+                            if (currentMarket && marketTickers[currentMarket.id] && marketTickers[currentMarket.id].price_change_percent) {
                                 const cn = classNames('', {
                                     'orderBook-negative': (marketTickers[currentMarket.id] || defaultTicker).price_change_percent.includes('-'),
                                     'orderBook-positive': (marketTickers[currentMarket.id] || defaultTicker).price_change_percent.includes('+'),
@@ -176,12 +176,11 @@ class OrderBookContainer extends React.Component<Props, State> {
                                         </Grid>
                                     </Grid>
                                 );
-                           }
-                           else {
+                            } else {
                                 return (
                                     <Grid container>
                                         <Grid container item xs={12} justify="center" className={'orderBook-negative'}>
-                                            <span style={{'alignSelf': 'flex-end'}}>0</span>
+                                            <span style={{alignSelf: 'flex-end'}}>0</span>
                                         </Grid>
                                         <Grid container item xs={12} justify="center" className="orderbook-text-color">
                                             {this.props.intl.formatMessage({id: 'page.body.trade.orderbook.lastMarket'})}
@@ -195,7 +194,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                 <Grid item xs={12} style={{height: '44%'}} className="orderbook-text-color">
                     {arrayBids.map((object, i) => {
                         const currentPercentage = Math.floor((object[4] / totalBids) * 100);
-                        if (object[0] === "empty") {
+                        if (object[0] === 'empty') {
                             return (
                                 <Grid container key={i} className="orderbook-border-bottom" style={{position: 'relative'}}>
                                     <Grid container item xs={12} justify="center" style={{zIndex: 30}}>
