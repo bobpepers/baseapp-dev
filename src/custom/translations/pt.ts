@@ -74,10 +74,11 @@ export const pt: LangType = {
     'page.body.trade.header.asks': 'Asks',
     'page.body.trade.header.bids': 'Bids',
     'page.body.trade.orderbook': 'Order Book',
-    'page.body.trade.orderbook.lastMarket': 'Last Market Price',
+    'page.body.trade.orderbook.lastMarket': 'Last Price',
     'page.body.trade.orderbook.header.price': 'Price',
     'page.body.trade.orderbook.header.amount': 'Amount',
     'page.body.trade.orderbook.header.volume': 'Total',
+    'page.body.trade.orderbook.header.estvalue': 'Est. Value',
 
     'page.body.trade.header.recentTrades': 'Recent Trades',
     'page.body.trade.header.recentTrades.content.time': 'Time',
@@ -472,7 +473,7 @@ export const pt: LangType = {
     'page.password2fa.message': 'Enter 2fa code (if enabled)',
     'page.forgotPassword.email': 'Email',
     'page.forgotPassword.send': 'Send',
-    'page.noDataToShow': 'There is no data to show',
+    'page.noDataToShow': 'Empty',
 
     'page.modal.withdraw.success': 'Success!',
     'page.modal.withdraw.success.message.content': 'Your withdrawal request has been received',
