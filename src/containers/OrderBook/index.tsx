@@ -1,25 +1,25 @@
 import classNames from 'classnames';
 import * as React from 'react';
-import { 
+import {
     Grid,
-    CircularProgress, 
+    CircularProgress,
 } from '@material-ui/core';
-import { 
-    InjectedIntlProps, 
-    injectIntl 
+import {
+    InjectedIntlProps,
+    injectIntl
 } from 'react-intl';
-import { 
-    connect, 
-    MapDispatchToPropsFunction 
+import {
+    connect,
+    MapDispatchToPropsFunction
 } from 'react-redux';
-import { 
+import {
     Decimal,
 } from '../../components';
-import { 
-    accumulateVolume, 
-    //calcMaxVolume, 
-    sortAsks, 
-    sortBids 
+import {
+    accumulateVolume,
+    //calcMaxVolume,
+    sortAsks,
+    sortBids
 } from '../../helpers';
 import {
     Market,
@@ -57,7 +57,7 @@ class OrderBookContainer extends React.Component<Props, State> {
         this.orderRef = React.createRef();
     }
 
-    private orderRef;    
+    private orderRef;
 
     public render() {
         const {
@@ -95,24 +95,28 @@ class OrderBookContainer extends React.Component<Props, State> {
                     <Grid container>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.price'})}
+                            &nbsp
                             (
                                 {currentMarket && currentMarket.quote_unit.toUpperCase()}
                             )
                         </Grid>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.amount'})}
+                            &nbsp
                             (
                                 {currentMarket && currentMarket.base_unit.toUpperCase()}
                             )
                         </Grid>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.estvalue'})}
+                            &nbsp
                             (
                                 {currentMarket && currentMarket.quote_unit.toUpperCase()}
                             )
                         </Grid>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.volume'})}
+                            &nbsp
                             (
                                 {currentMarket && currentMarket.base_unit.toUpperCase()}
                             )
@@ -128,7 +132,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                                 <Grid container key={i} className="orderbook-border-top" style={{"position": "relative"}}>
                                     <Grid container item xs={12} justify="center" style={{"zIndex": 30}}>
                                         {object[1]}
-                                    </Grid>                                    
+                                    </Grid>
                                 </Grid>
                             );
                         } else {
@@ -149,9 +153,9 @@ class OrderBookContainer extends React.Component<Props, State> {
                                     <span style={{"backgroundColor": "rgba(215, 38, 44, 0.2)", "position": "absolute", "right": "0", "top": "0", "bottom": "0", "zIndex": 20, "width": `${currentPercentage}%`}}/>
                                 </Grid>
                             );
-                        }                        
+                        }
                     })}
-                    </div> 
+                    </div>
                 </Grid>
                 <Grid container item xs={12} justify="center" className="orderbook-border-both" style={{"height" : "7%"}}>
                     {
@@ -188,7 +192,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                        })()
                     }
                 </Grid>
-                <Grid item xs={12} style={{"height" : "44%"}} className="orderbook-text-color">                    
+                <Grid item xs={12} style={{"height" : "44%"}} className="orderbook-text-color">
                     {arrayBids.map((object, i) => {
                         const currentPercentage = Math.floor((object[4] / totalBids) * 100);
                         if (object[0] === "empty") {
@@ -196,7 +200,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                                 <Grid container key={i} className="orderbook-border-bottom" style={{"position": "relative"}}>
                                     <Grid container item xs={12} justify="center" style={{"zIndex": 30}}>
                                         {object[1]}
-                                    </Grid>                                    
+                                    </Grid>
                                 </Grid>
                             );
                         } else {
@@ -217,8 +221,8 @@ class OrderBookContainer extends React.Component<Props, State> {
                                     <span style={{"backgroundColor" : "rgba(0, 169, 44, 0.2)", "position": "absolute", "right": "0", "top": "0", "bottom": "0", "zIndex": 20, "width": `${currentPercentage}%`}}/>
                                 </Grid>
                             );
-                        }                        
-                    })}                    
+                        }
+                    })}
                 </Grid>
             </Grid>
         );
@@ -242,7 +246,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                         <span key={i}><Decimal fixed={priceFixed} prevValue={array[i + 1] ? array[i + 1][0] : 0}>{price}</Decimal></span>,
                         <Decimal key={i} fixed={amountFixed}>{volume}</Decimal>,
                         <Decimal key={i} fixed={amountFixed}>{estimateValue}</Decimal>,
-                        <Decimal key={i} fixed={amountFixed}>{total[i]}</Decimal>,                        
+                        <Decimal key={i} fixed={amountFixed}>{total[i]}</Decimal>,
                         total[i],
 
                     ];
@@ -251,9 +255,9 @@ class OrderBookContainer extends React.Component<Props, State> {
                         <span key={i}><Decimal fixed={priceFixed} prevValue={array[i - 1] ? array[i - 1][0] : 0}>{price}</Decimal></span>,
                         <Decimal key={i} fixed={amountFixed}>{volume}</Decimal>,
                         <Decimal key={i} fixed={amountFixed}>{estimateValue}</Decimal>,
-                        <Decimal key={i} fixed={amountFixed}>{total[i]}</Decimal>,                        
-                        total[i],                        
-                    ];                    
+                        <Decimal key={i} fixed={amountFixed}>{total[i]}</Decimal>,
+                        total[i],
+                    ];
             }
         }) : [["empty", message]];
     };
@@ -273,7 +277,7 @@ class OrderBookContainer extends React.Component<Props, State> {
             this.props.setCurrentPrice(priceToSet);
         }
     };
-    
+
 }
 
 const mapStateToProps = (state: RootState) => ({
