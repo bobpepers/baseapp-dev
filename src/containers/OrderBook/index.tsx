@@ -186,7 +186,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                                             {this.props.intl.formatMessage({id: 'page.body.trade.orderbook.lastMarket'})}
                                         </Grid>
                                     </Grid>
-                                )
+                                );
                            }
                        })()
                     }
