@@ -90,8 +90,8 @@ class OrderBookContainer extends React.Component<Props, State> {
         console.log(arrayAsks);
 
         return (
-            <Grid container style={{'height': 100%}}>
-                <Grid item xs={12} style={{'height' : 5%}} className="orderbook-text-color">
+            <Grid container style={{'height': '100%'}}>
+                <Grid item xs={12} style={{'height' : '5%'}} className="orderbook-text-color">
                     <Grid container>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.price'})}
@@ -123,8 +123,8 @@ class OrderBookContainer extends React.Component<Props, State> {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} className="orderbook-text-color" style={{'height' : 44%, 'display': 'flex', 'alignItems': 'flex-end', 'flexDirection': 'row'}}>
-                    <div style={{'flex' : '0 0 auto', 'width': 100%}}>
+                <Grid item xs={12} className="orderbook-text-color" style={{'height' : '44%', 'display': 'flex', 'alignItems': 'flex-end', 'flexDirection': 'row'}}>
+                    <div style={{'flex' : '0 0 auto', 'width': '100%'}}>
                     {arrayAsks.map((object, i) => {
                         const currentPercentage = Math.floor((object[4] / totalAsks) * 100);
                         if (object[0] === "empty") {
@@ -157,7 +157,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                     })}
                     </div>
                 </Grid>
-                <Grid container item xs={12} justify="center" className="orderbook-border-both" style={{'height': 7%}}>
+                <Grid container item xs={12} justify="center" className="orderbook-border-both" style={{'height': '7%'}}>
                     {
                        (() => {
                            if (currentMarket && marketTickers[currentMarket.id] && marketTickers[currentMarket.id].price_change_percent) {
@@ -192,7 +192,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                        })()
                     }
                 </Grid>
-                <Grid item xs={12} style={{'height': 44%}} className="orderbook-text-color">
+                <Grid item xs={12} style={{'height': '44%'}} className="orderbook-text-color">
                     {arrayBids.map((object, i) => {
                         const currentPercentage = Math.floor((object[4] / totalBids) * 100);
                         if (object[0] === "empty") {
