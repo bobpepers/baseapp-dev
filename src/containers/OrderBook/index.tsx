@@ -123,7 +123,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} className="orderbook-text-color" style={{height : '44%', display: 'flex', alignItems: 'flex-end', flexDirection: 'row'}}>
+                <Grid item xs={12} className="orderbook-text-color orderbook-group-container-height orderbook-scrollable-content-top">
                     <div style={{flex : '0 0 auto', width: '100%'}}>
                     {arrayAsks.map((object, i) => {
                         const currentPercentage = Math.floor((object[4] / totalAsks) * 100);
@@ -191,37 +191,39 @@ class OrderBookContainer extends React.Component<Props, State> {
                        })()
                     }
                 </Grid>
-                <Grid item xs={12} style={{height: '44%'}} className="orderbook-text-color">
-                    {arrayBids.map((object, i) => {
-                        const currentPercentage = Math.floor((object[4] / totalBids) * 100);
-                        if (object[0] === 'empty') {
-                            return (
-                                <Grid container key={i} className="orderbook-border-bottom" style={{position: 'relative'}}>
-                                    <Grid container item xs={12} justify="center" style={{zIndex: 30}}>
-                                        {object[1]}
+                <Grid item xs={12} className="orderbook-text-color orderbook-group-container-bottom orderbook-group-container-height">
+                    <div className="orderbook-scrollable-content-bottom">
+                        {arrayBids.map((object, i) => {
+                            const currentPercentage = Math.floor((object[4] / totalBids) * 100);
+                            if (object[0] === 'empty') {
+                                return (
+                                    <Grid container key={i} className="orderbook-border-bottom" style={{position: 'relative'}}>
+                                        <Grid container item xs={12} justify="center" style={{zIndex: 30}}>
+                                            {object[1]}
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            );
-                        } else {
-                            return (
-                                <Grid container key={i} onClick={e => this.handleOnSelectBids(e, i)} className="orderbook-border-bottom orderbook-item" style={{position: 'relative', cursor: 'pointer'}}>
-                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
-                                        {object[0]}
+                                );
+                            } else {
+                                return (
+                                    <Grid container key={i} onClick={e => this.handleOnSelectBids(e, i)} className="orderbook-border-bottom orderbook-item" style={{position: 'relative', cursor: 'pointer'}}>
+                                        <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
+                                            {object[0]}
+                                        </Grid>
+                                        <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
+                                            {object[1]}
+                                        </Grid>
+                                        <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
+                                            {object[2]}
+                                        </Grid>
+                                        <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
+                                            {object[3]}
+                                        </Grid>
+                                        <span style={{backgroundColor: 'rgba(0, 169, 44, 0.2)', position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 20, width: `${currentPercentage}%`}}/>
                                     </Grid>
-                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
-                                        {object[1]}
-                                    </Grid>
-                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
-                                        {object[2]}
-                                    </Grid>
-                                    <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
-                                        {object[3]}
-                                    </Grid>
-                                    <span style={{backgroundColor: 'rgba(0, 169, 44, 0.2)', position: 'absolute', right: 0, top: 0, bottom: 0, zIndex: 20, width: `${currentPercentage}%`}}/>
-                                </Grid>
-                            );
-                        }
-                    })}
+                                );
+                            }
+                        })}
+                    </div>
                 </Grid>
             </Grid>
         );
