@@ -95,28 +95,28 @@ class OrderBookContainer extends React.Component<Props, State> {
                     <Grid container>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.price'})}
-                            &nbsp
+                            &nbsp;
                             (
                                 {currentMarket && currentMarket.quote_unit.toUpperCase()}
                             )
                         </Grid>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.amount'})}
-                            &nbsp
+                            &nbsp;
                             (
                                 {currentMarket && currentMarket.base_unit.toUpperCase()}
                             )
                         </Grid>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.estvalue'})}
-                            &nbsp
+                            &nbsp;
                             (
                                 {currentMarket && currentMarket.quote_unit.toUpperCase()}
                             )
                         </Grid>
                         <Grid container item xs={3} justify="center">
                             {intl.formatMessage({id: 'page.body.trade.orderbook.header.volume'})}
-                            &nbsp
+                            &nbsp;
                             (
                                 {currentMarket && currentMarket.base_unit.toUpperCase()}
                             )
