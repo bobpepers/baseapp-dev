@@ -1,7 +1,6 @@
 import { Spinner } from 'react-bootstrap';
 import * as React from 'react';
 import {
-    FormattedMessage,
     InjectedIntlProps,
     injectIntl,
 } from 'react-intl';
@@ -117,15 +116,9 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
 
         const currentTicker = marketTickers[currentMarket.id];
         const defaultCurrentTicker = { last: '0' };
-        const headerContent = (
-            <div className="cr-table-header__content">
-                <div className="cr-title-component"><FormattedMessage id="page.body.trade.header.newOrder" /></div>
-            </div>
-        );
 
         return (
             <div className={'pg-order'} ref={this.orderRef}>
-                {this.state.width > 448 ? headerContent : undefined}
                 <Order
                     asks={asks}
                     bids={bids}

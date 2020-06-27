@@ -119,7 +119,7 @@ class MarketSelectionTable extends React.Component<TableProps, MarketSelectionTa
 
         this.ensureDataIsValid(data);
 
-        const cn = classNames('cr-table-header__content', {
+        const cn = classNames('trading-component-header', {
             'cr-table-header__content-empty': !titleComponent && filters.length === 0,
         });
 

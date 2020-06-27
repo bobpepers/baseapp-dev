@@ -99,7 +99,7 @@ const MarketDepthContainer: FunctionComponent<tProps> = Props => {
 
     return (
         <div className="market-depth-wrapper">
-            <div className="cr-table-header__content">
+            <div className="trading-component-header">
                 <div className="market-depth-title">
                     <FormattedMessage id="page.body.trade.header.marketDepths" />
                 </div>

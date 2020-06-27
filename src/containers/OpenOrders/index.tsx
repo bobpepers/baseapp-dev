@@ -1,5 +1,13 @@
 import React, { FunctionComponent, useEffect, memo } from 'react';
-import { Table, TableBody, TableCell, TableHead, TableRow, CircularProgress } from '@material-ui/core';
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    CircularProgress,
+    Button,
+} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import classnames from 'classnames';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
@@ -179,14 +187,18 @@ const OpenOrdersContainer: FunctionComponent<Props> = props => {
 
     return (
         <div className={classNames}>
-            <div className="cr-table-header__content">
+            <div className="trading-component-header">
                 <div className="cr-title-component">
                     <FormattedMessage id="page.body.trade.header.openOrders" />
 
-                    <span className="cr-table-header__cancel" onClick={handleCancelAll}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className="cancel-order-all"
+                        onClick={handleCancelAll}
+                    >
                         <FormattedMessage id="page.body.openOrders.header.button.cancelAll" />
-                        <CloseIcon />
-                    </span>
+                    </Button>
                 </div>
             </div>
             {fetching ? <div className="open-order-loading"><CircularProgress disableShrink /></div> : openOrders()}

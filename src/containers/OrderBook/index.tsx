@@ -68,7 +68,7 @@ class OrderBookContainer extends React.Component<Props, State> {
 
         return (
             <div className="orderBook" ref={this.orderRef}>
-                <div className={'cr-table-header__content'}>
+                <div className="trading-component-header">
                     {this.props.intl.formatMessage({id: 'page.body.trade.orderbook'})}
                 </div>
                 {orderBookLoading ? <div className="orderBook-loader"><CircularProgress disableShrink /></div> : this.orderBook(sortBids(bids), sortAsks(asks))}
