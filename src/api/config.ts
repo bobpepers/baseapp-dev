@@ -14,7 +14,5 @@ export const gaTrackerKey = (): string => '';
 export const msAlertDisplayTime = (): string => '5000';
 export const rangerReconnectPeriod = (): number => 1;
 export const incrementalOrderBook = (): boolean => false;
-export const isResizableGrid = (): boolean => false;
-export const isDraggableGrid = (): boolean => false;
 export const languages = ['en', 'pt'];
 export const passwordEntropyStep = ():number => 14;

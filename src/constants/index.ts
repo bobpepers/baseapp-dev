@@ -42,7 +42,8 @@ export const colors = {
     },
     basic: {
         chart: {
-            primary: '#1E2841',
+            primary: '#28334e',
+            secondary: '#28334e',
             up: '#54B489',
             down: '#E85E59',
         },

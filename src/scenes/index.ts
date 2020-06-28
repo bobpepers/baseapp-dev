@@ -10,7 +10,7 @@ export * from './ProfileScreen';
 export * from './ProfileTwoFactorAuthScreen';
 export * from './SignInScreen';
 export * from './SignUpScreen';
-export * from './TradingScreen';
+export * from './TradingScene';
 export * from './VerificationScreen';
 export * from './WalletsScreen';
 export * from './TermsScreen';

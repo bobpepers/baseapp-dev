@@ -1,5 +1,4 @@
 import { LayoutGrid } from '../components/Grid';
-import { isResizableGrid, isDraggableGrid} from '../api/config';
 
 export const getStaticHeight = () => {
     const header = document.getElementsByTagName('header')[0];
@@ -30,47 +29,42 @@ export const pixelsToGridUnits = (pixels: number, rowHeight: number, margin: num
 };
 
 const getLayouts = () => {
-    const isDraggable = isDraggableGrid();
-    const isResizable = isResizableGrid();
 
     return {
         lg: [
             /* Top Bar */
             { i: '1', x: 0, y: 0, w: 24, h: 3, minH: 3, maxH: 6, minW: 13, isDraggable: false, isResizable: false },
             /* Left Side */
-            { i: '2', x: 0, y: 3, w: 14, h: 36, minH: 36, maxH: 36, minW: 4, isDraggable: isDraggable, isResizable: isResizable }, /* Chart */
-            { i: '3', x: 0, y: 39, w: 14, h: 10, minH: 10, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Market Depth */
-            { i: '4', x: 0, y: 49, w: 14, h: 21, minH: 21, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Order Component */
-            { i: '5', x: 0, y: 70, w: 14, h: 20, minH: 20, minW: 5, isDraggable: isDraggable, isResizable: isResizable }, /* Open Orders */
+            { i: '2', x: 0, y: 3, w: 14, h: 36, minH: 36, maxH: 36, minW: 4, isDraggable: false, isResizable: false }, /* Chart */
+            { i: '3', x: 0, y: 49, w: 14, h: 21, minH: 21, minW: 5, isDraggable: false, isResizable: false }, /* Order Component */
+            { i: '4', x: 0, y: 70, w: 14, h: 30, minH: 30, minW: 5, isDraggable: false, isResizable: false }, /* Open Orders */
 
             /* Right Side */
-            { i: '6', x: 14, y: 3, w: 10, h: 36, minH: 36, minW: 4, isDraggable: isDraggable, isResizable: isResizable }, /* Markets */
-            { i: '7', x: 14, y: 39, w: 10, h: 31, minH: 31, minW: 4, isDraggable: isDraggable, isResizable: isResizable }, /* Order Book */
-            { i: '8', x: 14, y: 70, w: 10, h: 20, minH: 20, minW: 4, isDraggable: isDraggable, isResizable: isResizable }, /* Recent Trades */
+            { i: '5', x: 14, y: 3, w: 10, h: 36, minH: 36, minW: 4, isDraggable: false, isResizable: false }, /* Markets */
+            { i: '6', x: 14, y: 39, w: 10, h: 31, minH: 31, minW: 4, isDraggable: false, isResizable: false }, /* Order Book */
+            { i: '7', x: 14, y: 70, w: 10, h: 20, minH: 20, minW: 4, isDraggable: false, isResizable: false }, /* Recent Trades */
         ],
         md: [
             /* Top Bar */
             { i: '1', x: 0, y: 0, w: 24, h: 6, minH: 6, maxH: 6, minW: 13, isDraggable: false, isResizable: false },
             /* Left Side */
-            { i: '2', x: 0, y: 3, w: 14, h: 36, minH: 36, maxH: 36, minW: 4, isDraggable: isDraggable, isResizable: isResizable },
-            { i: '3', x: 0, y: 39, w: 14, h: 10, minH: 10, minW: 5, isDraggable: isDraggable, isResizable: isResizable },
-            { i: '4', x: 0, y: 49, w: 14, h: 21, minH: 21, minW: 5, isDraggable: isDraggable, isResizable: isResizable },
-            { i: '5', x: 0, y: 70, w: 14, h: 20, minH: 20, minW: 5, isDraggable: isDraggable, isResizable: isResizable },
+            { i: '2', x: 0, y: 3, w: 14, h: 36, minH: 36, maxH: 36, minW: 4, isDraggable: false, isResizable: false },
+            { i: '3', x: 0, y: 49, w: 14, h: 21, minH: 21, minW: 5, isDraggable: false, isResizable: false },
+            { i: '4', x: 0, y: 70, w: 14, h: 30, minH: 30, minW: 5, isDraggable: false, isResizable: false },
 
             /* Right Side */
-            { i: '6', x: 14, y: 3, w: 10, h: 36, minH: 36, minW: 5, isDraggable: isDraggable, isResizable: isResizable },
-            { i: '7', x: 14, y: 39, w: 10, h: 31, minH: 31, minW: 4, isDraggable: isDraggable, isResizable: isResizable },
-            { i: '8', x: 14, y: 70, w: 10, h: 20, minH: 20, minW: 4, isDraggable: isDraggable, isResizable: isResizable },
+            { i: '5', x: 14, y: 3, w: 10, h: 36, minH: 36, minW: 5, isDraggable: false, isResizable: false },
+            { i: '6', x: 14, y: 39, w: 10, h: 31, minH: 31, minW: 4, isDraggable: false, isResizable: false },
+            { i: '7', x: 14, y: 70, w: 10, h: 20, minH: 20, minW: 4, isDraggable: false, isResizable: false },
         ],
         sm: [
             { i: '1', x: 0, y: 0, w: 24, h: 6, minH: 6, maxH: 6, minW: 13, isDraggable: false, isResizable: false },
-            { i: '2', x: 0, y: 3, w: 12, h: 36, minH: 22, maxH: 22, minW: 5, isDraggable: false },
-            { i: '3', x: 0, y: 39, w: 12, h: 10, minH: 30, minW: 5, isDraggable: false },
-            { i: '4', x: 0, y: 49, w: 12, h: 21, minH: 12, minW: 3, isDraggable: false },
-            { i: '5', x: 0, y: 70, w: 12, h: 20, minH: 12, minW: 7, isDraggable: false },
-            { i: '6', x: 0, y: 90, w: 12, h: 36, minH: 12, minW: 7, isDraggable: false },
-            { i: '7', x: 0, y: 126, w: 12, h: 31, minH: 12, minW: 7, isDraggable: false },
-            { i: '8', x: 0, y: 157, w: 12, h: 20, minH: 12, minW: 7, isDraggable: false },
+            { i: '2', x: 0, y: 39, w: 12, h: 36, minH: 22, maxH: 22, minW: 5, isDraggable: false, isResizable: false },
+            { i: '3', x: 0, y: 106, w: 12, h: 21, minH: 12, minW: 3, isDraggable: false, isResizable: false },
+            { i: '4', x: 0, y: 127, w: 12, h: 20, minH: 12, minW: 7, isDraggable: false, isResizable: false },
+            { i: '5', x: 0, y: 3, w: 12, h: 36, minH: 12, minW: 7, isDraggable: false, isResizable: false },
+            { i: '6', x: 0, y: 75, w: 12, h: 31, minH: 12, minW: 7, isDraggable: false, isResizable: false },
+            { i: '7', x: 0, y: 157, w: 12, h: 20, minH: 12, minW: 7, isDraggable: false, isResizable: false },
         ],
     };
 };

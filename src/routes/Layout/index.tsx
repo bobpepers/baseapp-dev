@@ -44,7 +44,7 @@ import {
     ApiScreen,
     FeeScreen,
     DashboardScreen,
-} from '../../screens';
+} from '../../scenes';
 import { ExpiredSessionModal } from '../../components';
 
 interface ReduxProps {

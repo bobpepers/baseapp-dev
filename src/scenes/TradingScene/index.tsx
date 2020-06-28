@@ -7,7 +7,6 @@ import { Decimal } from '../../components/Decimal';
 import { Grid } from '../../components/Grid';
 import {
     MarketSelection,
-    MarketDepthsComponent,
     OpenOrdersComponent,
     OrderBook,
     OrderComponent,
@@ -98,26 +97,22 @@ class Trading extends React.Component<Props, StateProps> {
         },
         {
             i: 3,
-            render: () => <MarketDepthsComponent />,
-        },
-        {
-            i: 4,
             render: () => <OrderComponent size={this.state.orderComponentResized} />,
         },
         {
-            i: 5,
+            i: 4,
             render: () => <OpenOrdersComponent />,
         },
         {
-            i: 6,
+            i: 5,
             render: () => <MarketSelection />,
         },
         {
-            i: 7,
+            i: 6,
             render: () => <OrderBook size={this.state.orderBookComponentResized} />,
         },
         {
-            i: 8,
+            i: 7,
             render: () => <RecentTrades />,
         },
     ];
@@ -186,7 +181,7 @@ class Trading extends React.Component<Props, StateProps> {
         const {rgl} = this.props;
 
         return (
-            <div className="pg-trading-screen">
+            <div className="trade-scene">
                 <Grid
                     breakpoints={breakpoints}
                     className="layout"

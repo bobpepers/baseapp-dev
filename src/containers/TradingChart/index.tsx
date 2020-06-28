@@ -39,6 +39,7 @@ import {
     widgetParams,
 } from './config';
 import { getTradingChartTimezone } from './timezones';
+import { MarketDepthsComponent } from '../MarketDepth'
 
 interface ReduxProps {
     markets: Market[];
@@ -59,10 +60,23 @@ interface DispatchProps {
 type Props = ReduxProps & DispatchProps;
 
 export class TradingChartComponent extends React.PureComponent<Props> {
+    public readonly state = {
+        selectedItem: 0,
+        scrollLeft: 0,
+    };
+
+    public constructor(props) {
+        super(props);
+        this.tabsRef = React.createRef();
+    }
+
     public currentKlineSubscription: CurrentKlineSubscription = {};
     public tvWidget: IChartingLibraryWidget | null = null;
 
     private datafeed = dataFeedObject(this, this.props.markets);
+
+    private tabsRef;
+
 
     public UNSAFE_componentWillReceiveProps(next: Props) {
         if (next.currentMarket && next.colorTheme && next.colorTheme !== this.props.colorTheme) {
@@ -107,10 +121,39 @@ export class TradingChartComponent extends React.PureComponent<Props> {
     public render() {
         return (
             <React.Fragment>
-                <div id={widgetParams.containerId} className="pg-trading-chart" />
+                <div className="candle-depth-top-wrapper">
+                    <div>
+                        <ul className="nav nav-pills" role="tablist" onWheel={this.handleOnMouseWheel} ref={this.tabsRef}>
+                            <li key={0} onClick={() => this.handleSelectButton(0)}>
+                                <span className={`nav-link ${this.state.selectedItem === 0 && 'active'}`}>
+                                    Chart
+                                </span>
+                            </li>
+                            <li key={1} onClick={() => this.handleSelectButton(1)}>
+                                <span className={`nav-link ${this.state.selectedItem === 1 && 'active'}`}>
+                                    Depth
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div className="candle-depth-wrapper">
+                        <div id={widgetParams.containerId} className={`candle-chart ${this.state.selectedItem !== 0 && 'hide-item'}`} />
+                        <MarketDepthsComponent />
+                    </div>
+                </div>
             </React.Fragment>
         );
     }
+
+    private handleSelectButton = (index: number) => {
+        this.setState({
+            selectedItem: index,
+        });
+    };
+
+    private handleOnMouseWheel = (event: React.WheelEvent) => {
+        this.tabsRef.current.scrollLeft += event.deltaX;
+    };
 
     private setChart = (markets: Market[], currentMarket: Market, colorTheme: string) => {
         const { kline, lang } = this.props;
