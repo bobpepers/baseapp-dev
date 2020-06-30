@@ -155,7 +155,7 @@ const EnhancedTableHead = (props: EnhancedTableProps) => {
   };
 
   return (
-    <TableHead className="landingTable-head">
+    <TableHead className="marketSelect-header">
       <TableRow>
         {headCells.map((headCell, i) => (
           <TableCell
@@ -266,9 +266,9 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
     };
 
   return (
-        <TableContainer>
+        <TableContainer className="marketSelect-container">
           <Table
-            className={classes.table}
+            className={`${classes.table} marketSelect-table`}
             aria-labelledby="tableTitle"
             aria-label="enhanced table"
           >
@@ -278,47 +278,49 @@ const MarketsListComponent: FunctionComponent<Props> = props => {
               orderBy={orderBy}
               onRequestSort={handleRequestSort}
             />
-            <TableBody>
-              {stableSort(data, getComparator(order, orderBy))
-                .map((row, index) => {
-                  const classname = classnames({
-                    'pg-dropdown-markets-list-container__positive': row.isPositiveChange,
-                    'pg-dropdown-markets-list-container__negative': !row.isPositiveChange,
-                  });
+            <div className="marketSelect-bodyContainer">
+              <TableBody className="marketSelect-body">
+                {stableSort(data, getComparator(order, orderBy))
+                  .map((row, index) => {
+                    const classname = classnames({
+                      'pg-dropdown-markets-list-container__positive': row.isPositiveChange,
+                      'pg-dropdown-markets-list-container__negative': !row.isPositiveChange,
+                    });
 
-                  return (
-                    <TableRow
-                      hover
-                      tabIndex={-1}
-                      key={row.id}
-                      onClick={e => currencyPairSelectHandler(e, String(row.id))}
-                      className="landingTable-row"
-                    >
-                      <TableCell>
-                        <span className="landingTable-cell">
-                            <img src={`https://downloads.runebase.io/${row.baseUnit}.svg`} alt={`${row.id} market icon`} className="MarketListCoinIcon" />
-                                {row.id}
-                        </span>
-                      </TableCell>
-                      <TableCell align="right">
-                        <span className={classname}>
-                            {row.last}
-                        </span>
-                      </TableCell>
-                      <TableCell align="right">
-                            <span className={classname}>
-                                {row.vol}
-                            </span>
-                      </TableCell>
-                      <TableCell align="right">
-                            <span className={classname}>
-                                {row.priceChangePercentNum}
-                            </span>
-                      </TableCell>
-                    </TableRow>
-                  );
-              })}
-            </TableBody>
+                    return (
+                      <TableRow
+                        hover
+                        tabIndex={-1}
+                        key={row.id}
+                        onClick={e => currencyPairSelectHandler(e, String(row.id))}
+                        className="landingTable-row"
+                      >
+                        <TableCell>
+                          <span className="landingTable-cell">
+                              <img src={`https://downloads.runebase.io/${row.baseUnit}.svg`} alt={`${row.id} market icon`} className="MarketListCoinIcon" />
+                                  {row.id}
+                          </span>
+                        </TableCell>
+                        <TableCell align="right">
+                          <span className={classname}>
+                              {row.last}
+                          </span>
+                        </TableCell>
+                        <TableCell align="right">
+                              <span className={classname}>
+                                  {row.vol}
+                              </span>
+                        </TableCell>
+                        <TableCell align="right">
+                              <span className={classname}>
+                                  {row.priceChangePercentNum}
+                              </span>
+                        </TableCell>
+                      </TableRow>
+                    );
+                })}
+              </TableBody>
+            </div>
           </Table>
         </TableContainer>
   );

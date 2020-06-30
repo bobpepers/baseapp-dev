@@ -1,3 +1,60 @@
+.cr-grid-item ::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.cr-grid-item ::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+.cr-grid-item ::-webkit-scrollbar-thumb {
+  background: #e1e1e1;
+  border-radius: 15px;
+}
+.cr-grid-item ::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+.cr-grid-item ::-webkit-scrollbar-thumb:active {
+  background: #000000;
+}
+.cr-grid-item ::-webkit-scrollbar-track {
+  background: #666666;
+  border-radius: 0px;
+}
+.cr-grid-item ::-webkit-scrollbar-track:hover {
+  background: #666666;
+}
+.cr-grid-item ::-webkit-scrollbar-track:active {
+  background: #333333;
+}
+.cr-grid-item ::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.marketSelect-bodyContainer {
+    overflow: auto;
+    overflow: overlay;
+}
+.marketSelect-container {
+  display: flex;
+}
+
+table.marketSelect-table {
+    display: grid;
+}
+thead.marketSelect-header {
+  background-color: var(--header-bg);
+  width: 100%;
+    display: table;
+    table-layout: fixed;
+}
+
+tbody.marketSelect-body {
+        display: table;
+    table-layout: fixed;
+    width: 100%;
+    overflow: auto;
+}
+
 .nav {
   background: var(--bg);
 }
@@ -26,8 +83,8 @@
 .pg-trading-header-market-selector-list-container {
     height: 100% !important;
     box-shadow: 4px 4px 10px rgba(46, 76, 128, 0.2);
-    display: block;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
     left: 0;
     padding-left: 0;
     position: absolute;

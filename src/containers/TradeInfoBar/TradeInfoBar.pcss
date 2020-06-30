@@ -29,8 +29,6 @@
         font-size: calc(var(--font-size) * 0.85);
       }
       &-value {
-        font-size: calc(var(--font-size) * 1.16);
-        font-weight: 600;
         text-align: right;
         margin: 0;
         &-positive {
@@ -43,7 +41,7 @@
     }
 }
 
-.pg-priceInfoBar {
+.info-bar {
   margin: auto;
   position: absolute;
   top: 0;
@@ -79,7 +77,7 @@
   }
 }
 
-.pg-priceInfoBar-break {
+.info-bar-break {
     height: 0;
   }
 
@@ -90,13 +88,13 @@
 
 
 @media (min-width: 1200px) {
-  .pg-priceInfoBar {
+  .info-bar {
     display: unset;
   }
 }
 
 @media (max-width: 1200px) {
-  .pg-priceInfoBar-break {
+  .info-bar-break {
     flex-basis: 100%;
   }
 }

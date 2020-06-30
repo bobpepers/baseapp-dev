@@ -1,3 +1,4 @@
+
 .landingTable-cell .MuiTableSortLabel-active {
   color: var(--bright);
 }

@@ -14,7 +14,7 @@ export const pt: LangType = {
 
     'markets.market': 'Market',
     'markets.price': 'Price',
-    'markets.volume': 'Volume',
+    'markets.volume': '24h Volume',
     'markets.change': '24H Change',
 
     /* Old */
@@ -64,10 +64,10 @@ export const pt: LangType = {
     'page.body.trade.header.marketDepths.content.cumulativeVolume': 'Total:',
     'page.body.trade.header.marketDepths.content.cumulativeValue': 'Estimated Value:',
 
-    'page.body.trade.toolBar.lowest': 'Lowest 24h',
+    'page.body.trade.toolBar.lowest': '24h Low',
     'page.body.trade.toolBar.lastPrice': 'Last Price',
     'page.body.trade.toolBar.selectMarket': 'Select Market',
-    'page.body.trade.toolBar.highest': 'Highest 24h',
+    'page.body.trade.toolBar.highest': '24h High',
     'page.body.trade.toolBar.volume': '24h Volume',
     'page.body.trade.toolBar.change': 'Change',
 
