@@ -55,7 +55,6 @@ const OrderBookContainer: FunctionComponent<Props> = props => {
         currentMarket,
         marketTickers,
         currentPrice,
-        setCurrentPrice,
     } = props;
 
     const fmt = {
@@ -68,7 +67,7 @@ const OrderBookContainer: FunctionComponent<Props> = props => {
             <div className="trading-component-header">
                 {intl.formatMessage({id: 'page.body.trade.orderbook'})}
             </div>
-            {orderBookLoading ? <div className="orderBook-loader"><CircularProgress disableShrink /></div> : smallOrderBook(sortBids(bids), sortAsks(asks), currentMarket, currentPrice, marketTickers, setCurrentPrice, fmt, intl)}
+            {orderBookLoading ? <div className="orderBook-loader"><CircularProgress disableShrink /></div> : smallOrderBook(sortBids(bids), sortAsks(asks), currentMarket, currentPrice, marketTickers, props.setCurrentPrice, fmt, intl)}
         </div>
     );
 
@@ -257,18 +256,18 @@ const renderOrderBook = (array: string[][], side: string, message: string, bookT
     }) : [['empty', message]];
 };
 
-const handleOnSelectBids = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, bids: any[], setCurrentPrice2) => {
+const handleOnSelectBids = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, bids: any[], setCurrentPrice1) => {
     const priceToSet = bids[Number(index)] && Number(bids[Number(index)][0]);
     if (currentPrice !== priceToSet) {
-        setCurrentPrice2(priceToSet);
+        setCurrentPrice1(priceToSet);
     }
 };
 
-const handleOnSelectAsks = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, asks: any[], setCurrentPrice3) => {
+const handleOnSelectAsks = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, asks: any[], setCurrentPrice1) => {
     const asksData = asks.slice(0).reverse();
     const priceToSet = asksData[Number(index)] && Number(asksData[Number(index)][0]);
     if (currentPrice !== priceToSet) {
-        setCurrentPrice3(priceToSet);
+        setCurrentPrice1(priceToSet);
     }
 };
 
