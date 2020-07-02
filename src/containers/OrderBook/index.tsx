@@ -72,9 +72,9 @@ const OrderBookContainer: FunctionComponent<Props> = props => {
         </div>
     );
 
-}
+};
 
-const smallOrderBook = (bids, asks, currentMarket, currentPrice, marketTickers, setCurrentPrice, fmt, intl) => {
+const smallOrderBook = (bids, asks, currentMarket, currentPrice, marketTickers, setCurrentPrice1, fmt, intl) => {
     const defaultTicker = {
         last: 0,
         price_change_percent: '+0.00%',
@@ -133,7 +133,7 @@ const smallOrderBook = (bids, asks, currentMarket, currentPrice, marketTickers, 
                             );
                         } else {
                             return (
-                                <Grid container key={i} onClick={e => handleOnSelectAsks(e, i, currentPrice, asks, setCurrentPrice)} className="orderbook-border-top orderbook-item" style={{position: 'relative', cursor: 'pointer'}}>
+                                <Grid container key={i} onClick={e => handleOnSelectAsks(e, i, currentPrice, asks, setCurrentPrice1)} className="orderbook-border-top orderbook-item" style={{position: 'relative', cursor: 'pointer'}}>
                                     <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
                                         {object[0]}
                                     </Grid>
@@ -201,7 +201,7 @@ const smallOrderBook = (bids, asks, currentMarket, currentPrice, marketTickers, 
                             );
                         } else {
                             return (
-                                <Grid container key={i} onClick={e => handleOnSelectBids(e, i, currentPrice, bids, setCurrentPrice)} className="orderbook-border-bottom orderbook-item" style={{position: 'relative', cursor: 'pointer'}}>
+                                <Grid container key={i} onClick={e => handleOnSelectBids(e, i, currentPrice, bids, setCurrentPrice1)} className="orderbook-border-bottom orderbook-item" style={{position: 'relative', cursor: 'pointer'}}>
                                     <Grid container item xs={3} justify="center" style={{zIndex: 30}}>
                                         {object[0]}
                                     </Grid>
@@ -257,18 +257,18 @@ const renderOrderBook = (array: string[][], side: string, message: string, bookT
     }) : [['empty', message]];
 };
 
-const handleOnSelectBids = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, bids: any[], setCurrentPrice) => {
+const handleOnSelectBids = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, bids: any[], setCurrentPrice2) => {
     const priceToSet = bids[Number(index)] && Number(bids[Number(index)][0]);
     if (currentPrice !== priceToSet) {
-        setCurrentPrice(priceToSet);
+        setCurrentPrice2(priceToSet);
     }
 };
 
-const handleOnSelectAsks = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, asks: any[], setCurrentPrice) => {
+const handleOnSelectAsks = (event: React.MouseEvent<HTMLDivElement, MouseEvent>, index: string, currentPrice: number, asks: any[], setCurrentPrice3) => {
     const asksData = asks.slice(0).reverse();
     const priceToSet = asksData[Number(index)] && Number(asksData[Number(index)][0]);
     if (currentPrice !== priceToSet) {
-        setCurrentPrice(priceToSet);
+        setCurrentPrice3(priceToSet);
     }
 };
 
