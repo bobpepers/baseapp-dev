@@ -19,7 +19,7 @@ interface Props {
 }
 
 export class LandingTable extends React.Component<Props> {
-    componentWillMount() {
+    public componentWillMount() {
         this.props.setCurrentBidUnit('btc');
     }
 
@@ -44,7 +44,7 @@ export class LandingTable extends React.Component<Props> {
                                     {item ? item.toUpperCase() : false}
                                 </span>
                             </li>
-                        )
+                        );
                     }
 
                     return true;
