@@ -1,9 +1,18 @@
 import * as React from 'react';
-import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect, MapDispatchToProps } from 'react-redux';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
+import {
+    connect,
+    MapDispatchToProps,
+} from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { Decimal, LandingTable } from '../../components';
+import {
+    Decimal,
+    LandingTable,
+} from '../../components';
 import {
     Market,
     marketsFetch,
@@ -15,7 +24,10 @@ import {
     setCurrentMarket,
     Ticker,
 } from '../../modules';
-import { rangerConnectFetch, RangerConnectFetch } from '../../modules/public/ranger';
+import {
+    rangerConnectFetch,
+    RangerConnectFetch,
+} from '../../modules/public/ranger';
 import { RangerState } from '../../modules/public/ranger/reducer';
 import { selectRanger } from '../../modules/public/ranger/selectors';
 

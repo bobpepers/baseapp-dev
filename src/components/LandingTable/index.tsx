@@ -1,5 +1,12 @@
 import React, { Fragment } from 'react';
-import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody } from '@material-ui/core';
+import {
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+} from '@material-ui/core';
 import { Market } from '../../modules';
 
 interface Props {
@@ -12,25 +19,36 @@ interface Props {
 }
 
 export class LandingTable extends React.Component<Props> {
+    componentWillMount() {
+        this.props.setCurrentBidUnit('btc');
+    }
+
     public renderTableHeader(currentBidUnit: string) {
         const {
             currentBidUnitsList,
             setCurrentBidUnit,
-            translate,
+            //translate,
         } = this.props;
+
 
         return (
             <ul className="nav nav-pills" role="tablist">
-                {currentBidUnitsList.map((item, i) => (
-                    <li
-                        key={i}
-                        onClick={() => setCurrentBidUnit(item)}
-                    >
-                        <span className={`nav-link ${item === currentBidUnit && 'active'}`}>
-                            {item ? item.toUpperCase() : translate('page.body.marketsTable.filter.all')}
-                        </span>
-                    </li>
-                ))}
+                {currentBidUnitsList.map((item, i) => {
+                    if (item) {
+                        return (
+                             <li
+                                key={i}
+                                onClick={() => setCurrentBidUnit(item)}
+                            >
+                                <span className={`nav-link ${item === currentBidUnit && 'active'}`}>
+                                    {item ? item.toUpperCase() : false}
+                                </span>
+                            </li>
+                        )
+                    }
+
+                    return true;
+                })}
             </ul>
         );
     }
