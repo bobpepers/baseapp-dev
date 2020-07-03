@@ -9,6 +9,9 @@ import {
     MarketSelection,
     OpenOrdersComponent,
     OrderBook,
+    SellBook,
+    BuyBook,
+    LastPrice,
     OrderComponent,
     RecentTrades,
     TradeInfoBar,
@@ -114,6 +117,18 @@ class Trading extends React.Component<Props, StateProps> {
         {
             i: 7,
             render: () => <RecentTrades />,
+        },
+        {
+            i: 8,
+            render: () => <BuyBook />,
+        },
+        {
+            i: 9,
+            render: () => <SellBook />,
+        },
+        {
+            i: 10,
+            render: () => <LastPrice />,
         },
     ];
 

@@ -1,4 +1,4 @@
-import { TabPanel } from '../../components';
+//import { TabPanel } from '../../components';
 import * as React from 'react';
 import { OrderForm } from '../';
 
@@ -129,8 +129,16 @@ export interface OrderComponentProps {
      */
     listenInputPrice?: () => void;
 }
+
 interface State {
     index: number;
+}
+
+interface Tab {
+    content: React.ReactNode;
+    disabled?: boolean;
+    hidden?: boolean;
+    label: string;
 }
 
 const defaultOrderTypes: DropdownElem[] = [
@@ -138,50 +146,36 @@ const defaultOrderTypes: DropdownElem[] = [
     'Market',
 ];
 
-const splitBorder = 449;
-const defaultWidth = 635;
 
 
 class Order extends React.PureComponent<OrderComponentProps, State> {
+
     public state = {
         index: 0,
     };
 
     public render() {
-        const {
-            width = defaultWidth,
-        } = this.props;
-
-        if (width < splitBorder) {
-            return (
-                <div className="cr-order">
-                    <TabPanel
-                        fixed={true}
-                        panels={this.getPanels()}
-                        onTabChange={this.handleChangeTab}
-                        currentTabIndex={this.state.index}
-                    />
-                </div>
-            );
-        }
-
+        const contents = this.getPanels()
+                .filter((panel, index) => index === this.state.index)
+                .map(this.renderTabContent);
         return (
-            <div className="cr-order cr-order--extended">
-                <div className="cr-order--extended__buy">
-                    <TabPanel
-                        fixed={true}
-                        panels={this.getPanelsBuy()}
-                        onTabChange={this.handleChangeTab}
-                        currentTabIndex={this.state.index}
-                    />
+            <div className="cr-order">
+                <div>
+                    <ul className="nav nav-pills" role="tablist">
+                            <li key={0} onClick={() => this.handleChangeTab(0, "Buy")}>
+                                <span className={`nav-link ${this.state.index === 0 && 'active'}`}>
+                                    Buy
+                                </span>
+                            </li>
+                            <li key={1} onClick={() => this.handleChangeTab(1, "Sell")}>
+                                <span className={`nav-link ${this.state.index === 1 && 'active'}`}>
+                                    Sell
+                                </span>
+                            </li>
+                    </ul>
                 </div>
-                <div className="cr-order--extended__sell">
-                    <TabPanel
-                        fixed={true}
-                        panels={this.getPanelsSell()}
-                        onTabChange={this.handleChangeTab}
-                        currentTabIndex={this.state.index}
-                    />
+                <div className="cr-tab-panel">
+                    {contents}
                 </div>
             </div>
         );
@@ -272,6 +266,15 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
         ];
     };
 
+    private renderTabContent = (tab: Tab, index: number) => {
+
+        return (
+            <div className="cr-tab-content__active cr-tab-content" key={`${tab.label}-${index}`}>
+                {tab.content}
+            </div>
+        );
+    };
+/*
     private getPanelsBuy = () => {
         const {
             availableQuote,
@@ -377,8 +380,10 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
             },
         ];
     };
-
+*/
     private handleChangeTab = (index: number, label?: string) => {
+        console.log(index);
+        console.log(label);
         if (this.props.handleSendType && label) {
           this.props.handleSendType(index, label);
         }
