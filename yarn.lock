@@ -1923,10 +1923,10 @@
   dependencies:
     stream "^0.0.2"
 
-"@material-ui/core@4.10.2":
-  version "4.10.2"
-  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.10.2.tgz#0ef78572132fcef1a25f6969bce0d34652d42e31"
-  integrity sha512-Uf4iDLi9sW6HKbVQDyDZDr1nMR4RUAE7w/RIIJZGNVZResC0xwmpLRZMtaUdSO43N0R0yJehfxTi4Z461Cd49A==
+"@material-ui/core@4.11.0":
+  version "4.11.0"
+  resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.11.0.tgz#b69b26e4553c9e53f2bfaf1053e216a0af9be15a"
+  integrity sha512-bYo9uIub8wGhZySHqLQ833zi4ZML+XCBE1XwJ8EuUVSpTWWG57Pm+YugQToJNFsEyiKFhPh8DPD0bgupz8n01g==
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.10.0"
@@ -13985,7 +13985,7 @@ svgo@^1.0.0, svgo@^1.2.2:
     unquote "~1.1.1"
     util.promisify "~1.0.0"
 
-swagger-client@^3.10.8:
+swagger-client@=3.10.9:
   version "3.10.9"
   resolved "https://registry.yarnpkg.com/swagger-client/-/swagger-client-3.10.9.tgz#685cd332f1ed365ea49e9938e00f5c353a39739b"
   integrity sha512-tPnhVQ0AC7wM89jfYsP/LlNvmzArr2Uf0NdQ7N69sHrS+7fibB/i75fOIG1kH4bb78D70Z1hwqszEvAOQaZ0Og==
@@ -14005,10 +14005,10 @@ swagger-client@^3.10.8:
     traverse "=0.6.6"
     url "=0.11.0"
 
-swagger-ui@3.27.0:
-  version "3.27.0"
-  resolved "https://registry.yarnpkg.com/swagger-ui/-/swagger-ui-3.27.0.tgz#172dfb63e517676076f73cc4f42155bebea24eb1"
-  integrity sha512-ncfOzxrD6MYBdz0T3l0lwp88ZaFDy7nAB8mADZEWdi5DqC024nU8/L9KhcPu3/vlDHTOKQrHO3sjkMGHxYGwVQ==
+swagger-ui@3.28.0:
+  version "3.28.0"
+  resolved "https://registry.yarnpkg.com/swagger-ui/-/swagger-ui-3.28.0.tgz#f043751922703e761ad6989d38fba09683692b69"
+  integrity sha512-eM671/PPhajdrptKBrRimNln3X/xo9CVK107yYVBTGxPYgkSnurcez76iDWW9AfkVu9qJa/7o38bHo55ulCjYg==
   dependencies:
     "@babel/runtime-corejs2" "^7.5.5"
     "@braintree/sanitize-url" "^4.0.0"
@@ -14043,7 +14043,7 @@ swagger-ui@3.27.0:
     reselect "^4.0.0"
     serialize-error "^2.1.0"
     sha.js "^2.4.11"
-    swagger-client "^3.10.8"
+    swagger-client "=3.10.9"
     url-parse "^1.4.7"
     xml-but-prettier "^1.0.1"
     zenscroll "^4.0.2"

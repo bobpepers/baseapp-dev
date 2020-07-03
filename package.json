@@ -3,7 +3,7 @@
   "version": "0.0.5",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "4.10.2",
+    "@material-ui/core": "4.11.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.47",
     "@rehooks/component-size": "^1.0.3",
@@ -47,7 +47,7 @@
     "redux": "4.0.5",
     "redux-saga": "^0.16.2",
     "sinon": "^7.2.3",
-    "swagger-ui": "3.27.0",
+    "swagger-ui": "3.28.0",
     "tslint": "^5.13.1",
     "ua-parser-js": "0.7.21",
     "ws": "7.2.5"
