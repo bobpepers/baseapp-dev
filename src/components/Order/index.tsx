@@ -146,8 +146,6 @@ const defaultOrderTypes: DropdownElem[] = [
     'Market',
 ];
 
-
-
 class Order extends React.PureComponent<OrderComponentProps, State> {
 
     public state = {
@@ -158,16 +156,17 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
         const contents = this.getPanels()
                 .filter((panel, index) => index === this.state.index)
                 .map(this.renderTabContent);
+
         return (
             <div className="cr-order">
                 <div>
                     <ul className="nav nav-pills" role="tablist">
-                            <li key={0} onClick={() => this.handleChangeTab(0, "Buy")}>
+                            <li key={0} onClick={() => this.handleChangeTab(0, 'Buy')}>
                                 <span className={`nav-link ${this.state.index === 0 && 'active'}`}>
                                     Buy
                                 </span>
                             </li>
-                            <li key={1} onClick={() => this.handleChangeTab(1, "Sell")}>
+                            <li key={1} onClick={() => this.handleChangeTab(1, 'Sell')}>
                                 <span className={`nav-link ${this.state.index === 1 && 'active'}`}>
                                     Sell
                                 </span>

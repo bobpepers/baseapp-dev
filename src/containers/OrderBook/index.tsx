@@ -299,6 +299,7 @@ const lastPriceOrderBook = (currentMarket, currentPrice, marketTickers, fmt, int
         last: 0,
         price_change_percent: '+0.00%',
     };
+
     return (
         <Grid container>
             <Grid container item xs={12} justify="center">
