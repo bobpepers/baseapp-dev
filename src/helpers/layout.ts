@@ -46,8 +46,8 @@ const getLayouts = () => {
             { i: '9', x: 15, y: 39, w: 9, h: 23, minH: 23, minW: 9, isDraggable: false, isResizable: false }, /* SellBook */
 
             /* Bottom */
-            { i: '4', x: 0, y: 62, w: 24, h: 30, minH: 30, minW: 24, isDraggable: false, isResizable: false }, /* Open Orders */
-            { i: '7', x: 0, y: 92, w: 24, h: 20, minH: 20, minW: 24, isDraggable: false, isResizable: false }, /* Recent Trades */
+            { i: '4', x: 0, y: 62, w: 24, h: 20, minH: 20, minW: 24, isDraggable: false, isResizable: false }, /* Open Orders */
+            { i: '7', x: 0, y: 82, w: 24, h: 20, minH: 20, minW: 24, isDraggable: false, isResizable: false }, /* Recent Trades */
 
             /* Hidden */
             { i: '6', x: 0, y: 0, w: 0, h: 0, minH: 0, minW: 0, isDraggable: false, isResizable: false }, /* Orderbook mobile */
@@ -67,8 +67,8 @@ const getLayouts = () => {
             { i: '9', x: 15, y: 39, w: 9, h: 23, minH: 23, minW: 9, isDraggable: false, isResizable: false }, /* SellBook */
 
             /* Bottom */
-            { i: '4', x: 0, y: 62, w: 24, h: 30, minH: 30, minW: 24, isDraggable: false, isResizable: false }, /* Open Orders */
-            { i: '7', x: 0, y: 92, w: 24, h: 20, minH: 20, minW: 24, isDraggable: false, isResizable: false }, /* Recent Trades */
+            { i: '4', x: 0, y: 62, w: 24, h: 20, minH: 20, minW: 24, isDraggable: false, isResizable: false }, /* Open Orders */
+            { i: '7', x: 0, y: 82, w: 24, h: 20, minH: 20, minW: 24, isDraggable: false, isResizable: false }, /* Recent Trades */
 
             /* Hidden */
             { i: '6', x: 0, y: 0, w: 0, h: 0, minH: 0, minW: 0, isDraggable: false, isResizable: false }, /* Orderbook mobile */
