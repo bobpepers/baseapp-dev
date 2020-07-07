@@ -151,19 +151,19 @@ class Trading extends React.Component<Props, StateProps> {
             margin: 0,
         };
         const bigRow2 = {
-            height: "700px",
+            height: '700px',
             margin: 0,
         };
         const bigRow3 = {
-            height: "445.75px",
+            height: '445.75px',
             margin: 0,
         };
         const bigRow4 = {
-            height: "445.75px",
+            height: '445.75px',
             margin: 0,
         };
         const bigRow5 = {
-            height: "445.75px",
+            height: '445.75px',
             margin: 0,
         };
         const smallContainer = {
@@ -173,30 +173,30 @@ class Trading extends React.Component<Props, StateProps> {
             margin: 0,
         };
         const smallRow2 = {
-            height: "700px",
+            height: '700px',
             margin: 0,
         };
         const smallRow3 = {
-            height: "700px",
+            height: '700px',
             margin: 0,
         };
         const smallRow4 = {
-            height: "600px",
+            height: '600px',
             margin: 0,
         };
         const smallRow5 = {
             margin: 0,
         };
         const smallRow6 = {
-            height: "445.75px",
+            height: '445.75px',
             margin: 0,
         };
         const smallRow7 = {
-            height: "445.75px",
+            height: '445.75px',
             margin: 0,
         };
         const columnHeight = {
-            height: "100%",
+            height: '100%',
         };
         if (this.state.width > 996) {
             return (
