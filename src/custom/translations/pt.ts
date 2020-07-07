@@ -80,12 +80,12 @@ export const pt: LangType = {
     'page.body.trade.orderbook.header.volume': 'Total',
     'page.body.trade.orderbook.header.estvalue': 'Est. Value',
 
-    'page.body.trade.header.recentTrades': 'Recent Trades',
+    'page.body.trade.header.recentTrades': 'Market History',
     'page.body.trade.header.recentTrades.content.time': 'Time',
     'page.body.trade.header.recentTrades.content.price': 'Price',
     'page.body.trade.header.recentTrades.content.amount': 'Amount',
 
-    'page.body.trade.header.openOrders': 'Open Orders',
+    'page.body.trade.header.openOrders': 'My Orders',
     'page.body.trade.header.openOrders.content.date': 'Date',
     'page.body.trade.header.openOrders.content.state': 'State',
     'page.body.trade.header.openOrders.content.price': 'Price',

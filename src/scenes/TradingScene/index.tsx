@@ -4,7 +4,8 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { incrementalOrderBook } from '../../api';
 import { Decimal } from '../../components/Decimal';
-import { Grid } from '../../components/Grid';
+//import { Grid } from '../../components/Grid';
+import { Grid } from '@material-ui/core';
 import {
     MarketSelection,
     OpenOrdersComponent,
@@ -37,22 +38,6 @@ import { RangerState } from '../../modules/public/ranger/reducer';
 import { selectRanger } from '../../modules/public/ranger/selectors';
 import { selectWallets, Wallet, walletsFetch } from '../../modules/user/wallets';
 
-const breakpoints = {
-    lg: 1200,
-    md: 996,
-    sm: 768,
-    xs: 480,
-    xxs: 0,
-};
-
-const cols = {
-    lg: 24,
-    md: 24,
-    sm: 12,
-    xs: 12,
-    xxs: 12,
-};
-
 interface ReduxProps {
     currentMarket: Market | undefined;
     markets: Market[];
@@ -79,61 +64,28 @@ interface DispatchProps {
 interface StateProps {
     orderComponentResized: number;
     orderBookComponentResized: number;
+    width: number;
+    height: number;
 }
 
 type Props = DispatchProps & ReduxProps & RouteComponentProps & InjectedIntlProps;
 
 class Trading extends React.Component<Props, StateProps> {
-    public readonly state = {
+    public state = {
         orderComponentResized: 5,
         orderBookComponentResized: 5,
+        width: 0,
+        height: 0,
     };
 
-    private gridItems = [
-        {
-            i: 1,
-            render: () => <TradeInfoBar />,
-        },
-        {
-            i: 2,
-            render: () => <TradingChart />,
-        },
-        {
-            i: 3,
-            render: () => <OrderComponent size={this.state.orderComponentResized} />,
-        },
-        {
-            i: 4,
-            render: () => <OpenOrdersComponent />,
-        },
-        {
-            i: 5,
-            render: () => <MarketSelection />,
-        },
-        {
-            i: 6,
-            render: () => <OrderBook size={this.state.orderBookComponentResized} />,
-        },
-        {
-            i: 7,
-            render: () => <RecentTrades />,
-        },
-        {
-            i: 8,
-            render: () => <BuyBook />,
-        },
-        {
-            i: 9,
-            render: () => <SellBook />,
-        },
-        {
-            i: 10,
-            render: () => <LastPrice />,
-        },
-    ];
+    public updateDimensions = () => {
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
+    };
 
     public componentDidMount() {
         setDocumentTitle('Trading');
+        window.addEventListener('resize', this.updateDimensions);
+        this.setState({ width: window.innerWidth, height: window.innerHeight });
         const { wallets, markets, currentMarket, userLoggedIn, rangerState: { connected, withAuth } } = this.props;
 
         if (markets.length < 1) {
@@ -156,6 +108,7 @@ class Trading extends React.Component<Props, StateProps> {
 
     public componentWillUnmount() {
         this.props.setCurrentPrice(undefined);
+        window.removeEventListener('resize', this.updateDimensions);
     }
 
     public UNSAFE_componentWillReceiveProps(nextProps) {
@@ -191,25 +144,150 @@ class Trading extends React.Component<Props, StateProps> {
     }
 
     public render() {
-        const rowHeight = 14;
-        const allGridItems = [...this.gridItems];
-        const {rgl} = this.props;
+        const bigContainer = {
+            margin: 0,
+        };
+        const bigRow1 = {
+            margin: 0,
+        };
+        const bigRow2 = {
+            height: "700px",
+            margin: 0,
+        };
+        const bigRow3 = {
+            height: "445.75px",
+            margin: 0,
+        };
+        const bigRow4 = {
+            height: "445.75px",
+            margin: 0,
+        };
+        const bigRow5 = {
+            height: "445.75px",
+            margin: 0,
+        };
+        const smallContainer = {
+            margin: 0,
+        };
+        const smallRow1 = {
+            margin: 0,
+        };
+        const smallRow2 = {
+            height: "700px",
+            margin: 0,
+        };
+        const smallRow3 = {
+            height: "700px",
+            margin: 0,
+        };
+        const smallRow4 = {
+            height: "600px",
+            margin: 0,
+        };
+        const smallRow5 = {
+            margin: 0,
+        };
+        const smallRow6 = {
+            height: "445.75px",
+            margin: 0,
+        };
+        const smallRow7 = {
+            height: "445.75px",
+            margin: 0,
+        };
+        const columnHeight = {
+            height: "100%",
+        };
+        if (this.state.width > 996) {
+            return (
+                <div className="trade-scene">
+                    <Grid container xs={12} spacing={1} style={bigContainer}>
+                        <Grid container item xs={12} spacing={1} style={bigRow1}>
+                            <Grid item xs={12} style={columnHeight} className="infobar-wrapper">
+                                <TradeInfoBar />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={bigRow2}>
+                            <Grid item xs={7} style={columnHeight}>
+                                <TradingChart />
+                            </Grid>
+                            <Grid item xs={5} style={columnHeight}>
+                                <MarketSelection />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={bigRow3}>
+                            <Grid item xs={4} style={columnHeight}>
+                                <BuyBook />
+                            </Grid>
+                            <Grid container item xs={4} style={columnHeight}>
+                                <Grid item xs={12}>
+                                    <LastPrice />
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <OrderComponent size={this.state.orderComponentResized} />
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={4} style={columnHeight}>
+                                <SellBook />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={bigRow4} className="my-orders">
+                            <Grid item xs={12} style={columnHeight}>
+                                <OpenOrdersComponent />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={bigRow5} className="market-history">
+                            <Grid item xs={12} style={columnHeight}>
+                                <RecentTrades />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </div>
+            );
+        } else {
+            return (
+                <div className="trade-scene">
+                    <Grid container xs={12} spacing={1} style={smallContainer}>
+                        <Grid container item xs={12} spacing={1} style={smallRow1}>
+                            <Grid item xs={12} style={columnHeight} className="infobar-wrapper">
+                                <TradeInfoBar />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={smallRow2}>
+                            <Grid item xs={12} style={columnHeight}>
+                                <MarketSelection />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1}style={smallRow3}>
+                            <Grid item xs={12} style={columnHeight}>
+                                <TradingChart />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={smallRow4}>
+                            <Grid item xs={12} style={columnHeight}>
+                                <OrderBook size={this.state.orderBookComponentResized} />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={smallRow5}>
+                            <Grid item xs={12} style={columnHeight}>
+                                <OrderComponent size={this.state.orderComponentResized} />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={smallRow6} className="my-orders">
+                            <Grid item xs={12} style={columnHeight}>
+                                <OpenOrdersComponent />
+                            </Grid>
+                        </Grid>
+                        <Grid container item xs={12} spacing={1} style={smallRow7} className="market-history">
+                            <Grid item xs={12} style={columnHeight}>
+                                <RecentTrades />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </div>
+            );
+        }
 
-        return (
-            <div className="trade-scene">
-                <Grid
-                    breakpoints={breakpoints}
-                    className="layout"
-                    children={allGridItems}
-                    cols={cols}
-                    draggableHandle=".cr-table-header__content, .pg-trading-screen__tab-panel, .draggable-container"
-                    layouts={rgl.layouts}
-                    rowHeight={rowHeight}
-                    onLayoutChange={() => {return;}}
-                    handleResize={this.handleResize}
-                />
-            </div>
-        );
     }
 
     private setMarketFromUrlIfExists = (markets: Market[]): void => {
@@ -221,26 +299,15 @@ class Trading extends React.Component<Props, StateProps> {
         }
     };
 
+/*
     private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
         const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
         document.title = `${Decimal.format(tickerPrice, market.price_precision)} ${market.name}`;
     };
-
-    private handleResize = (layout, oldItem, newItem) => {
-        switch (oldItem.i) {
-            case '1':
-                this.setState({
-                    orderComponentResized: newItem.w,
-                });
-                break;
-            case '3':
-                this.setState({
-                    orderBookComponentResized: newItem.w,
-                });
-                break;
-            default:
-                break;
-        }
+*/
+    private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
+        const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
+        document.title = `RunesX - ${market.name} ${Decimal.format(tickerPrice, market.price_precision)} `;
     };
 }
 

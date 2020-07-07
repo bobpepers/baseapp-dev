@@ -148,7 +148,7 @@ const bigBuyBook = (bids, asks, currentMarket, currentPrice, marketTickers, setC
     const totalBids = arrayBids[arrayBids.length - 1][4];
 
     return (
-        <Grid container>
+        <Grid container style={{height: '100%', position: 'relative'}}>
             <Grid item xs={12} className="orderbook-text-color bigbook-header orderbook-border-bottom">
                 <Grid container>
                     <Grid container item xs={3} justify="center">
@@ -225,7 +225,7 @@ const bigSellBook = (bids, asks, currentMarket, currentPrice, marketTickers, set
     console.log(totalAsks);
 
     return (
-        <Grid container style={{height: '100%'}}>
+        <Grid container style={{height: '100%', position: 'relative'}}>
             <Grid item xs={12} className="orderbook-text-color bigbook-header orderbook-border-bottom">
                 <Grid container>
                     <Grid container item xs={3} justify="center">

@@ -56,11 +56,11 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
         email,
         labelSignUp,
         confirmPassword,
-        refId,
+        //refId,
         isLoading,
         emailLabel,
         confirmPasswordLabel,
-        referalCodeLabel,
+        //referalCodeLabel,
         termsMessage,
         hasConfirmed,
         emailError,
@@ -75,7 +75,7 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
         onSignUp,
         validateForm,
         handleChangeEmail,
-        handleChangeRefId,
+        //handleChangeRefId,
         handleChangePassword,
         minPasswordEntropy,
         passwordErrorFirstSolved,
@@ -235,7 +235,7 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
                     />
                     {confirmationError && <div className={'signup-form-error'}>{confirmationError}</div>}
                 </div>
-                <div className="signin-form-input">
+                {/*<div className="signin-form-input">
                     <TextField
                         id="referal-code"
                         variant="outlined"
@@ -247,7 +247,7 @@ export const SignUpForm: FunctionComponent<SignUpFormProps> = props => {
                         onKeyPress={handleEnterPress}
                         value={refId.toString()}
                     />
-                </div>
+                </div>*/}
                 <div className="signin-form-input">
                     <Form.Check
                         type="checkbox"
